@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Couche_IHM.Views.CarteComponent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Couche_IHM.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Height="450" Width="350">
+    <materialDesign:Card 
+        UniformCornerRadius="9"
+        materialDesign:ElevationAssist.Elevation="Dp8"
+        MouseEnter="MouseOverCard" 
+        MouseLeave="MouseNotOverCard"
+        Background="Wheat">
+        <Border 
+            Name="border" 
+            BorderBrush="IndianRed" 
+            CornerRadius="9"  
+            BorderThickness="2">
+            <Grid>
+                <TextBlock  
+                    Foreground="IndianRed" 
+                    Name="cardName" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    FontSize="25"/>
+            </Grid>
+        </Border>
+    </materialDesign:Card>
+</UserControl>
