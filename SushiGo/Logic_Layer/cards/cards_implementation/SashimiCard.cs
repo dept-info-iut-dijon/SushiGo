@@ -2,7 +2,5 @@
 
 public class SashimiCard : Card
 {
-    public SashimiCard(string name) : base(name)
-    {
-    }
+    public override string Name => "Sashimi";
 }

@@ -2,7 +2,9 @@
 
 public class RavioliCard : Card
 {
-    public RavioliCard(string name) : base(name)
+    public RavioliCard()
     {
     }
+
+    public override string Name => "Ravioli";
 }

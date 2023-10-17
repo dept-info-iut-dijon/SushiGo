@@ -9,10 +9,11 @@ public class MakiCard : Card
     /// <summary>
     /// Créée une instance de carte maki
     /// </summary>
-    /// <param name="name">Nom de la carte</param>
     /// <param name="quantity">Quantité de makis présents sur la carte</param>
-    public MakiCard(string name, int quantity) : base(name)
+    public MakiCard(int quantity)
     {
         this.quantity = quantity;
     }
+
+    public override string Name => "Maki";
 }

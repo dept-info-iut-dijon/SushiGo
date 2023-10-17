@@ -7,7 +7,10 @@ public class ChopstickCard : Card, ISpecialCard
 {
     private bool available;
     
-    public ChopstickCard(string name) : base(name)
+    public override string Name => "Baguettes";
+
+
+    public ChopstickCard()
     {
         available = true;
     }
@@ -29,4 +32,5 @@ public class ChopstickCard : Card, ISpecialCard
     {
         return false;
     }
+
 }

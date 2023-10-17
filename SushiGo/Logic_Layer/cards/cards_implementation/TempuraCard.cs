@@ -2,7 +2,5 @@
 
 public class TempuraCard : Card
 {
-    public TempuraCard(string name) : base(name)
-    {
-    }
+    public override string Name => "Tempura";
 }

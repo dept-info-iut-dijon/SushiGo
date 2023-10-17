@@ -9,7 +9,9 @@ public class WasabiCard : Card, ISpecialCard
 {
     private SushiCard? sushi;
     
-    public WasabiCard(string name) : base(name)
+    public override string Name => "Wasabi";
+
+    public WasabiCard()
     {
         sushi = null;
     }
@@ -17,11 +19,11 @@ public class WasabiCard : Card, ISpecialCard
     /// <summary>
     /// Associe le wasabi à un sushi
     /// </summary>
-    /// <param name="sushi">Le sushi auquel on veut associer le wasabi</param>
-    public void AssociateSushi(SushiCard sushi)
+    /// <param name="sushiToAssociate">Le sushi auquel on veut associer le wasabi</param>
+    public void AssociateSushi(SushiCard sushiToAssociate)
     {
         if (this.sushi is null)
-            this.sushi = sushi;
+            this.sushi = sushiToAssociate;
         else throw new ValueAlreadySetException("La carte wasabi est déjà associée à un sushi");
     }
 
