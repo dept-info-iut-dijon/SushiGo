@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couche_IHM", "Couche_IHM\Couche_IHM.csproj", "{63AF0513-4F3F-4E92-9E7E-AF38289685C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Couche_Métier\Logic.csproj", "{AFCEF54F-BDB6-4072-9C8F-FD31A7DC6F11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{AFCEF54F-BDB6-4072-9C8F-FD31A7DC6F11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couche_Reseau", "Couche_Réseau\Couche_Reseau.csproj", "{A9AE9D77-51F1-44E7-98B2-D093C5491584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couche_Reseau", "Couche_Reseau\Couche_Reseau.csproj", "{A9AE9D77-51F1-44E7-98B2-D093C5491584}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{3936E126-3BED-4624-949D-F03020E31201}"
 EndProject

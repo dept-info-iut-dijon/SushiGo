@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Couche_Métier\Logic.csproj" />
-    <ProjectReference Include="..\Couche_Réseau\Couche_Reseau.csproj" />
+    <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\Couche_Reseau\Couche_Reseau.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
