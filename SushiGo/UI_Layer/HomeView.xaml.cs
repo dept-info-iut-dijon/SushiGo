@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Couche_IHM.Resources;
+using UI_Layer.Resources;
 
-namespace Couche_IHM
+namespace UI_Layer
 {
     /// <summary>
     /// Logique d'interaction pour HomeView.xaml

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Couche_IHM.Resources {
+namespace UI_Layer.Assets {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Couche_IHM.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Couche_IHM.Resources.fr_FR", typeof(fr_FR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UI_Layer.Assets.fr_FR", typeof(fr_FR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

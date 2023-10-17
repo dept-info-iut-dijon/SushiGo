@@ -8,29 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\Logo.png" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="Views\**" />
+    <Page Remove="ViewModels\**" />
+    <Page Remove="Views\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\Network_Layer\Network_Layer.csproj" />
+    <ProjectReference Include="..\Logic_Layer\Logic_Layer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Couche_Métier\Logic.csproj" />
-    <ProjectReference Include="..\Couche_Réseau\Couche_Reseau.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\Logo.png">
+    <Resource Include="Assets\Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\fr_FR.Designer.cs">
+    <Compile Update="Assets\fr_FR.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>fr_FR.resx</DependentUpon>
@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\fr_FR.resx">
+    <EmbeddedResource Update="Assets\fr_FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
