@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="Views\**" />
+    <Page Remove="ViewModels\**" />
+    <Page Remove="Views\**" />
+
     <None Remove="Assets\Cartes\baguettes.png" />
     <None Remove="Assets\Cartes\dessert.png" />
     <None Remove="Assets\Cartes\maki1.png" />
@@ -30,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +49,27 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <Resource Include="Assets\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Assets\fr_FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>fr_FR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Assets\fr_FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+
     <Resource Include="Assets\Cartes\baguettes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -74,6 +106,7 @@
     <Resource Include="Assets\Cartes\wasabi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+
   </ItemGroup>
 
 </Project>
