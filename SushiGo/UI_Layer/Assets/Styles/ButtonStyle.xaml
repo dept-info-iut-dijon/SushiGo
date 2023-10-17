@@ -12,8 +12,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontSize" Value="50"/>
-        <Setter Property="Margin" Value="200,35,200,35"/>
     </Style>
+
 
 </ResourceDictionary>

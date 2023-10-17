@@ -33,7 +33,7 @@
 
 
         <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
-            <TextBlock Text="{x:Static res:fr_FR.CREDITS}" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Text="{x:Static res:fr_FR.CREDITS}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 
 
