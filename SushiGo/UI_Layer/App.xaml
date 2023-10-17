@@ -4,11 +4,13 @@
              xmlns:local="clr-namespace:Couche_IHM"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Assets/Colors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="CustomFont">/VotreProjet;component/Fonts/YourCustomFont.ttf#YourCustomFont</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
