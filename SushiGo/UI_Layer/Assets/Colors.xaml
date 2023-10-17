@@ -1,4 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Color x:Key="red1">#CD1719</Color>
+    
+    <Color x:Key="green1">#ADCB32</Color>
+
+
+    <SolidColorBrush x:Key="Background" Color="{StaticResource green1}"/>
     
 </ResourceDictionary>

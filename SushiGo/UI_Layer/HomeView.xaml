@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:UI_Layer"
         xmlns:res="clr-namespace:UI_Layer.Assets"
         mc:Ignorable="d"
-        Title="HomeView" Height="1080" Width="1920" Background="#ADCB32">
+        Title="HomeView" Height="1080" Width="1920" 
+        Background="{StaticResource Background}">
 
     
 
