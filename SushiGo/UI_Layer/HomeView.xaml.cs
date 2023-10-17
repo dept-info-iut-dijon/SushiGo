@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using UI_Layer.Resources;
+using UI_Layer.Assets;
 
 namespace UI_Layer
 {
