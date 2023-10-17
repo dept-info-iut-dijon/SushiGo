@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Couche_IHM.Views.CarteComponent"
+﻿<UserControl x:Class="Couche_IHM.Views.CardComponent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,24 +8,19 @@
         mc:Ignorable="d"
         Height="450" Width="350">
     <materialDesign:Card 
-        UniformCornerRadius="9"
+        UniformCornerRadius="18"
         materialDesign:ElevationAssist.Elevation="Dp8"
         MouseEnter="MouseOverCard" 
-        MouseLeave="MouseNotOverCard"
-        Background="Wheat">
+        Background="Transparent"
+        MouseLeave="MouseNotOverCard">
         <Border 
             Name="border" 
             BorderBrush="IndianRed" 
-            CornerRadius="9"  
-            BorderThickness="2">
-            <Grid>
-                <TextBlock  
-                    Foreground="IndianRed" 
-                    Name="cardName" 
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" 
-                    FontSize="25"/>
-            </Grid>
+            CornerRadius="18"  
+            BorderThickness="0">
+            <Image Margin="-7,-7,-7,-5"  Name="image">
+                
+            </Image>
         </Border>
     </materialDesign:Card>
 </UserControl>

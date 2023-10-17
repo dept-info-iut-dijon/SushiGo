@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Couche_IHM.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CarteComponent.xaml
+    /// Logique d'interaction pour CardComponent.xaml
     /// </summary>
-    public partial class CarteComponent : UserControl
+    public partial class CardComponent : UserControl
     {
 
         #region dependenciesProperties
@@ -15,7 +16,7 @@ namespace Couche_IHM.Views
         /// Lie la propriété IsSelecting à l'event correspondant
         /// </summary>
         public static readonly DependencyProperty IsSelectingProperty =
-         DependencyProperty.Register("IsSelecting", typeof(bool), typeof(CarteComponent),
+         DependencyProperty.Register("IsSelecting", typeof(bool), typeof(CardComponent),
          new FrameworkPropertyMetadata(false,
              FrameworkPropertyMetadataOptions.AffectsRender |
              FrameworkPropertyMetadataOptions.AffectsParentMeasure, HighlightBorders));
@@ -24,7 +25,7 @@ namespace Couche_IHM.Views
         /// Lie la propriété CardName à l'event correspondant
         /// </summary>
         public static readonly DependencyProperty CardNameProperty =
-         DependencyProperty.Register("CardName", typeof(string), typeof(CarteComponent),
+         DependencyProperty.Register("CardName", typeof(string), typeof(CardComponent),
          new FrameworkPropertyMetadata(string.Empty,
              FrameworkPropertyMetadataOptions.AffectsRender |
              FrameworkPropertyMetadataOptions.AffectsParentMeasure, ChangeCardName));
@@ -79,17 +80,17 @@ namespace Couche_IHM.Views
         /// </summary>
         private static void HighlightBorders(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is CarteComponent carteComponent)
+            if (d is CardComponent CardComponent)
             {
-                if (carteComponent.border != null)
+                if (CardComponent.border != null)
                 {
-                    if (carteComponent.IsSelecting)
+                    if (CardComponent.IsSelecting)
                     {
-                        carteComponent.border.BorderThickness = new Thickness(3);
+                        CardComponent.border.BorderThickness = new Thickness(3);
                     }
                     else
                     {
-                        carteComponent.border.BorderThickness = new Thickness(0);
+                        CardComponent.border.BorderThickness = new Thickness(0);
                     }
                 }
             }
@@ -100,19 +101,17 @@ namespace Couche_IHM.Views
         /// </summary>
         private static void ChangeCardName(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is CarteComponent carteComponent)
+            if (d is CardComponent CardComponent)
             {
-                if (carteComponent.cardName != null)
+                if (CardComponent.image != null)
                 {
-                    // TO DO : changer l'image à partir du texte quand images pretes
-                    carteComponent.cardName.Text = carteComponent.CardName;
-                    
+                    CardComponent.image.Source = new BitmapImage(new System.Uri($"../Assets/{CardComponent.CardName}.png", System.UriKind.Relative));            
                 }
             }
         }
         #endregion
 
-        public CarteComponent()
+        public CardComponent()
         {
             InitializeComponent();
         }
