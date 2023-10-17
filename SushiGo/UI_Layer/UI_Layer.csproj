@@ -8,14 +8,72 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <None Remove="Assets\Cartes\baguettes.png" />
+    <None Remove="Assets\Cartes\dessert.png" />
+    <None Remove="Assets\Cartes\maki1.png" />
+    <None Remove="Assets\Cartes\maki2.png" />
+    <None Remove="Assets\Cartes\maki3.png" />
+    <None Remove="Assets\Cartes\ravioli.png" />
+    <None Remove="Assets\Cartes\sashimi.png" />
+    <None Remove="Assets\Cartes\sushiCalamar.png" />
+    <None Remove="Assets\Cartes\sushiOmelette.png" />
+    <None Remove="Assets\Cartes\sushiSaumon.png" />
+    <None Remove="Assets\Cartes\tempura.png" />
+    <None Remove="Assets\Cartes\wasabi.png" />
+    <None Remove="Assets\ravioli.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Network_Layer\Network_Layer.csproj" />
     <ProjectReference Include="..\Logic_Layer\Logic_Layer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Cartes\baguettes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\dessert.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\maki1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\maki2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\maki3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\ravioli.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sashimi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiCalamar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiOmelette.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiSaumon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\tempura.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
