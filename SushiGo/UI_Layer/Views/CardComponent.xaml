@@ -8,17 +8,18 @@
         mc:Ignorable="d"
         Height="450" Width="350">
     <materialDesign:Card 
-        UniformCornerRadius="18"
+        UniformCornerRadius="17"
         materialDesign:ElevationAssist.Elevation="Dp8"
         MouseEnter="MouseOverCard" 
+        
         Background="Transparent"
         MouseLeave="MouseNotOverCard">
         <Border 
             Name="border" 
             BorderBrush="IndianRed" 
-            CornerRadius="18"  
+            CornerRadius="17"  
             BorderThickness="0">
-            <Image Margin="-7,-7,-7,-5"  Name="image">
+            <Image Stretch="Fill" Margin="-4"  Name="image">
                 
             </Image>
         </Border>

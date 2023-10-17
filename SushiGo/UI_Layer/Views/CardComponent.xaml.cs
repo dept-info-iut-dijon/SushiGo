@@ -105,7 +105,7 @@ namespace Couche_IHM.Views
             {
                 if (CardComponent.image != null)
                 {
-                    CardComponent.image.Source = new BitmapImage(new System.Uri($"../Assets/{CardComponent.CardName}.png", System.UriKind.Relative));            
+                    CardComponent.image.Source = new BitmapImage(new System.Uri($"../Assets/Cartes/{CardComponent.CardName}.png", System.UriKind.Relative));            
                 }
             }
         }
