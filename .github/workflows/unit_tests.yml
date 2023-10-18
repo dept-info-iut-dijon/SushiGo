@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '6.x'
 
       - name: Restore dependencies
-        run: dotnet restore **/*Test.csproj
+        run: dotnet restore 
 
       - name: Build and run tests
-        run: dotnet test **/*Test.csproj --no-restore
+        run: dotnet test --no-restore
