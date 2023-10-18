@@ -1,4 +1,5 @@
-﻿using Logic_Layer.factories;
+﻿using Logic_Layer.cards;
+using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer;
@@ -16,6 +17,7 @@ public class Table
     /// </summary>
     public Player CurrentPlayer => players[currentPlayerIndex];
 
+    #region Méthodes publiques
     /// <summary>
     /// Initialise la table de jeu
     /// </summary>
@@ -47,6 +49,27 @@ public class Table
     {
         ActualizeHands();
     }
+
+    /// <summary>
+    /// Fait jouer une carte à un joueur
+    /// </summary>
+    /// <param name="player">Le joueur que l'on veut faire jouer</param>
+    /// <param name="card">La carte à jouer</param>
+    /// <exception cref="PlayerImpossibleToFindException">Lancée quand le joueur demandé n'est pas en jeu</exception>
+    public void PlayCard(Player player, Card card)
+    {
+        Player? myPlayer = players.Find(myPlayer => myPlayer.Equals(player));
+
+        if (myPlayer is null)
+        {
+            throw new PlayerImpossibleToFindException("Le joueur n'est pas dans la partie");
+        }
+
+        // On joue la carte si le joueur n'est pas null
+        myPlayer.PlayCard(card);
+    }
+    
+    #endregion
 
     #region Méthodes privées
     // Retourne true si toutes les cartes distribuées aux joueurs ont été posées

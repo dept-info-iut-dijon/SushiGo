@@ -58,5 +58,14 @@ public class Board
         }
 
         return ret;
-    } 
+    }
+
+    /// <summary>
+    /// Ajoute une carte sur le plateau
+    /// </summary>
+    /// <param name="card">Carte à ajouter</param>
+    public void AddCard(Card card)
+    {
+        cards.Add(card);
+    }
 }

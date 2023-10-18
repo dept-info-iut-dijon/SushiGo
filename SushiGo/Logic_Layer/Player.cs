@@ -39,6 +39,15 @@ public class Player
         this.board = board;
         this.hand = hand;
     }
+
+    /// <summary>
+    /// Joue une carte
+    /// </summary>
+    /// <param name="card">La carte à jouer</param>
+    public void PlayCard(Card card)
+    {
+        hand.PlayCard(card, board);
+    }
     
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
