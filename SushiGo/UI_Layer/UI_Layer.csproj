@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
@@ -44,12 +43,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Fonts\New_Sushi.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Views\HomeView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Network_Layer\Network_Layer.csproj" />
     <ProjectReference Include="..\Logic_Layer\Logic_Layer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-
+    <Content Include="Assets\Fonts\New_Sushi.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Page Include="Views\HomeView.xaml" />
     <Resource Include="Assets\Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

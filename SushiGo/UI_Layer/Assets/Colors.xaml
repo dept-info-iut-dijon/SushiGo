@@ -2,11 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
+    <!-- Définitions de couleurs -->
     <Color x:Key="red1">#CD1719</Color>
-    
+    <Color x:Key="orange1">#FFCD00</Color>    
     <Color x:Key="green1">#ADCB32</Color>
-
-
-    <SolidColorBrush x:Key="Background" Color="{StaticResource green1}"/>
+    <Color x:Key="white1">#FFFFFF</Color>
     
+    
+    
+
+    <!-- Définitions de SolidColorBrush-->
+    <SolidColorBrush x:Key="Background" Color="{StaticResource green1}"/>
+
+    <SolidColorBrush x:Key="Button1_Background" Color="{StaticResource orange1}"/>
+    <SolidColorBrush x:Key="Button1_BorderBrush" Color="{StaticResource white1}"/>
+
 </ResourceDictionary>

@@ -6,14 +6,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="Red" BorderBrush="White" BorderThickness="20" CornerRadius="30">
+                    <Border Background="{StaticResource Button1_Background}" BorderBrush="{StaticResource Button1_BorderBrush}" BorderThickness="20" CornerRadius="30">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="FontSize" Value="50"/>
-        <Setter Property="Margin" Value="200,35,200,35"/>
     </Style>
+
 
 </ResourceDictionary>
