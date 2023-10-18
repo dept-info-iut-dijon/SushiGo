@@ -22,6 +22,14 @@ namespace UI_Layer.Views
         public GameCreationView()
         {
             InitializeComponent();
+            this.test.ItemsSource = new List<Joueur>()
+            {
+                new Joueur("Florian","admin"),
+                new Joueur("Morgane"),
+                new Joueur("Evan"),
+                new Joueur("Jonas"),
+                new Joueur("Elia"),
+            };
         }
     }
 }

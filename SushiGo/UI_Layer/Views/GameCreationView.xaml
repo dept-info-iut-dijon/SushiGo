@@ -9,22 +9,15 @@
         Title="GameCreationView" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.9*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.9*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.9*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="0.8*"/>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
@@ -34,100 +27,143 @@
             Grid.ColumnSpan="4"
             Grid.RowSpan="11"
             Source="../Assets/test.png"/>
-        
-        <TextBlock 
-            Text="Création de partie"
-            FontSize="60"
-            Foreground="White"
+
+        <TextBlock
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="3"
             Grid.Row="1"
-            Grid.ColumnSpan="4"
-            FontWeight="Bold"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
-
-        <!-- Choisir le nb de joueurs -->
-        <materialDesign:Card
-            BorderThickness="2"
-            BorderBrush="Black"
-            Padding="2"
-            Content="Nombre de joueurs"
-            FontSize="20"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
-            Foreground="White"
-            Background="IndianRed"
-            Grid.Row="3"
-            Grid.Column="1"/>
-        <Button
-             BorderThickness="0"
-            Margin="15"
-            Style="{x:Null}"
-            Content="1"
-            Foreground="White"
-            Background="IndianRed"
+            FontSize="55"
             FontWeight="Bold"
-            Grid.Row="3"
-            Grid.Column="2"
-            ToolTip="MaterialDesignFlatPrimaryToggleButton" />
-        
-        <!-- Choisir les adversaires -->
-        <materialDesign:Card
-            Content="Joueur contre ordinateurs"
-            FontSize="20"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
             Foreground="White"
-            Background="IndianRed"
-            Grid.Row="5"
-            Grid.Column="1"/>
-        <Button
-            Margin="15"
-            Style="{x:Null}"
-            Content="J/O"
-            Foreground="White"
-            Background="IndianRed"
-            materialDesign:ToggleButtonAssist.OnContent="J/J"
-            FontWeight="Bold"
-             BorderThickness="0"
-            Grid.Row="5"
-            Grid.Column="2"
-            ToolTip="MaterialDesignFlatPrimaryToggleButton" />
+            Text="Création de la partie">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="DarkRed" Direction="0" ShadowDepth="3" BlurRadius="5"/>
+            </TextBlock.Effect>
+        </TextBlock>
 
-        <!-- Choisir la difficulté -->
-        <materialDesign:Card
-            Content="Difficulté"
-            FontSize="20"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
-            Foreground="White"
-            Background="IndianRed"
-            Grid.Row="7"
-            Grid.Column="1"/>
-        <Button
-            Margin="15"
-            Style="{x:Null}"
-            BorderThickness="0"
-            Content="J/O"
-            Foreground="White"
-            Background="IndianRed"
-            FontWeight="Bold"
-            Grid.Row="7"
-            Grid.Column="2"/>
+        <Button Height="150" Width="200" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent" Grid.RowSpan="2">
+            <materialDesign:PackIcon
+                Foreground="{StaticResource Background}"
+                Width="170"
+                Height="140"
+                Kind="ArrowLeftThin"/>
+        </Button>
 
-        <!-- Créer la partie -->
+        <materialDesign:Card materialDesign:ElevationAssist.Elevation="Dp24"  Grid.Row="3" Grid.Column="1">
+            <Image
+                Stretch="Fill"
+                Opacity="0.5"
+                Source="../Assets/bois2.jpg"/>
+        </materialDesign:Card>
+
+        <TabControl 
+
+          materialDesign:ColorZoneAssist.Foreground="DarkRed"
+          materialDesign:ColorZoneAssist.Mode="Custom"
+            Grid.Row="3" Grid.Column="1" >
+            <TabItem
+                FontWeight="Bold"
+                Header="Joueurs">
+                <ListView 
+                        Grid.Row="2" Grid.Column="1"
+                        x:Name="test"
+                HorizontalContentAlignment="Stretch"  
+                VerticalContentAlignment="Top">
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <!-- Header des colonnes -->
+                            <DockPanel LastChildFill="True">
+                                <Grid DockPanel.Dock="Top">
+
+                                </Grid>
+                                <!-- items de la listview -->
+                                <ItemsPresenter  ></ItemsPresenter>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="670"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon
+                                        VerticalAlignment="Center"  
+                                        Width="30"
+                                        Height="19"
+                                        Grid.Column="0">
+                                    <materialDesign:PackIcon.Style>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                    <Setter Property="Kind" Value="Account"/>
+
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Role}" Value="admin">
+                                                    <Setter Property="Kind" Value="Crown"/>
+                                                    <Setter Property="Foreground" Value="Yellow"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:PackIcon.Style>
+                                </materialDesign:PackIcon>
+
+                                <!-- Content -->
+                                <TextBlock 
+                                        Grid.Column="1"
+                                        Text="{Binding Name}"
+                                        FontSize="18"/>
+
+                                <materialDesign:PackIcon
+                                        VerticalAlignment="Center"  
+                                        Width="30"
+                                        Height="17"
+                                        Kind="CloseThick"
+                                        Grid.Column="2">
+                                    <materialDesign:PackIcon.Style>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Role}" Value="admin">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:PackIcon.Style>
+                                </materialDesign:PackIcon>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Options">
+                <TextBlock
+                    Margin="8"
+                    Text="Default Tab 2" />
+            </TabItem>
+        </TabControl>
+
+
         <Button
-            Content="GO !"
-            Foreground="Black"
-            HorizontalAlignment="Center"
-            BorderThickness="0"
-            FontSize="20"
-            VerticalAlignment="Center"
-            Grid.Row="9"
+            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
             Width="200"
-            Height="60"
+            Height="50"
+            HorizontalAlignment="Center"
+            Grid.Row="4"
+            FontSize="20"
+            BorderThickness="0"
             Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Background="White"/>
+            Background="White"
+            Foreground="Black"
+            Content="GO !"
+            />
 
 
     </Grid>

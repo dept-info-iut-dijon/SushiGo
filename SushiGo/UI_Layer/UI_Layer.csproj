@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <None Remove="Assets\background.jpg" />
+    <None Remove="Assets\bamboo.jpg" />
+    <None Remove="Assets\bois.jpg" />
+    <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\cartas-sushi-go.jpg" />
     <None Remove="Assets\test.png" />
   </ItemGroup>
@@ -38,6 +41,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\bamboo.jpg" />
+    <Resource Include="Assets\bois.jpg" />
+    <Resource Include="Assets\bois2.jpg" />
     <Resource Include="Assets\cartas-sushi-go.jpg" />
 
     <Resource Include="Assets\Cartes\baguettes.png">
