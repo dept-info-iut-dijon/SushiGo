@@ -1,10 +1,10 @@
-﻿name: Run Unit Tests
+﻿name: Run Logic Unit Tests
 
 on:
   pull_request:
     branches:
       - main
-      - dev 
+      - dev
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '6.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ env.LOGIC_UNIT_TEST_PATH }}
 
       - name: Build and run tests
-        run: dotnet test --no-restore
+        run: dotnet test ${{ env.LOGIC_UNIT_TEST_PATH }} --no-restore
