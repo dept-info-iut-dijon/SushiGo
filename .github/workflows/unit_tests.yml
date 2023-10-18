@@ -1,4 +1,4 @@
-﻿name: Run Logic Unit Tests
+﻿name: Run Unit Tests
 
 on:
   pull_request:
@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '6.x'
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.LOGIC_UNIT_TEST_PATH }}
+        run: dotnet restore Sushigo/**/*Test.csproj
 
       - name: Build and run tests
-        run: dotnet test ${{ env.LOGIC_UNIT_TEST_PATH }} --no-restore
+        run: dotnet test Sushigo/**/*Test.csproj --no-restore
