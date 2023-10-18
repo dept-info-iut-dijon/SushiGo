@@ -41,15 +41,7 @@ public class Table
         
         return NextPlayer();
     }
-
-    /// <summary>
-    /// Arrive après un tour complet de la table
-    /// </summary>
-    public void NextTableTurn()
-    {
-        ActualizeHands();
-    }
-
+    
     /// <summary>
     /// Fait jouer une carte à un joueur
     /// </summary>
@@ -72,6 +64,14 @@ public class Table
     #endregion
 
     #region Méthodes privées
+    /// <summary>
+    /// Arrive après un tour complet de la table
+    /// </summary>
+    private void NextTableTurn()
+    {
+        ActualizeHands();
+    }
+    
     // Retourne true si toutes les cartes distribuées aux joueurs ont été posées
     private bool NoMoreCards()
     {

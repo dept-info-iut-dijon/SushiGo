@@ -10,6 +10,7 @@ public class WasabiCard : Card, ISpecialCard
     private SushiCard? sushi;
     
     public override string Name => "Wasabi";
+    public SushiCard? Sushi => sushi;
 
     public WasabiCard()
     {

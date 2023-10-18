@@ -17,12 +17,8 @@ public class Board
     /// <summary>
     /// Liste des cartes du joueur
     /// </summary>
-    public List<Card> Cards
-    {
-        get => cards;
-        set => cards = value;
-    }
-    
+    public List<Card> Cards => cards;
+
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
     /// </summary>
@@ -33,7 +29,7 @@ public class Board
         List<ISpecialCard> ret = new List<ISpecialCard>();
         
         // On rassemble les cartes spéciales devant être prises en compte
-        foreach (Card c in this.Cards)
+        foreach (Card c in Cards)
         {
             if (c is ISpecialCard card && card.PlayerTurn())
                 ret.Add(card);
@@ -51,7 +47,7 @@ public class Board
         List<ISpecialCard> ret = new List<ISpecialCard>();
 
         // On rassemble les cartes spéciales devant être prises en compte
-        foreach (Card c in this.Cards)
+        foreach (Card c in Cards)
         {
             if (c is ISpecialCard card && card.EndRound())
                 ret.Add(card);
