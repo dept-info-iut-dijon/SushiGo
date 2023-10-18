@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '6.x'
 
       - name: Restore dependencies
-        run: dotnet restore Sushigo/**/*Test.csproj
+        run: dotnet restore **/*Test.csproj
 
       - name: Build and run tests
-        run: dotnet test Sushigo/**/*Test.csproj --no-restore
+        run: dotnet test **/*Test.csproj --no-restore
