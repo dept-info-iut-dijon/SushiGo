@@ -10,18 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI_Layer.Views;
 
-namespace Couche_IHM
+namespace UI_Layer.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour GameCreationView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameCreationView : Window
     {
-        public MainWindow()
+        public GameCreationView()
         {
             InitializeComponent();
         }

@@ -7,12 +7,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\background.jpg" />
+    <None Remove="Assets\cartas-sushi-go.jpg" />
+    <None Remove="Assets\test.png" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-    <Folder Include="Assets\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,8 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\cartas-sushi-go.jpg" />
 
     <Resource Include="Assets\Cartes\baguettes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -70,6 +76,7 @@
     <Resource Include="Assets\Cartes\wasabi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\test.png" />
 
   </ItemGroup>
 
