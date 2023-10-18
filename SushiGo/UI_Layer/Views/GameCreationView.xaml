@@ -21,13 +21,15 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Arriere plan -->
         <Image
             Opacity="0.7"
             Stretch="Fill"
             Grid.ColumnSpan="4"
             Grid.RowSpan="11"
             Source="../Assets/test.png"/>
-
+        
+        <!-- Titre de l'écran -->
         <TextBlock
             VerticalAlignment="Top"
             Grid.ColumnSpan="3"
@@ -42,7 +44,8 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Button Height="150" Width="200" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Left" Background="Transparent" Grid.RowSpan="2">
+        <!-- Bouton retour page -->
+        <Button Style="{StaticResource ButtonWithImage}" Height="150" Width="200" VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.RowSpan="2">
             <materialDesign:PackIcon
                 Foreground="{StaticResource Background}"
                 Width="170"
@@ -50,6 +53,7 @@
                 Kind="ArrowLeftThin"/>
         </Button>
 
+        <!-- HUD création partie -->
         <materialDesign:Card materialDesign:ElevationAssist.Elevation="Dp24"  Grid.Row="3" Grid.Column="1">
             <Image
                 Stretch="Fill"
@@ -57,19 +61,22 @@
                 Source="../Assets/bois2.jpg"/>
         </materialDesign:Card>
 
+        <!-- Onglets création partie -->
         <TabControl 
-
           materialDesign:ColorZoneAssist.Foreground="DarkRed"
           materialDesign:ColorZoneAssist.Mode="Custom"
             Grid.Row="3" Grid.Column="1" >
-            <TabItem
-                FontWeight="Bold"
-                Header="Joueurs">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="Joueurs"
+                        FontSize="20"/>
+                </TabItem.Header>
                 <ListView 
-                        Grid.Row="2" Grid.Column="1"
-                        x:Name="test"
-                HorizontalContentAlignment="Stretch"  
-                VerticalContentAlignment="Top">
+                    Grid.Row="2" Grid.Column="1"
+                    x:Name="test"
+                    HorizontalContentAlignment="Stretch"  
+                    VerticalContentAlignment="Top">
                     <ListView.Template>
                         <ControlTemplate>
                             <!-- Header des colonnes -->
@@ -87,8 +94,9 @@
                             <Grid Margin="0,5,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="35"/>
-                                    <ColumnDefinition Width="670"/>
+                                    <ColumnDefinition Width="660"/>
                                     <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
                                 <materialDesign:PackIcon
                                         VerticalAlignment="Center"  
@@ -117,14 +125,17 @@
                                         Text="{Binding Name}"
                                         FontSize="18"/>
 
-                                <materialDesign:PackIcon
-                                        VerticalAlignment="Center"  
+                                <Button 
+                                    VerticalAlignment="Center"  
+                                    Grid.Column="2">
+                                    <materialDesign:PackIcon
                                         Width="30"
                                         Height="17"
+                                        Foreground="DarkRed"
                                         Kind="CloseThick"
-                                        Grid.Column="2">
-                                    <materialDesign:PackIcon.Style>
-                                        <Style TargetType="materialDesign:PackIcon">
+                                        />
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImage}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Role}" Value="joueur">
                                                     <Setter Property="Visibility" Value="Visible"/>
@@ -135,22 +146,114 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </materialDesign:PackIcon.Style>
-                                </materialDesign:PackIcon>
+                                    </Button.Style>
+                                </Button>
+
+                                <materialDesign:PackIcon
+                                    Width="15"
+                                    Height="15"
+                                    Opacity="0.6"
+                                    VerticalAlignment="Center"  
+                                    Grid.Column="3"
+                                    Foreground="ForestGreen"
+                                    Kind="CheckboxBlankCircle"/>
 
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>
             </TabItem>
-            <TabItem Header="Options">
-                <TextBlock
-                    Margin="8"
-                    Text="Default Tab 2" />
+            <TabItem >
+                <TabItem.Header>
+                    <TextBlock 
+                        Text="Configuration"
+                        FontSize="20"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Configuration mode de jeu-->
+                    <TextBlock
+                        Text="Mode de jeu :"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"/>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                          Margin="4"
+                          Orientation="Horizontal">
+                        <RadioButton
+                            Margin="4"
+                            Content="Joueurs/Joueurs"
+                            IsChecked="True"
+                            BorderBrush="IndianRed"
+                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                        <RadioButton
+                            Margin="4"
+                            Content="Joueurs/Robots"
+                            IsChecked="False"
+                            BorderBrush="IndianRed"
+                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                    </StackPanel>
+
+                    <!-- Configuration nombre joueurs -->
+                    <TextBlock
+                        Text="Nombre de joueurs :"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Grid.Row="3"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"/>
+
+                    <StackPanel 
+                        Margin="0,10,0,0"
+                        Grid.Row="4"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <Button Style="{StaticResource ButtonWithImage}">
+                            <materialDesign:PackIcon
+                                Kind="MinusThick"/>
+                        </Button>
+                        <TextBlock
+                            Foreground="Black"
+                            Margin="5,0,0,0"
+                            FontSize="17"
+                            Text="5"/>
+                        <Button Margin="5,0,0,0" Style="{StaticResource ButtonWithImage}">
+                            <materialDesign:PackIcon
+                                Kind="PlusThick"/>
+                        </Button>
+                    </StackPanel>
+
+                    <Button BorderThickness="0" Background="IndianRed" Grid.Row="6" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon
+                                Kind="ContentSave"/>
+                            <TextBlock
+                                FontSize="18"
+                                Text="Sauvegarder"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </TabItem>
         </TabControl>
 
-
+        <!-- Lancer la partie-->
         <Button
             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
             Width="200"
@@ -162,9 +265,6 @@
             Grid.Column="1"
             Background="White"
             Foreground="Black"
-            Content="GO !"
-            />
-
-
+            Content="GO !"/>
     </Grid>
 </Window>

@@ -22,6 +22,7 @@ namespace UI_Layer.Views
         public GameCreationView()
         {
             InitializeComponent();
+            // TODO : Uniquement pour les tests
             this.test.ItemsSource = new List<Joueur>()
             {
                 new Joueur("Florian","admin"),
