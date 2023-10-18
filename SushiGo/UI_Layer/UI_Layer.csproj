@@ -14,12 +14,6 @@
     <Page Remove="ViewModels\**" />
   </ItemGroup>
 
-
-
-  <ItemGroup>
-    <Folder Include="Assets\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
 

@@ -3,12 +3,90 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:usercontrols="clr-namespace:UI_Layer.UserControls"
         xmlns:local="clr-namespace:UI_Layer.Views"
         mc:Ignorable="d"
         Title="GameTable" Height="1080" Width="1920" 
-        Background="{StaticResource Background}">
-    
+        Background="Black">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         
+        
+        
+
+        
+        <!-- Plateau du joueur 1-->
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="100" Width="540" Margin="10">
+                <TextBlock Text="Joueur 1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font2}"/>
+            </Border>
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="350" Width="540">
+                <ListView Margin="5">
+
+                </ListView>
+            </Border>
+        </StackPanel>
+
+        <!-- Plateau du joueur 2-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardHasPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="80" Width="500" Margin="10">
+                <TextBlock Text="Joueur 2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font2}"/>
+            </Border>
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardHasPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="300" Width="500">
+                <ListView Margin="5">
+
+                </ListView>
+            </Border>
+        </StackPanel>
+
+        <!-- Plateau du joueur 3-->
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="80" Width="500" Margin="10">
+                <TextBlock Text="Joueur 3" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font2}"/>
+            </Border>
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="300" Width="500">
+                <ListView Margin="5">
+
+                </ListView>
+            </Border>
+        </StackPanel>
+
+        <!-- Plateau du joueur 4-->
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardHasPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="80" Width="500" Margin="10">
+                <TextBlock Text="Joueur 4" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font2}"/>
+            </Border>
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardHasPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="300" Width="500">
+                <ListView Margin="5">
+
+                </ListView>
+            </Border>
+        </StackPanel>
+
+        <!-- Plateau du joueur 5-->
+        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="80" Width="500" Margin="10">
+                <TextBlock Text="Joueur 5" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font2}"/>
+            </Border>
+            <Border BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" Background="{StaticResource GameTableView_PlayerBoardBorderBackground}" BorderThickness="15" CornerRadius="30" Height="300" Width="500">
+                <ListView Margin="5">
+
+                </ListView>
+            </Border>
+        </StackPanel>
+
+
+
     </Grid>
+        
+        
 </Window>
