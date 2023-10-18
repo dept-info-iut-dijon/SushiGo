@@ -38,7 +38,7 @@ public class Hand
     /// <param name="card">La carte à jouer</param>
     /// <param name="board">Le plateau sur laquelle jouer la carte</param>
     /// <exception cref="CardNotInHandException">Lancée si la carte n'est pas dans la main</exception>
-    public void PlayCard(Card card, Board board)
+    public virtual void PlayCard(Card card, Board board)
     {
         Card? myCard = Contains(card);
         if (myCard is not null)

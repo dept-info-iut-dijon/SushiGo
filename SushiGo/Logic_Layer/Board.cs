@@ -24,7 +24,7 @@ public class Board
     /// </summary>
     /// <see cref="ISpecialCard"/>
     /// <returns>Les cartes spéciales à prendre en compte</returns>
-    public List<ISpecialCard> PlayerTurn()
+    public virtual List<ISpecialCard> PlayerTurn()
     {
         List<ISpecialCard> ret = new List<ISpecialCard>();
         
@@ -42,7 +42,7 @@ public class Board
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>
     /// <returns></returns>
-    public List<ISpecialCard> EndTurn()
+    public virtual List<ISpecialCard> EndTurn()
     {
         List<ISpecialCard> ret = new List<ISpecialCard>();
 

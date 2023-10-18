@@ -50,9 +50,11 @@ public class PlayerTests
     public void Player_PlayCard_CallsHandPlayCard()
     {
         // Arrange
-        var handMock = new Mock<Hand>();
-        var player = new Player(1, new Board(), handMock.Object);
         var card = new Mock<Card>().Object;
+        var cardList = new List<Card>();
+        cardList.Add(card);
+        var handMock = new Mock<Hand>(1, cardList);
+        var player = new Player(1, new Board(), handMock.Object);
 
         // Act
         player.PlayCard(card);
