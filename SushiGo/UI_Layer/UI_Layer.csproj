@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,34 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
 
-    <Compile Remove="ViewModels\**" />
-    <Compile Remove="Views\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="ViewModels\**" />
-    <None Remove="Views\**" />
-    <Page Remove="ViewModels\**" />
-    <Page Remove="Views\**" />
-
-    <None Remove="Assets\Cartes\baguettes.png" />
-    <None Remove="Assets\Cartes\dessert.png" />
-    <None Remove="Assets\Cartes\maki1.png" />
-    <None Remove="Assets\Cartes\maki2.png" />
-    <None Remove="Assets\Cartes\maki3.png" />
-    <None Remove="Assets\Cartes\ravioli.png" />
-    <None Remove="Assets\Cartes\sashimi.png" />
-    <None Remove="Assets\Cartes\sushiCalamar.png" />
-    <None Remove="Assets\Cartes\sushiOmelette.png" />
-    <None Remove="Assets\Cartes\sushiSaumon.png" />
-    <None Remove="Assets\Cartes\tempura.png" />
-    <None Remove="Assets\Cartes\wasabi.png" />
-    <None Remove="Assets\ravioli.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+    <Folder Include="Assets\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,36 +20,12 @@
 
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Assets\Fonts\New_Sushi.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Views\HomeView.xaml.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Network_Layer\Network_Layer.csproj" />
     <ProjectReference Include="..\Logic_Layer\Logic_Layer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Assets\Fonts\New_Sushi.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Page Include="Views\HomeView.xaml" />
-    <Resource Include="Assets\Logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Assets\fr_FR.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>fr_FR.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Assets\fr_FR.resx">
