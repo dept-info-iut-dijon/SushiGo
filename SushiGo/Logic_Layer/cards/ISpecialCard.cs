@@ -12,7 +12,7 @@ public interface ISpecialCard
     bool PlayerTurn();
     
     /// <summary>
-    /// Appelé à la fin du tour
+    /// Appelé à la fin de la manche
     /// </summary>
     /// <returns>Indique si la carte peut être prise en compte</returns>
     bool EndRound();

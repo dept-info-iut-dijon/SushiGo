@@ -11,9 +11,22 @@ public class Player
     /// <summary>
     /// Identifiant du joueur dans la partie
     /// </summary>
-    /// 
     public int Id => id;
-    
+
+    /// <summary>
+    /// Indique si le joueur a encore des cartes dans sa main
+    /// </summary>
+    public bool HaveCards => hand.Cards.Count > 0;
+
+    /// <summary>
+    /// Main de cartes du joueur
+    /// </summary>
+    public Hand Hand
+    {
+        get => hand;
+        set => hand = value;
+    }
+
     /// <summary>
     /// Créée un joueur
     /// </summary>

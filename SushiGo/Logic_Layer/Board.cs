@@ -8,7 +8,12 @@ namespace Logic_Layer;
 public class Board
 {
     private List<Card> cards;
-    
+
+    public Board()
+    {
+        cards = new List<Card>();
+    }
+
     /// <summary>
     /// Liste des cartes du joueur
     /// </summary>
@@ -30,8 +35,8 @@ public class Board
         // On rassemble les cartes spéciales devant être prises en compte
         foreach (Card c in this.Cards)
         {
-            if (c is ISpecialCard && ((ISpecialCard)c).PlayerTurn())
-                ret.Add(c as ISpecialCard);
+            if (c is ISpecialCard card && card.PlayerTurn())
+                ret.Add(card);
         }
         
         return ret;
@@ -48,8 +53,8 @@ public class Board
         // On rassemble les cartes spéciales devant être prises en compte
         foreach (Card c in this.Cards)
         {
-            if (c is ISpecialCard && ((ISpecialCard)c).EndRound())
-                ret.Add(c as ISpecialCard);
+            if (c is ISpecialCard card && card.EndRound())
+                ret.Add(card);
         }
 
         return ret;

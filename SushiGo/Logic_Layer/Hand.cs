@@ -8,25 +8,18 @@ namespace Logic_Layer;
 public class Hand
 {
     private int id;
-    private List<Card> cards;
+    private readonly List<Card> cards;
     
     /// <summary>
     /// Identifiant de la main
     /// </summary>
-    public int Id
-    {
-        get => id;
-    }
+    public int Id => id;
 
     /// <summary>
     /// Liste des cartes de la main
     /// </summary>
-    public List<Card> Cards
-    {
-        get => cards;
-        set => cards = value;
-    }
-    
+    public List<Card> Cards => cards;
+
     /// <summary>
     /// Créée une main
     /// </summary>
