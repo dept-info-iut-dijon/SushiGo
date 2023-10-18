@@ -7,8 +7,9 @@
 
     <Style x:Key="Font1" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource NewSushi}" />
-        <Setter Property="FontSize" Value="56" />
+        <Setter Property="FontSize" Value="50" />
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
 </ResourceDictionary>
