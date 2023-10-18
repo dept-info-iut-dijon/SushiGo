@@ -17,9 +17,9 @@ namespace UI_Layer.Views
     /// <summary>
     /// Logique d'interaction pour GameTable.xaml
     /// </summary>
-    public partial class GameTable : Window
+    public partial class GameTableView : Window
     {
-        public GameTable()
+        public GameTableView()
         {
             InitializeComponent();
         }
