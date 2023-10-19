@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace UI_Layer.ViewModels
 {
@@ -28,9 +29,11 @@ namespace UI_Layer.ViewModels
         private bool isModeJvJ = true;
         private bool isLobbyShowed = false;
         private bool startButtonShow = false;
-
-        public GameCreationViewModel()
+        private Window view;
+        public GameCreationViewModel(Window view)
         {
+            this.view = view;
+
             // Initialisation des events
             this.AddPlayer = new RelayCommand(x =>
             {
@@ -47,12 +50,23 @@ namespace UI_Layer.ViewModels
                 }
             });
             this.CreateGame = new RelayCommand(x => this.CreateLobby());
+            this.BackToHome = new RelayCommand(x =>
+            {
+                HomeView homeView = new HomeView();
+                homeView.Show();
+                this.view.Close();
+
+            });
         }
 
 
 
         #endregion
         #region events
+        /// <summary>
+        /// Permet de retourner à l'écran d'accueil
+        /// </summary>
+        public RelayCommand BackToHome { get; set; }
         /// <summary>
         /// Permet d'ajouter un joueur dans la partie
         /// </summary>
@@ -69,7 +83,39 @@ namespace UI_Layer.ViewModels
         #endregion
         #region properties
 
-       
+        /// <summary>
+        /// Nom de la partie
+        /// </summary>
+       public string TitleLobby
+        {
+            get
+            {
+                string title = "Partie contre des robots";
+                if (isModeJvJ)
+                {
+                    title = $"Partie en multijoueur";
+                }
+                return title;
+            }
+        }
+
+        /// <summary>
+        /// Message qui s'affiche avant de lancer la partie
+        /// </summary>
+        public string MessageWaitingStart
+        {
+            get
+            {
+                string message = "Prêt à lancer !";
+                int compteur = 0;
+                compteur = this.players.ToList().FindAll(x => x.IsReady == false).Count;
+                if (compteur != 0)
+                {
+                    message = $"En attente de {compteur} joueur(s) pour lancer la partie";
+                }
+                return message;
+            }
+        }
         /// <summary>
         /// Représente le nombre de joueurs
         /// </summary>
@@ -135,14 +181,19 @@ namespace UI_Layer.ViewModels
         {
             if (isModeJvJ)
             {
-
+                this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Player 1"), PlayerType.PLAYER) { IsReady = true});
+                for (int i = 1; i < playerCount; i++)
+                {
+                    this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING));
+                }
+                NotifyPropertyChanged(nameof(MessageWaitingStart));
             }
             else
             {
-                this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>())), "Player", "joueur"));
+                this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()),"Player"), PlayerType.PLAYER) { IsReady = true});
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new Player(i+1,new Board(),new Hand(i+1,new List<Card>())),$"Robot {i}","robot"));
+                    this.Players.Add(new PlayerViewModel(new Player(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT));
                 }
                 this.StartButtonShow = true;
             }

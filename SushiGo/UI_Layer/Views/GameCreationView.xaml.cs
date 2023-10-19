@@ -23,7 +23,7 @@ namespace UI_Layer.Views
         public GameCreationView()
         {
             InitializeComponent();
-            this.DataContext = new GameCreationViewModel();
+            this.DataContext = new GameCreationViewModel(this);
             // TODO : Uniquement pour les tests
             //this.test.ItemsSource = new List<Joueur>()
             //{

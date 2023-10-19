@@ -21,14 +21,12 @@ namespace UI_Layer.ViewModels
 
         #region attributes
         private Player player;
-        private string nom;
-        private string role;
+        private PlayerType role;
+        private bool isReady = false;
 
-
-        public PlayerViewModel(Player player,string nomTemp,string role)
+        public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
-            this.nom = nomTemp;
             this.role = role;
         }
         #endregion
@@ -41,9 +39,19 @@ namespace UI_Layer.ViewModels
                 return new List<string>() { "Facile", "Moyen", "Difficile" };
             }
         }
-        public string Nom { get => nom; set => nom = value; }
+        /// <summary>
+        /// Nom du joueur
+        /// </summary>
+        public string Nom { get => player.Pseudo;  }
+        /// <summary>
+        /// Id du joueur
+        /// </summary>
         public int Id { get => player.Id; }
-        public string Role { get => role; set => role = value; }
+        /// <summary>
+        /// Role du joueur
+        /// </summary>
+        public PlayerType Role { get => role; set => role = value; }
+        public bool IsReady { get => isReady; set => isReady = value; }
         #endregion
 
     }

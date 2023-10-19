@@ -28,15 +28,16 @@
             Grid.ColumnSpan="4"
             Grid.RowSpan="11"
             Source="../Assets/test.png"/>
-        
+
         <!-- Titre de l'écran -->
         <TextBlock
             VerticalAlignment="Top"
             Grid.ColumnSpan="3"
             Grid.Row="1"
+            
             HorizontalAlignment="Center"
             FontSize="55"
-            FontWeight="Bold"
+            FontWeight="Black"
             Foreground="White"
             Text="Sushi-Lobby">
             <TextBlock.Effect>
@@ -45,9 +46,16 @@
         </TextBlock>
 
         <!-- Bouton retour page -->
-        <Button Style="{StaticResource ButtonWithImage}" Height="150" Width="200" VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.RowSpan="2">
+        <Button 
+            Command="{Binding BackToHome}"
+            Style="{StaticResource ButtonWithImage}" 
+            Height="150" 
+            Width="200" 
+            VerticalAlignment="Center"  
+            HorizontalAlignment="Left" 
+            Grid.RowSpan="2">
             <materialDesign:PackIcon
-                Foreground="{StaticResource Background}"
+                Foreground="IndianRed"
                 Width="170"
                 Height="140"
                 Kind="ArrowLeftThin"/>
@@ -102,19 +110,19 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Top"
                                         Margin="4"
-                                        Orientation="Horizontal"> 
+                                        Orientation="Horizontal">
                                         <RadioButton
                             FontSize="19"
                             Margin="4"
                             Content="Joueurs/Joueurs"
                             IsChecked="{Binding IsModeJvJ}"
-                            BorderBrush="IndianRed"
+                            BorderBrush="GreenYellow"
                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                         <RadioButton
                             FontSize="19"
                             Margin="4"
                             Content="Joueurs/Robots"
-                            BorderBrush="IndianRed"
+                            BorderBrush="GreenYellow"
                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                     </StackPanel>
 
@@ -140,7 +148,7 @@
                                 Kind="MinusThick"/>
                                         </Button>
                                         <TextBlock
-                            Foreground="Black"
+                            Foreground="GreenYellow"
                             Margin="8,0,0,0"
                             FontSize="19"
                             Text="{Binding PlayerCount}"/>
@@ -175,35 +183,53 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    
-                    
+
+
                 </materialDesign:Card>
-              
+
             </materialDesign:Flipper.FrontContent>
             <materialDesign:Flipper.BackContent>
                 <materialDesign:Card>
                     <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        
                         <Image
+                            Grid.RowSpan="3"
                             Stretch="Fill"
                             Opacity="0.5"
                             Source="../Assets/bois2.jpg"/>
+
+                        <TextBlock
+                            Margin="0,15,0,0"
+                            FontWeight="Black"
+                            Foreground="Green"
+                            Text="{Binding TitleLobby}"
+                            HorizontalAlignment="Center"
+                            FontSize="24"/>
+                        <TextBlock
+                            Margin="0,15,10,0"
+                            FontWeight="Thin"
+                            Foreground="White"
+                            Text="MDSFPS"
+                            HorizontalAlignment="Right"
+                            FontSize="22"/>
+
+                        <!-- Liste des joueurs -->
                         <ListView 
-                            Margin="0,5,0,0"
+                            Margin="0,15,0,0"
+                            Grid.Row="1"
                             ItemsSource="{Binding Players}"
-                            Grid.Row="2" Grid.Column="1"
                             HorizontalContentAlignment="Stretch"  
                             VerticalContentAlignment="Top">
                             <ListView.Template>
                                 <ControlTemplate>
                                     <!-- Header des colonnes -->
                                     <DockPanel LastChildFill="True">
-                                        <Grid DockPanel.Dock="Top">
-                                            <TextBlock Margin="0,5,0,0"
-                                                HorizontalAlignment="Center"
-                                                Foreground="DarkRed"
-                                                FontSize="23"
-                                                Text="Joueurs"/>
-                                        </Grid>
+ 
                                         <!-- items de la listview -->
                                         <ItemsPresenter  ></ItemsPresenter>
                                     </DockPanel>
@@ -214,7 +240,7 @@
                                     <Grid Margin="0,5,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="35"/>
-                                            <ColumnDefinition Width="630"/>
+                                            <ColumnDefinition Width="620"/>
                                             <ColumnDefinition Width="35"/>
                                             <ColumnDefinition Width="35"/>
                                             <ColumnDefinition Width="40"/>
@@ -227,11 +253,14 @@
                                             <materialDesign:PackIcon.Style>
                                                 <Style TargetType="materialDesign:PackIcon">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
                                                             <Setter Property="Kind" Value="Account"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="robot">
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
                                                             <Setter Property="Kind" Value="RobotExcitedOutline"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Kind" Value="None"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Id}" Value="1">
                                                             <Setter Property="Kind" Value="Crown"/>
@@ -247,7 +276,7 @@
                                         Grid.Column="1"
                                         Text="{Binding Nom}"
                                         FontSize="18"/>
-                                        
+
                                         <!-- Difficulte de l'ia-->
                                         <ComboBox
                                             ItemsSource="{Binding IaDifficulties}"
@@ -260,17 +289,20 @@
                                             <ComboBox.Style>
                                                 <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
                                                             <Setter Property="Visibility" Value="Hidden"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="robot">
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </ComboBox.Style>
                                         </ComboBox>
-                                        
+
                                         <!-- Kick du joueur-->
                                         <Button 
                                     VerticalAlignment="Center"  
@@ -284,10 +316,13 @@
                                             <Button.Style>
                                                 <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImage}">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="robot">
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
                                                             <Setter Property="Visibility" Value="Hidden"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Id}" Value="1">
@@ -297,38 +332,67 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
-
+                                        <!-- Est ce que les joueurs sont ready -->
                                         <materialDesign:PackIcon
-                                    Width="15"
-                                    Height="15"
-                                    Opacity="0.6"
-                                    VerticalAlignment="Center"  
-                                    Grid.Column="4"
-                                    Foreground="ForestGreen"
-                                    Kind="CheckboxBlankCircle">
+                                            Width="30"
+                                            Height="30"
+                                            Opacity="0.6"
+                                            VerticalAlignment="Center"  
+                                            Grid.Column="4"
+                                            Kind="AlphaR">
 
                                             <materialDesign:PackIcon.Style>
                                                 <Style TargetType="materialDesign:PackIcon">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Role}" Value="joueur">
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
                                                             <Setter Property="Visibility" Value="Visible"/>
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="robot">
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
                                                             <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsReady}" Value="true">
+                                                            <Setter Property="Foreground" Value="ForestGreen"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsReady}" Value="false">
+                                                            <Setter Property="Foreground" Value="Orange"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
                                             </materialDesign:PackIcon.Style>
                                         </materialDesign:PackIcon>
-
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListView>
+                        <TextBlock
+                            Text="{Binding MessageWaitingStart}"
+                            Foreground="Red"
+                            Grid.Row="2"
+                            FontWeight="Thin"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
                 </materialDesign:Card>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
+        
       
 
         <!-- Lancer la partie-->
