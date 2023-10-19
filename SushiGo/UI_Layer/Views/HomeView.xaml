@@ -32,7 +32,7 @@
         <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/UI_Layer;component/Assets/Logo.png" Margin="60,50"/>
 
 
-        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="1" Command="{Binding PlayCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.PLAY}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 
@@ -40,7 +40,7 @@
             <TextBlock Text="{x:Static res:fr_FR.CREDITS}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 
-        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="3" Command="{Binding QuitCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.QUIT}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 

@@ -24,7 +24,7 @@ namespace UI_Layer
         public HomeView()
         {
             InitializeComponent();
-            this.DataContext = new HomeViewModels();
+            this.DataContext = new HomeViewModel(this);
         }
     }
 }
