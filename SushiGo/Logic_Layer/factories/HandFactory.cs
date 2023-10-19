@@ -1,4 +1,5 @@
 ﻿using Logic_Layer.cards;
+using Logic_Layer.factories.utils;
 using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer.factories;
@@ -11,6 +12,7 @@ public class HandFactory
     #region Attributs
     private Random rand;
     private List<Card>? deck;
+    private CardFactory factory;
     
     // Stocke le nombre de carte par main selon le nombre de joueurs
     private static readonly Dictionary<int, int> playersToCardNumber = new Dictionary<int, int>()
@@ -28,6 +30,7 @@ public class HandFactory
     public HandFactory()
     {
         rand = new Random();
+        factory = new CardFactory();
     }
 
     /// <summary>
@@ -78,8 +81,15 @@ public class HandFactory
     private List<Card> CreateDeck()
     {
         List<Card> ret = new List<Card>();
-
-        throw new NotImplementedException("Il va falloir implémenter ici les appels à la factory des cartes");
+        
+        // Récupération des données de génération
+        var generationDatas = new GenerationParametersExtractor().GetParameters();
+        
+        // On lance chacune des générations et on les ajoute au résultat
+        foreach (var param in generationDatas.Keys)
+        {
+            ret.AddRange(factory.CreateCard(param, generationDatas[param]));
+        }
 
         return ret;
     }
