@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,20 +7,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\test.png" />
   </ItemGroup>
 
 
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-
   </ItemGroup>
 
 

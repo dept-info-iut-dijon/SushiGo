@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace Couche_IHM.Views
+namespace UI_Layer.UserControls
 {
     /// <summary>
     /// Logique d'interaction pour CardComponent.xaml
