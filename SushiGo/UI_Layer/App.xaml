@@ -9,6 +9,7 @@
             <FontFamily x:Key="NewSushi">/UI_Layer;component/Assets/Fonts/New_Sushi.ttf</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Colors.xaml"/>
+                <ResourceDictionary Source="/UI_Layer;component/Assets/ImagesResource.xaml"/>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Styles/FontStyle.xaml"/>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Styles/ButtonStyle.xaml"/>
 
@@ -18,8 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
-                
-                
+
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>
