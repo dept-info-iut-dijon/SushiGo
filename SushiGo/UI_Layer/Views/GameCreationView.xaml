@@ -27,8 +27,8 @@
             Stretch="Fill"
             Grid.ColumnSpan="4"
             Grid.RowSpan="11"
-            Source="../Assets/test.png"/>
-
+            Source="{StaticResource test}"/>
+        
         <!-- Titre de l'écran -->
         <TextBlock
             VerticalAlignment="Top"

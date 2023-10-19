@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI_Layer.Assets;
+using UI_Layer.ViewModels;
 
 namespace UI_Layer
 {
@@ -23,6 +24,7 @@ namespace UI_Layer
         public HomeView()
         {
             InitializeComponent();
+            this.DataContext = new HomeViewModel(this);
         }
     }
 }
