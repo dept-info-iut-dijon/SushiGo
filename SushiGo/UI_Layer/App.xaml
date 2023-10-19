@@ -1,8 +1,7 @@
 ﻿<Application x:Class="Couche_IHM.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Couche_IHM"
-             StartupUri="/UI_Layer;component/Views/GameCreationView.xaml">
+             StartupUri="/UI_Layer;component/Views/HomeView.xaml">
     
     <Application.Resources>
 
@@ -10,6 +9,7 @@
             <FontFamily x:Key="NewSushi">/UI_Layer;component/Assets/Fonts/New_Sushi.ttf</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Colors.xaml"/>
+                <ResourceDictionary Source="/UI_Layer;component/Assets/ImagesResource.xaml"/>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Styles/FontStyle.xaml"/>
                 <ResourceDictionary Source="/UI_Layer;component/Assets/Styles/ButtonStyle.xaml"/>
 
@@ -19,10 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
 
-                
-                
-                
-                
+
             </ResourceDictionary.MergedDictionaries>
             
         </ResourceDictionary>
