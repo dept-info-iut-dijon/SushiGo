@@ -7,16 +7,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <Compile Remove="ViewModels\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
-    <None Remove="ViewModels\**" />
-    <Page Remove="ViewModels\**" />
+    <None Remove="Assets\bois2.jpg" />
+    <None Remove="Assets\test.png" />
   </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-
   </ItemGroup>
 
 
@@ -32,6 +31,7 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\bois2.jpg" />
 
     <Resource Include="Assets\Cartes\baguettes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -69,6 +69,7 @@
     <Resource Include="Assets\Cartes\wasabi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\test.png" />
 
   </ItemGroup>
 
