@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UI_Layer.ViewModels;
 
 namespace UI_Layer.Views
 {
@@ -22,15 +23,16 @@ namespace UI_Layer.Views
         public GameCreationView()
         {
             InitializeComponent();
+            this.DataContext = new GameCreationViewModel();
             // TODO : Uniquement pour les tests
-            this.test.ItemsSource = new List<Joueur>()
-            {
-                new Joueur("Florian","admin"),
-                new Joueur("Morgane"),
-                new Joueur("Evan"),
-                new Joueur("Jonas"),
-                new Joueur("Elia"),
-            };
+            //this.test.ItemsSource = new List<Joueur>()
+            //{
+            //    new Joueur("Florian","admin"),
+            //    new Joueur("Morgane"),
+            //    new Joueur("Evan"),
+            //    new Joueur("Jonas"),
+            //    new Joueur("Elia"),
+            //};
         }
     }
 }
