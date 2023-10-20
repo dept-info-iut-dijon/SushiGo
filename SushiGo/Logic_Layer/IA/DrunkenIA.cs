@@ -13,7 +13,7 @@ namespace Logic_Layer.IA
     public class DrunkenIA : IA
     {
 
-        public DrunkenIA(int id, Board board, Hand hand) : base(id, board, hand)
+        public DrunkenIA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
         {
         }
 

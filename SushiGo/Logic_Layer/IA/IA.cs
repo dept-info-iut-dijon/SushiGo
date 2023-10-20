@@ -12,13 +12,14 @@ namespace Logic_Layer.IA
     /// </summary>
     public abstract class IA : Player
     {
+
         /// <summary>
         /// Reprend le constructeur du joueur
         /// </summary>
         /// <param name="id"></param>
         /// <param name="board"></param>
         /// <param name="hand"></param>
-        protected IA(int id, Board board, Hand hand) : base(id, board, hand)
+        protected IA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
         {
         }
 

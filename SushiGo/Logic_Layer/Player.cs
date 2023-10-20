@@ -5,6 +5,7 @@ namespace Logic_Layer;
 public class Player
 {
     private int id;
+    private string pseudo;
     private Board board;
     private Hand hand;
     
@@ -30,18 +31,18 @@ public class Player
         get => hand;
         set => hand = value;
     }
-
     /// <summary>
-    /// Créée un joueur
+    /// Pseudo du joueur
     /// </summary>
-    /// <param name="id">identifiant du joueur</param>
-    /// <param name="board">Plateau de jeu du joueur</param>
-    /// <param name="hand">Main de départ du joueur</param>
-    public Player(int id, Board board, Hand hand)
+    public string Pseudo { get => pseudo; set => pseudo = value; }
+
+
+    public Player(int id, Board board, Hand hand,string pseudo)
     {
         this.id = id;
         this.board = board;
         this.hand = hand;
+        this.pseudo = pseudo;
     }
 
     /// <summary>

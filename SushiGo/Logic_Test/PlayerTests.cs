@@ -11,7 +11,7 @@ public class PlayerTests
     {
         // Arrange
         int expectedId = 1;
-        var player = new Player(expectedId, new Board(), new Hand(expectedId, new List<Card>()));
+        var player = new Player(expectedId, new Board(), new Hand(expectedId, new List<Card>()),"") ;
 
         // Act
         int id = player.Id;
@@ -24,7 +24,7 @@ public class PlayerTests
     public void Player_HaveCardsProperty_InitialValueIsTrue()
     {
         // Arrange
-        var player = new Player(1, new Board(), new Hand(1, new List<Card> { new Mock<Card>().Object }));
+        var player = new Player(1, new Board(), new Hand(1, new List<Card> { new Mock<Card>().Object }), "");
 
         // Act
         bool haveCards = player.HaveCards;
@@ -37,7 +37,7 @@ public class PlayerTests
     public void Player_HaveCardsProperty_NoCardsInHandReturnsFalse()
     {
         // Arrange
-        var player = new Player(1, new Board(), new Hand(1, new List<Card>()));
+        var player = new Player(1, new Board(), new Hand(1, new List<Card>()), "");
 
         // Act
         bool haveCards = player.HaveCards;
@@ -54,7 +54,7 @@ public class PlayerTests
         var cardList = new List<Card>();
         cardList.Add(card);
         var handMock = new Mock<Hand>(1, cardList);
-        var player = new Player(1, new Board(), handMock.Object);
+        var player = new Player(1, new Board(), handMock.Object, "");
 
         // Act
         player.PlayCard(card);
@@ -68,7 +68,7 @@ public class PlayerTests
     {
         // Arrange
         var boardMock = new Mock<Board>();
-        var player = new Player(1, boardMock.Object, new Hand(1, new List<Card>()));
+        var player = new Player(1, boardMock.Object, new Hand(1, new List<Card>()), "");
 
         var specialCards = new List<ISpecialCard> { new Mock<ISpecialCard>().Object };
         boardMock.Setup(board => board.PlayerTurn()).Returns(specialCards);
@@ -85,7 +85,7 @@ public class PlayerTests
     {
         // Arrange
         var boardMock = new Mock<Board>();
-        var player = new Player(1, boardMock.Object, new Hand(1, new List<Card>()));
+        var player = new Player(1, boardMock.Object, new Hand(1, new List<Card>()), "");
 
         var specialCards = new List<ISpecialCard> { new Mock<ISpecialCard>().Object };
         boardMock.Setup(board => board.EndRound()).Returns(specialCards);

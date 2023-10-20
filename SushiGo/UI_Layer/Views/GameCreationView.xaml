@@ -3,16 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI_Layer.Views"
+        xmlns:logiq="clr-namespace:Logic_Layer.IA;assembly=Logic_Layer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized"
         Title="GameCreationView" Height="450" Width="800">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="DifficultyEnumValues"
+                        ObjectType="{x:Type logiq:IADifficulty}"  MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="logiq:IADifficulty" />
+                <!-- Remplacez "VotreEnumType" par le type réel de votre énumération -->
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -34,229 +44,452 @@
             VerticalAlignment="Top"
             Grid.ColumnSpan="3"
             Grid.Row="1"
+            
             HorizontalAlignment="Center"
             FontSize="55"
-            FontWeight="Bold"
+            FontWeight="Black"
             Foreground="White"
-            Text="Création de la partie">
+            Text="Sushi-Lobby">
             <TextBlock.Effect>
                 <DropShadowEffect Color="DarkRed" Direction="0" ShadowDepth="3" BlurRadius="5"/>
             </TextBlock.Effect>
         </TextBlock>
 
         <!-- Bouton retour page -->
-        <Button Style="{StaticResource ButtonWithImage}" Height="150" Width="200" VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.RowSpan="2">
+        <Button 
+            Command="{Binding BackToHome}"
+            Style="{StaticResource ButtonWithImage}" 
+            Height="150" 
+            Width="200" 
+            VerticalAlignment="Center"  
+            HorizontalAlignment="Left" 
+            Grid.RowSpan="2">
             <materialDesign:PackIcon
-                Foreground="{StaticResource Background}"
+                Foreground="IndianRed"
                 Width="170"
                 Height="140"
                 Kind="ArrowLeftThin"/>
         </Button>
 
-        <!-- HUD création partie -->
-        <materialDesign:Card materialDesign:ElevationAssist.Elevation="Dp24"  Grid.Row="3" Grid.Column="1">
-            <Image
-                Stretch="Fill"
-                Opacity="0.5"
-                Source="{StaticResource bois2}"/>
-        </materialDesign:Card>
+
 
         <!-- Onglets création partie -->
-        <TabControl 
-          materialDesign:ColorZoneAssist.Foreground="DarkRed"
-          materialDesign:ColorZoneAssist.Mode="Custom"
-            Grid.Row="3" Grid.Column="1" >
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock 
-                        Text="Joueurs"
-                        FontSize="20"/>
-                </TabItem.Header>
-                <ListView 
-                    Grid.Row="2" Grid.Column="1"
-                    x:Name="test"
-                    HorizontalContentAlignment="Stretch"  
-                    VerticalContentAlignment="Top">
-                    <ListView.Template>
-                        <ControlTemplate>
-                            <!-- Header des colonnes -->
-                            <DockPanel LastChildFill="True">
-                                <Grid DockPanel.Dock="Top">
+        <materialDesign:Flipper
+            Grid.Row="3" 
+            Grid.Column="1" 
+            IsFlipped="{Binding IsLobbyShowed}">
+            <materialDesign:Flipper.FrontContent>
+                <materialDesign:Card >
+                    <Grid >
+                        <Image
+                            Stretch="Fill"
+                            Opacity="0.5"
+                            Source="{StaticResource bois2}"/>
+                        <TabControl 
+                              materialDesign:ColorZoneAssist.Foreground="DarkRed"
+                              materialDesign:ColorZoneAssist.Mode="Custom">
+                            <TabItem>
+                                <TabItem.Header>
+                                    <TextBlock 
+                                        Text="Créer une partie"
+                                        FontSize="20"/>
+                                </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="0.5*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="2*"/>
+                                    </Grid.RowDefinitions>
 
+                                    <!-- Configuration mode de jeu-->
+                                    <TextBlock
+                                        Text="Mode de jeu :"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"/>
+
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Margin="4"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            IsEnabled="False"
+                                            FontSize="19"
+                                            Margin="4"
+                                            Content="Joueurs/Joueurs"
+                                            IsChecked="{Binding IsModeJvJ}"
+                                            BorderBrush="DarkRed"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                                        <RadioButton
+                                            FontSize="19"
+                                            Margin="4"
+                                            Content="Joueurs/Robots"
+                                            BorderBrush="DarkRed"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                                    </StackPanel>
+                                     <!-- Difficulte IA -->
+                                    <TextBlock
+                                        Text="Difficulté"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Grid.Row="5"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock" >
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    
+                                    <ComboBox SelectedItem="{Binding Difficulty}"
+                                              ItemsSource="{Binding Source={StaticResource DifficultyEnumValues}}"
+                                              FontSize="16"
+                                              HorizontalAlignment="Center"
+                                              Grid.Row="6">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontWeight="Bold" Foreground="DarkRed" TextAlignment="Center" Text="{Binding}" HorizontalAlignment="Center" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                        <ComboBox.Style>
+                                            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ComboBox.Style>
+                                    </ComboBox>
+                                    <!-- Configuration nombre joueurs -->
+                                    <TextBlock
+                                        Text="Nombre de joueurs :"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Grid.Row="3"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"/>
+
+                                  
+                                    <StackPanel 
+                                        Margin="0,10,0,0"
+                                        Grid.Row="4"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <Button 
+                            Command="{Binding RemovePlayer}"
+                            Style="{StaticResource ButtonWithImage}">
+                                            <materialDesign:PackIcon
+                                Kind="MinusThick"/>
+                                        </Button>
+                                        <TextBlock
+                                            FontWeight="Bold"
+                                            Foreground="DarkRed"
+                                            Margin="8,0,0,0"
+                                            FontSize="19"
+                                            Text="{Binding PlayerCount}"/>
+                                        <Button 
+                                            Command="{Binding AddPlayer}"
+                                            Margin="8,0,0,0" 
+                                            Style="{StaticResource ButtonWithImage}">
+                                            <materialDesign:PackIcon
+                                Kind="PlusThick"/>
+                                        </Button>
+                                    </StackPanel>
+
+                                    <Button 
+                        BorderThickness="0" 
+                        FontSize="20" 
+                        Width="150" 
+                        Height="40" 
+                        Background="IndianRed" 
+                        Grid.Row="7" 
+                        HorizontalAlignment="Center" 
+                                Command="{Binding CreateGame}"
+                        Content="Créer"/>
                                 </Grid>
-                                <!-- items de la listview -->
-                                <ItemsPresenter  ></ItemsPresenter>
-                            </DockPanel>
-                        </ControlTemplate>
-                    </ListView.Template>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0,5,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="35"/>
-                                    <ColumnDefinition Width="660"/>
-                                    <ColumnDefinition Width="35"/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-                                <materialDesign:PackIcon
+                            </TabItem>
+                            <TabItem IsEnabled="False" >
+                                <TabItem.Header>
+                                    <TextBlock 
+                        Text="Rejoindre des amis"
+                        FontSize="20"/>
+                                </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1.2*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="3"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="24"
+                                            FontWeight="Thin"
+                                            Text="Code :"/>
+                                        <TextBox
+                                            Margin="10,0,0,0"
+                                        Background="White"
+                                        BorderBrush="Transparent"
+                                        Width="150"
+                                        TextAlignment="Center"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        
+                                        FontSize="25"/>
+                                    </StackPanel>
+                                   
+                                    
+                                    <!-- Rejoindre une partie-->
+                                    <Button 
+                                        BorderThickness="0" 
+                                        FontSize="20" 
+                                        Width="150" 
+                                        Height="40" 
+                                        Background="IndianRed" 
+                                        Grid.Row="6" 
+                                        HorizontalAlignment="Center" 
+                                    Command="{Binding CreateGame}"
+                            Content="Rejoindre"/>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+
+
+                </materialDesign:Card>
+
+            </materialDesign:Flipper.FrontContent>
+            <materialDesign:Flipper.BackContent>
+                <materialDesign:Card>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Image
+                            Grid.RowSpan="3"
+                            Stretch="Fill"
+                            Opacity="0.5"
+                            Source="{StaticResource bois2}"/>
+
+                        <TextBlock
+                            Margin="0,15,0,0"
+                            FontWeight="Black"
+                            Foreground="Green"
+                            Text="{Binding TitleLobby}"
+                            HorizontalAlignment="Center"
+                            FontSize="24"/>
+                        <TextBlock
+                            Margin="0,15,10,0"
+                            FontWeight="Thin"
+                            Foreground="White"
+                            Text="{Binding IdParty}"
+                            HorizontalAlignment="Right"
+                            FontSize="22">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <!-- Liste des joueurs -->
+                        <ListView 
+                            Margin="0,15,0,0"
+                            Grid.Row="1"
+                            ItemsSource="{Binding Players}"
+                            HorizontalContentAlignment="Stretch"  
+                            VerticalContentAlignment="Top">
+                            <ListView.Template>
+                                <ControlTemplate>
+                                    <!-- Header des colonnes -->
+                                    <DockPanel LastChildFill="True">
+ 
+                                        <!-- items de la listview -->
+                                        <ItemsPresenter  ></ItemsPresenter>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </ListView.Template>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,5,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="9*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <materialDesign:PackIcon
                                         VerticalAlignment="Center"  
                                         Width="30"
                                         Height="19"
                                         Grid.Column="0">
-                                    <materialDesign:PackIcon.Style>
-                                        <Style TargetType="materialDesign:PackIcon">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Role}" Value="joueur">
-                                                    <Setter Property="Kind" Value="Account"/>
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
+                                                            <Setter Property="Kind" Value="Account"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
+                                                            <Setter Property="Kind" Value="RobotExcitedOutline"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Kind" Value="None"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Id}" Value="1">
+                                                            <Setter Property="Kind" Value="Crown"/>
+                                                            <Setter Property="Foreground" Value="Yellow"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
 
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Role}" Value="admin">
-                                                    <Setter Property="Kind" Value="Crown"/>
-                                                    <Setter Property="Foreground" Value="Yellow"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </materialDesign:PackIcon.Style>
-                                </materialDesign:PackIcon>
-
-                                <!-- Content -->
-                                <TextBlock 
+                                        <!-- Nom du joueur -->
+                                        <TextBlock 
                                         Grid.Column="1"
-                                        Text="{Binding Name}"
+                                        Text="{Binding Nom}"
                                         FontSize="18"/>
 
-                                <Button 
+
+                                        <!-- Kick du joueur-->
+                                        <Button 
                                     VerticalAlignment="Center"  
-                                    Grid.Column="2">
-                                    <materialDesign:PackIcon
+                                    Grid.Column="3">
+                                            <materialDesign:PackIcon
                                         Width="30"
                                         Height="17"
                                         Foreground="DarkRed"
                                         Kind="CloseThick"
                                         />
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImage}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Role}" Value="joueur">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource ButtonWithImage}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Id}" Value="1">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <!-- Est ce que les joueurs sont ready -->
+                                        <materialDesign:PackIcon
+                                            Width="30"
+                                            Height="30"
+                                            Opacity="0.6"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"  
+                                            Grid.Column="4"
+                                            Kind="AlphaR">
 
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Role}" Value="admin">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-
-                                <materialDesign:PackIcon
-                                    Width="15"
-                                    Height="15"
-                                    Opacity="0.6"
-                                    VerticalAlignment="Center"  
-                                    Grid.Column="3"
-                                    Foreground="ForestGreen"
-                                    Kind="CheckboxBlankCircle"/>
-
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListView>
-            </TabItem>
-            <TabItem >
-                <TabItem.Header>
-                    <TextBlock 
-                        Text="Configuration"
-                        FontSize="20"/>
-                </TabItem.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-
-                    <!-- Configuration mode de jeu-->
-                    <TextBlock
-                        Text="Mode de jeu :"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"/>
-
-                    <StackPanel
-                        Grid.Row="2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                          Margin="4"
-                          Orientation="Horizontal">
-                        <RadioButton
-                            Margin="4"
-                            Content="Joueurs/Joueurs"
-                            IsChecked="True"
-                            BorderBrush="IndianRed"
-                            Style="{StaticResource MaterialDesignTabRadioButton}" />
-                        <RadioButton
-                            Margin="4"
-                            Content="Joueurs/Robots"
-                            IsChecked="False"
-                            BorderBrush="IndianRed"
-                            Style="{StaticResource MaterialDesignTabRadioButton}" />
-                    </StackPanel>
-
-                    <!-- Configuration nombre joueurs -->
-                    <TextBlock
-                        Text="Nombre de joueurs :"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Grid.Row="3"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"/>
-
-                    <StackPanel 
-                        Margin="0,10,0,0"
-                        Grid.Row="4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Orientation="Horizontal">
-                        <Button Style="{StaticResource ButtonWithImage}">
-                            <materialDesign:PackIcon
-                                Kind="MinusThick"/>
-                        </Button>
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsReady}" Value="true">
+                                                            <Setter Property="Foreground" Value="ForestGreen"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsReady}" Value="false">
+                                                            <Setter Property="Foreground" Value="Orange"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListView>
                         <TextBlock
-                            Foreground="Black"
-                            Margin="5,0,0,0"
-                            FontSize="17"
-                            Text="5"/>
-                        <Button Margin="5,0,0,0" Style="{StaticResource ButtonWithImage}">
-                            <materialDesign:PackIcon
-                                Kind="PlusThick"/>
-                        </Button>
-                    </StackPanel>
-
-                    <Button BorderThickness="0" Background="IndianRed" Grid.Row="6" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon
-                                Kind="ContentSave"/>
-                            <TextBlock
-                                FontSize="18"
-                                Text="Sauvegarder"/>
-                        </StackPanel>
-                    </Button>
-                </Grid>
-            </TabItem>
-        </TabControl>
+                            Text="{Binding MessageWaitingStart}"
+                            Foreground="Red"
+                            Grid.Row="2"
+                            FontWeight="Thin"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:Flipper.BackContent>
+        </materialDesign:Flipper>
+        
+      
 
         <!-- Lancer la partie-->
         <Button
-            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
             Width="200"
+            Command="{Binding StartGame}"
             Height="50"
             HorizontalAlignment="Center"
             Grid.Row="4"
@@ -265,6 +498,19 @@
             Grid.Column="1"
             Background="White"
             Foreground="Black"
-            Content="GO !"/>
+            Content="GO !">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding StartButtonShow}" Value="true">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding StartButtonShow}" Value="false">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
