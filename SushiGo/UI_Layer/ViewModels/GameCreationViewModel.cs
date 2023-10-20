@@ -29,7 +29,15 @@ namespace UI_Layer.ViewModels
         private bool isModeJvJ = true;
         private bool isLobbyShowed = false;
         private bool startButtonShow = false;
+        private string idParty;
         private Window view;
+
+        #endregion
+
+        /// <summary>
+        /// Constructeur du vue modele associé à l'écran de création de partie
+        /// </summary>
+        /// <param name="view">vue liée</param>
         public GameCreationViewModel(Window view)
         {
             this.view = view;
@@ -61,7 +69,6 @@ namespace UI_Layer.ViewModels
 
 
 
-        #endregion
         #region events
         /// <summary>
         /// Permet de retourner à l'écran d'accueil
@@ -83,6 +90,16 @@ namespace UI_Layer.ViewModels
         #endregion
         #region properties
 
+        /// <summary>
+        /// Liste des difficultés d'ia
+        /// </summary>
+        public List<IADifficulty> DifficultyList
+        {
+            get
+            {
+                return new List<IADifficulty>() { IADifficulty.FACILE, IADifficulty.MOYEN, IADifficulty.DIFFICILE };
+            }
+        }
         /// <summary>
         /// Nom de la partie
         /// </summary>
@@ -138,6 +155,7 @@ namespace UI_Layer.ViewModels
             { 
                 isModeJvJ = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(TitleLobby));
             }
         }
         /// <summary>
@@ -169,6 +187,18 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public ObservableCollection<PlayerViewModel> Players { get => players; set => players = value; }
+        /// <summary>
+        /// Id de la partie à rejoindre en multijoueur
+        /// </summary>
+        public string IdParty 
+        { 
+            get => idParty;
+            set 
+            { 
+                idParty = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -187,6 +217,7 @@ namespace UI_Layer.ViewModels
                     this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING));
                 }
                 NotifyPropertyChanged(nameof(MessageWaitingStart));
+                GenerateIDParty();
             }
             else
             {
@@ -199,6 +230,23 @@ namespace UI_Layer.ViewModels
             }
 
             this.IsLobbyShowed = true;
+        }
+
+        /// <summary>
+        /// Permet de générer un identifiant de partie pour s'y connecter
+        /// </summary>
+        private void GenerateIDParty()
+        {
+            Random random = new Random();
+            int nbCar = random.Next(6, 9);
+            string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            char[] uniqueId = new char[nbCar];
+            for (int i = 0; i < nbCar; i++)
+            {
+                uniqueId[i] = characters[random.Next(characters.Length)];
+            }
+            this.IdParty = new string(uniqueId);
+            
         }
         #endregion
     }

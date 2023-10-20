@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI_Layer.Views"
+        xmlns:local="clr-namespace:UI_Layer.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized"
         Title="GameCreationView" Height="450" Width="800">
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -74,7 +76,7 @@
                         <Image
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="../Assets/bois2.jpg"/>
+                            Source="{StaticResource bois2}"/>
                         <TabControl 
                               materialDesign:ColorZoneAssist.Foreground="DarkRed"
                               materialDesign:ColorZoneAssist.Mode="Custom">
@@ -116,13 +118,13 @@
                             Margin="4"
                             Content="Joueurs/Joueurs"
                             IsChecked="{Binding IsModeJvJ}"
-                            BorderBrush="GreenYellow"
+                            BorderBrush="DarkRed"
                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                         <RadioButton
                             FontSize="19"
                             Margin="4"
                             Content="Joueurs/Robots"
-                            BorderBrush="GreenYellow"
+                            BorderBrush="DarkRed"
                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                     </StackPanel>
 
@@ -148,7 +150,7 @@
                                 Kind="MinusThick"/>
                                         </Button>
                                         <TextBlock
-                            Foreground="GreenYellow"
+                            Foreground="DarkRed"
                             Margin="8,0,0,0"
                             FontSize="19"
                             Text="{Binding PlayerCount}"/>
@@ -179,7 +181,50 @@
                         Text="Rejoindre des amis"
                         FontSize="20"/>
                                 </TabItem.Header>
-
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1.2*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="3"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="24"
+                                            FontWeight="Thin"
+                                            Text="Code :"/>
+                                        <TextBox
+                                            Margin="10,0,0,0"
+                                        Background="White"
+                                        BorderBrush="Transparent"
+                                        Width="150"
+                                        TextAlignment="Center"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        
+                                        FontSize="25"/>
+                                    </StackPanel>
+                                   
+                                    
+                                    <!-- Rejoindre une partie-->
+                                    <Button 
+                                        BorderThickness="0" 
+                                        FontSize="20" 
+                                        Width="150" 
+                                        Height="40" 
+                                        Background="IndianRed" 
+                                        Grid.Row="6" 
+                                        HorizontalAlignment="Center" 
+                                    Command="{Binding CreateGame}"
+                            Content="Rejoindre"/>
+                                </Grid>
                             </TabItem>
                         </TabControl>
                     </Grid>
@@ -201,7 +246,7 @@
                             Grid.RowSpan="3"
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="../Assets/bois2.jpg"/>
+                            Source="{StaticResource bois2}"/>
 
                         <TextBlock
                             Margin="0,15,0,0"
@@ -214,9 +259,22 @@
                             Margin="0,15,10,0"
                             FontWeight="Thin"
                             Foreground="White"
-                            Text="MDSFPS"
+                            Text="{Binding IdParty}"
                             HorizontalAlignment="Right"
-                            FontSize="22"/>
+                            FontSize="22">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
                         <!-- Liste des joueurs -->
                         <ListView 
@@ -279,8 +337,8 @@
 
                                         <!-- Difficulte de l'ia-->
                                         <ComboBox
-                                            ItemsSource="{Binding IaDifficulties}"
-                                            SelectedItem="Moyen"
+                                            
+                                            SelectedItem="{Binding Difficulty}"
                                             
                                             FontSize="16"
                                              Grid.Column="2"
@@ -358,6 +416,9 @@
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding IsReady}" Value="false">
                                                             <Setter Property="Foreground" Value="Orange"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
