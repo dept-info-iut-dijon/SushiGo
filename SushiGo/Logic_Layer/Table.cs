@@ -12,12 +12,18 @@ public class Table
 {
     private List<Player> players;
     private int currentPlayerIndex;
+    private int roundNumber;
 
     private int CurrentPlayerIndex
     {
         get => currentPlayerIndex;
         set => currentPlayerIndex = value;
     }
+
+    /// <summary>
+    /// Numéro de la manche de la partie
+    /// </summary>
+    public int RoundNumber { get => roundNumber; }
 
     /// <summary>
     /// Joueur en train d'effectuer son tour
@@ -27,6 +33,7 @@ public class Table
     public List<Player> Players => players;
 
     #region Méthodes publiques
+
 
     /// <summary>
     /// Initialise la table de jeu
@@ -94,14 +101,15 @@ public class Table
     {
         foreach (var player in players)
         {
-            EndPlayerTurn(player);
+            EndPlayerRound(player);
         }
+        roundNumber = roundNumber + 1;
     }
     
     // Doit être appelé sur chaque joueur à la fin de chaque manche
-    private void EndPlayerTurn(Player player)
+    private void EndPlayerRound(Player player)
     {
-        var specialCards = player.EndTurn();
+        var specialCards = player.EndRound();
         throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
     

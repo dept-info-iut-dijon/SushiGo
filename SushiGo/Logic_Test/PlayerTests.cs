@@ -88,10 +88,10 @@ public class PlayerTests
         var player = new Player(1, boardMock.Object, new Hand(1, new List<Card>()), "");
 
         var specialCards = new List<ISpecialCard> { new Mock<ISpecialCard>().Object };
-        boardMock.Setup(board => board.EndTurn()).Returns(specialCards);
+        boardMock.Setup(board => board.EndRound()).Returns(specialCards);
 
         // Act
-        var result = player.EndTurn();
+        var result = player.EndRound();
 
         // Assert
         Assert.Equal(specialCards, result);

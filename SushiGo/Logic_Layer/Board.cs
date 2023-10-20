@@ -42,7 +42,7 @@ public class Board
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>
     /// <returns></returns>
-    public virtual List<ISpecialCard> EndTurn()
+    public virtual List<ISpecialCard> EndRound()
     {
         List<ISpecialCard> ret = new List<ISpecialCard>();
 

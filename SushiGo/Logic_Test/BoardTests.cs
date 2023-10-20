@@ -34,7 +34,7 @@ public class BoardTests
         board.AddCard(specialCard2);
 
         // Act
-        var result = board.EndTurn();
+        var result = board.EndRound();
 
         // Assert
         Assert.Contains(specialCard1, result);
