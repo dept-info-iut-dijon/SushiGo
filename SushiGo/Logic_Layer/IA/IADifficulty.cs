@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UI_Layer.ViewModels
+namespace Logic_Layer.IA
 {
     public enum IADifficulty
     {
-        FACILE,
-        MOYEN,
-        DIFFICILE
+        FACILE
     }
 }

@@ -17,6 +17,10 @@ namespace Logic_Layer.IA
         {
         }
 
+        public DrunkenIA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
+        {
+        }
+
         /// <summary>
         /// Joue la première carte de sa main et termine son tour
         /// </summary>

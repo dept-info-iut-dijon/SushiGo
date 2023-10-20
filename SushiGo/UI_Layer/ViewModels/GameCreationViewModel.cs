@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using UI_Layer.Views;
 
 namespace UI_Layer.ViewModels
 {
@@ -26,10 +27,9 @@ namespace UI_Layer.ViewModels
 
         #region attributes
         private IADifficulty difficulty = IADifficulty.FACILE;
-        
         private ObservableCollection<PlayerViewModel> players = new ObservableCollection<PlayerViewModel>();
         private int playerCount = 3;
-        private bool isModeJvJ = true;
+        private bool isModeJvJ = false;
         private bool isLobbyShowed = false;
         private bool startButtonShow = false;
         private string idParty;
@@ -37,60 +37,65 @@ namespace UI_Layer.ViewModels
 
         #endregion
 
+
         /// <summary>
         /// Constructeur du vue modele associé à l'écran de création de partie
         /// </summary>
         /// <param name="view">vue liée</param>
         public GameCreationViewModel(Window view)
         {
-            this.view = view;
-
-            // Initialisation des events
-            this.AddPlayer = new RelayCommand(x =>
-            {
-                if (playerCount < 5)
-                {
-                    this.PlayerCount++;
-                }
-            });
-            this.RemovePlayer = new RelayCommand(x =>
-            {
-                if (playerCount > 2)
-                {
-                    this.PlayerCount--;
-                }
-            });
-            this.CreateGame = new RelayCommand(x => this.CreateLobby());
-            this.BackToHome = new RelayCommand(x =>
-            {
-                HomeView homeView = new HomeView();
-                homeView.Show();
-                this.view.Close();
-
-            });
+            this.view = view;     
         }
-
-
 
         #region events
         /// <summary>
         /// Permet de retourner à l'écran d'accueil
         /// </summary>
-        public RelayCommand BackToHome { get; set; }
+        public DelegateCommand BackToHome => new DelegateCommand(() =>
+        {
+            HomeView homeView = new HomeView();
+            homeView.Show();
+            this.view.Close();
+        });
+
         /// <summary>
         /// Permet d'ajouter un joueur dans la partie
         /// </summary>
-        public RelayCommand AddPlayer { get; set; }
+        public DelegateCommand AddPlayer => new DelegateCommand(() =>
+        {
+            if (playerCount < 5)
+            {
+                this.PlayerCount++;
+            }
+        });
+
         /// <summary>
         /// Permet d'enlever un joueur dans la partie
         /// </summary>
-        public RelayCommand RemovePlayer { get; set; }
+        public DelegateCommand RemovePlayer => new DelegateCommand(() =>
+        {
+            if (playerCount > 2)
+            {
+                this.PlayerCount--;
+            }
+        });
+
         /// <summary>
         /// Permet de créer le lobby de la partie
         /// </summary>
-        public RelayCommand CreateGame { get; set; }
+        public DelegateCommand CreateGame => new DelegateCommand(() => 
+            this.CreateLobby()
+        );
+
+        /// <summary>
+        /// Permet de lancer  la partie
+        /// </summary>
+        public DelegateCommand StartGame => new DelegateCommand(() => 
+            this.Start()
+        );
 
         #endregion
+
         #region properties
 
         /// <summary>
@@ -192,6 +197,7 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public ObservableCollection<PlayerViewModel> Players { get => players; set => players = value; }
+
         /// <summary>
         /// Id de la partie à rejoindre en multijoueur
         /// </summary>
@@ -205,7 +211,6 @@ namespace UI_Layer.ViewModels
             }
         }
 
-
         #endregion
 
         #region methods
@@ -215,9 +220,9 @@ namespace UI_Layer.ViewModels
         /// </summary>
         private void CreateLobby()
         {
-
+            
             // Création du joueur qui créer la partie
-            this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Player 1"), PlayerType.PLAYER, this) { IsReady = true });
+            this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Moi"), PlayerType.PLAYER, this) { IsReady = true });
 
             // Création des joueurs en multijoueurs
             if (isModeJvJ)
@@ -232,15 +237,36 @@ namespace UI_Layer.ViewModels
             // Création des IAs
             else
             {
-   
+                // TODO  : gerer les difficultes
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new Player(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT, this));
+                    this.Players.Add(new PlayerViewModel(new DrunkenIA(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT, this));
                 }
                 this.StartButtonShow = true;
             }
 
             this.IsLobbyShowed = true;
+
+           
+        }
+
+        /// <summary>
+        /// Permet de lancer la partie
+        /// </summary>
+        public void Start()
+        {
+            // Création de la logique
+            List<Player> list = new List<Player>();
+            foreach (var player in this.Players)
+            {
+                list.Add(player.Player);
+            }
+            Table t = new Table(list);
+
+
+            GameTableView gameTableView = new GameTableView();
+            gameTableView.Show();
+            this.view.Close();
         }
 
         /// <summary>

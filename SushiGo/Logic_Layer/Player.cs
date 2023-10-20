@@ -49,7 +49,7 @@ public class Player
         this.hand = hand;
     }
 
-    public Player(int id, Board board, Hand hand,string  pseudo)
+    public Player(int id, Board board, Hand hand,string pseudo)
     {
         this.id = id;
         this.board = board;

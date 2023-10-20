@@ -1,4 +1,5 @@
 ﻿using Logic_Layer;
+using Logic_Layer.IA;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,6 @@ namespace UI_Layer.ViewModels
         private Player player;
         private PlayerType role;
         private bool isReady = false;
-        private IADifficulty difficulty = IADifficulty.MOYEN;
         private GameCreationViewModel gameCreationViewModel;
         #endregion
 
@@ -69,13 +69,12 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
             }
         }
+
+
         /// <summary>
-        /// Difficulte de l'ia
+        /// Modele du joueur
         /// </summary>
-        public IADifficulty Difficulty 
-        { 
-            get => difficulty; 
-            set => difficulty = value; }
+        public Player Player { get => player; set => player = value; }
         #endregion
 
     }

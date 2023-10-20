@@ -22,6 +22,10 @@ namespace Logic_Layer.IA
         {
         }
 
+        protected IA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
+        {
+        }
+
         /// <summary>
         /// Actions à réaliser au moment du tour de celle-ci
         /// </summary>

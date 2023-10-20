@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI_Layer.ViewModels"
+        xmlns:logiq="clr-namespace:Logic_Layer.IA;assembly=Logic_Layer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized"
         Title="GameCreationView" Height="450" Width="800">
     <Window.Resources>
         <ObjectDataProvider x:Key="DifficultyEnumValues"
-                        ObjectType="{x:Type local:IADifficulty}"  MethodName="GetValues">
+                        ObjectType="{x:Type logiq:IADifficulty}"  MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:IADifficulty" />
+                <x:Type TypeName="logiq:IADifficulty" />
                 <!-- Remplacez "VotreEnumType" par le type réel de votre énumération -->
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
@@ -122,6 +122,7 @@
                                         Margin="4"
                                         Orientation="Horizontal">
                                         <RadioButton
+                                            IsEnabled="False"
                                             FontSize="19"
                                             Margin="4"
                                             Content="Joueurs/Joueurs"
@@ -229,7 +230,7 @@
                         Content="Créer"/>
                                 </Grid>
                             </TabItem>
-                            <TabItem >
+                            <TabItem IsEnabled="False" >
                                 <TabItem.Header>
                                     <TextBlock 
                         Text="Rejoindre des amis"
@@ -488,6 +489,7 @@
         <!-- Lancer la partie-->
         <Button
             Width="200"
+            Command="{Binding StartGame}"
             Height="50"
             HorizontalAlignment="Center"
             Grid.Row="4"
