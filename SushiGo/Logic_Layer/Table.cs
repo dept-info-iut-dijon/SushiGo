@@ -58,8 +58,11 @@ public class Table
             throw new PlayerImpossibleToFindException("Le joueur n'est pas dans la partie");
         }
 
-        // On joue la carte si le joueur n'est pas null
-        myPlayer.PlayCard(card);
+        // On joue la carte si le joueur n'est pas null et n'a pas encore joué sur ce tour
+        if (!myPlayer.HavePlayed) myPlayer.PlayCard(card);
+        
+        // On passe au tour suivant si tout le monde a joué
+        if (players.All(gamePlayer => gamePlayer.HavePlayed)) NextTurn();
     }
     
     #endregion
