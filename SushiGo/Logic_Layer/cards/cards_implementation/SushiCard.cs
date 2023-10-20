@@ -1,24 +1,16 @@
-﻿namespace Logic_Layer.cards.cards_implementation;
+﻿using Logic_Layer.cards.utils;
+
+namespace Logic_Layer.cards.cards_implementation;
 
 public class SushiCard : Card
 {
     private SushiTypes type;
+    private SushiTypesConverter converter;
 
     public SushiTypes Type => type;
-    
     public override string Name => $"Sushi {TypeToString}";
 
-    private static readonly Dictionary<SushiTypes, String> typeToString = new Dictionary<SushiTypes, string>()
-    {
-        { SushiTypes.SALMON, "Saumon" },
-        { SushiTypes.CALAMARI, "Calamar" },
-        { SushiTypes.OMELETTE, "Omelette" }
-    };
-
-    private String TypeToString
-    {
-        get => typeToString[type];
-    }
+    private string TypeToString => converter.SushiToString(type);
 
     /// <summary>
     /// Créée une carte sushi
@@ -27,5 +19,6 @@ public class SushiCard : Card
     public SushiCard(SushiTypes type)
     {
         this.type = type;
+        converter = new SushiTypesConverter();
     }
 }

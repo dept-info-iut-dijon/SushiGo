@@ -5,7 +5,7 @@ namespace Logic_Layer.factories;
 
 public class CardFactory
 {
-    private Dictionary<string, ISpecificCardFactory> specificCardFactories = new Dictionary<string, ISpecificCardFactory>()
+    private readonly Dictionary<string, ISpecificCardFactory> specificCardFactories = new Dictionary<string, ISpecificCardFactory>()
     {
         { "chopstick", new ChopsticFactory() },
         { "dessert", new DessertFactory() },

@@ -1,8 +1,4 @@
-﻿using Logic_Layer.cards;
-using System.Configuration;
-using System.Collections.Specialized;
-
-namespace Logic_Layer.factories.utils;
+﻿namespace Logic_Layer.factories.utils;
 
 public class GenerationParametersExtractor
 {
@@ -12,13 +8,28 @@ public class GenerationParametersExtractor
     /// <returns>Données de génération</returns>
     public Dictionary<string, int> GetParameters()
     {
-        NameValueCollection parameters = ConfigurationManager.AppSettings;
-        Dictionary<string, int> ret = new Dictionary<string, int>();
-        foreach (string param in parameters)
-        {
-            ret.Add(param, Convert.ToInt32(parameters.Get(param)));
-        }
+        // Temporairement on génèrera les données ici, le but final est de les stocker dans un fichier externe
+        return CreateParameters();
+    }
 
-        return ret;
+    //TODO à externaliser, c'est vraiment sale de hardcoder comme ça
+    private Dictionary<string, int> CreateParameters()
+    {
+        return new Dictionary<string, int>()
+        {
+            { "tempura", 14 },
+            { "sashimi", 14 },
+            { "ravioli", 14 },
+            { "maki 1", 6 },
+            { "maki 2", 12 },
+            { "maki 3", 8 },
+            { "sushi saumon", 10 },
+            { "sushi calamar", 5 },
+            { "sushi omelette", 10 } //,
+            // { "dessert", 10 },
+            // { "wasabi", 6 },
+            // { "baguette", 4 }
+        };
+        //TODO La génération des cartes spéciales est désactivée pour l'instant car leur gestion n'est pas encore totalement implémentée
     }
 }

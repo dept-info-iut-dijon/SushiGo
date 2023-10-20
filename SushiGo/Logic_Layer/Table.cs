@@ -12,10 +12,18 @@ public class Table
     private List<Player> players;
     private int currentPlayerIndex;
 
+    private int CurrentPlayerIndex
+    {
+        get => currentPlayerIndex;
+        set => currentPlayerIndex = value;
+    }
+
     /// <summary>
     /// Joueur en train d'effectuer son tour
     /// </summary>
     public Player CurrentPlayer => players[currentPlayerIndex];
+
+    public List<Player> Players => players;
 
     #region Méthodes publiques
     /// <summary>
@@ -102,11 +110,11 @@ public class Table
     {
         if (currentPlayerIndex < players.Count)
         {
-            currentPlayerIndex++;
+            CurrentPlayerIndex++;
         }
         else
         {
-            currentPlayerIndex = 0;
+            CurrentPlayerIndex = 0;
             NextTableTurn();
         }
 
