@@ -8,7 +8,13 @@ public class Player
     private string pseudo;
     private Board board;
     private Hand hand;
-    
+    private bool havePlayed;
+
+    /// <summary>
+    /// Indique si le joueur a terminé de jouer dans le tour courant
+    /// </summary>
+    public bool HavePlayed => havePlayed;
+
     /// <summary>
     /// Identifiant du joueur dans la partie
     /// </summary>
@@ -43,6 +49,7 @@ public class Player
         this.board = board;
         this.hand = hand;
         this.pseudo = pseudo;
+        havePlayed = false;
     }
 
     /// <summary>
@@ -52,6 +59,7 @@ public class Player
     public void PlayCard(Card card)
     {
         hand.PlayCard(card, board);
+        havePlayed = true;
     }
     
     /// <summary>
