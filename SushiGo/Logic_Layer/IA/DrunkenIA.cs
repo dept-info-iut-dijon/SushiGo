@@ -23,7 +23,7 @@ namespace Logic_Layer.IA
         public override void Play()
         {
             this.PlayCard(Hand.Cards.First());
-            this.EndTurn();
+            this.EndRound();
         }
     }
 }
