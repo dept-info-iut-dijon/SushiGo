@@ -103,7 +103,17 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public IADifficulty Difficulty
         {
-            get => difficulty;
+            get
+            {
+                if (!isModeJvJ)
+                {
+                    return difficulty;
+                }
+                else
+                {
+                    throw new Exception("Mode de jeu non compatible");
+                }
+            }
             set 
             { 
                 difficulty = value; 
