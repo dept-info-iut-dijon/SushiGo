@@ -63,8 +63,8 @@ public class Player
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>
     /// <returns></returns>
-    public List<ISpecialCard> EndTurn()
+    public List<ISpecialCard> EndRound()
     {
-        return board.EndTurn();
+        return board.EndRound();
     }
 }
