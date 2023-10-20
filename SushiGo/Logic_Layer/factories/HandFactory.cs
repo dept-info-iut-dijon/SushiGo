@@ -1,4 +1,5 @@
 ﻿using Logic_Layer.cards;
+using Logic_Layer.factories.utils;
 using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer.factories;
@@ -9,16 +10,17 @@ namespace Logic_Layer.factories;
 public class HandFactory
 {
     #region Attributs
-    private Random rand;
+    private readonly Random rand;
     private List<Card>? deck;
+    private readonly CardFactory factory;
     
     // Stocke le nombre de carte par main selon le nombre de joueurs
-    private static readonly Dictionary<int, int> playersToCardNumber = new Dictionary<int, int>()
+    private static readonly Dictionary<int, int> playersToCardNumber = new()
     {
         { 2, 10 },
         { 3, 9 },
-        { 3, 8 },
-        { 4, 7 }
+        { 4, 8 },
+        { 5, 7 }
     };
     #endregion
     
@@ -28,6 +30,7 @@ public class HandFactory
     public HandFactory()
     {
         rand = new Random();
+        factory = new CardFactory();
     }
 
     /// <summary>
@@ -37,8 +40,10 @@ public class HandFactory
     /// <returns>Liste des mains à distribuer</returns>
     public List<Hand> CreateHands(int playersNumber)
     {
+        if (playersNumber is < 2 or > 5)
+            throw new WrongPlayersNumberException("Le nombre de joueur devrait être inclus entre 2 et 5");
+        
         // Initialisation des variables
-        List<Hand> ret = new List<Hand>();
         List<List<Card>> tmpCards = new List<List<Card>>();
         deck = CreateDeck();
         for (int i = 0; i < playersNumber; i++)
@@ -55,13 +60,8 @@ public class HandFactory
             }
         }
 
-        // Répartition des mains
-        for (var index = 0; index < tmpCards.Count; index++)
-        {
-            ret.Add(new Hand(index, tmpCards[index]));
-        }
-
-        return ret;
+        // Répartition des mains et retour
+        return tmpCards.Select((t, index) => new Hand(index, t)).ToList();
     }
 
     #region Méthodes privées
@@ -78,8 +78,15 @@ public class HandFactory
     private List<Card> CreateDeck()
     {
         List<Card> ret = new List<Card>();
-
-        throw new NotImplementedException("Il va falloir implémenter ici les appels à la factory des cartes");
+        
+        // Récupération des données de génération
+        var generationDatas = new GenerationParametersExtractor().GetParameters();
+        
+        // On lance chacune des générations et on les ajoute au résultat
+        foreach (var param in generationDatas.Keys)
+        {
+            ret.AddRange(factory.CreateCard(param, generationDatas[param]));
+        }
 
         return ret;
     }

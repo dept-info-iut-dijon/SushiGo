@@ -3,10 +3,6 @@
 public class DessertCard : Card, ISpecialCard
 {
     public override string Name => "Carte Dessert";
-    
-    public DessertCard()
-    {
-    }
 
     public bool PlayerTurn()
     {
