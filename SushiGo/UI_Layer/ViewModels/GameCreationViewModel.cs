@@ -1,5 +1,6 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
+using Logic_Layer.IA;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,6 +25,8 @@ namespace UI_Layer.ViewModels
         #endregion
 
         #region attributes
+        private IADifficulty difficulty = IADifficulty.FACILE;
+        
         private ObservableCollection<PlayerViewModel> players = new ObservableCollection<PlayerViewModel>();
         private int playerCount = 3;
         private bool isModeJvJ = true;
@@ -91,19 +94,21 @@ namespace UI_Layer.ViewModels
         #region properties
 
         /// <summary>
-        /// Liste des difficultés d'ia
+        /// Difficulté de l'ia sélectionnée
         /// </summary>
-        public List<IADifficulty> DifficultyList
+        public IADifficulty Difficulty
         {
-            get
-            {
-                return new List<IADifficulty>() { IADifficulty.FACILE, IADifficulty.MOYEN, IADifficulty.DIFFICILE };
+            get => difficulty;
+            set 
+            { 
+                difficulty = value; 
             }
         }
+
         /// <summary>
         /// Nom de la partie
         /// </summary>
-       public string TitleLobby
+        public string TitleLobby
         {
             get
             {
@@ -200,6 +205,7 @@ namespace UI_Layer.ViewModels
             }
         }
 
+
         #endregion
 
         #region methods
@@ -209,22 +215,27 @@ namespace UI_Layer.ViewModels
         /// </summary>
         private void CreateLobby()
         {
+
+            // Création du joueur qui créer la partie
+            this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Player 1"), PlayerType.PLAYER, this) { IsReady = true });
+
+            // Création des joueurs en multijoueurs
             if (isModeJvJ)
             {
-                this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Player 1"), PlayerType.PLAYER) { IsReady = true});
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING));
+                    this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING, this));
                 }
                 NotifyPropertyChanged(nameof(MessageWaitingStart));
                 GenerateIDParty();
             }
+            // Création des IAs
             else
             {
-                this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()),"Player"), PlayerType.PLAYER) { IsReady = true});
+   
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new Player(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT));
+                    this.Players.Add(new PlayerViewModel(new Player(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT, this));
                 }
                 this.StartButtonShow = true;
             }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\Images\Logo.png" />
+    <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\test.png" />
   </ItemGroup>
 
@@ -75,6 +76,7 @@
     <Resource Include="Assets\Images\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\pin.png" />
     <Resource Include="Assets\Images\test.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

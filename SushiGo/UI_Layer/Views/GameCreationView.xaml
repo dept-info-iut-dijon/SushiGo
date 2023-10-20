@@ -7,14 +7,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized"
         Title="GameCreationView" Height="450" Width="800">
-
+    <Window.Resources>
+        <ObjectDataProvider x:Key="DifficultyEnumValues"
+                        ObjectType="{x:Type local:IADifficulty}"  MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:IADifficulty" />
+                <!-- Remplacez "VotreEnumType" par le type réel de votre énumération -->
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -91,11 +99,11 @@
                                         <RowDefinition Height="1*"/>
                                         <RowDefinition Height="1*"/>
                                         <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="0.5*"/>
                                         <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="0.5*"/>
                                         <RowDefinition Height="1*"/>
-                                        <RowDefinition Height="1*"/>
-                                        <RowDefinition Height="1*"/>
-                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="2*"/>
                                     </Grid.RowDefinitions>
 
                                     <!-- Configuration mode de jeu-->
@@ -114,35 +122,80 @@
                                         Margin="4"
                                         Orientation="Horizontal">
                                         <RadioButton
-                            FontSize="19"
-                            Margin="4"
-                            Content="Joueurs/Joueurs"
-                            IsChecked="{Binding IsModeJvJ}"
-                            BorderBrush="DarkRed"
-                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                                            FontSize="19"
+                                            Margin="4"
+                                            Content="Joueurs/Joueurs"
+                                            IsChecked="{Binding IsModeJvJ}"
+                                            BorderBrush="DarkRed"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}" />
                                         <RadioButton
-                            FontSize="19"
-                            Margin="4"
-                            Content="Joueurs/Robots"
-                            BorderBrush="DarkRed"
-                            Style="{StaticResource MaterialDesignTabRadioButton}" />
+                                            FontSize="19"
+                                            Margin="4"
+                                            Content="Joueurs/Robots"
+                                            BorderBrush="DarkRed"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}" />
                                     </StackPanel>
-
+                                     <!-- Difficulte IA -->
+                                    <TextBlock
+                                        Text="Difficulté"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Grid.Row="5"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock" >
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    
+                                    <ComboBox SelectedItem="{Binding Difficulty}"
+                                              ItemsSource="{Binding Source={StaticResource DifficultyEnumValues}}"
+                                              FontSize="16"
+                                              HorizontalAlignment="Center"
+                                              Grid.Row="6">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontWeight="Bold" Foreground="DarkRed" TextAlignment="Center" Text="{Binding}" HorizontalAlignment="Center" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                        <ComboBox.Style>
+                                            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="true">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ComboBox.Style>
+                                    </ComboBox>
                                     <!-- Configuration nombre joueurs -->
                                     <TextBlock
-                        Text="Nombre de joueurs :"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Grid.Row="3"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"/>
+                                        Text="Nombre de joueurs :"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Grid.Row="3"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"/>
 
+                                  
                                     <StackPanel 
-                        Margin="0,10,0,0"
-                        Grid.Row="4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Orientation="Horizontal">
+                                        Margin="0,10,0,0"
+                                        Grid.Row="4"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
                                         <Button 
                             Command="{Binding RemovePlayer}"
                             Style="{StaticResource ButtonWithImage}">
@@ -150,14 +203,15 @@
                                 Kind="MinusThick"/>
                                         </Button>
                                         <TextBlock
-                            Foreground="DarkRed"
-                            Margin="8,0,0,0"
-                            FontSize="19"
-                            Text="{Binding PlayerCount}"/>
+                                            FontWeight="Bold"
+                                            Foreground="DarkRed"
+                                            Margin="8,0,0,0"
+                                            FontSize="19"
+                                            Text="{Binding PlayerCount}"/>
                                         <Button 
-                            Command="{Binding AddPlayer}"
-                            Margin="8,0,0,0" 
-                            Style="{StaticResource ButtonWithImage}">
+                                            Command="{Binding AddPlayer}"
+                                            Margin="8,0,0,0" 
+                                            Style="{StaticResource ButtonWithImage}">
                                             <materialDesign:PackIcon
                                 Kind="PlusThick"/>
                                         </Button>
@@ -169,7 +223,7 @@
                         Width="150" 
                         Height="40" 
                         Background="IndianRed" 
-                        Grid.Row="6" 
+                        Grid.Row="7" 
                         HorizontalAlignment="Center" 
                                 Command="{Binding CreateGame}"
                         Content="Créer"/>
@@ -297,11 +351,10 @@
                                 <DataTemplate>
                                     <Grid Margin="0,5,0,0">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="35"/>
-                                            <ColumnDefinition Width="620"/>
-                                            <ColumnDefinition Width="35"/>
-                                            <ColumnDefinition Width="35"/>
-                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="9*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                            <ColumnDefinition Width="0.5*"/>
                                         </Grid.ColumnDefinitions>
                                         <materialDesign:PackIcon
                                         VerticalAlignment="Center"  
@@ -335,31 +388,6 @@
                                         Text="{Binding Nom}"
                                         FontSize="18"/>
 
-                                        <!-- Difficulte de l'ia-->
-                                        <ComboBox
-                                            
-                                            SelectedItem="{Binding Difficulty}"
-                                            
-                                            FontSize="16"
-                                             Grid.Column="2"
-                                             Grid.ColumnSpan="3"
-                                             >
-                                            <ComboBox.Style>
-                                                <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Role}" Value="PLAYER">
-                                                            <Setter Property="Visibility" Value="Hidden"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="WAITING">
-                                                            <Setter Property="Visibility" Value="Hidden"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Role}" Value="ROBOT">
-                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ComboBox.Style>
-                                        </ComboBox>
 
                                         <!-- Kick du joueur-->
                                         <Button 
@@ -395,6 +423,7 @@
                                             Width="30"
                                             Height="30"
                                             Opacity="0.6"
+                                            HorizontalAlignment="Right"
                                             VerticalAlignment="Center"  
                                             Grid.Column="4"
                                             Kind="AlphaR">

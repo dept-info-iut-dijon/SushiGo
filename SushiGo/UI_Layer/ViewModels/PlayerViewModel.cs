@@ -24,6 +24,7 @@ namespace UI_Layer.ViewModels
         private PlayerType role;
         private bool isReady = false;
         private IADifficulty difficulty = IADifficulty.MOYEN;
+        private GameCreationViewModel gameCreationViewModel;
         #endregion
 
         /// <summary>
@@ -31,10 +32,11 @@ namespace UI_Layer.ViewModels
         /// </summary>
         /// <param name="player">objet player metier</param>
         /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
-        public PlayerViewModel(Player player, PlayerType role)
+        public PlayerViewModel(Player player, PlayerType role,GameCreationViewModel creationViewModel)
         {
             this.player = player;
             this.role = role;
+            this.gameCreationViewModel = creationViewModel;
         }
         
 
@@ -58,7 +60,15 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Est ce que le joueur est prêt
         /// </summary>
-        public bool IsReady { get => isReady; set => isReady = value; }
+        public bool IsReady 
+        { 
+            get => isReady;
+            set 
+            { 
+                isReady = value; 
+                NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
+            }
+        }
         /// <summary>
         /// Difficulte de l'ia
         /// </summary>

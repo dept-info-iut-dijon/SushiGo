@@ -24,15 +24,7 @@ namespace UI_Layer.Views
         {
             InitializeComponent();
             this.DataContext = new GameCreationViewModel(this);
-            // TODO : Uniquement pour les tests
-            //this.test.ItemsSource = new List<Joueur>()
-            //{
-            //    new Joueur("Florian","admin"),
-            //    new Joueur("Morgane"),
-            //    new Joueur("Evan"),
-            //    new Joueur("Jonas"),
-            //    new Joueur("Elia"),
-            //};
+
         }
     }
 }
