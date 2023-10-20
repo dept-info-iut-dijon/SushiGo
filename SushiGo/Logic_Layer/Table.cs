@@ -1,7 +1,6 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
-using System.Numerics;
 
 namespace Logic_Layer;
 
@@ -10,25 +9,13 @@ namespace Logic_Layer;
 /// </summary>
 public class Table
 {
-    private List<Player> players;
-    private int currentPlayerIndex;
+    private readonly List<Player> players;
     private int roundNumber;
-
-    private int CurrentPlayerIndex
-    {
-        get => currentPlayerIndex;
-        set => currentPlayerIndex = value;
-    }
-
+    
     /// <summary>
     /// Numéro de la manche de la partie
     /// </summary>
-    public int RoundNumber { get => roundNumber; }
-
-    /// <summary>
-    /// Joueur en train d'effectuer son tour
-    /// </summary>
-    public Player CurrentPlayer => players[currentPlayerIndex];
+    public int RoundNumber => roundNumber;
 
     public List<Player> Players => players;
 
@@ -43,21 +30,17 @@ public class Table
     {
         this.players = players;
         InitPlayersValue();
-
-        currentPlayerIndex = 0;
     }
 
 
     /// <summary>
-    /// Effectue les opérations de changement de joueur
+    /// Effectue les opérations de changement de tour
     /// </summary>
-    /// <returns>Nouveau joueur courant</returns>
-    public Player NextPlayerTurn()
+    public void NextTurn()
     {
+        ActualizeHands();
         // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
         if (NoMoreCards()) NextRound();
-        
-        return NextPlayer();
     }
     
     /// <summary>
@@ -82,14 +65,6 @@ public class Table
     #endregion
 
     #region Méthodes privées
-    /// <summary>
-    /// Arrive après un tour complet de la table
-    /// </summary>
-    private void NextTableTurn()
-    {
-        ActualizeHands();
-    }
-    
     // Retourne true si toutes les cartes distribuées aux joueurs ont été posées
     private bool NoMoreCards()
     {
@@ -112,26 +87,6 @@ public class Table
         var specialCards = player.EndRound();
         throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
-    
-    /// <summary>
-    /// Actualise le joueur courant
-    /// </summary>
-    /// <returns>Le nouveau joueur courant</returns>
-    private Player NextPlayer()
-    {
-        if (currentPlayerIndex < players.Count)
-        {
-            CurrentPlayerIndex++;
-        }
-        else
-        {
-            CurrentPlayerIndex = 0;
-            NextTableTurn();
-        }
-
-        return CurrentPlayer;
-    }
-    
 
     // Initialiser les joueurs
     private void InitPlayersValue()
@@ -162,16 +117,23 @@ public class Table
         }
     }
 
-    // Retourne les mains des joueurs après rotation
+    // Créée la liste des mains pour la rotation
     private List<Hand> RotateHands()
     {
-        List<Hand> hands = new List<Hand>();
+        List<Hand?> hands = Enumerable.Repeat((Hand)null, players.Count).ToList();
         for (var index = 0; index < players.Count; index++)
         {
             var player = players[index];
-            if (index + 1 < players.Count) hands.Insert(index + 1, player.Hand);
-            else hands.Insert(0, player.Hand);
+            if (index + 1 < players.Count) 
+                hands[index+1] = player.Hand;
+            else hands[0] = player.Hand;
         }
+
+        if (hands is null || hands.Count != players.Count || hands.Contains(null))
+        {
+            throw new HandsRotationException("La nouvelle liste de mains est invalide");
+        }
+        
         return hands;
     }
     #endregion

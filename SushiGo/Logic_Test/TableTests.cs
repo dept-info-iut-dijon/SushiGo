@@ -61,7 +61,7 @@ public void Table_NextPlayerTurn_NoMoreCards_StartsNextRound()
 
     // Act
     player.Hand.Cards.Clear(); // Simulez l'absence de cartes dans la main du joueur
-    table.NextPlayerTurn();
+    table.NextTurn();
 
     // Assert
     // Assurez-vous que NextRound a été appelé (vérifiez l'état interne de votre classe)
