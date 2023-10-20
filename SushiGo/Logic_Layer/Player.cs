@@ -11,7 +11,11 @@ public class Player
     /// <summary>
     /// Identifiant du joueur dans la partie
     /// </summary>
-    public int Id => id;
+    public int Id 
+    {
+        get => id;
+        set => id = value;
+    }
 
     /// <summary>
     /// Indique si le joueur a encore des cartes dans sa main

@@ -1,6 +1,7 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
+using System.Numerics;
 
 namespace Logic_Layer;
 
@@ -37,6 +38,19 @@ public class Table
 
         currentPlayerIndex = 0;
     }
+
+    /// <summary>
+    /// Initialise la table de jeu
+    /// </summary>
+    /// <param name="players">liste des joueurs</param>
+    public Table(List<Player> players)
+    {
+        this.players = players;
+        InitPlayersValue();
+
+        currentPlayerIndex = 0;
+    }
+
 
     /// <summary>
     /// Effectue les opérations de changement de joueur
@@ -135,6 +149,24 @@ public class Table
         for (int i = 0; i < playersNumber; i++)
         {
             players.Add(new Player(i, new Board(), hands[i]));
+        }
+    }
+    // Initialiser les joueurs
+    private void InitPlayersValue()
+    {
+        if (this.players.Count is < 2 or > 5)
+        {
+            throw new WrongPlayersNumberException("Le nombre de joueur doit être inclus entre 2 et 5");
+        }
+
+        
+        List<Hand> hands = new HandFactory().CreateHands(this.players.Count);
+
+
+        for (int i = 0; i < this.players.Count; i++)
+        {
+            players[i].Id = i;
+            players[i].Hand = hands[i];
         }
     }
 
