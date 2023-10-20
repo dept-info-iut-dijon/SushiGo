@@ -27,7 +27,7 @@
             Stretch="Fill"
             Grid.ColumnSpan="4"
             Grid.RowSpan="11"
-            Source="../Assets/test.png"/>
+            Source="{StaticResource test}"/>
         
         <!-- Titre de l'écran -->
         <TextBlock
@@ -58,7 +58,7 @@
             <Image
                 Stretch="Fill"
                 Opacity="0.5"
-                Source="../Assets/bois2.jpg"/>
+                Source="{StaticResource bois2}"/>
         </materialDesign:Card>
 
         <!-- Onglets création partie -->

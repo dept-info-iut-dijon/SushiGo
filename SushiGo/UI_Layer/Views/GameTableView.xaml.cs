@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using UI_Layer.Assets;
-using UI_Layer.ViewModels;
 
-namespace UI_Layer
+namespace UI_Layer.Views
 {
     /// <summary>
-    /// Logique d'interaction pour HomeView.xaml
+    /// Logique d'interaction pour GameTable.xaml
     /// </summary>
-    public partial class HomeView : Window
+    public partial class GameTableView : Window
     {
-        public HomeView()
+        public GameTableView()
         {
             InitializeComponent();
-            this.DataContext = new HomeViewModel(this);
         }
     }
 }
