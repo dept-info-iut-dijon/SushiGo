@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,20 +7,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
+    <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\test.png" />
   </ItemGroup>
 
 
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-
   </ItemGroup>
 
 
@@ -36,7 +32,9 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Resource Include="Assets\bois2.jpg" />
+    <Resource Include="Assets\Images\bois2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
 
     <Resource Include="Assets\Cartes\baguettes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -74,7 +72,12 @@
     <Resource Include="Assets\Cartes\wasabi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\test.png" />
+    <Resource Include="Assets\Images\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
 
   </ItemGroup>
 
