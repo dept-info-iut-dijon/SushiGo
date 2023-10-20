@@ -36,18 +36,6 @@ public class Player
     /// </summary>
     public string Pseudo { get => pseudo; set => pseudo = value; }
 
-    /// <summary>
-    /// Créée un joueur
-    /// </summary>
-    /// <param name="id">identifiant du joueur</param>
-    /// <param name="board">Plateau de jeu du joueur</param>
-    /// <param name="hand">Main de départ du joueur</param>
-    public Player(int id, Board board, Hand hand)
-    {
-        this.id = id;
-        this.board = board;
-        this.hand = hand;
-    }
 
     public Player(int id, Board board, Hand hand,string pseudo)
     {

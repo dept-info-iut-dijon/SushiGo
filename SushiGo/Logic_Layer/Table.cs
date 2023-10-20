@@ -27,17 +27,6 @@ public class Table
     public List<Player> Players => players;
 
     #region Méthodes publiques
-    /// <summary>
-    /// Initialise la table de jeu
-    /// </summary>
-    /// <param name="playersNumber">Nombre de joueurs participants</param>
-    public Table(int playersNumber)
-    {
-        players = new List<Player>();
-        InitPlayersValue(playersNumber);
-
-        currentPlayerIndex = 0;
-    }
 
     /// <summary>
     /// Initialise la table de jeu
@@ -135,22 +124,7 @@ public class Table
         return CurrentPlayer;
     }
     
-    // Initialise les joueurs participants
-    private void InitPlayersValue(int playersNumber)
-    {
-        if (playersNumber is < 2 or > 5)
-        {
-            throw new WrongPlayersNumberException("Le nombre de joueur doit être inclus entre 2 et 5");
-        }
 
-        players = new List<Player>();
-        List<Hand> hands = new HandFactory().CreateHands(playersNumber);
-
-        for (int i = 0; i < playersNumber; i++)
-        {
-            players.Add(new Player(i, new Board(), hands[i]));
-        }
-    }
     // Initialiser les joueurs
     private void InitPlayersValue()
     {

@@ -2,6 +2,7 @@
 using Logic_Layer.cards;
 using Logic_Layer.logic_exceptions;
 using Moq;
+using System.Text;
 
 namespace LogicTest;
 
@@ -11,20 +12,34 @@ public class TableTests
 public void Table_InitializeWithValidPlayersNumber_CreatesPlayers()
 {
     // Arrange
-    int playersNumber = 4;
-    var table = new Table(playersNumber);
+    List<Player> players = new List<Player>()
+    {
+        new Player(1,new Board(),null,""),
+        new Player(2,new Board(),null,""),
+        new Player(3,new Board(),null,""),
+        new Player(4,new Board(),null,""),
+    };
+    var table = new Table(players);
 
     // Act and Assert
-    Assert.Equal(playersNumber, table.Players.Count);
+    Assert.Equal(4, table.Players.Count);
 }
 
 [Fact]
 public void Table_InitializeWithInvalidPlayersNumber_ThrowsException()
 {
     // Arrange
-    int invalidPlayersNumber = 6; // Remplacez par un nombre de joueurs invalide
+    List<Player> players = new List<Player>()
+    {
+        new Player(1,new Board(),null,""),
+        new Player(2,new Board(),null,""),
+        new Player(3,new Board(),null,""),
+        new Player(4,new Board(),null,""),
+        new Player(5,new Board(),null,""),
+        new Player(6,new Board(),null,""),
+    };
     // Act and Assert
-    var exception = Assert.Throws<WrongPlayersNumberException>(() => new Table(invalidPlayersNumber));
+    var exception = Assert.Throws<WrongPlayersNumberException>(() => new Table(players));
 
     // Vérifiez le message d'exception (facultatif)
     Assert.Equal("Le nombre de joueur doit être inclus entre 2 et 5", exception.Message);
@@ -34,7 +49,14 @@ public void Table_InitializeWithInvalidPlayersNumber_ThrowsException()
 public void Table_NextPlayerTurn_NoMoreCards_StartsNextRound()
 {
     // Arrange
-    var table = new Table(4); // Remplacez par le nombre de joueurs souhaité
+    List<Player> players = new List<Player>()
+    {
+        new Player(1,new Board(),null,""),
+        new Player(2,new Board(),null,""),
+        new Player(3,new Board(),null,""),
+        new Player(4,new Board(),null,""),
+    };
+    var table = new Table(players); // Remplacez par le nombre de joueurs souhaité
     var player = table.Players[0];
 
     // Act
@@ -51,8 +73,15 @@ public void Table_NextPlayerTurn_NoMoreCards_StartsNextRound()
 public void Table_PlayCard_PlayerNotInGame_ThrowsException()
 {
     // Arrange
-    var table = new Table(4); // Remplacez par le nombre de joueurs souhaité
-    var player = new Player(999, new Board(), new Hand(999, new List<Card>()));
+    List<Player> players = new List<Player>()
+    {
+        new Player(1,new Board(),null,""),
+        new Player(2,new Board(),null,""),
+        new Player(3,new Board(),null,""),
+        new Player(4,new Board(),null,""),
+    };
+    var table = new Table(players); // Remplacez par le nombre de joueurs souhaité
+    var player = new Player(999, new Board(), new Hand(999, new List<Card>()), "");
     var cardMock = new Mock<Card>();
     var card = cardMock.Object;
 
