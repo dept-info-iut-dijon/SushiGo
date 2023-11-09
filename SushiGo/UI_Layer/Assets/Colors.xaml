@@ -33,7 +33,7 @@
     
     <!-- Couleurs de la vue GameTable -->
     <SolidColorBrush x:Key="GameTableView_PlayerBoardHasPlay" Color="{StaticResource green2}"/>
-    <SolidColorBrush x:Key="GameTableView_PlayerBoardBorderHasNotPlay" Color="{StaticResource red2}"/>
+    <SolidColorBrush x:Key="GameTableView_PlayerBoardBorderHasNotPlay" Color="Black"/>
     <SolidColorBrush x:Key="GameTableView_PlayerBoardBorderBackground" Color="{StaticResource white1}"/>
     
     

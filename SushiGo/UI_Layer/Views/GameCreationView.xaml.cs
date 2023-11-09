@@ -26,5 +26,9 @@ namespace UI_Layer.Views
             this.DataContext = new GameCreationViewModel(this);
 
         }
+
+
+
+
     }
 }

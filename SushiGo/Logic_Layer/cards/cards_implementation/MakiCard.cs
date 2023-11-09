@@ -15,5 +15,5 @@ public class MakiCard : Card
         this.quantity = quantity;
     }
 
-    public override string Name => "Maki";
+    public override string Name => $"Maki{quantity}";
 }
