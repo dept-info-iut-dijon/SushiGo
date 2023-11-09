@@ -8,7 +8,7 @@ public class SushiCard : Card
     private SushiTypesConverter converter;
 
     public SushiTypes Type => type;
-    public override string Name => $"Sushi {TypeToString}";
+    public override string Name => $"Sushi{TypeToString}";
 
     private string TypeToString => converter.SushiToString(type);
 

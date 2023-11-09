@@ -274,7 +274,7 @@ namespace UI_Layer.ViewModels
             Table t = new Table(list);
 
 
-            GameTableView gameTableView = new GameTableView();
+            GameTableView gameTableView = new GameTableView(t);
             gameTableView.Show();
             this.view.Close();
         }

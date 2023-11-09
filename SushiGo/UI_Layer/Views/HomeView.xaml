@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:UI_Layer"
         xmlns:res="clr-namespace:UI_Layer.Assets"
         mc:Ignorable="d"
-        Title="HomeView" 
-        WindowState="Maximized"
-        Height="1080" Width="1920" 
-        Background="{StaticResource Background}">
+        Title="SushiGo !" 
+        WindowStyle="None"
+        WindowState="Maximized" 
+        Background="Wheat">
 
 
     <Grid>
@@ -25,26 +25,25 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Image  Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="../Assets/Images/sushiTest5.jpg"/>
+        <Border Grid.RowSpan="5" Grid.ColumnSpan="3" Opacity="0.5" Background="White">
 
-        <Border Grid.ColumnSpan="3" Background="Black">
-            <Border.CornerRadius>
-                <CornerRadius BottomLeft="100" BottomRight="100" />
-            </Border.CornerRadius>
         </Border>
         <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{StaticResource logo}" Margin="60,50"/>
 
+        
         <!-- Bouton Jouer -->
-        <Button Grid.Column="1" Grid.Row="1" Command="{Binding PlayCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="1" Command="{Binding PlayCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150,35,150,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.PLAY}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 
         <!-- Bouton Credits -->
-        <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150,35,150,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.CREDITS}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 
         <!-- Bouton Quitter -->
-        <Button Grid.Column="1" Grid.Row="3" Command="{Binding QuitCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="200,35,200,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="3" Command="{Binding QuitCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150,35,150,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.QUIT}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 

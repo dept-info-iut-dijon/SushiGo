@@ -2,7 +2,7 @@
 
 public class DessertCard : Card, ISpecialCard
 {
-    public override string Name => "Carte Dessert";
+    public override string Name => "Dessert";
 
     public bool PlayerTurn()
     {
