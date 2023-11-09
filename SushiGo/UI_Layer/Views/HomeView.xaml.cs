@@ -10,20 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UI_Layer.Views;
+using UI_Layer.Assets;
+using UI_Layer.ViewModels;
 
-namespace Couche_IHM
+namespace UI_Layer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour HomeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomeView : Window
     {
-        public MainWindow()
+        public HomeView()
         {
             InitializeComponent();
+            this.DataContext = new HomeViewModel(this);
         }
     }
 }
