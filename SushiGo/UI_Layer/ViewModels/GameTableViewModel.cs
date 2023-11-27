@@ -35,14 +35,6 @@ namespace UI_Layer.ViewModels
         {
             this.table = table;
         }
-        
-        public string test
-        {
-            get
-            {
-                return "Yes";
-            }
-        }
 
     }
 }
