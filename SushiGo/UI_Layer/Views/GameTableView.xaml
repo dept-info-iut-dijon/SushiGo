@@ -41,7 +41,8 @@
                 Background="Yellow"
                 Foreground="Black"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                Click="EndPlayerTurn">
                 <TextBlock 
                     Margin="10,5,10,5"
                     Text="Valider"
