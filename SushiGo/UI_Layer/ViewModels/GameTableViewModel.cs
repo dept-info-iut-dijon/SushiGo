@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
@@ -26,9 +21,9 @@ namespace UI_Layer.ViewModels
                 List<CardComponent> cards = new List<CardComponent>();
 
                 int x = 0;
-                foreach (Card c in table.Players[0].Hand.Cards)
+                foreach (Card card in table.Players[0].Hand.Cards)
                 {
-                    cards.Add(new CardComponent() { CardName = c.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    cards.Add(new CardComponent() { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
                     x = -10;
                 }
 
