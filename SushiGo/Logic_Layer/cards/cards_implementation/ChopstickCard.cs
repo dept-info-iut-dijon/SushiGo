@@ -33,4 +33,10 @@ public class ChopstickCard : Card, ISpecialCard
         return false;
     }
 
+    public override bool Equals(object? obj)
+    {
+        return obj is ChopstickCard card &&
+               Name == card.Name &&
+               available == card.available;
+    }
 }

@@ -13,4 +13,10 @@ public class DessertCard : Card, ISpecialCard
     {
         return true;
     }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is DessertCard card &&
+               Name == card.Name;
+    }
 }
