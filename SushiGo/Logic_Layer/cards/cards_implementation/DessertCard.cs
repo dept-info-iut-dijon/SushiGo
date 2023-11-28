@@ -14,6 +14,7 @@ public class DessertCard : Card, ISpecialCard
         return true;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is DessertCard card &&
