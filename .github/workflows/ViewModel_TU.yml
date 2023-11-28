@@ -1,4 +1,4 @@
-﻿name: Tests unitaires de la couche des vues-modèles
+﻿name: Tests unitaires des vues-modèles
 
 on:
   push:
