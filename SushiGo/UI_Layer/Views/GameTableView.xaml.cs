@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI_Layer.UserControls;
+using UI_Layer.ViewModels;
 
 namespace UI_Layer.Views
 {
@@ -25,6 +26,10 @@ namespace UI_Layer.Views
         public GameTableView(Logic_Layer.Table t)
         {
             InitializeComponent();
+            MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
+            DataContext = MainWindowViewModel.Instance;
+            // Pour le merge : rajoute le viewmodel dans MainWindowViewModel et accede y directement dans le xaml
+
             int x = 0;
             foreach (Card c in t.Players[0].Hand.Cards)
             {
