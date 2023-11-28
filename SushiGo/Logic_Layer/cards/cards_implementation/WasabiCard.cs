@@ -37,4 +37,12 @@ public class WasabiCard : Card, ISpecialCard
     {
         return false;
     }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is WasabiCard card &&
+               Name == card.Name &&
+               EqualityComparer<SushiCard?>.Default.Equals(sushi, card.sushi) &&
+               EqualityComparer<SushiCard?>.Default.Equals(Sushi, card.Sushi);
+    }
 }

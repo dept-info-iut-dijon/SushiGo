@@ -3,4 +3,10 @@
 public class TempuraCard : Card
 {
     public override string Name => "Tempura";
+
+    public override bool Equals(object? obj)
+    {
+        return obj is TempuraCard card &&
+               Name == card.Name;
+    }
 }
