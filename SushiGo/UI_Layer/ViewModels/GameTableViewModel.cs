@@ -45,6 +45,7 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Main du joueur.
         /// </summary>
+        /// <inheritdoc/>
         public List<CardComponent> Deck
         {
             get
