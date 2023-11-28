@@ -20,6 +20,10 @@ namespace UI_Layer.ViewModels
 
         #region Constructeur
 
+        /// <summary>
+        /// Constructeur de GameTableViewModel.
+        /// </summary>
+        /// <param name="table">Table de jeu.</param>
         public GameTableViewModel(Table table)
         {
             this.table = table;
