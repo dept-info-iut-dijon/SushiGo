@@ -28,7 +28,11 @@ namespace UI_Layer.Views
         public GameTableView(Logic_Layer.Table t)
         {
             InitializeComponent();
+            MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
+            DataContext = MainWindowViewModel.Instance;
+
             Player thisPLayer = t.Players[0];
+
             int x = 0;
             foreach (Card c in thisPLayer.Hand.Cards)
             {
