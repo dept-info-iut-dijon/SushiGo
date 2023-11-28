@@ -14,51 +14,51 @@
         <DockPanel>
             <materialDesign:Card DockPanel.Dock="Top" Height="30"   Background="IndianRed" Grid.ColumnSpan="4" >
                 <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="50" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
 
-                <MenuItem Command="{Binding NavigationViewModel.BackToMenu}">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon
+                    <MenuItem Command="{Binding NavigationViewModel.BackToMenu}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon
                     Width="20"
                     Height="20"
                 Foreground="White"
                 Kind="Home"/>
-                    </MenuItem.Icon>
-                </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                <MenuItem Command="{Binding NavigationViewModel.MinimizeApplication}" Grid.Column="2">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon
-                    Width="25"
-                    Height="20"
-                    Foreground="Black"
-                    Kind="WindowMinimize"/>
-                    </MenuItem.Icon>
-                </MenuItem>
+                    <MenuItem Command="{Binding NavigationViewModel.MinimizeApplication}" Grid.Column="2">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon
+                        Width="25"
+                        Height="20"
+                        Foreground="Black"
+                        Kind="WindowMinimize"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="3">
-                    <MenuItem.Icon >
-                        <materialDesign:PackIcon
+                    <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="3">
+                        <MenuItem.Icon >
+                            <materialDesign:PackIcon
                     Foreground="Black"
                     Width="20"
                     Height="20"
                     Kind="Close"/>
-                    </MenuItem.Icon>
+                        </MenuItem.Icon>
 
-                </MenuItem>
+                    </MenuItem>
 
-            </Menu>
+                </Menu>
             </materialDesign:Card>
 
             <Grid>
@@ -80,48 +80,48 @@
 
 
                     <TextBlock 
-        Text="Manche n°1" 
-        Grid.Row="0"
-        Style="{StaticResource Font1}" 
-        HorizontalAlignment="Center" 
-        VerticalAlignment="Center"/>
+                        Text="Manche n°1" 
+                        Grid.Row="0"
+                        Style="{StaticResource Font1}" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"/>
 
                     <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
                     <Button 
-        Grid.Row="1" 
-        Background="Yellow"
-        Foreground="Black"
-        HorizontalAlignment="Center" 
-        VerticalAlignment="Center">
+                        Grid.Row="1" 
+                        Background="Yellow"
+                        Foreground="Black"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
                         <TextBlock 
-            Margin="10,5,10,5"
-            Text="Valider"
-            FontFamily="{StaticResource NewSushi}"
-            HorizontalAlignment="Center" 
-            FontSize="20"
-            VerticalAlignment="Center"/>
+                            Margin="10,5,10,5"
+                            Text="Valider"
+                            FontFamily="{StaticResource NewSushi}"
+                            HorizontalAlignment="Center" 
+                            FontSize="20"
+                            VerticalAlignment="Center"/>
                     </Button>
 
 
                     <!-- Plateau du joueur 1-->
                     <Border 
-        Margin="10"
-        BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
-        Grid.Row="2" 
-        BorderThickness="5"
-        CornerRadius="10" >
+                        Margin="10"
+                        BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                        Grid.Row="2" 
+                        BorderThickness="5"
+                        CornerRadius="10" >
                         <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <materialDesign:PackIcon
-                    VerticalAlignment="Center"
-                    Width="20"
-                    Height="20"
-                    Kind="Account"/>
+                                    VerticalAlignment="Center"
+                                    Width="20"
+                                    Height="20"
+                                    Kind="Account"/>
                                 <TextBlock
-                FontFamily="{StaticResource NewSushi}"
-                Margin="5,0,0,0"
-                FontSize="20"
-                Text="Joueur 1"/>
+                                    FontFamily="{StaticResource NewSushi}"
+                                    Margin="5,0,0,0"
+                                    FontSize="20"
+                                    Text="Joueur 1"/>
                             </StackPanel>
                             <Grid/>
                         </StackPanel>
@@ -130,8 +130,7 @@
                 </Grid>
 
                 <!-- Liste des cartes -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3"  Orientation="Horizontal"
-Name="te"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3"  Orientation="Horizontal" Name="te"/>
 
 
 
@@ -148,24 +147,24 @@ Name="te"/>
 
                     <!-- Plateau du joueur 2-->
                     <Border 
-         Margin="10"
-         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
-         Grid.Row="0" 
-         BorderThickness="5"
-         CornerRadius="10" >
+                         Margin="10"
+                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         Grid.Row="0" 
+                         BorderThickness="5"
+                         CornerRadius="10" >
                         <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <materialDesign:PackIcon
-                     VerticalAlignment="Center"
-                     Width="25"
-                     Height="25"
-                     Kind="Android"/>
+                                 VerticalAlignment="Center"
+                                 Width="25"
+                                 Height="25"
+                                 Kind="Android"/>
                                 <TextBlock
-                    Margin="5,0,0,0"
-                    FontFamily="{StaticResource NewSushi}"
-                    HorizontalAlignment="Center"
-                    FontSize="20"
-                    Text="Joueur 2"/>
+                                    Margin="5,0,0,0"
+                                    FontFamily="{StaticResource NewSushi}"
+                                    HorizontalAlignment="Center"
+                                    FontSize="20"
+                                    Text="Joueur 2"/>
                             </StackPanel>
                             <Grid/>
                         </StackPanel>
@@ -173,25 +172,25 @@ Name="te"/>
 
                     <!-- Plateau du joueur 4-->
                     <Border 
-          Margin="10"
-          BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
-          Grid.Row="1" 
-          Grid.Column="0"
-          BorderThickness="5"
-          CornerRadius="10">
+                          Margin="10"
+                          BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                          Grid.Row="1" 
+                          Grid.Column="0"
+                          BorderThickness="5"
+                          CornerRadius="10">
                         <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <materialDesign:PackIcon
- VerticalAlignment="Center"
- Width="25"
- Height="25"
- Kind="Android"/>
+                                     VerticalAlignment="Center"
+                                     Width="25"
+                                     Height="25"
+                                     Kind="Android"/>
                                 <TextBlock
-                    Margin="5,0,0,0"
-                FontFamily="{StaticResource NewSushi}"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                Text="Joueur 4"/>
+                                    Margin="5,0,0,0"
+                                FontFamily="{StaticResource NewSushi}"
+                                HorizontalAlignment="Center"
+                                FontSize="20"
+                                Text="Joueur 4"/>
                             </StackPanel>
                             <Grid/>
                         </StackPanel>
@@ -211,23 +210,23 @@ Name="te"/>
                     <!-- Plateau du joueur 3-->
 
                     <Border 
-             Margin="10"
-             BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
-             Grid.Row="0" 
-             BorderThickness="5"
-             CornerRadius="10">
+                         Margin="10"
+                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         Grid.Row="0" 
+                         BorderThickness="5"
+                         CornerRadius="10">
                         <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <materialDesign:PackIcon
-                     VerticalAlignment="Center"
-                     Width="25"
-                     Height="25"
-                     Kind="Android"/>
+                                     VerticalAlignment="Center"
+                                     Width="25"
+                                     Height="25"
+                                     Kind="Android"/>
                                 <TextBlock
-                    Margin="5,0,0,0"
-                FontFamily="{StaticResource NewSushi}"
-                FontSize="20"
-                Text="Joueur 3"/>
+                                    Margin="5,0,0,0"
+                                FontFamily="{StaticResource NewSushi}"
+                                FontSize="20"
+                                Text="Joueur 3"/>
                             </StackPanel>
                             <Grid 
                 />
@@ -238,24 +237,24 @@ Name="te"/>
 
                     <!-- Plateau du joueur 5-->
                     <Border 
-         Margin="10"
-         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
-         Grid.Row="1" 
-         BorderThickness="5"
-         CornerRadius="10" >
+                         Margin="10"
+                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         Grid.Row="1" 
+                         BorderThickness="5"
+                         CornerRadius="10" >
                         <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <materialDesign:PackIcon
-                     VerticalAlignment="Center"
-                     Width="25"
-                     Height="25"
-                     Kind="Android"/>
+                                 VerticalAlignment="Center"
+                                 Width="25"
+                                 Height="25"
+                                 Kind="Android"/>
                                 <TextBlock
-                    Margin="5,0,0,0"
-                FontFamily="{StaticResource NewSushi}"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                Text="Joueur 5"/>
+                                    Margin="5,0,0,0"
+                                FontFamily="{StaticResource NewSushi}"
+                                HorizontalAlignment="Center"
+                                FontSize="20"
+                                Text="Joueur 5"/>
                             </StackPanel>
                             <Grid/>
                         </StackPanel>
@@ -264,9 +263,9 @@ Name="te"/>
                 </Grid>
             </Grid>
         </DockPanel>
-        
+
 
     </Grid>
-        
-        
+
+
 </Window>
