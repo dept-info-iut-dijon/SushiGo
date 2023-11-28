@@ -23,21 +23,30 @@ namespace UI_Layer.Views
     /// </summary>
     public partial class GameTableView : Window
     {
+        private PlayerViewModel player;
+        
         public GameTableView(Logic_Layer.Table t)
         {
             InitializeComponent();
             MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
             DataContext = MainWindowViewModel.Instance;
-            // Pour le merge : rajoute le viewmodel dans MainWindowViewModel et accede y directement dans le xaml
+
+            Player thisPLayer = t.Players[0];
 
             int x = 0;
-            foreach (Card c in t.Players[0].Hand.Cards)
+            foreach (Card c in thisPLayer.Hand.Cards)
             {
                 this.te.Children.Add(new CardComponent() { CardName = c.Name,Width=140,Height=200,Margin=new Thickness(x,0,0,0) }) ;
                 x = -10;
             }
+
+            player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
         }
 
 
+        private void EndPlayerTurn(object sender, RoutedEventArgs e)
+        {
+            player.IsTurnFinished = true;
+        }
     }
 }

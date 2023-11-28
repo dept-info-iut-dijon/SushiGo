@@ -243,17 +243,23 @@ namespace UI_Layer.ViewModels
             // Création des IAs
             else
             {
-                // TODO  : gerer les difficultes
-                for (int i = 1; i < playerCount; i++)
+                switch (this.difficulty)
                 {
-                    this.Players.Add(new PlayerViewModel(new DrunkenIA(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT, this));
+                    case IADifficulty.FACILE:
+                        for (int i = 1; i < playerCount; i++)
+                        {
+                            this.Players.Add(new PlayerViewModel(new DrunkenIA(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Robot {i}"), PlayerType.ROBOT, this));
+                        }
+                        break;
+                    default: throw new Exception("La difficulté n'existe pas");
                 }
+                
                 this.StartButtonShow = true;
             }
 
             this.IsLobbyShowed = true;
 
-           
+
         }
 
         /// <summary>
