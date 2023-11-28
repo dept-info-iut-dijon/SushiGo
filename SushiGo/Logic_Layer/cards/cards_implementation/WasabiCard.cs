@@ -38,6 +38,7 @@ public class WasabiCard : Card, ISpecialCard
         return false;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is WasabiCard card &&

@@ -22,6 +22,7 @@ public class SushiCard : Card
         converter = new SushiTypesConverter();
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is SushiCard card &&

@@ -17,6 +17,7 @@ public class MakiCard : Card
 
     public override string Name => $"Maki{quantity}";
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return obj is MakiCard card &&
