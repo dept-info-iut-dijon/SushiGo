@@ -7,13 +7,40 @@ using Logic_Layer;
 
 namespace UI_Layer.ViewModels
 {
+    /// <summary>
+    /// ViewModel de la vue GameTableView.
+    /// </summary>
     public class GameTableViewModel : INotifyPropertyChanged
     {
+        #region Attribut
+
         private Table table;
 
+        #endregion Attribut
+
+        #region Constructeur
+
+        public GameTableViewModel(Table table)
+        {
+            this.table = table;
+        }
+
+        #endregion Constructeur
+
+        #region Evénement
+
+        /// <summary>
+        /// Evénement lors du changement d'une propriété.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        
+        #endregion Evénement
+
+        #region Propriété
+
+        /// <summary>
+        /// Main du joueur.
+        /// </summary>
         public List<CardComponent> Deck
         {
             get
@@ -31,10 +58,6 @@ namespace UI_Layer.ViewModels
             }
         }
 
-        public GameTableViewModel(Table table)
-        {
-            this.table = table;
-        }
-
+        #endregion Propriété
     }
 }
