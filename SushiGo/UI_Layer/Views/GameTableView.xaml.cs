@@ -26,16 +26,16 @@ namespace UI_Layer.Views
             MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
             DataContext = MainWindowViewModel.Instance;
 
+            //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableViewModel (propriété Deck)
             Player thisPLayer = t.Players[0];
-
+            player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
             int x = 0;
             foreach (Card c in thisPLayer.Hand.Cards)
             {
-                this.te.Children.Add(new CardComponent() { CardName = c.Name,Width=140,Height=200,Margin=new Thickness(x,0,0,0) }) ;
+                this.te.Children.Add(new CardComponent(player, c) { CardName = c.Name,Width=140,Height=200,Margin=new Thickness(x,0,0,0) }) ;
                 x = -10;
             }
 
-            player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
         }
 
 
