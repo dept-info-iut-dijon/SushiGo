@@ -32,13 +32,13 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
 
-                <MenuItem Command="{Binding NavigationViewModel.BackToMenu}">
+                <MenuItem Command="{Binding GameTableViewModel.OpenMenu}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon
-                    Width="20"
-                    Height="20"
-                Foreground="White"
-                Kind="Home"/>
+                        Width="20"
+                        Height="20"
+                    Foreground="White"
+                    Kind="Home"/>
                     </MenuItem.Icon>
                 </MenuItem>
 
@@ -280,7 +280,7 @@
             </Grid>
         </Grid>
 
-        <materialDesign:DialogHost  Name="scores" HorizontalAlignment="Center" DialogBackground="#d8bfd8" VerticalAlignment="Center">
+        <materialDesign:DialogHost  Name="scores" HorizontalAlignment="Center" DialogBackground="#efbf41" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
             <materialDesign:DialogHost.DialogContent >
                 <Grid Margin="30" >
                     <Grid.RowDefinitions>
@@ -309,7 +309,7 @@
                                     Text="Joueur 1 : 200 points"/>
                             </materialDesign:Chip.Content>
                         </materialDesign:Chip>
-                        <materialDesign:Chip IconBackground="#cd7f32" IconForeground="#000000" Background="White">
+                        <materialDesign:Chip IconBackground="#c0c0c0" IconForeground="#000000" Background="White">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon
                                     Width="23"
@@ -321,8 +321,8 @@
                                     FontSize="15"
                                     Text="Joueur 2 : 120 points"/>
                             </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                        <materialDesign:Chip  IconBackground="#c0c0c0" IconForeground="#000000" Background="White" >
+                        </materialDesign:Chip> 
+                        <materialDesign:Chip  IconBackground="#cd7f32" IconForeground="#000000" Background="White" >
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon
                                     Width="23"
@@ -369,6 +369,7 @@
                              Background="White"
                              Foreground="Black"
                              Content="Retour au jeu"
+                            Command="{Binding GameTableViewModel.OpenMenu}"
                              Grid.Row="2"/>
                         <Button
                             Margin="10,0,0,0"                       

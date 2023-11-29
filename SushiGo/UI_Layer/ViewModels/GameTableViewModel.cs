@@ -15,6 +15,7 @@ namespace UI_Layer.ViewModels
         #region Attribut
 
         private Table table;
+        private bool showMenu = false;
 
         #endregion Attribut
 
@@ -37,6 +38,14 @@ namespace UI_Layer.ViewModels
         /// Evénement lors du changement d'une propriété.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// Permet d'ajouter un joueur dans la partie
+        /// </summary>
+        public DelegateCommand OpenMenu => new DelegateCommand(() =>
+        {
+            ShowMenu = !showMenu;
+        });
 
         #endregion Evénement
 
@@ -64,6 +73,19 @@ namespace UI_Layer.ViewModels
                 }
 
                 return cards;
+            }
+        }
+
+        /// <summary>
+        /// Permet d'afficher le menu
+        /// </summary>
+        public bool ShowMenu
+        {
+            get => showMenu;
+            set
+            {
+                showMenu = value;
+                
             }
         }
 
