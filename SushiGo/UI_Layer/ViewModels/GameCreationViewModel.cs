@@ -39,7 +39,6 @@ namespace UI_Layer.ViewModels
 
 
 
-
         #region events
         /// <summary>
         /// Permet d'indiquer a la vue de fermer la page
@@ -289,6 +288,7 @@ namespace UI_Layer.ViewModels
 
 
             GameTableView gameTableView = new GameTableView(t);
+            MainWindowViewModel.Instance.GameTableViewModel.Init(t);
             gameTableView.Show();
             OnCloseRequested();
         }
