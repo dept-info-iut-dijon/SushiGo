@@ -41,13 +41,13 @@ public class BoardTests
         Assert.Contains(specialCard1, result);
         Assert.DoesNotContain(specialCard2, result);
     }
-    
+
     [Fact]
     public void EndRound_ClearCards()
     {
         // Create a list of 5 mock cards
         var cards = new List<Card>();
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 5; i++)
         {
             var card = new Mock<Card>();
             card.Setup(c => c.Name).Returns("Card " + i);
@@ -56,10 +56,7 @@ public class BoardTests
 
         // Create a board and add the cards
         var board = new Board();
-        foreach (var card in cards)
-        {
-            board.AddCard(card);
-        }
+        foreach (var card in cards) board.AddCard(card);
         var specialCard = new SpecialCardWithTrueEndRound();
         board.AddCard(specialCard);
         board.AddCard(new SpecialCardWithTruePlayerTurn());
@@ -68,15 +65,10 @@ public class BoardTests
         var toRemove = new List<Card>();
 
         foreach (var card in boardCardList)
-        {
-            if(card is ISpecialCard c && c.EndRound())
+            if (!(card is ISpecialCard c && c.EndRound()))
                 toRemove.Add(card);
-        }
 
-        foreach (var card in toRemove)
-        {
-            boardCardList.Remove(card);
-        }
+        foreach (var card in toRemove) boardCardList.Remove(card);
 
         Assert.NotEmpty(board.Cards);
         Assert.NotEmpty(boardCardList);
@@ -85,24 +77,26 @@ public class BoardTests
         boardCardList = board.Cards;
 
         foreach (var card in boardCardList)
-        {
-            if(card is ISpecialCard c && c.EndRound())
+            if (!(card is ISpecialCard c && c.EndRound()))
                 toRemove.Add(card);
-        }
 
-        foreach (var card in toRemove)
-        {
-            boardCardList.Remove(card);
-        }
+        foreach (var card in toRemove) boardCardList.Remove(card);
 
-        Assert.Empty(boardCardList);
         Assert.NotEmpty(board.Cards);
+        
+        for (var index = 0; index < board.Cards.Count; index++)
+        {
+            var card = board.Cards[index];
+            Assert.Equal(boardCardList[index], card);
+        }
     }
 }
 
 /*          CLASSES MOCK        */
 public class SpecialCardWithTruePlayerTurn : Card, ISpecialCard
 {
+    public override string Name => throw new NotImplementedException();
+
     public bool PlayerTurn()
     {
         return true;
@@ -112,12 +106,12 @@ public class SpecialCardWithTruePlayerTurn : Card, ISpecialCard
     {
         return false;
     }
-
-    public override string Name => throw new NotImplementedException();
 }
 
 public class SpecialCardWithFalsePlayerTurn : Card, ISpecialCard
 {
+    public override string Name => throw new NotImplementedException();
+
     public bool PlayerTurn()
     {
         return false;
@@ -127,12 +121,12 @@ public class SpecialCardWithFalsePlayerTurn : Card, ISpecialCard
     {
         return false;
     }
-
-    public override string Name => throw new NotImplementedException();
 }
 
 public class SpecialCardWithTrueEndRound : Card, ISpecialCard
 {
+    public override string Name => throw new NotImplementedException();
+
     public bool PlayerTurn()
     {
         return false;
@@ -142,12 +136,12 @@ public class SpecialCardWithTrueEndRound : Card, ISpecialCard
     {
         return true;
     }
-
-    public override string Name => throw new NotImplementedException();
 }
 
 public class SpecialCardWithFalseEndRound : Card, ISpecialCard
 {
+    public override string Name => throw new NotImplementedException();
+
     public bool PlayerTurn()
     {
         return false;
@@ -157,6 +151,4 @@ public class SpecialCardWithFalseEndRound : Card, ISpecialCard
     {
         return false;
     }
-
-    public override string Name => throw new NotImplementedException();
 }
