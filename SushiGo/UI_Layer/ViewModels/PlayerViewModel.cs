@@ -23,9 +23,8 @@ namespace UI_Layer.ViewModels
         #region attributes
         private Player player;
         private PlayerType role;
-        private bool isReady;
+        private bool isReady = false;
         private GameCreationViewModel gameCreationViewModel;
-        private bool isTurnFinished;
         #endregion
 
         /// <summary>
@@ -39,17 +38,7 @@ namespace UI_Layer.ViewModels
             this.role = role;
             this.gameCreationViewModel = creationViewModel;
         }
-
-        /// <summary>
-        /// Constructeur du playerviewmodel associé au joueur ou a l'ia, en version isolée du VM du jeu
-        /// </summary>
-        /// <param name="player">objet player metier</param>
-        /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
-        public PlayerViewModel(Player player, PlayerType role)
-        {
-            this.player = player;
-            this.role = role;
-        }
+        
 
         #region properties
 
@@ -69,7 +58,7 @@ namespace UI_Layer.ViewModels
         public PlayerType Role { get => role; set => role = value; }
 
         /// <summary>
-        /// Est ce que le joueur est prêt à démarrer la partie
+        /// Est ce que le joueur est prêt
         /// </summary>
         public bool IsReady 
         { 
@@ -81,24 +70,11 @@ namespace UI_Layer.ViewModels
             }
         }
 
+
         /// <summary>
         /// Modele du joueur
         /// </summary>
         public Player Player { get => player; set => player = value; }
-        
-        /// <summary>
-        /// Indique si le joueur a terminé son tour
-        /// </summary>
-        public bool IsTurnFinished
-        {
-            get => isTurnFinished;
-            set
-            {
-                isTurnFinished = value;
-                NotifyPropertyChanged(nameof(isTurnFinished));
-            }
-        }
-
         #endregion
 
     }
