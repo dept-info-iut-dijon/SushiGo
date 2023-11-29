@@ -33,4 +33,16 @@ public class ChopstickCard : Card, ISpecialCard
         return false;
     }
 
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return obj is ChopstickCard card &&
+               Name == card.Name &&
+               available == card.available;
+    }
+
+    public override int GetHashCode()
+    {
+        return available.GetHashCode();
+    }
 }
