@@ -7,4 +7,11 @@ public class RavioliCard : Card
     }
 
     public override string Name => "Ravioli";
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return obj is RavioliCard card &&
+               Name == card.Name;
+    }
 }
