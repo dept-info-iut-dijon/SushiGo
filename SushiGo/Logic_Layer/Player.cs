@@ -6,7 +6,7 @@ public class Player
 {
     private int id;
     private string pseudo;
-    private Board board;
+    private readonly Board board;
     private Hand hand;
     private bool havePlayed;
 
@@ -40,8 +40,12 @@ public class Player
     /// <summary>
     /// Pseudo du joueur
     /// </summary>
-    public string Pseudo { get => pseudo; set => pseudo = value; }
+    public string Pseudo => pseudo;
 
+    /// <summary>
+    /// Plateau du joueur
+    /// </summary>
+    public Board Board => board;
 
     public Player(int id, Board board, Hand hand,string pseudo)
     {

@@ -61,6 +61,7 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
+            
         }
 
         #region properties
@@ -108,6 +109,23 @@ namespace UI_Layer.ViewModels
             {
                 isTurnFinished = value;
                 NotifyPropertyChanged(nameof(isTurnFinished));
+            }
+        }
+
+        /// <summary>
+        /// Abonne la vue à la table pour être notifié des changements de round
+        /// </summary>
+        public GameTableViewModel Table
+        {
+            set => value.PropertyChanged += Table_PropertyChanged;
+        }
+
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            // notify if the received notification is for the round number
+            if (e.PropertyName == nameof(Logic_Layer.Table.RoundNumber))
+            {
+                NotifyPropertyChanged(nameof(Player.Board.Cards));
             }
         }
         #endregion

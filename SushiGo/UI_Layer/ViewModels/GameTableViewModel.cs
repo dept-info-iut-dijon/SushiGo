@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
@@ -14,7 +15,7 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private Table table;
+        private readonly Table table;
 
         #endregion Attribut
 
@@ -31,6 +32,13 @@ namespace UI_Layer.ViewModels
 
         #endregion Constructeur
 
+        #region Propriétés privées
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(table.RoundNumber));
+        }
+        #endregion
+        
         #region Evénement
 
         /// <summary>
@@ -38,6 +46,10 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         #endregion Evénement
 
         #region Propriété
@@ -45,7 +57,6 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Main du joueur.
         /// </summary>
-        /// <inheritdoc/>
         public List<CardComponent> Deck
         {
             get
@@ -65,6 +76,12 @@ namespace UI_Layer.ViewModels
 
                 return cards;
             }
+        }
+
+        public Table Table
+        {
+            get => table;
+            set => table.PropertyChanged += Table_PropertyChanged;
         }
 
         #endregion Propriété
