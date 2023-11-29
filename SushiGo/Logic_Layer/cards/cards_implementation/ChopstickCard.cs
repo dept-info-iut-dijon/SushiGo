@@ -41,7 +41,9 @@ public class ChopstickCard : Card, ISpecialCard
                available == card.available;
     }
 
+
     /// <inheritdoc/>
+
     public override int GetHashCode()
     {
         return available.GetHashCode();
