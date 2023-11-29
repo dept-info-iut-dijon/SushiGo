@@ -82,7 +82,7 @@
                 </Grid.RowDefinitions>
 
 
-            <TextBlock 
+                <TextBlock 
                 Text="Manche 1" 
                 Grid.Row="0"
                 Style="{StaticResource Font1}" 
@@ -297,7 +297,7 @@
                                     Text="Joueur 1 : 200 points"/>
                             </materialDesign:Chip.Content>
                         </materialDesign:Chip>
-                        <materialDesign:Chip IconBackground="#cd7f32" IconForeground="#ffffff" Background="White">
+                        <materialDesign:Chip IconBackground="#cd7f32" IconForeground="#000000" Background="White">
                             <materialDesign:Chip.Icon>
                                 <materialDesign:PackIcon
                                     Width="23"
@@ -323,14 +323,26 @@
                                     Text="Joueur 3 : 90 points"/>
                             </materialDesign:Chip.Content>
                         </materialDesign:Chip>
-                        <materialDesign:Chip Background="White">
+                        <materialDesign:Chip IconBackground="Transparent" IconForeground="IndianRed" Background="White">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon
+                                    Width="23"
+                                    Height="23"
+                                    Kind="Numeric4"/>
+                            </materialDesign:Chip.Icon>
                             <materialDesign:Chip.Content>
                                 <TextBlock
                                     FontSize="15"
                                     Text="Joueur 4 : 20 points"/>
                             </materialDesign:Chip.Content>
                         </materialDesign:Chip>
-                        <materialDesign:Chip Background="White">
+                        <materialDesign:Chip IconBackground="Transparent" IconForeground="IndianRed" Background="White">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon
+                                 Width="23"
+                                 Height="23"
+                                 Kind="Numeric5"/>  
+                            </materialDesign:Chip.Icon>
                             <materialDesign:Chip.Content>
                                 <TextBlock
                                     FontSize="15"
@@ -351,7 +363,7 @@
                             BorderThickness="0"
                             Background="IndianRed"
                             Foreground="White"
-                            Content="Quitter le jeu"
+                            Content="Allez au menu"
                             Grid.Row="2"/>
                     </StackPanel>
 
