@@ -21,4 +21,14 @@ public class SushiCard : Card
         this.type = type;
         converter = new SushiTypesConverter();
     }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return obj is SushiCard card &&
+               Name == card.Name &&
+               type == card.type &&
+               Type == card.Type &&
+               TypeToString == card.TypeToString;
+    }
 }

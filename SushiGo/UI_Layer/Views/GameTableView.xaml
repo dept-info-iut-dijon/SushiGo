@@ -82,6 +82,12 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
+            <TextBlock 
+                Text="Manche 1" 
+                Grid.Row="0"
+                Style="{StaticResource Font1}" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
 
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Border Background="IndianRed" CornerRadius="10" Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
