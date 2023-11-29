@@ -86,7 +86,7 @@
                     Stretch="Fill"
                     Grid.ColumnSpan="4"
                     Grid.RowSpan="11"
-                    Source="{StaticResource test}"/>
+                    Source="{StaticResource CardsBackground}"/>
 
 
                 <!-- Titre de l'écran -->
@@ -118,7 +118,7 @@
                                 <Image
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="{StaticResource bois2}"/>
+                            Source="{StaticResource Wood}"/>
                                 <TabControl 
                               materialDesign:ColorZoneAssist.Foreground="DarkRed"
                               materialDesign:ColorZoneAssist.Mode="Custom">
@@ -335,7 +335,7 @@
                             Grid.RowSpan="3"
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="{StaticResource bois2}"/>
+                            Source="{StaticResource Wood}"/>
 
                                 <TextBlock
                             Margin="0,15,0,0"

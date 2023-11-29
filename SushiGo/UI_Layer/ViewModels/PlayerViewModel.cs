@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Logic_Layer.cards;
 
 namespace UI_Layer.ViewModels
 {
@@ -21,7 +22,7 @@ namespace UI_Layer.ViewModels
         #endregion
 
         #region attributes
-        private Player player;
+        private readonly Player player;
         private PlayerType role;
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
@@ -51,6 +52,17 @@ namespace UI_Layer.ViewModels
             this.role = role;
         }
 
+        /// <summary>
+        /// Joue une carte et notifie les observers
+        /// </summary>
+        /// <param name="card">La carte à jouer, elle doit faire partie de la main du joueur</param>
+        public void PlayCard(Card card)
+        {
+            player.PlayCard(card);
+            NotifyPropertyChanged(nameof(player.Hand));
+            NotifyPropertyChanged(nameof(player.HavePlayed));
+        }
+
         #region properties
 
         /// <summary>
@@ -74,7 +86,7 @@ namespace UI_Layer.ViewModels
         public bool IsReady 
         { 
             get => isReady;
-            set 
+            init 
             { 
                 isReady = value; 
                 NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
@@ -84,8 +96,8 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Modele du joueur
         /// </summary>
-        public Player Player { get => player; set => player = value; }
-        
+        public Player Player => player;
+
         /// <summary>
         /// Indique si le joueur a terminé son tour
         /// </summary>
@@ -98,7 +110,6 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(isTurnFinished));
             }
         }
-
         #endregion
 
     }
