@@ -6,12 +6,15 @@
         xmlns:usercontrols="clr-namespace:UI_Layer.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:UI_Layer.Views"
-        mc:Ignorable="d" WindowStyle="None"
-        Title="SushiGo" WindowState="Maximized"
-        Background="IndianRed">
+        mc:Ignorable="d" 
+        WindowStyle="None"
+        Title="SushiGo" 
+        WindowState="Maximized">
 
     <Grid>
-
+            <Grid.Background>
+    <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
+</Grid.Background>
         <!-- Menu -->
         <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="IndianRed" Grid.ColumnSpan="4" >
             <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
@@ -89,6 +92,15 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"/>
 
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Background="IndianRed" CornerRadius="10" Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
+                        <TextBlock 
+                            Text="Manche n°1" 
+                            Style="{StaticResource Font1}" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"/>
+                    </Grid>
+
 
                 <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
                 <Button 
@@ -134,8 +146,8 @@
 
             </Grid>
 
-            <!-- Liste des cartes -->
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3"  Orientation="Horizontal" Name="te"/>
+                <!-- Liste des cartes -->
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal" Name="te"/>
 
 
 
