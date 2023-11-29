@@ -31,8 +31,16 @@ public class PlayerViewModelTests
     [ClassData(typeof(PlayerDatasGenerator))]
     public void PlayCard_GetNotification_BoardCards(int playerId, Board board, Hand hand, string pseudo, PlayerType playerType, Card card)
     {
-        var playerVM = new PlayerViewModel(new Player(playerId, board, hand, pseudo), playerType);
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Board.Cards), () => playerVM.PlayCard(card));
+        var player = new Player(playerId, board, hand, pseudo); 
+        var playerVM = new PlayerViewModel(player, playerType);
+        var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
+        var gameVM = new GameTableViewModel(table)
+        {
+            Table = table
+        };
+        playerVM.Table = gameVM;
+
+        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Hand), () => playerVM.PlayCard(card));
     }
     
     [Theory]
@@ -50,7 +58,11 @@ public class PlayerViewModelTests
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
         var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
-        playerVM.Table = new GameTableViewModel(table);
+        var gameVM = new GameTableViewModel(table)
+        {
+            Table = table
+        };
+        playerVM.Table = gameVM;
         
         player.Hand.Cards.Add(card);
         playerVM.PlayCard(card);

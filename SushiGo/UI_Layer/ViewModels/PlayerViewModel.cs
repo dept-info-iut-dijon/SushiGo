@@ -125,7 +125,7 @@ namespace UI_Layer.ViewModels
             // notify if the received notification is for the round number
             if (e.PropertyName == nameof(Logic_Layer.Table.RoundNumber))
             {
-                NotifyPropertyChanged(nameof(Player.Board.Cards));
+                NotifyPropertyChanged(nameof(player.Board.Cards));
             }
         }
         #endregion
