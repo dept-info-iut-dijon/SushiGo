@@ -5,5 +5,6 @@
     <BitmapImage x:Key="Wood" UriSource="Images/Wood.jpg" />
     <BitmapImage x:Key="CardsBackground" UriSource="Images/CardsBackground.png" />
     <BitmapImage x:Key="RestaurantHall" UriSource="Images/RestaurantHall.jpg" />
+    <BitmapImage x:Key="SushiOnTable" UriSource="Images/SushiOnTable.jpg" />
     
 </ResourceDictionary>
