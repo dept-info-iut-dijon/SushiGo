@@ -12,9 +12,9 @@
         WindowState="Maximized">
 
     <Grid>
-            <Grid.Background>
-    <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
-</Grid.Background>
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
+        </Grid.Background>
         <!-- Menu -->
         <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="{StaticResource PersianRedBrush}" Grid.ColumnSpan="4" >
             <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
@@ -129,7 +129,7 @@
 
                 <!-- Liste des cartes -->
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <ItemsControl ItemsSource="{Binding GameTableViewModel.Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ItemsControl ItemsSource="{Binding GameTableViewModel.PlayerList[0].Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" />
@@ -264,7 +264,7 @@
             </Grid>
         </Grid>
 
-        <materialDesign:DialogHost  Name="scores" HorizontalAlignment="Center" DialogBackground="#efbf41" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.ShowMenu}" HorizontalAlignment="Center" DialogBackground="#efbf41" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
             <materialDesign:DialogHost.DialogContent >
                 <Grid Margin="30" >
                     <Grid.RowDefinitions>
@@ -360,6 +360,7 @@
                             BorderThickness="0"
                             Background="IndianRed"
                             Foreground="White"
+                            Command="{Binding GameTableViewModel.QuitGame}"
                             Content="Allez au menu"
                             Grid.Row="2"/>
                     </StackPanel>

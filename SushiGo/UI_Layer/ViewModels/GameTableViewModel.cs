@@ -5,6 +5,8 @@ using UI_Layer.UserControls;
 using Logic_Layer.cards;
 using Logic_Layer;
 using System.Windows.Documents;
+using System.Runtime.CompilerServices;
+using System;
 
 namespace UI_Layer.ViewModels
 {
@@ -15,8 +17,9 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private Table table;
+        private Logic_Layer.Table table;
         private bool showMenu = false;
+        private List<PlayerViewModel> playerList;
 
         #endregion Attribut
 
@@ -32,6 +35,20 @@ namespace UI_Layer.ViewModels
         public void Init(Logic_Layer.Table table)
         {
             this.table = table;
+            InitPlayers();
+        }
+
+        /// <summary>
+        /// Permet d'initialiser la liste des joueurs
+        /// </summary>
+        private void InitPlayers()
+        {
+            this.playerList = new List<PlayerViewModel>();
+            foreach (Player player in table.Players)
+            {
+                this.playerList.Add(new PlayerViewModel(player, PlayerType.PLAYER));
+            }
+            NotifyPropertyChanged(nameof(this.PlayerList));
         }
 
         #endregion Constructeur
@@ -44,42 +61,29 @@ namespace UI_Layer.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// Permet d'ajouter un joueur dans la partie
+        /// Permet d'ouvrir l'écran du menu
         /// </summary>
         public DelegateCommand OpenMenu => new DelegateCommand(() =>
         {
             ShowMenu = !showMenu;
         });
 
+
+
+        /// <summary>
+        /// Permet de quitter la partie et retourner au menu
+        /// </summary>
+        public DelegateCommand QuitGame => new DelegateCommand(() =>
+        {
+            ShowMenu = !showMenu;
+            MainWindowViewModel.Instance.NavigationViewModel.ReturnToMenu();
+        });
+
         #endregion Evénement
 
         #region Propriété
 
-        /// <summary>
-        /// Main du joueur.
-        /// </summary>
-        /// <inheritdoc/>
-        public List<CardComponent> Deck
-        {
-            get
-            {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
-                List<CardComponent> cards = new List<CardComponent>();
-                
-                Player thisPLayer = table.Players[0];
-                var player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
-
-                int x = 0;
-                foreach (Card card in table.Players[0].Hand.Cards)
-                {
-                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
-                }
-
-                return cards;
-            }
-        }
-
+       
         /// <summary>
         /// Permet d'afficher le menu
         /// </summary>
@@ -89,10 +93,20 @@ namespace UI_Layer.ViewModels
             set
             {
                 showMenu = value;
+                NotifyPropertyChanged(nameof(ShowMenu));
                 
             }
         }
+        /// <summary>
+        /// Liste des joueurs de la partie
+        /// </summary>
+        public List<PlayerViewModel> PlayerList { get => playerList; set => playerList = value; }
 
         #endregion Propriété
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -29,11 +29,16 @@ namespace UI_Layer.Views
             //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableViewModel (propriété Deck)
             Player thisPLayer = t.Players[0];
             player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
+            KeyDown += Show_Menu;
         }
 
         private void Show_Menu(object sender, KeyEventArgs e)
         {
-            this.scores.IsOpen = !this.scores.IsOpen;
+            if(e.Key == Key.Escape || e.Key == Key.Tab)
+            {
+                MainWindowViewModel.Instance.GameTableViewModel.ShowMenu = !MainWindowViewModel.Instance.GameTableViewModel.ShowMenu;
+            }
+            
         }
 
         private void EndPlayerTurn(object sender, RoutedEventArgs e)

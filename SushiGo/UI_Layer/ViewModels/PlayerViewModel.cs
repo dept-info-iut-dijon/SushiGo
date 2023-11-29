@@ -8,6 +8,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Logic_Layer.cards;
+using System.Windows.Documents;
+using System.Windows;
+using UI_Layer.UserControls;
 
 namespace UI_Layer.ViewModels
 {
@@ -110,6 +113,29 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(isTurnFinished));
             }
         }
+
+        /// <summary>
+        /// Main du joueur.
+        /// </summary>
+        /// <inheritdoc/>
+        public List<CardComponent> Deck
+        {
+            get
+            {
+                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
+                List<CardComponent> cards = new List<CardComponent>();
+
+                int x = 0;
+                foreach (Card card in this.player.Hand.Cards)
+                {
+                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    x = -10;
+                }
+
+                return cards;
+            }
+        }
+
         #endregion
 
     }
