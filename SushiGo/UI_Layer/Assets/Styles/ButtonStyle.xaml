@@ -6,7 +6,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{StaticResource Button1_Background}" BorderBrush="{StaticResource Button1_BorderBrush}" BorderThickness="2" CornerRadius="30">
+                    <Border Background="{StaticResource SaffronBrush}" BorderBrush="{StaticResource WhiteSmokeBrush}" BorderThickness="2" CornerRadius="30">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -29,7 +29,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter  Property="Opacity" Value="1" />
+                            <Setter Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

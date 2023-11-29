@@ -1,10 +1,5 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI_Layer.UserControls;
+using UI_Layer.ViewModels;
 
 namespace UI_Layer.Views
 {
@@ -22,17 +18,23 @@ namespace UI_Layer.Views
     /// </summary>
     public partial class GameTableView : Window
     {
+        private PlayerViewModel player;
+        
         public GameTableView(Logic_Layer.Table t)
         {
             InitializeComponent();
-            int x = 0;
-            foreach (Card c in t.Players[0].Hand.Cards)
-            {
-                this.te.Children.Add(new CardComponent() { CardName = c.Name,Width=140,Height=200,Margin=new Thickness(x,0,0,0) }) ;
-                x = -10;
-            }
+            MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
+            DataContext = MainWindowViewModel.Instance;
+
+            //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableViewModel (propriété Deck)
+            Player thisPLayer = t.Players[0];
+            player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
         }
 
 
+        private void EndPlayerTurn(object sender, RoutedEventArgs e)
+        {
+            player.IsTurnFinished = true;
+        }
     }
 }
