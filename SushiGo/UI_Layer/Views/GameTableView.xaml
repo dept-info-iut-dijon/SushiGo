@@ -16,7 +16,7 @@
     <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
 </Grid.Background>
         <!-- Menu -->
-        <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="IndianRed" Grid.ColumnSpan="4" >
+        <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="{StaticResource PersianRedBrush}" Grid.ColumnSpan="4" >
             <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -75,61 +75,42 @@
             </Grid.ColumnDefinitions>
 
 
-            <!-- Colonne 3 -->
-            <Grid  Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.9*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
+        <!-- Colonne 3 -->
+        <Grid  Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
-
+            <!-- Texte affichant le numéro de la manche en cours -->
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
                 <TextBlock 
-                Text="Manche 1" 
-                Grid.Row="0"
-                Style="{StaticResource Font1}" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                    Text="Manche n°1"
+                    Padding="20,15,20,15"
+                    Style="{StaticResource Font1}" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+            </Grid>
 
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Border Background="IndianRed" CornerRadius="10" Padding="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
-                        <TextBlock 
-                            Text="Manche n°1" 
-                            Style="{StaticResource Font1}" 
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-                <Button 
-                Grid.Row="1" 
-                Background="Yellow"
-                Foreground="Black"
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"
-                Click="EndPlayerTurn">
-                    <TextBlock 
-                    Margin="10,5,10,5"
-                    Text="Valider"
-            FontFamily="{StaticResource NewSushi}"
-            HorizontalAlignment="Center" 
-            FontSize="20"
-            VerticalAlignment="Center"/>
-                </Button>
+            <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
+            <Button Grid.Row="1" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,20,40,20" FontSize="40" />
+            </Button>
 
 
                 <!-- Plateau du joueur 1-->
                 <Border 
                         Margin="10"
-                        BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                        BorderBrush="{StaticResource NightBrush}" 
                         Grid.Row="2" 
                         BorderThickness="5"
                         CornerRadius="10" >
-                    <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <materialDesign:PackIcon
+                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                                     VerticalAlignment="Center"
                                     Width="20"
                                     Height="20"
@@ -147,12 +128,15 @@
             </Grid>
 
                 <!-- Liste des cartes -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal" Name="te"/>
-
-
-
-
-
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <ItemsControl ItemsSource="{Binding GameTableViewModel.Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
 
             <!-- Colonne 1-->
             <Grid>
@@ -165,13 +149,13 @@
                 <!-- Plateau du joueur 2-->
                 <Border 
                          Margin="10"
-                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         BorderBrush="{StaticResource NightBrush}" 
                          Grid.Row="0" 
                          BorderThickness="5"
                          CornerRadius="10" >
-                    <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <materialDesign:PackIcon
+                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                                  VerticalAlignment="Center"
                                  Width="25"
                                  Height="25"
@@ -190,14 +174,14 @@
                 <!-- Plateau du joueur 4-->
                 <Border 
                           Margin="10"
-                          BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                          BorderBrush="{StaticResource NightBrush}" 
                           Grid.Row="1" 
                           Grid.Column="0"
                           BorderThickness="5"
                           CornerRadius="10">
-                    <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <materialDesign:PackIcon
+                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                                      VerticalAlignment="Center"
                                      Width="25"
                                      Height="25"
@@ -228,13 +212,13 @@
 
                 <Border 
                          Margin="10"
-                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         BorderBrush="{StaticResource NightBrush}" 
                          Grid.Row="0" 
                          BorderThickness="5"
                          CornerRadius="10">
-                    <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <materialDesign:PackIcon
+                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                                      VerticalAlignment="Center"
                                      Width="25"
                                      Height="25"
@@ -255,13 +239,13 @@
                 <!-- Plateau du joueur 5-->
                 <Border 
                          Margin="10"
-                         BorderBrush="{StaticResource GameTableView_PlayerBoardBorderHasNotPlay}" 
+                         BorderBrush="{StaticResource NightBrush}" 
                          Grid.Row="1" 
                          BorderThickness="5"
                          CornerRadius="10" >
-                    <StackPanel Background="{StaticResource GameTableView_PlayerBoardBorderBackground}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <materialDesign:PackIcon
+                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                                  VerticalAlignment="Center"
                                  Width="25"
                                  Height="25"
