@@ -50,12 +50,16 @@ namespace UI_Layer.ViewModels
         {
             get
             {
+                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
+                
+                Player thisPLayer = table.Players[0];
+                var player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
 
                 int x = 0;
                 foreach (Card card in table.Players[0].Hand.Cards)
                 {
-                    cards.Add(new CardComponent() { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
                     x = -10;
                 }
 

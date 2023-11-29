@@ -26,6 +26,7 @@ namespace UI_Layer.Views
             MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
             DataContext = MainWindowViewModel.Instance;
 
+            //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableViewModel (propriété Deck)
             Player thisPLayer = t.Players[0];
             player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
             int x = 0;
