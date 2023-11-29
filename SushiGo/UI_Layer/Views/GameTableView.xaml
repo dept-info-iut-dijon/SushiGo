@@ -78,9 +78,9 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            
+
             <TextBlock 
-                Text="Manche n°1" 
+                Text="Manche 1" 
                 Grid.Row="0"
                 Style="{StaticResource Font1}" 
                 HorizontalAlignment="Center" 
