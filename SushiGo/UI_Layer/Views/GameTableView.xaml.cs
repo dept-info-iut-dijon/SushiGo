@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,8 +42,15 @@ namespace UI_Layer.Views
             }
 
             player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
+
+            KeyDown += Show_Menu;
+        
         }
 
+        private void Show_Menu(object sender, KeyEventArgs e)
+        {
+            this.scores.IsOpen = !this.scores.IsOpen;
+        }
 
         private void EndPlayerTurn(object sender, RoutedEventArgs e)
         {
