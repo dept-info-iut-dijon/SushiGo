@@ -5,6 +5,7 @@ using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
 using Logic_Layer;
+using System.Windows.Documents;
 
 namespace UI_Layer.ViewModels
 {
@@ -15,7 +16,8 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private readonly Table table;
+
+        private Logic_Layer.Table table;
 
         #endregion Attribut
 
@@ -24,8 +26,11 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Constructeur de GameTableViewModel.
         /// </summary>
-        /// <param name="table">Table de jeu.</param>
-        public GameTableViewModel(Table table)
+        public GameTableViewModel()
+        {
+        }
+
+        public void Init(Logic_Layer.Table table)
         {
             this.table = table;
         }

@@ -1,41 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
     <!-- Définitions de couleurs -->
-    <Color x:Key="red1">#CD1719</Color>
-    <Color x:Key="red2">#FF0000</Color>
-    
-    <Color x:Key="orange1">#FFCD00</Color>
-    
-    <Color x:Key="green1">#ADCB32</Color>
-    <Color x:Key="green2">#72CB32</Color>
 
-    <Color x:Key="white1">#FFFFFF</Color>
-    
-    <Color x:Key="noir1">#000000</Color>
-    
-
+    <Color x:Key="WhiteSmoke">#F5F5F5</Color>
+    <Color x:Key="PersianRed">#C63C3C</Color>
+    <Color x:Key="YellowGreen">#B6CD4B</Color>
+    <Color x:Key="Saffron">#EFBF41</Color>
+    <Color x:Key="Night">#151515</Color>
     
 
     <!-- Définitions de SolidColorBrush-->
     
-    <!-- Couleurs générales -->
-    <SolidColorBrush x:Key="Background" Color="{StaticResource green1}"/>
-
-    <!-- Couleurs des styles -->
-    <SolidColorBrush x:Key="Button1_Background" Color="{StaticResource orange1}"/>
-    <SolidColorBrush x:Key="Button1_BorderBrush" Color="{StaticResource white1}"/>
-    <SolidColorBrush x:Key="Font1_Foreground" Color="{StaticResource white1}"/>
-    <SolidColorBrush x:Key="Font2_Foreground" Color="{StaticResource noir1}"/>
-    
-    
-    
-    <!-- Couleurs de la vue GameTable -->
-    <SolidColorBrush x:Key="GameTableView_PlayerBoardHasPlay" Color="{StaticResource green2}"/>
-    <SolidColorBrush x:Key="GameTableView_PlayerBoardBorderHasNotPlay" Color="Black"/>
-    <SolidColorBrush x:Key="GameTableView_PlayerBoardBorderBackground" Color="{StaticResource white1}"/>
-    
-    
+    <SolidColorBrush x:Key="WhiteSmokeBrush"    Color="{StaticResource WhiteSmoke}" />
+    <SolidColorBrush x:Key="PersianRedBrush"    Color="{StaticResource PersianRed}" />
+    <SolidColorBrush x:Key="YellowGreenBrush"   Color="{StaticResource YellowGreen}" />
+    <SolidColorBrush x:Key="SaffronBrush"       Color="{StaticResource Saffron}" />
+    <SolidColorBrush x:Key="NightBrush"         Color="{StaticResource Night}" />
 
 </ResourceDictionary>

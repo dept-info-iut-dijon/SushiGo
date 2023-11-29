@@ -16,7 +16,6 @@ namespace UI_Layer.Views
             MainWindowViewModel.Instance.GameCreationViewModel.ResetChanges();
             MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
             MainWindowViewModel.Instance.GameCreationViewModel.CloseRequested += ClosePage;
-
         }
 
         /// <summary>
