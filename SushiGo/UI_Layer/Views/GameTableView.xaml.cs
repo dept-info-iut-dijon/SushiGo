@@ -28,13 +28,6 @@ namespace UI_Layer.Views
 
             Player thisPLayer = t.Players[0];
 
-            int x = 0;
-            foreach (Card c in thisPLayer.Hand.Cards)
-            {
-                this.te.Children.Add(new CardComponent() { CardName = c.Name,Width=140,Height=200,Margin=new Thickness(x,0,0,0) }) ;
-                x = -10;
-            }
-
             player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
         }
 

@@ -131,11 +131,9 @@
                 </Grid>
 
                 <!-- Liste des cartes -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3"  Orientation="Horizontal" Name="te"/>
-
-
-
-
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3"  Orientation="Horizontal">
+                    <ItemsControl ItemsSource="{Binding MainWindowViewModel.Deck}" />
+                </StackPanel>
 
 
                 <!-- Colonne 1-->
