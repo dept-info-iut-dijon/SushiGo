@@ -7,6 +7,7 @@ public class MakiCard : Card
         return quantity == other.quantity;
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return quantity;
@@ -14,6 +15,9 @@ public class MakiCard : Card
 
     private readonly int quantity;
     
+    /// <summary>
+    /// Quantité de makis présents sur la carte
+    /// </summary>
     public int Quantity => quantity;
 
     /// <summary>
@@ -25,6 +29,9 @@ public class MakiCard : Card
         this.quantity = quantity;
     }
 
+    /// <summary>
+    /// Nom de la carte, inclus la quantité de makis présents sur la carte
+    /// </summary>
     public override string Name => $"Maki{quantity}";
 
     /// <inheritdoc/>
