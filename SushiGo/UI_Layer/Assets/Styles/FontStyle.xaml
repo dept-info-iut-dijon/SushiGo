@@ -8,14 +8,14 @@
     <Style x:Key="Font1" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource NewSushi}" />
         <Setter Property="FontSize" Value="50" />
-        <Setter Property="Foreground" Value="{StaticResource Font1_Foreground}" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteSmokeBrush}" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
     <Style x:Key="Font2" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource NewSushi}" />
         <Setter Property="FontSize" Value="44" />
-        <Setter Property="Foreground" Value="{StaticResource Font2_Foreground}" />
+        <Setter Property="Foreground" Value="{StaticResource NightBrush}" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 

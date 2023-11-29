@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="SushiGo !" 
         WindowStyle="None"
-        WindowState="Maximized" 
-        Background="Wheat">
+        WindowState="Maximized">
 
 
     <Grid>
