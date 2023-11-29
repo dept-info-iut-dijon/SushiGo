@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using UI_Layer.ViewModels;
 
 namespace UI_Layer.Views

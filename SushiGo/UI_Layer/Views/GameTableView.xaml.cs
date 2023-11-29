@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Logic_Layer;
+using Logic_Layer.cards;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
