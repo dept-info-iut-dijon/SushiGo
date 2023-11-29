@@ -38,25 +38,13 @@ namespace UI_Layer.ViewModels
         #endregion
 
 
-        /// <summary>
-        /// Constructeur du vue modele associé à l'écran de création de partie
-        /// </summary>
-        /// <param name="view">vue liée</param>
-        public GameCreationViewModel(Window view)
-        {
-            this.view = view;     
-        }
+
 
         #region events
         /// <summary>
-        /// Permet de retourner à l'écran d'accueil
+        /// Permet d'indiquer a la vue de fermer la page
         /// </summary>
-        public DelegateCommand BackToHome => new DelegateCommand(() =>
-        {
-            HomeView homeView = new HomeView();
-            homeView.Show();
-            this.view.Close();
-        });
+        public event EventHandler CloseRequested;
 
         /// <summary>
         /// Permet d'ajouter un joueur dans la partie
@@ -226,6 +214,14 @@ namespace UI_Layer.ViewModels
         #region methods
 
         /// <summary>
+        /// Indique à la vue de close la page
+        /// </summary>
+        protected virtual void OnCloseRequested()
+        {
+            CloseRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
         /// Permet de créer le lobby de la partie
         /// </summary>
         private void CreateLobby()
@@ -267,6 +263,18 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
+        /// Permet de réinitialiser l'ihm à chaque chargement de la page
+        /// </summary>
+        public void ResetChanges()
+        {
+            this.IsLobbyShowed = false;
+            this.StartButtonShow = false;
+            this.PlayerCount = 5;
+            this.IsModeJvJ = false;
+            this.Players.Clear();
+        }
+
+        /// <summary>
         /// Permet de lancer la partie
         /// </summary>
         public void Start()
@@ -282,7 +290,7 @@ namespace UI_Layer.ViewModels
 
             GameTableView gameTableView = new GameTableView(t);
             gameTableView.Show();
-            this.view.Close();
+            OnCloseRequested();
         }
 
         /// <summary>

@@ -23,12 +23,19 @@ namespace UI_Layer.Views
         public GameCreationView()
         {
             InitializeComponent();
-            this.DataContext = new GameCreationViewModel(this);
+            this.DataContext = MainWindowViewModel.Instance;
+            MainWindowViewModel.Instance.GameCreationViewModel.ResetChanges();
+            MainWindowViewModel.Instance.NavigationViewModel.CurrentWindow = this;
+            MainWindowViewModel.Instance.GameCreationViewModel.CloseRequested += ClosePage;
 
         }
 
-
-
-
+        /// <summary>
+        /// Permet de fermer la page en cours
+        /// </summary>
+        private void ClosePage(object? sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
