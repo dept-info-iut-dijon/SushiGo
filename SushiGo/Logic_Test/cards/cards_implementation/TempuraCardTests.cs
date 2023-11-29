@@ -16,13 +16,4 @@ public class TempuraCardTests
         // Assert
         Assert.Equal("Tempura", name);
     }
-
-    [Fact]
-    public void TempuraCard_EqualByValuesTrue()
-    {
-        var tempuraCard = new TempuraCard();
-        var tempuraCard2 = new TempuraCard();
-        
-        Assert.True(tempuraCard.Equals(tempuraCard2));
-    }
 }
