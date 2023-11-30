@@ -3,9 +3,9 @@ using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.factories;
 
-namespace LogicTest.datas_generators;
+namespace LogicTest.datas_generators.cards.utils;
 
-public class CardsSorterGenerator : IEnumerable<object[]>
+public class CardsSorterDatasGenerator : IEnumerable<object[]>
 {
     private CardFactory cardFactory = new();
 

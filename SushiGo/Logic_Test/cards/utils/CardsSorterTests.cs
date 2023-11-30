@@ -1,13 +1,14 @@
 ﻿using Logic_Layer.cards;
 using LogicTest.datas_generators;
 using Logic_Layer.cards.utils;
+using LogicTest.datas_generators.cards.utils;
 
 namespace LogicTest.cards.utils;
 
 public class CardsSorterTests
 {
     [Theory]
-    [ClassData(typeof(CardsSorterGenerator))]
+    [ClassData(typeof(CardsSorterDatasGenerator))]
     public void TypeSort_ShouldReturnSortedCards(Card[] cards, Card[] expected, Type type)
     {
         var actual = new CardsSorter().SortCards(type, cards);
