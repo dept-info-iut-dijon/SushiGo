@@ -156,7 +156,18 @@ public partial class CardComponent : UserControl
         this.IsSelected = !this.IsSelected;
         if (IsSelected)
         {
-            this.Margin = new Thickness(0, 0, 0, 40);
+            Thickness thickness = new Thickness();
+
+            // On garde les ancienne valeur
+            thickness.Left = this.BaseMargin.Left;
+            thickness.Top = this.BaseMargin.Top;
+            thickness.Right = this.BaseMargin.Right;
+
+            // On monte la carte
+            thickness.Bottom = 40;
+
+            // On applique la nouvelle valeur
+            this.Margin = thickness;
         }
         else
         {
