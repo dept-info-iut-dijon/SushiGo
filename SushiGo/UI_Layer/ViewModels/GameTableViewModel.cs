@@ -132,7 +132,12 @@ namespace UI_Layer.ViewModels
 
         private void OnValidateCommand()
         {
-            this.CardSelected?.PlayCard();
+            if (this.CardSelected != null)
+            {
+                this.CardSelected.PlayCard();
+                this.OnPropertyChanged(nameof(this.CardSelected));
+                this.OnPropertyChanged(nameof(this.Deck));
+            }
         }
 
         #endregion Méthode Privée
