@@ -67,6 +67,11 @@ namespace UI_Layer.ViewModels
         #region Propriété
 
         /// <summary>
+        /// Bouton Valider actif ou non.
+        /// </summary>
+        public bool ButtonValidateEnable => this.CardSelected != null;
+
+        /// <summary>
         /// Carte sélectionnée.
         /// </summary>
         public CardComponent? CardSelected
@@ -90,6 +95,7 @@ namespace UI_Layer.ViewModels
 
                     // Notification des changements
                     this.OnPropertyChanged(nameof(CardSelected));
+                    this.OnPropertyChanged(nameof(this.ButtonValidateEnable));
                 }
             }
         }
@@ -135,6 +141,8 @@ namespace UI_Layer.ViewModels
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
+
+                // Notifications
                 this.OnPropertyChanged(nameof(this.CardSelected));
                 this.OnPropertyChanged(nameof(this.Deck));
             }
