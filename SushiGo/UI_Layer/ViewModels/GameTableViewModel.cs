@@ -4,7 +4,6 @@ using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
 using Logic_Layer;
-using System.Windows.Documents;
 
 namespace UI_Layer.ViewModels
 {
@@ -15,7 +14,8 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private Logic_Layer.Table table;
+        private Table table;
+        private CardComponent? cardSelected;
 
         #endregion Attribut
 
@@ -28,9 +28,10 @@ namespace UI_Layer.ViewModels
         {
         }
 
-        public void Init(Logic_Layer.Table table)
+        public void Init(Table table)
         {
             this.table = table;
+            this.cardSelected = null;
         }
 
         #endregion Constructeur
@@ -45,6 +46,17 @@ namespace UI_Layer.ViewModels
         #endregion Evénement
 
         #region Propriété
+
+        /// <summary>
+        /// Carte sélectionnée.
+        /// </summary>
+        public CardComponent? CardSelected
+        {
+            get
+            {
+                return this.cardSelected;
+            }
+        }
 
         /// <summary>
         /// Main du joueur.

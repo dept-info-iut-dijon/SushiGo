@@ -19,7 +19,7 @@
             BorderBrush="LightYellow" 
             CornerRadius="17"  
             BorderThickness="0">
-            <Image Stretch="Fill" Margin="-6,-1,-6,-1"  MouseDown="PlayCard" Name="image">
+            <Image Stretch="Fill" Margin="-6,-1,-6,-1"  MouseDown="ClickOnCard" Name="image">
                 
             </Image>
         </Border>
