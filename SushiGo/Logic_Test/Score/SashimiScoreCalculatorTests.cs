@@ -10,7 +10,7 @@ public class SashimiScoreCalculatorTests
     [ClassData(typeof(SashimiScoreCalculatorDatasGenerator))]
     public void CalculateScore_ReturnCorrectScore(List<Player> hands, Dictionary<int, int> expectedScore)
     {
-        var calculator = new SashimiScoreCalculator();
+        var calculator = new SashimisScoreCalculator();
         
         Dictionary<int, int> actualScore = calculator.CalculateScore(hands);
         
