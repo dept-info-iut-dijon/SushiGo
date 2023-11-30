@@ -18,7 +18,7 @@ namespace UI_Layer.ViewModels
         #region Attribut
 
         private Logic_Layer.Table table;
-        private bool showMenu = false;
+        private bool showLeaderboard = false;
         private List<PlayerViewModel> playerList;
 
         #endregion Attribut
@@ -63,9 +63,9 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Permet d'ouvrir l'écran du menu
         /// </summary>
-        public DelegateCommand OpenMenu => new DelegateCommand(() =>
+        public DelegateCommand OpenLeaderboard => new DelegateCommand(() =>
         {
-            ShowMenu = !showMenu;
+            ShowLeaderboard = !showLeaderboard;
         });
 
 
@@ -75,7 +75,6 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public DelegateCommand QuitGame => new DelegateCommand(() =>
         {
-            ShowMenu = !showMenu;
             MainWindowViewModel.Instance.NavigationViewModel.ReturnToMenu();
         });
 
@@ -87,13 +86,13 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Permet d'afficher le menu
         /// </summary>
-        public bool ShowMenu
+        public bool ShowLeaderboard
         {
-            get => showMenu;
+            get => showLeaderboard;
             set
             {
-                showMenu = value;
-                NotifyPropertyChanged(nameof(ShowMenu));
+                showLeaderboard = value;
+                NotifyPropertyChanged(nameof(ShowLeaderboard));
                 
             }
         }
