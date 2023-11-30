@@ -1,6 +1,7 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.IA;
+using Logic_Layer.IA.IAImplementation;
 
 namespace LogicTest.IA
 {
@@ -18,6 +19,7 @@ namespace LogicTest.IA
             // Assert
             Assert.Equal("IAFacile3", easyIA.Pseudo);
             Assert.Equal(hand, easyIA.Hand);
+            Assert.Equal(typeof(DrunkenIA), easyIA.GetType());
         }
     }
 }
