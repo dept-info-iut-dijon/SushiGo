@@ -5,7 +5,7 @@ using Logic_Layer.cards.cards_implementation;
 
 namespace LogicTest.datas_generators.score;
 
-public class TempuraScoreCalculatorDatasGenerator : IEnumerable<object[]>
+public class SashimiScoreCalculatorDatasGenerator : IEnumerable<object[]>
 {
     private readonly CreatePlayerUtils createPlayerUtils = new CreatePlayerUtils();
 
@@ -15,7 +15,7 @@ public class TempuraScoreCalculatorDatasGenerator : IEnumerable<object[]>
         {
             new List<Player>
             {
-                createPlayerUtils.CreatePlayer(0, new List<Card>() { new TempuraCard(), new ChopstickCard(), new MakiCard(2) })
+                createPlayerUtils.CreatePlayer(0, new List<Card>())
             },
             new Dictionary<int, int>
             {
@@ -26,11 +26,12 @@ public class TempuraScoreCalculatorDatasGenerator : IEnumerable<object[]>
         {
             new List<Player>
             {
-                createPlayerUtils.CreatePlayer(0, new List<Card> { new TempuraCard(), new TempuraCard() })
+                createPlayerUtils.CreatePlayer(0,
+                    new List<Card>() { new ChopstickCard(), new DessertCard(), new SashimiCard(), new SashimiCard() })
             },
             new Dictionary<int, int>
             {
-                { 0, 5 }
+                { 0, 0 }
             }
         };
         yield return new object[]
@@ -38,19 +39,7 @@ public class TempuraScoreCalculatorDatasGenerator : IEnumerable<object[]>
             new List<Player>
             {
                 createPlayerUtils.CreatePlayer(0,
-                    new List<Card> { new TempuraCard(), new TempuraCard(), new TempuraCard(), new SashimiCard() })
-            },
-            new Dictionary<int, int>
-            {
-                { 0, 5 }
-            }
-        };
-        yield return new object[]
-        {
-            new List<Player>
-            {
-                createPlayerUtils.CreatePlayer(0,
-                    new List<Card> { new TempuraCard(), new TempuraCard(), new TempuraCard(), new TempuraCard() })
+                    new List<Card>() { new ChopstickCard(), new SashimiCard(), new SashimiCard(), new SashimiCard() })
             },
             new Dictionary<int, int>
             {
@@ -62,19 +51,30 @@ public class TempuraScoreCalculatorDatasGenerator : IEnumerable<object[]>
             new List<Player>
             {
                 createPlayerUtils.CreatePlayer(0,
-                    new List<Card>
+                    new List<Card>()
                     {
-                        new TempuraCard(), new TempuraCard(), new TempuraCard(), new TempuraCard(), new TempuraCard()
-                    }),
-                createPlayerUtils.CreatePlayer(1,
-                    new List<Card> { new TempuraCard(), new TempuraCard(), new TempuraCard(), new TempuraCard() }),
-                createPlayerUtils.CreatePlayer(2, new List<Card> { new TempuraCard(), new TempuraCard(), new TempuraCard() }),
+                        new ChopstickCard(), new SashimiCard(), new SashimiCard(), new SashimiCard(), new SashimiCard()
+                    })
             },
             new Dictionary<int, int>
             {
-                { 0, 10 },
-                { 1, 10 },
-                { 2, 5 }
+                { 0, 10 }
+            }
+        };
+        yield return new object[]
+        {
+            new List<Player>
+            {
+                createPlayerUtils.CreatePlayer(0,
+                    new List<Card>()
+                    {
+                        new ChopstickCard(), new SashimiCard(), new SashimiCard(), new SashimiCard(), new SashimiCard(),
+                        new SashimiCard(), new SushiCard(SushiTypes.OMELETTE), new SashimiCard()
+                    })
+            },
+            new Dictionary<int, int>
+            {
+                { 0, 20 }
             }
         };
     }
