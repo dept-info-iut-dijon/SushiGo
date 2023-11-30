@@ -10,7 +10,9 @@
         WindowStyle="None"
         Title="SushiGo" 
         WindowState="Maximized">
-
+    <Window.Resources>
+        <usercontrols:LeaderboardRetriever x:Key="LeaderboardRetriever" />
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
@@ -289,73 +291,67 @@
                         FontSize="25"
                         Text="Classement"/>
 
-                    <StackPanel Margin="0,20,0,30" HorizontalAlignment="Center" Grid.Row="1">
-                        <materialDesign:Chip IconBackground="#ffd700" IconForeground="#000000" Background="White" >
-                            <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon
-                                    Width="23"
-                                    Height="23"
-                                    Kind="Numeric1"/>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <TextBlock
-                                    FontSize="15"
-                                    Text="Joueur 1 : 200 points"/>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                        <materialDesign:Chip IconBackground="#c0c0c0" IconForeground="#000000" Background="White">
-                            <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon
-                                    Width="23"
-                                    Height="23"
-                                    Kind="Numeric2"/>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <TextBlock
-                                    FontSize="15"
-                                    Text="Joueur 2 : 120 points"/>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                        <materialDesign:Chip  IconBackground="#cd7f32" IconForeground="#000000" Background="White" >
-                            <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon
-                                    Width="23"
-                                    Height="23"
-                                    Kind="Numeric3"/>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <TextBlock
-                                    FontSize="15"
-                                    Text="Joueur 3 : 90 points"/>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                        <materialDesign:Chip IconBackground="Transparent" IconForeground="IndianRed" Background="White">
-                            <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon
-                                    Width="23"
-                                    Height="23"
-                                    Kind="Numeric4"/>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <TextBlock
-                                    FontSize="15"
-                                    Text="Joueur 4 : 20 points"/>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                        <materialDesign:Chip IconBackground="Transparent" IconForeground="IndianRed" Background="White">
-                            <materialDesign:Chip.Icon>
-                                <materialDesign:PackIcon
-                                 Width="23"
-                                 Height="23"
-                                 Kind="Numeric5"/>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <TextBlock
-                                    FontSize="15"
-                                    Text="Joueur 5 : 0 points"/>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
-                    </StackPanel>
+                    <ListView Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                    <materialDesign:Chip.Style>
+                                        <Style TargetType="materialDesign:Chip">
+                                            <Style.Setters>
+                                                <Setter Property="IconBackground" Value="Transparent" />
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="1">
+                                                    <Setter Property="IconBackground" Value="#ffd700"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                    <Setter Property="IconBackground" Value="#c0c0c0"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                    <Setter Property="IconBackground" Value="#cd7f32"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:Chip.Style>
+                                    <materialDesign:Chip.Icon>
+                                        <materialDesign:PackIcon Width="23" Height="23">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Style.Setters>
+                                                        <Setter Property="Kind" Value="Numeric1" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Style.Setters>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                            <Setter Property="Kind" Value="Numeric2" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                            <Setter Property="Kind" Value="Numeric3" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="4">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric4" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="5">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric5" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+                                   
+                                    </materialDesign:Chip.Icon>
+                                    <materialDesign:Chip.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Nom , StringFormat='{}{0} : '}"/>
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Score , StringFormat='{}{0} points'}"/>
+                                        </StackPanel>
+                                    </materialDesign:Chip.Content>
+                                </materialDesign:Chip>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <Button
                         Command="{Binding GameTableViewModel.OpenLeaderboard}"

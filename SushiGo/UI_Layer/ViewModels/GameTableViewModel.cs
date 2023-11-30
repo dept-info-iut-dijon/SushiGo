@@ -7,6 +7,7 @@ using Logic_Layer;
 using System.Windows.Documents;
 using System.Runtime.CompilerServices;
 using System;
+using System.Linq;
 
 namespace UI_Layer.ViewModels
 {
@@ -100,6 +101,11 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> PlayerList { get => playerList; set => playerList = value; }
+
+        /// <summary>
+        /// Liste des joueurs de la partie
+        /// </summary>
+        public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x.Score).ToList();  }
 
         #endregion Propriété
 
