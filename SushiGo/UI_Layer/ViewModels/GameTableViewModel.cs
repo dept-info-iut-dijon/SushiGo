@@ -43,7 +43,16 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         #endregion Evénement
+
+        #region Commande Déléguée
+
+        #endregion Commande Déléguée
 
         #region Propriété
 
@@ -56,17 +65,32 @@ namespace UI_Layer.ViewModels
             {
                 return this.cardSelected;
             }
+            set
+            {
+                if (this.cardSelected != value)
+                {
+                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Mettre à jour la propriété
+                    this.cardSelected = value;
+
+                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Notification des changements
+                    this.OnPropertyChanged(nameof(CardSelected));
+                }
+            }
         }
 
         /// <summary>
         /// Main du joueur.
         /// </summary>
-        /// <inheritdoc/>
         public List<CardComponent> Deck
         {
             get
             {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
                 
                 Player thisPLayer = table.Players[0];
@@ -75,10 +99,16 @@ namespace UI_Layer.ViewModels
                 int x = 0;
                 foreach (Card card in table.Players[0].Hand.Cards)
                 {
+                    // On définie le margin
                     Thickness margin = new Thickness(x, 0, 0, 0);
+
+                    // On créé la carte et lui applique le margin de départ
                     CardComponent newCard = new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = margin };
                     newCard.BaseMargin = margin;
+
+                    // On ajoute la carte
                     cards.Add(newCard);
+
                     x = -10;
                 }
 
@@ -87,5 +117,9 @@ namespace UI_Layer.ViewModels
         }
 
         #endregion Propriété
+
+        #region Méthode Privée
+
+        #endregion Méthode Privée
     }
 }

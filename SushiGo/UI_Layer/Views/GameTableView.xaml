@@ -127,19 +127,20 @@
 
                 <!-- Liste des cartes -->
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <ItemsControl ItemsSource="{Binding GameTableViewModel.Deck}" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                        <ItemsControl.ItemContainerStyle>
-                            <Style>
+                    <ListBox ItemsSource="{Binding GameTableViewModel.Deck}" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
                                 <Setter Property="Control.VerticalAlignment" Value="Bottom" />
                             </Style>
-                        </ItemsControl.ItemContainerStyle>
-                        <ItemsControl.ItemsPanel>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" />
                             </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
                 </StackPanel>
+
 
                 <!-- Colonne 1-->
                 <Grid>

@@ -151,7 +151,7 @@ public partial class CardComponent : UserControl
     /// <summary>
     /// Sélectionne ou déselectionne la carte lorsque l'on clic dessus.
     /// </summary>
-    private void ClickOnCard(object sender, MouseButtonEventArgs e)
+    public void ClickOnCard()
     {
         this.IsSelected = !this.IsSelected;
         if (IsSelected)
