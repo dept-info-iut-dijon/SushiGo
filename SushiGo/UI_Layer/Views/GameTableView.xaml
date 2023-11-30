@@ -47,7 +47,7 @@
                         <materialDesign:PackIcon
                              Width="17"
                              Height="17"
-                         Foreground="Yellow"
+                         Foreground="{StaticResource SaffronBrush}"
                          Kind="Trophy"/>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -274,7 +274,7 @@
             </Grid>
         </Grid>
 
-        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.ShowLeaderboard}" HorizontalAlignment="Center" DialogBackground="#efbf41" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.ShowLeaderboard}" HorizontalAlignment="Center" DialogBackground="{StaticResource SaffronBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
             <materialDesign:DialogHost.DialogContent >
                 <Grid Margin="40,20,40,20" >
                     <Grid.RowDefinitions>
@@ -362,7 +362,7 @@
                         Grid.Row="2"
                         Margin="10,0,10,0"
                         BorderThickness="0"
-                        Background="IndianRed"
+                        Background="{StaticResource PersianRedBrush}"
                         Content="Retour"/>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
