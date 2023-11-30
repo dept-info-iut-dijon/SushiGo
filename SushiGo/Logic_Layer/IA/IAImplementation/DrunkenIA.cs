@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic_Layer.IA
+namespace Logic_Layer.IA.IAImplementation
 {
     /// <summary>
     /// IA bourrée : elle pose la premiere carte de sa main
@@ -13,7 +13,7 @@ namespace Logic_Layer.IA
     public class DrunkenIA : IA
     {
 
-        public DrunkenIA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
+        public DrunkenIA(int id, Board board, Hand hand, string pseudo) : base(id, board, hand, pseudo)
         {
         }
 
@@ -22,8 +22,8 @@ namespace Logic_Layer.IA
         /// </summary>
         public override void Play()
         {
-            this.PlayCard(Hand.Cards.First());
-            this.EndRound();
+            PlayCard(Hand.Cards.First());
+            EndRound();
         }
     }
 }
