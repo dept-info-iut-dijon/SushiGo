@@ -14,7 +14,7 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private Table table;
+        private Table? table;
         private CardComponent? cardSelected;
 
         #endregion Attribut
@@ -26,8 +26,13 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public GameTableViewModel()
         {
+            this.ValidateCommand = new DelegateCommand(this.OnValidateCommand);
         }
 
+        /// <summary>
+        /// Initialise les valeurs lors de l'ouverture de la fenêtre.
+        /// </summary>
+        /// <param name="table"></param>
         public void Init(Table table)
         {
             this.table = table;
@@ -51,6 +56,11 @@ namespace UI_Layer.ViewModels
         #endregion Evénement
 
         #region Commande Déléguée
+
+        /// <summary>
+        /// Commande appelée lors du clic sur le bouton Valider.
+        /// </summary>
+        public DelegateCommand ValidateCommand { get; set; }
 
         #endregion Commande Déléguée
 
@@ -119,6 +129,11 @@ namespace UI_Layer.ViewModels
         #endregion Propriété
 
         #region Méthode Privée
+
+        private void OnValidateCommand()
+        {
+            this.CardSelected?.PlayCard();
+        }
 
         #endregion Méthode Privée
     }

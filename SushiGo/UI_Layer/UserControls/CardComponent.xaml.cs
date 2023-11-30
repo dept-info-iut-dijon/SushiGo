@@ -101,6 +101,45 @@ public partial class CardComponent : UserControl
 
     #endregion
 
+    #region Méthode Publique
+
+    /// <summary>
+    /// Sélectionne ou déselectionne la carte lorsque l'on clic dessus.
+    /// </summary>
+    public void ClickOnCard()
+    {
+        this.IsSelected = !this.IsSelected;
+        if (IsSelected)
+        {
+            Thickness thickness = new Thickness();
+
+            // On garde les ancienne valeur
+            thickness.Left = this.BaseMargin.Left;
+            thickness.Top = this.BaseMargin.Top;
+            thickness.Right = this.BaseMargin.Right;
+
+            // On monte la carte
+            thickness.Bottom = 40;
+
+            // On applique la nouvelle valeur
+            this.Margin = thickness;
+        }
+        else
+        {
+            this.Margin = this.baseMargin;
+        }
+    }
+
+    /// <summary>
+    /// Joue la carte.
+    /// </summary>
+    public void PlayCard()
+    {
+        this.player.PlayCard(this.card);
+    }
+
+    #endregion Méthode Publique
+
     #region event
 
     /// <summary>
@@ -145,33 +184,6 @@ public partial class CardComponent : UserControl
             {
                 CardComponent.image.Source = new BitmapImage(new Uri($"../Assets/Cartes/{CardComponent.CardName}.png", UriKind.Relative));
             }
-        }
-    }
-
-    /// <summary>
-    /// Sélectionne ou déselectionne la carte lorsque l'on clic dessus.
-    /// </summary>
-    public void ClickOnCard()
-    {
-        this.IsSelected = !this.IsSelected;
-        if (IsSelected)
-        {
-            Thickness thickness = new Thickness();
-
-            // On garde les ancienne valeur
-            thickness.Left = this.BaseMargin.Left;
-            thickness.Top = this.BaseMargin.Top;
-            thickness.Right = this.BaseMargin.Right;
-
-            // On monte la carte
-            thickness.Bottom = 40;
-
-            // On applique la nouvelle valeur
-            this.Margin = thickness;
-        }
-        else
-        {
-            this.Margin = this.baseMargin;
         }
     }
 
