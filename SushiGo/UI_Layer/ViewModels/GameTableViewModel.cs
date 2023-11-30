@@ -75,7 +75,10 @@ namespace UI_Layer.ViewModels
                 int x = 0;
                 foreach (Card card in table.Players[0].Hand.Cards)
                 {
-                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    Thickness margin = new Thickness(x, 0, 0, 0);
+                    CardComponent newCard = new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = margin };
+                    newCard.BaseMargin = margin;
+                    cards.Add(newCard);
                     x = -10;
                 }
 

@@ -15,6 +15,7 @@ public partial class CardComponent : UserControl
 {
     private readonly PlayerViewModel player;
     private readonly Card card;
+    private Thickness baseMargin;
     private bool isSelected;
 
     /// <summary>
@@ -86,6 +87,18 @@ public partial class CardComponent : UserControl
         }
     }
 
+    public Thickness BaseMargin
+    {
+        get
+        {
+            return this.baseMargin;
+        }
+        set
+        {
+            this.baseMargin = value;
+        }
+    }
+
     #endregion
 
     #region event
@@ -143,15 +156,12 @@ public partial class CardComponent : UserControl
         this.IsSelected = !this.IsSelected;
         if (IsSelected)
         {
-            this.Margin = new Thickness(0, 0, 0, 50);
+            this.Margin = new Thickness(0, 0, 0, 40);
         }
         else
         {
-            this.Margin = new Thickness(0);
+            this.Margin = this.baseMargin;
         }
-        
-        //this.border.BorderThickness = 
-        //player.PlayCard(card);
     }
 
     #endregion
