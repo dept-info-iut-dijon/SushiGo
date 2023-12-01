@@ -11,8 +11,8 @@ public class CardsSorterTests
     [ClassData(typeof(CardsSorterDatasGenerator))]
     public void TypeSort_ShouldReturnSortedCards(Card[] cards, Card[] expected, Type type)
     {
-        var actual = new CardsSorter().SortCards(type, cards);
-        Assert.Equal(expected.Length, actual.Length);
+        var actual = CardsSorter.TypeSort(type, cards.ToList());
+        Assert.Equal(expected.Length, actual.Count);
 
         for (int i = 0; i < expected.Length; i++)
         {
