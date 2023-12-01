@@ -107,11 +107,10 @@
                     VerticalAlignment="Center"/>
                 </Grid>
 
-                <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-                <Button Grid.Row="1" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,20,40,20" FontSize="40" />
-                </Button>
-
+            <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
+            <Button Grid.Row="1" IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,20,40,20" FontSize="40" />
+            </Button>
 
                 <!-- Plateau du joueur 1-->
                 <Border 
@@ -139,16 +138,32 @@
 
             </Grid>
 
-            <!-- Liste des cartes -->
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
-                <ItemsControl ItemsSource="{Binding GameTableViewModel.PlayerList[0].Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </StackPanel>
+
+                <!-- Liste des cartes -->
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <ListView ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Control.VerticalAlignment" Value="Bottom" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+
+
 
             <!-- Colonne 1-->
             <Grid>
@@ -240,6 +255,7 @@
                                 FontFamily="{StaticResource NewSushi}"
                                 FontSize="20"
                                 Text="Joueur 3"/>
+
                         </StackPanel>
                         <Grid 
                 />

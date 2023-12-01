@@ -3,11 +3,15 @@
 
     <!-- Définitions de couleurs -->
 
+    <!-- Charte graphique -->
     <Color x:Key="WhiteSmoke">#F5F5F5</Color>
     <Color x:Key="PersianRed">#C63C3C</Color>
     <Color x:Key="YellowGreen">#B6CD4B</Color>
     <Color x:Key="Saffron">#EFBF41</Color>
     <Color x:Key="Night">#151515</Color>
+
+    <!-- Couleurs additionnelles-->
+    <Color x:Key="Silver">#C0C0C0</Color>
     
 
     <!-- Définitions de SolidColorBrush-->
@@ -17,5 +21,6 @@
     <SolidColorBrush x:Key="YellowGreenBrush"   Color="{StaticResource YellowGreen}" />
     <SolidColorBrush x:Key="SaffronBrush"       Color="{StaticResource Saffron}" />
     <SolidColorBrush x:Key="NightBrush"         Color="{StaticResource Night}" />
+    <SolidColorBrush x:Key="SilverBrush"        Color="{StaticResource Silver}" />
 
 </ResourceDictionary>

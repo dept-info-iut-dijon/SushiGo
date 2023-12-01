@@ -9,10 +9,9 @@
         Title="GameCreationView" Height="450" Width="800">
     
     <Window.Resources>
-        <ObjectDataProvider x:Key="DifficultyEnumValues"
-                        ObjectType="{x:Type logiq:IADifficulty}"  MethodName="GetValues">
+        <ObjectDataProvider x:Key="DifficultyEnumValues" ObjectType="{x:Type logiq:IADifficultyEnum}"  MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="logiq:IADifficulty" />
+                <x:Type TypeName="logiq:IADifficultyEnum" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
