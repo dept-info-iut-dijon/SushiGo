@@ -29,11 +29,12 @@ namespace UI_Layer.ViewModels
 
         #region viewModels
         private NavigationViewModel navigationViewModel;
+        private GameCreationViewModel gamecreationViewModel;
+        private GameTableViewModel gameTableViewModel;
 
         public NavigationViewModel NavigationViewModel { get => navigationViewModel; set => navigationViewModel = value; }
         public GameCreationViewModel GameCreationViewModel { get => gamecreationViewModel; set => gamecreationViewModel = value; }
-
-        private GameCreationViewModel gamecreationViewModel;
+        public GameTableViewModel GameTableViewModel { get => gameTableViewModel; set => gameTableViewModel = value; }
 
         #endregion
 
@@ -42,6 +43,7 @@ namespace UI_Layer.ViewModels
         {
             navigationViewModel = new NavigationViewModel();
             gamecreationViewModel = new GameCreationViewModel();
+            gameTableViewModel = new GameTableViewModel();
         }
 
 

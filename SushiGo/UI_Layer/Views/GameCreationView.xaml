@@ -7,19 +7,19 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized" WindowStyle="None"
         Title="GameCreationView" Height="450" Width="800">
+    
     <Window.Resources>
-        <ObjectDataProvider x:Key="DifficultyEnumValues"
-                        ObjectType="{x:Type logiq:IADifficulty}"  MethodName="GetValues">
+        <ObjectDataProvider x:Key="DifficultyEnumValues" ObjectType="{x:Type logiq:IADifficultyEnum}"  MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="logiq:IADifficulty" />
+                <x:Type TypeName="logiq:IADifficultyEnum" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
 
     <Grid>
         <DockPanel>
-            <materialDesign:Card DockPanel.Dock="Top" Height="30"   Background="IndianRed" Grid.ColumnSpan="4" >
-                <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+            <materialDesign:Card DockPanel.Dock="Top" Height="30" Background="{StaticResource PersianRedBrush}" Grid.ColumnSpan="4" >
+                <Menu materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Grid>
@@ -86,7 +86,7 @@
                     Stretch="Fill"
                     Grid.ColumnSpan="4"
                     Grid.RowSpan="11"
-                    Source="{StaticResource test}"/>
+                    Source="{StaticResource CardsBackground}"/>
 
 
                 <!-- Titre de l'écran -->
@@ -100,7 +100,7 @@
                     Foreground="White"
                     Text="Sushi-Lobby">
                     <TextBlock.Effect>
-                        <DropShadowEffect Color="DarkRed" Direction="0" ShadowDepth="3" BlurRadius="5"/>
+                        <DropShadowEffect Color="{StaticResource PersianRed}" Direction="0" ShadowDepth="3" BlurRadius="5"/>
                     </TextBlock.Effect>
                 </TextBlock>
 
@@ -118,9 +118,9 @@
                                 <Image
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="{StaticResource bois2}"/>
+                            Source="{StaticResource Wood}"/>
                                 <TabControl 
-                              materialDesign:ColorZoneAssist.Foreground="DarkRed"
+                              materialDesign:ColorZoneAssist.Foreground="{StaticResource PersianRedBrush}"
                               materialDesign:ColorZoneAssist.Mode="Custom">
                                     <TabItem>
                                         <TabItem.Header>
@@ -161,13 +161,13 @@
                                             Margin="4"
                                             Content="Joueurs/Joueurs"
                                             IsChecked="{Binding GameCreationViewModel.IsModeJvJ}"
-                                            BorderBrush="DarkRed"
+                                            BorderBrush="{StaticResource PersianRedBrush}"
                                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                                 <RadioButton
                                             FontSize="19"
                                             Margin="4"
                                             Content="Joueurs/Robots"
-                                            BorderBrush="DarkRed"
+                                            BorderBrush="{StaticResource PersianRedBrush}"
                                             Style="{StaticResource MaterialDesignTabRadioButton}" />
                                             </StackPanel>
                                             <!-- Difficulte IA -->
@@ -199,7 +199,7 @@
                                               Grid.Row="6">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <TextBlock FontWeight="Bold" Foreground="DarkRed" TextAlignment="Center" Text="{Binding}" HorizontalAlignment="Center" />
+                                                        <TextBlock FontWeight="Bold" Foreground="{StaticResource PersianRedBrush}" TextAlignment="Center" Text="{Binding}" HorizontalAlignment="Center" />
                                                     </DataTemplate>
                                                 </ComboBox.ItemTemplate>
                                                 <ComboBox.Style>
@@ -239,7 +239,7 @@
                                                 </Button>
                                                 <TextBlock
                                             FontWeight="Bold"
-                                            Foreground="DarkRed"
+                                            Foreground="{StaticResource PersianRedBrush}"
                                             Margin="8,0,0,0"
                                             FontSize="19"
                                             Text="{Binding GameCreationViewModel.PlayerCount}"/>
@@ -257,7 +257,7 @@
                                                 FontSize="20" 
                                                 Width="150" 
                                                 Height="40" 
-                                                Background="IndianRed" 
+                                                Background="{StaticResource PersianRedBrush}" 
                                                 Grid.Row="7" 
                                                 HorizontalAlignment="Center" 
                                                 Command="{Binding GameCreationViewModel.CreateGame}"
@@ -308,7 +308,7 @@
                                         FontSize="20" 
                                         Width="150" 
                                         Height="40" 
-                                        Background="IndianRed" 
+                                        Background="{StaticResource PersianRedBrush}" 
                                         Grid.Row="6" 
                                         HorizontalAlignment="Center" 
                                     Command="{Binding GameCreationViewModel.CreateGame}"
@@ -335,19 +335,19 @@
                             Grid.RowSpan="3"
                             Stretch="Fill"
                             Opacity="0.5"
-                            Source="{StaticResource bois2}"/>
+                            Source="{StaticResource Wood}"/>
 
                                 <TextBlock
                             Margin="0,15,0,0"
                             FontWeight="Black"
-                            Foreground="Green"
+                            Foreground="{StaticResource NightBrush}"
                             Text="{Binding GameCreationViewModel.TitleLobby}"
                             HorizontalAlignment="Center"
                             FontSize="24"/>
                                 <TextBlock
                             Margin="0,15,10,0"
                             FontWeight="Thin"
-                            Foreground="White"
+                            Foreground="{StaticResource WhiteSmokeBrush}"
                             Text="{Binding GameCreationViewModel.IdParty}"
                             HorizontalAlignment="Right"
                             FontSize="22">
@@ -410,7 +410,7 @@
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Id}" Value="1">
                                                                     <Setter Property="Kind" Value="Crown"/>
-                                                                    <Setter Property="Foreground" Value="Yellow"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource PersianRedBrush}"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -431,7 +431,7 @@
                                                     <materialDesign:PackIcon
                                         Width="30"
                                         Height="17"
-                                        Foreground="DarkRed"
+                                        Foreground="{StaticResource PersianRedBrush}"
                                         Kind="CloseThick"
                                         />
                                                     <Button.Style>
@@ -476,10 +476,10 @@
                                                                     <Setter Property="Visibility" Value="Hidden"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding IsReady}" Value="true">
-                                                                    <Setter Property="Foreground" Value="ForestGreen"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource PersianRedBrush}"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding IsReady}" Value="false">
-                                                                    <Setter Property="Foreground" Value="Orange"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource SaffronBrush}"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding IsModeJvJ}" Value="false">
                                                                     <Setter Property="Visibility" Value="Hidden"/>
@@ -494,7 +494,7 @@
                                 </ListView>
                                 <TextBlock
                             Text="{Binding GameCreationViewModel.MessageWaitingStart}"
-                            Foreground="Red"
+                            Foreground="{StaticResource PersianRedBrush}"
                             Grid.Row="2"
                             FontWeight="Thin"
                             HorizontalAlignment="Center"
@@ -530,8 +530,8 @@
             FontSize="20"
             BorderThickness="0"
             Grid.Column="1"
-            Background="White"
-            Foreground="Black"
+            Background="{StaticResource WhiteSmokeBrush}"
+            Foreground="{StaticResource NightBrush}"
             Content="GO !">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
