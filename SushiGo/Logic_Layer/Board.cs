@@ -12,7 +12,11 @@ public class Board
     /// <summary>
     /// Liste des cartes du joueur
     /// </summary>
-    public List<Card> Cards => cards;
+    public List<Card> Cards
+    {
+        get => cards;
+        private set => cards = value;
+    }
 
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
@@ -39,14 +43,16 @@ public class Board
     /// <returns></returns>
     public virtual List<ISpecialCard> EndRound()
     {
-        List<ISpecialCard> ret = new List<ISpecialCard>();
+        var ret = new List<ISpecialCard>();
 
         // On rassemble les cartes spéciales devant être prises en compte
-        foreach (Card c in Cards)
+        foreach (var c in Cards)
         {
             if (c is ISpecialCard card && card.EndRound())
                 ret.Add(card);
         }
+        
+        Cards = ret.Select(c => (Card) c).ToList();
 
         return ret;
     }
