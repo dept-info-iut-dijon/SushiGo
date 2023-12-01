@@ -108,24 +108,27 @@ namespace UI_Layer.ViewModels
             get
             {
                 List<CardComponent> cards = new List<CardComponent>();
-                
-                Player thisPLayer = table.Players[0];
-                var player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
 
-                int x = 0;
-                foreach (Card card in table.Players[0].Hand.Cards)
+                if (table != null)
                 {
-                    // On définie le margin
-                    Thickness margin = new Thickness(x, 0, 0, 0);
+                    Player thisPLayer = table.Players[0];
+                    PlayerViewModel player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
 
-                    // On créé la carte et lui applique le margin de départ
-                    CardComponent newCard = new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = margin };
-                    newCard.BaseMargin = margin;
+                    int x = 0;
+                    foreach (Card card in table.Players[0].Hand.Cards)
+                    {
+                        // On définie le margin
+                        Thickness margin = new Thickness(x, 0, 0, 0);
 
-                    // On ajoute la carte
-                    cards.Add(newCard);
+                        // On créé la carte et lui applique le margin de départ
+                        CardComponent newCard = new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = margin };
+                        newCard.BaseMargin = margin;
 
-                    x = -10;
+                        // On ajoute la carte
+                        cards.Add(newCard);
+
+                        x = -10;
+                    }
                 }
 
                 return cards;
