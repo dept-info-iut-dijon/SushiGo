@@ -32,9 +32,12 @@ namespace UI_Layer.Views
             KeyDown += Show_Leaderboard;
         }
 
+        /// <summary>
+        /// Permet d'afficher le tableau des scores
+        /// </summary>
         private void Show_Leaderboard(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape || e.Key == Key.Tab)
+            if(e.Key == Key.Tab)
             {
                 MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard = !MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard;
             }
