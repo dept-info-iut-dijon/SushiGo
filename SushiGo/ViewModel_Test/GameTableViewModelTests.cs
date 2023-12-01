@@ -29,15 +29,15 @@ namespace ViewModel_Test
             Thread thread = new Thread(() =>
             {
                 // Arrange
-                var viewModel = new GameTableViewModel();
+                var gameTableVM = new GameTableViewModel();
                 Player player = new Player(2, new Board(), new Hand(2, new List<Card>()), "Spartacus");
                 PlayerViewModel playerVM = new PlayerViewModel(player, PlayerType.PLAYER);
                 var card = new CardComponent(playerVM, new ChopstickCard());
 
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
-                viewModel.CardSelected = card;
-                bool buttonEnable = viewModel.ButtonValidateEnable;
+                gameTableVM.CardSelected = card;
+                bool buttonEnable = gameTableVM.ButtonValidateEnable;
 
                 // Assert
                 Assert.True(buttonEnable);
@@ -58,24 +58,14 @@ namespace ViewModel_Test
             Thread thread = new Thread(() =>
             {
                 // Arrange
-                var viewModel = new GameTableViewModel();
+                var gameTableVM = new GameTableViewModel();
                 Player player = new Player(2, new Board(), new Hand(2, new List<Card>()), "Spartacus");
                 PlayerViewModel playerVM = new PlayerViewModel(player, PlayerType.PLAYER);
-                bool propertyChangedRaised = false;
-                viewModel.PropertyChanged += (sender, args) =>
-                {
-                    if (args.PropertyName == "CardSelected")
-                    {
-                        propertyChangedRaised = true;
-                    }
-                };
 
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
-                viewModel.CardSelected = new CardComponent(playerVM, new SushiCard(SushiTypes.OMELETTE));
-
                 // Assert
-                Assert.True(propertyChangedRaised);
+                Assert.PropertyChanged(gameTableVM, "CardSelected", () =>  gameTableVM.CardSelected = new CardComponent(playerVM, new SushiCard(SushiTypes.OMELETTE)));
 
                 Dispatcher.CurrentDispatcher.BeginInvokeShutdown(DispatcherPriority.Background);
                 Dispatcher.Run();
