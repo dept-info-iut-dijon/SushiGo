@@ -15,6 +15,13 @@ namespace Logic_Layer.score
     public class SashimisScoreCalculator : IScoreCalculator
     {
         /// <summary>
+        /// Constructeur du calculateur de score des cartes sashimis
+        /// </summary>
+        public SashimisScoreCalculator()
+        {
+        }
+
+        /// <summary>
         /// Calcule le score des cartes sashimis d'une liste de cartes
         /// </summary>
         /// <param name="players">les joueurs dont on veut le score</param>

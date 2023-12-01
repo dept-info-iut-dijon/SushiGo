@@ -17,6 +17,13 @@ namespace Logic_Layer.score
     public class RavioliScoreCalculator : IScoreCalculator
     {
         /// <summary>
+        /// Constructeur du calculateur de score des cartes raviolis
+        /// </summary>
+        public RavioliScoreCalculator()
+        {
+        }
+
+        /// <summary>
         /// Calcule le score des cartes raviolis d'une liste de cartes
         /// </summary>
         /// <param name="players">les joueurs dont on veut le score</param>

@@ -1,4 +1,5 @@
 ﻿using Logic_Layer;
+using Logic_Layer.score;
 using LogicTest.datas_generators.score;
 
 namespace LogicTest.Score;
