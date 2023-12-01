@@ -83,7 +83,26 @@ namespace UI_Layer.ViewModels
             }
         }
 
-        public Table Table
+        public List<CardComponent> PlayerBoard
+        {
+            get
+            {
+                List<CardComponent> cards = new List<CardComponent>();
+                Player thisplayer = table.Players[0];
+                var player = new PlayerViewModel(thisplayer, PlayerType.PLAYER);
+                
+                int x = 0;
+                foreach (Card card in table.Players[0].Board.Cards)
+                {
+                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    x = -10;
+                }
+
+                return cards;
+            }
+        }
+
+        public Logic_Layer.Table Table
         {
             get => table;
             set => table.PropertyChanged += Table_PropertyChanged;
