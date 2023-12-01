@@ -37,8 +37,8 @@
                     <MenuItem Command="{Binding NavigationViewModel.BackToMenu}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon
-                                Width="20"
-                                Height="20"
+                                Width="18"
+                                Height="18"
                             Foreground="White"
                             Kind="Home"/>
                         </MenuItem.Icon>
