@@ -4,6 +4,10 @@ using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
 using Logic_Layer;
+using System.Windows.Documents;
+using System.Runtime.CompilerServices;
+using System;
+using System.Linq;
 
 namespace UI_Layer.ViewModels
 {
@@ -14,7 +18,9 @@ namespace UI_Layer.ViewModels
     {
         #region Attribut
 
-        private Table? table;
+        private Logic_Layer.Table table;
+        private bool showLeaderboard = false;
+        private List<PlayerViewModel> playerList;
         private CardComponent? cardSelected;
 
         #endregion Attribut
@@ -33,10 +39,24 @@ namespace UI_Layer.ViewModels
         /// Initialise les valeurs lors de l'ouverture de la fenêtre.
         /// </summary>
         /// <param name="table"></param>
-        public void Init(Table table)
+        public void Init(Logic_Layer.Table table)
         {
             this.table = table;
             this.cardSelected = null;
+            InitPlayers();
+        }
+
+        /// <summary>
+        /// Permet d'initialiser la liste des joueurs
+        /// </summary>
+        private void InitPlayers()
+        {
+            this.playerList = new List<PlayerViewModel>();
+            foreach (Player player in table.Players)
+            {
+                this.playerList.Add(new PlayerViewModel(player, PlayerType.PLAYER));
+            }
+            NotifyPropertyChanged(nameof(this.PlayerList));
         }
 
         #endregion Constructeur
@@ -48,10 +68,24 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+
+        /// <summary>
+        /// Permet d'ouvrir l'écran du menu
+        /// </summary>
+        public DelegateCommand OpenLeaderboard => new DelegateCommand(() =>
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+            ShowLeaderboard = !showLeaderboard;
+        });
+
+
+
+        /// <summary>
+        /// Permet de quitter la partie et retourner au menu
+        /// </summary>
+        public DelegateCommand QuitGame => new DelegateCommand(() =>
+        {
+            MainWindowViewModel.Instance.NavigationViewModel.ReturnToMenu();
+        });
 
         #endregion Evénement
 
@@ -66,7 +100,20 @@ namespace UI_Layer.ViewModels
 
         #region Propriété
 
+       
         /// <summary>
+        /// Permet d'afficher le menu
+        /// </summary>
+        public bool ShowLeaderboard
+        {
+            get => showLeaderboard;
+            set
+            {
+                showLeaderboard = value;
+                NotifyPropertyChanged(nameof(ShowLeaderboard));
+            }
+        }
+
         /// Bouton Valider actif ou non.
         /// </summary>
         public bool ButtonValidateEnable => this.CardSelected != null;
@@ -94,8 +141,8 @@ namespace UI_Layer.ViewModels
                     this.cardSelected?.ClickOnCard();
 
                     // Notification des changements
-                    this.OnPropertyChanged(nameof(CardSelected));
-                    this.OnPropertyChanged(nameof(this.ButtonValidateEnable));
+                    this.NotifyPropertyChanged(nameof(CardSelected));
+                    this.NotifyPropertyChanged(nameof(this.ButtonValidateEnable));
                 }
             }
         }
@@ -105,7 +152,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public List<CardComponent> Deck
         {
-            get
+            get 
             {
                 List<CardComponent> cards = new List<CardComponent>();
 
@@ -134,8 +181,23 @@ namespace UI_Layer.ViewModels
                 return cards;
             }
         }
+        /// <summary>
+        /// Liste des joueurs de la partie
+        /// </summary>
+        public List<PlayerViewModel> PlayerList { get => playerList; set => playerList = value; }
+
+        /// <summary>
+        /// Liste des joueurs de la partie
+        /// </summary>
+        public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x.Score).ToList();  }
 
         #endregion Propriété
+
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #region Méthode Privée
 
@@ -146,11 +208,12 @@ namespace UI_Layer.ViewModels
                 this.CardSelected.PlayCard();
 
                 // Notifications
-                this.OnPropertyChanged(nameof(this.CardSelected));
-                this.OnPropertyChanged(nameof(this.Deck));
+                this.NotifyPropertyChanged(nameof(this.CardSelected));
+                this.NotifyPropertyChanged(nameof(this.Deck));
             }
         }
 
         #endregion Méthode Privée
+
     }
 }

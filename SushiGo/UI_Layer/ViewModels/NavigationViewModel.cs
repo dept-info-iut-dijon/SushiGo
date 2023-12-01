@@ -25,9 +25,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public DelegateCommand BackToMenu => new DelegateCommand(() =>
         {
-            HomeView home = new HomeView();
-            home.Show();
-            currentWindow.Close();          
+            ReturnToMenu();         
         });
 
         /// <summary>
@@ -43,5 +41,16 @@ namespace UI_Layer.ViewModels
         /// Représente la window affiché
         /// </summary>
         public Window CurrentWindow { get => currentWindow; set => currentWindow = value; }
+
+
+        /// <summary>
+        /// Permet de retourner au menu
+        /// </summary>
+        public void ReturnToMenu()
+        {
+            HomeView home = new HomeView();
+            home.Show();
+            currentWindow.Close();
+        }
     }
 }
