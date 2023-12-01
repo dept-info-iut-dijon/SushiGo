@@ -44,7 +44,7 @@ public class Player
     /// <summary>
     /// Board des cartes posées du joueur
     /// </summary>
-    public Board Board { get => board; set => board = value; }
+    public Board Board { get => board; }
 
     public Player(int id, Board board, Hand hand,string pseudo)
     {

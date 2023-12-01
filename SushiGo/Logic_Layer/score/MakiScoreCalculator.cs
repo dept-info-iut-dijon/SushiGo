@@ -103,7 +103,6 @@ namespace Logic_Layer.score
         }
         private void NewFirstPlayer(Player player, int amountMakis)
         {
-            //NewSecondPlayers(firstPlayerList, amountMakis);
             firstPlayerList.Clear();
             firstPlayerList.Add(player);
             amountMakisFirst = amountMakis;

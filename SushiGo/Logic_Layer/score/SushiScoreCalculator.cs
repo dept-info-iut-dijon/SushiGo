@@ -28,53 +28,25 @@ namespace Logic_Layer.score
             {
                 List<Card> sushiCardsBeforeConversion = CardsSorter.TypeSort(typeof(SushiCard), player.Board.Cards);
                 List<SushiCard> sushiCards = ListCardToListSushiCardConverter(sushiCardsBeforeConversion);
-                List<SushiCard> sushiSalmonCards = SushiSalmonCardsSorter(sushiCards);
-                List<SushiCard> sushiOmeletteCards = SushiOmeletteCardsSorter(sushiCards);
-                List<SushiCard> sushiCalamariCards = SushiCalamariCardsSorter(sushiCards);
+                List<SushiCard> sushiSalmonCards = SushiCardsSorterByType(sushiCards, SushiTypes.SALMON);
+                List<SushiCard> sushiOmeletteCards = SushiCardsSorterByType(sushiCards, SushiTypes.OMELETTE);
+                List<SushiCard> sushiCalamariCards = SushiCardsSorterByType(sushiCards, SushiTypes.CALAMARI);
                 int formule = sushiOmeletteCards.Count * 1 + sushiSalmonCards.Count * 2 + sushiCalamariCards.Count * 3;
                 score.Add(player.Id, formule);
             }
             return score;
-            
         }
 
-        private List<SushiCard> SushiSalmonCardsSorter(List<SushiCard> sushiCards)
-        {
-            List<SushiCard> sushiSalmonCards = new List<SushiCard>();
-            foreach(SushiCard card in sushiCards)
-            {
-                if (card.Type == cards.SushiTypes.SALMON)
-                {
-                    sushiSalmonCards.Add(card);
-                }
-            }
-            return sushiSalmonCards;
-        }
-
-        private List<SushiCard> SushiOmeletteCardsSorter(List<SushiCard> sushiCards)
-        {
-            List<SushiCard> sushiOmeletteCards = new List<SushiCard>();
-            foreach (SushiCard card in sushiCards)
-            {
-                if (card.Type == cards.SushiTypes.OMELETTE)
-                {
-                    sushiOmeletteCards.Add(card);
-                }
-            }
-            return sushiOmeletteCards;
-        }
-
-        private List<SushiCard> SushiCalamariCardsSorter(List<SushiCard> sushiCards)
-        {
-            List<SushiCard> sushiCalamariCards = new List<SushiCard>();
-            foreach (SushiCard card in sushiCards)
-            {
-                if (card.Type == cards.SushiTypes.CALAMARI)
-                {
-                    sushiCalamariCards.Add(card);
-                }
-            }
-            return sushiCalamariCards;
+        private List<SushiCard> SushiCardsSorterByType(List<SushiCard> sushiCards, cards.SushiTypes sushiType) 
+        { 
+            List<SushiCard> sortedSushiCards = new List<SushiCard>(); 
+            foreach (SushiCard card in sushiCards) { 
+                if (card.Type == sushiType) 
+                { 
+                    sortedSushiCards.Add(card); 
+                } 
+            } 
+            return sortedSushiCards; 
         }
 
         private List<SushiCard> ListCardToListSushiCardConverter(List<Card> cards)
