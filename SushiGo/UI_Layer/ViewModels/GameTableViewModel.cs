@@ -39,7 +39,7 @@ namespace UI_Layer.ViewModels
         /// Initialise les valeurs lors de l'ouverture de la fenêtre.
         /// </summary>
         /// <param name="table"></param>
-        public void Init(Table table)
+        public void Init(Logic_Layer.Table table)
         {
             this.table = table;
             this.cardSelected = null;
@@ -208,8 +208,8 @@ namespace UI_Layer.ViewModels
                 this.CardSelected.PlayCard();
 
                 // Notifications
-                this.OnPropertyChanged(nameof(this.CardSelected));
-                this.OnPropertyChanged(nameof(this.Deck));
+                this.NotifyPropertyChanged(nameof(this.CardSelected));
+                this.NotifyPropertyChanged(nameof(this.Deck));
             }
         }
 
