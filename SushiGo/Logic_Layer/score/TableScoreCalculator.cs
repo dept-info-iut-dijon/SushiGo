@@ -49,7 +49,7 @@ namespace Logic_Layer.score
         {
             scoreCalculators.Clear();
             scoreCalculators.Add(new MakiScoreCalculator());
-            scoreCalculators.Add(new SushiScoreCalculator());
+            //scoreCalculators.Add(new SushiScoreCalculator());
             scoreCalculators.Add(new SashimisScoreCalculator());
             scoreCalculators.Add(new TempuraScoreCalculator());
             scoreCalculators.Add(new RavioliScoreCalculator());

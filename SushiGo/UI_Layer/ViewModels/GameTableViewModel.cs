@@ -21,8 +21,6 @@ namespace UI_Layer.ViewModels
         private Logic_Layer.Table table;
         private bool showLeaderboard = false;
         private List<PlayerViewModel> playerList;
-        private CardComponent? cardSelected;
-        
 
         #endregion Attribut
 
@@ -130,18 +128,7 @@ namespace UI_Layer.ViewModels
 
         #region Méthode Privée
 
-        private void OnValidateCommand()
-        {
-            if (this.CardSelected != null)
-            {
-                this.CardSelected.PlayCard();
-                this.SetScores();
-
-                // Notifications
-                this.NotifyPropertyChanged(nameof(this.CardSelected));
-                this.NotifyPropertyChanged(nameof(this.Deck));
-            }
-        }
+       
 
         #endregion Méthode Privée
 
