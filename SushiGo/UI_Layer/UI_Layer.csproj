@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
+    <None Remove="Assets\Images\Board.jpg" />
+    <None Remove="Assets\Images\Board.png" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
@@ -35,6 +37,12 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\Images\Board.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Board.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

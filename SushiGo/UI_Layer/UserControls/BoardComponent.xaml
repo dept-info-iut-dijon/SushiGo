@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="UI_Layer.UserControls.BoardComponent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI_Layer.UserControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        >
+    <Border 
+        Margin="10"
+        BorderBrush="White" 
+        Grid.Row="2" 
+        BorderThickness="5"
+        CornerRadius="10">
+        <Grid>
+            <Image
+               Source="../Assets/Images/Board.jpg"
+               Stretch="Fill"/>
+            <StackPanel>
+                <Border Background="White"  BorderBrush="Black">
+                    <StackPanel Background="White" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                    VerticalAlignment="Center"
+                    Width="20"
+                    Height="20"
+                    Kind="Account"/>
+
+                        <TextBlock
+                        Text="Template"
+                        Name="PlayerName"
+                        FontFamily="{StaticResource NewSushi}"
+                        Margin="5,0,0,0"
+                        FontSize="20"/>
+                    </StackPanel>
+                </Border>
+                <Grid/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

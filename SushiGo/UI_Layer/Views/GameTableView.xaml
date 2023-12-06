@@ -66,67 +66,17 @@
             </materialDesign:Card>
 
             <Grid>
-                   <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="3*"/>
-              <ColumnDefinition Width="5*"/>
-              <ColumnDefinition Width="3*"/>
-          </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
 
-        <!-- Colonne 3 -->
-        <Grid  Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
 
-            <!-- Texte affichant le numéro de la manche en cours -->
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
-                <TextBlock 
-                    Text="Manche n°1"
-                    Padding="20,15,20,15"
-                    Style="{StaticResource Font1}" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"/>
-            </Grid>
-
-            <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-            <Button Grid.Row="1" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,20,40,20" FontSize="40" />
-            </Button>
-
-
-                    <!-- Plateau du joueur 1-->
-                    <Border 
-                        Margin="10"
-                        BorderBrush="{StaticResource NightBrush}" 
-                        Grid.Row="2" 
-                        BorderThickness="5"
-                        CornerRadius="10" >
-                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                    VerticalAlignment="Center"
-                                    Width="20"
-                                    Height="20"
-                                    Kind="Account"/>
-                                <TextBlock
-                                    FontFamily="{StaticResource NewSushi}"
-                                    Margin="5,0,0,0"
-                                    FontSize="20"
-                                    Text="Joueur 1"/>
-                            </StackPanel>
-                            <Grid/>
-                        </StackPanel>
-                    </Border>
-
-                </Grid>
 
                 <!-- Liste des cartes -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
                     <ItemsControl ItemsSource="{Binding GameTableViewModel.Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -145,60 +95,52 @@
                     </Grid.RowDefinitions>
 
                     <!-- Plateau du joueur 2-->
-                    <Border 
-                         Margin="10"
-                         BorderBrush="{StaticResource NightBrush}" 
-                         Grid.Row="0" 
-                         BorderThickness="5"
-                         CornerRadius="10" >
-                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                 VerticalAlignment="Center"
-                                 Width="25"
-                                 Height="25"
-                                 Kind="Android"/>
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                    FontFamily="{StaticResource NewSushi}"
-                                    HorizontalAlignment="Center"
-                                    FontSize="20"
-                                    Text="Joueur 2"/>
-                            </StackPanel>
-                            <Grid/>
-                        </StackPanel>
-                    </Border>
+                    <usercontrols:BoardComponent
+                        Player="{Binding GameTableViewModel.PlayerList[1]}"
+                        />
 
                     <!-- Plateau du joueur 4-->
-                    <Border 
-                          Margin="10"
-                          BorderBrush="{StaticResource NightBrush}" 
-                          Grid.Row="1" 
-                          Grid.Column="0"
-                          BorderThickness="5"
-                          CornerRadius="10">
-                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                     VerticalAlignment="Center"
-                                     Width="25"
-                                     Height="25"
-                                     Kind="Android"/>
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                FontFamily="{StaticResource NewSushi}"
-                                HorizontalAlignment="Center"
-                                FontSize="20"
-                                Text="Joueur 4"/>
-                            </StackPanel>
-                            <Grid/>
-                        </StackPanel>
-                    </Border>
+                    <usercontrols:BoardComponent
+                        Grid.Row="1"
+                        Player="{Binding GameTableViewModel.PlayerList[3]}"
+                        />
 
                 </Grid>
 
+                <!-- Colonne 2 -->
+                <Grid  Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="1.7*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Colonne 2-->
+                    <!-- Texte affichant le numéro de la manche en cours -->
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
+                        <TextBlock 
+                              Text="Manche n°1"
+                              Padding="20,15,20,15"
+                              Style="{StaticResource Font1}" 
+                              HorizontalAlignment="Center" 
+                              VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
+                    <Button  Grid.Row="1" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
+                    </Button>
+
+                    <usercontrols:BoardComponent
+                          Grid.Row="2"
+                          Player="{Binding GameTableViewModel.PlayerList[0]}"
+                          />
+                </Grid>
+                
+                
+
+                <!-- Colonne 3-->
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -207,64 +149,17 @@
                     </Grid.RowDefinitions>
 
                     <!-- Plateau du joueur 3-->
-
-                    <Border 
-                         Margin="10"
-                         BorderBrush="{StaticResource NightBrush}" 
-                         Grid.Row="0" 
-                         BorderThickness="5"
-                         CornerRadius="10">
-                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                     VerticalAlignment="Center"
-                                     Width="25"
-                                     Height="25"
-                                     Kind="Android"/>
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                FontFamily="{StaticResource NewSushi}"
-                                FontSize="20"
-                                Text="Joueur 3"/>
-                            </StackPanel>
-                            <Grid 
-                />
-                        </StackPanel>
-                    </Border>
-
-
+                    <usercontrols:BoardComponent
+                         Player="{Binding GameTableViewModel.PlayerList[2]}"
+                         />
 
                     <!-- Plateau du joueur 5-->
-                    <Border 
-                         Margin="10"
-                         BorderBrush="{StaticResource NightBrush}" 
-                         Grid.Row="1" 
-                         BorderThickness="5"
-                         CornerRadius="10" >
-                        <StackPanel Background="{StaticResource WhiteSmokeBrush}">
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                 VerticalAlignment="Center"
-                                 Width="25"
-                                 Height="25"
-                                 Kind="Android"/>
-                                <TextBlock
-                                    Margin="5,0,0,0"
-                                FontFamily="{StaticResource NewSushi}"
-                                HorizontalAlignment="Center"
-                                FontSize="20"
-                                Text="Joueur 5"/>
-                            </StackPanel>
-                            <Grid/>
-                        </StackPanel>
-                    </Border>
-
+                    <usercontrols:BoardComponent
+                        Grid.Row="1"
+                         Player="{Binding GameTableViewModel.PlayerList[4]}"
+                         />
                 </Grid>
             </Grid>
         </DockPanel>
-
-
     </Grid>
-
-
 </Window>
