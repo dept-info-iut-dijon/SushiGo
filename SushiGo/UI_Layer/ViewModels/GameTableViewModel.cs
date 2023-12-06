@@ -218,6 +218,7 @@ namespace UI_Layer.ViewModels
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
+                this.SetScores();
 
                 // Notifications
                 this.NotifyPropertyChanged(nameof(this.CardSelected));
