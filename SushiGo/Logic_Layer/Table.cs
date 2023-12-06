@@ -1,6 +1,7 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
+using Logic_Layer.score;
 
 namespace Logic_Layer;
 
@@ -11,6 +12,7 @@ public class Table
 {
     private readonly List<Player> players;
     private int roundNumber;
+    private TableScoreCalculator scoreCalculator;
     
     /// <summary>
     /// Numéro de la manche de la partie
@@ -18,6 +20,11 @@ public class Table
     public int RoundNumber => roundNumber;
 
     public List<Player> Players => players;
+
+    /// <summary>
+    /// Permet de calculer le score des joueurs
+    /// </summary>
+    public TableScoreCalculator ScoreCalculator { get => scoreCalculator;}
 
     #region Méthodes publiques
 
@@ -30,6 +37,7 @@ public class Table
     {
         this.players = players;
         InitPlayersValue();
+        this.scoreCalculator = new TableScoreCalculator(this);
     }
 
 
@@ -41,7 +49,9 @@ public class Table
         ActualizeHands();
         // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
         if (NoMoreCards()) NextRound();
+
     }
+
     
     /// <summary>
     /// Fait jouer une carte à un joueur

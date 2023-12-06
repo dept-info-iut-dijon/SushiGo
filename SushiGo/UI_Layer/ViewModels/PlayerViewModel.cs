@@ -27,7 +27,7 @@ namespace UI_Layer.ViewModels
         #region attributes
         private readonly Player player;
         private PlayerType role;
-        private int score = Random.Shared.Next(0, 200);
+        private int score = 0;
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
@@ -88,7 +88,15 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Score actuel du joueur
         /// </summary>
-        public int Score { get => score; }
+        public int Score 
+        { 
+            get => score; 
+            set
+            {
+                score = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Est ce que le joueur est prêt à démarrer la partie

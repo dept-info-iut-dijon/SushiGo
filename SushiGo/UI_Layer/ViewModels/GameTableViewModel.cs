@@ -21,6 +21,8 @@ namespace UI_Layer.ViewModels
         private Logic_Layer.Table table;
         private bool showLeaderboard = false;
         private List<PlayerViewModel> playerList;
+        private CardComponent? cardSelected;
+        
 
         #endregion Attribut
 
@@ -37,6 +39,18 @@ namespace UI_Layer.ViewModels
         {
             this.table = table;
             InitPlayers();
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour les scores
+        /// </summary>
+        public void SetScores()
+        {
+            foreach (PlayerViewModel player in this.playerList)
+            {
+                player.Score = table.ScoreCalculator.GetScoreOfPlayer(player.Player);
+            }
+            NotifyPropertyChanged(nameof(LeaderBoard));
         }
 
         /// <summary>
@@ -113,5 +127,23 @@ namespace UI_Layer.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region Méthode Privée
+
+        private void OnValidateCommand()
+        {
+            if (this.CardSelected != null)
+            {
+                this.CardSelected.PlayCard();
+                this.SetScores();
+
+                // Notifications
+                this.NotifyPropertyChanged(nameof(this.CardSelected));
+                this.NotifyPropertyChanged(nameof(this.Deck));
+            }
+        }
+
+        #endregion Méthode Privée
+
     }
 }
