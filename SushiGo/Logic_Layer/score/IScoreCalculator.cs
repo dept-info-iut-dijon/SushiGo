@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logic_Layer.score
 {
+    /// <summary>
+    /// Interface de calculateur de score
+    /// </summary>
     public interface IScoreCalculator
     {
         /// <summary>

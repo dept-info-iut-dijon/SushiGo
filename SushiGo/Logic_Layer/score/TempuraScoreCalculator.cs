@@ -14,6 +14,12 @@ namespace Logic_Layer.score
     /// </summary>
     public class TempuraScoreCalculator : IScoreCalculator
     {
+        /// <summary>
+        /// Constructeur du calculateur de score des cartes tempura
+        /// </summary>
+        public TempuraScoreCalculator()
+        {
+        }
 
         /// <summary>
         /// Calcule le score des cartes tempura d'une liste de cartes

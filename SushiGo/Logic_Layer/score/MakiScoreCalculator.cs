@@ -19,19 +19,30 @@ namespace Logic_Layer.score
         private int amountMakisSecond;
         private List<Player> firstPlayerList;
         private List<Player> secondPlayerList;
-        #endregion
+       
+        #endregion 
+        /// <summary>
+        /// Constructeur du calculateur de score des cartes makis
+        /// </summary>
+        public MakiScoreCalculator()
+        {
+            this.amountMakisFirst = -1;
+            this.amountMakisSecond = -1;
+            this.firstPlayerList = new List<Player>();
+            this.secondPlayerList = new List<Player>();
+        }
         /// <summary>
         /// Calcule le score des cartes makis
         /// </summary>
         /// <param name="players"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public Dictionary<int, int> CalculateScore(List<Player> players)
         {
             int amountMakis;
             Dictionary<int, int> score = new Dictionary<int, int>();
             foreach (Player player in players)
             {
+                score[player.Id] = 0;
                 amountMakis = AmountMakisByPlayer(player.Board.Cards);
                 FirstSecondRanking(player, amountMakis);
             }
@@ -40,17 +51,22 @@ namespace Logic_Layer.score
             {
                 score[player.Id] = scoreToGiveFirst;
             }
-            if (firstPlayerList.Count <= 1)
+            if (firstPlayerList.Count == 1)
             {
-                int scoreToGiveSecond = 3 / secondPlayerList.Count();
-                foreach(Player player in secondPlayerList)
+                if (secondPlayerList.Count != 0)
                 {
-                    score[player.Id] = scoreToGiveSecond; 
+                    int scoreToGiveSecond = 3 / secondPlayerList.Count();
+                    foreach(Player player in secondPlayerList)
+                    {
+                        score[player.Id] = scoreToGiveSecond; 
+                    }
                 }
+                
             }
 
             return score;
         }
+
 
         #region Private Methodes
         private int AmountMakisByPlayer(List<Card> cards)
@@ -74,7 +90,7 @@ namespace Logic_Layer.score
             {
                 AddFirstPlayer(player);
             }
-            else if (amountMakis > amountMakisSecond)
+            else if (amountMakis > amountMakisSecond && amountMakis!=0) //Si on a pas de makis on a pas de points
             {
                 List<Player> secondPlayer = new List<Player>();
                 secondPlayer.Add(player);
@@ -87,7 +103,6 @@ namespace Logic_Layer.score
         }
         private void NewFirstPlayer(Player player, int amountMakis)
         {
-            NewSecondPlayers(firstPlayerList, amountMakis);
             firstPlayerList.Clear();
             firstPlayerList.Add(player);
             amountMakisFirst = amountMakis;
