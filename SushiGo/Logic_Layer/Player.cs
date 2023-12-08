@@ -1,14 +1,18 @@
 ﻿using Logic_Layer.cards;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Logic_Layer;
 
-public class Player
+public class Player : INotifyPropertyChanged
 {
     private int id;
     private string pseudo;
     private Board board;
     private Hand hand;
     private bool havePlayed;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
@@ -55,14 +59,26 @@ public class Player
         havePlayed = false;
     }
 
+
+    private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
     /// <summary>
     /// Joue une carte
     /// </summary>
     /// <param name="card">La carte à jouer</param>
     public void PlayCard(Card card)
     {
-        hand.PlayCard(card, board);
-        havePlayed = true;
+        // On joue la carte si le joueur n'est pas null et n'a pas encore joué sur ce tour
+        if (!HavePlayed)
+        {
+            hand.PlayCard(card, board);
+            havePlayed = true;
+        }
+
+        NotifyPropertyChanged(nameof(Player.HavePlayed));
     }
     
     /// <summary>
@@ -72,6 +88,7 @@ public class Player
     /// <returns>Les cartes spéciales à prendre en compte</returns>
     public List<ISpecialCard> PlayerTurn()
     {
+        havePlayed = false;
         return board.PlayerTurn();
     }
     

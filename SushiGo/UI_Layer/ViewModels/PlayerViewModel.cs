@@ -68,6 +68,15 @@ namespace UI_Layer.ViewModels
             NotifyPropertyChanged(nameof(player.HavePlayed));
         }
 
+        /// <summary>
+        /// Permet de mettre à jour le score d'après le métier
+        /// </summary>
+        public void LoadScore(int score)
+        {
+            this.score = score;
+            NotifyPropertyChanged(nameof(Score));
+        }
+
         #region properties
 
         /// <summary>
@@ -91,11 +100,6 @@ namespace UI_Layer.ViewModels
         public int Score 
         { 
             get => score; 
-            set
-            {
-                score = value;
-                NotifyPropertyChanged();
-            }
         }
 
         /// <summary>

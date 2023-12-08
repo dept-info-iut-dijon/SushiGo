@@ -33,6 +33,16 @@ namespace UI_Layer.ViewModels
         public GameTableViewModel()
         {
             this.ValidateCommand = new DelegateCommand(this.OnValidateCommand);
+
+
+        }
+
+        private void GameTableViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(Table.RoundNumber)))
+            {
+                this.LoadAllScores();
+            }
         }
 
         /// <summary>
@@ -44,19 +54,12 @@ namespace UI_Layer.ViewModels
             this.table = table;
             this.cardSelected = null;
             InitPlayers();
+
+            this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
+
+
         }
 
-        /// <summary>
-        /// Permet de mettre à jour les scores
-        /// </summary>
-        public void SetScores()
-        {
-            foreach (PlayerViewModel player in this.playerList)
-            {
-                player.Score = table.ScoreCalculator.GetScoreOfPlayer(player.Player);
-            }
-            NotifyPropertyChanged(nameof(LeaderBoard));
-        }
 
         /// <summary>
         /// Permet d'initialiser la liste des joueurs
@@ -202,6 +205,10 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x.Score).ToList();  }
+        /// <summary>
+        /// Représente l'objet métier de la table
+        /// </summary>
+        public Logic_Layer.Table Table { get => table;}
 
         #endregion Propriété
 
@@ -211,6 +218,18 @@ namespace UI_Layer.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Permet de mettre à jour tous les scores d'après le métier
+        /// </summary>
+        public void LoadAllScores()
+        {
+            foreach (PlayerViewModel player in PlayerList)
+            {
+                player.LoadScore(this.table.GetScoreOfPlayer(player.Player));
+            }
+            this.NotifyPropertyChanged(nameof(this.LeaderBoard));
+        }
+
         #region Méthode Privée
 
         private void OnValidateCommand()
@@ -218,7 +237,13 @@ namespace UI_Layer.ViewModels
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
-                this.SetScores();
+                List<PlayerViewModel> players = PlayerList.FindAll(x => x.Player.HavePlayed == false);
+                foreach (PlayerViewModel player in players)
+                {
+                    player.Player.PlayCard(player.Player.Hand.Cards[0]);
+                }
+                LoadAllScores();
+
 
                 // Notifications
                 this.NotifyPropertyChanged(nameof(this.CardSelected));
@@ -226,6 +251,7 @@ namespace UI_Layer.ViewModels
             }
         }
 
+        
         #endregion Méthode Privée
 
     }

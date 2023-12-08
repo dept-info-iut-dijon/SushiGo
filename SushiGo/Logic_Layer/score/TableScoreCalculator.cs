@@ -70,8 +70,7 @@ namespace Logic_Layer.score
         /// <param name="player">joueur dont on veut le score</param>
         /// <returns>score entier</returns>
         public int GetScoreOfPlayer(Player player)
-        {
-            Dictionary<int, int> scores = CalculateScore();
+        { 
             return scores[player.Id];
         }
     }
