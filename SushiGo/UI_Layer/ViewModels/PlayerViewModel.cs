@@ -28,21 +28,9 @@ namespace UI_Layer.ViewModels
         private readonly Player player;
         private PlayerType role;
         private bool isReady;
-        private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
         #endregion
 
-        /// <summary>
-        /// Constructeur du playerviewmodel associé au joueur ou a l'ia
-        /// </summary>
-        /// <param name="player">objet player metier</param>
-        /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
-        public PlayerViewModel(Player player, PlayerType role,GameCreationViewModel creationViewModel)
-        {
-            this.player = player;
-            this.role = role;
-            this.gameCreationViewModel = creationViewModel;
-        }
 
         /// <summary>
         /// Constructeur du playerviewmodel associé au joueur ou a l'ia, en version isolée du VM du jeu
@@ -103,7 +91,7 @@ namespace UI_Layer.ViewModels
             init 
             { 
                 isReady = value; 
-                NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
+                NotifyPropertyChanged(nameof(MainWindowViewModel.Instance.GameCreationViewModel.MessageWaitingStart));
             }
         }
 
