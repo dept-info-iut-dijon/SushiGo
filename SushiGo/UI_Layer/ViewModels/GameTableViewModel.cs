@@ -237,11 +237,7 @@ namespace UI_Layer.ViewModels
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
-                List<PlayerViewModel> players = PlayerList.FindAll(x => x.Player.HavePlayed == false);
-                foreach (PlayerViewModel player in players)
-                {
-                    player.Player.PlayCard(player.Player.Hand.Cards[0]);
-                }
+               
                 LoadAllScores();
 
 
