@@ -8,6 +8,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Logic_Layer.cards;
+using System.Windows.Documents;
+using System.Windows;
+using UI_Layer.UserControls;
 
 namespace UI_Layer.ViewModels
 {
@@ -24,6 +27,7 @@ namespace UI_Layer.ViewModels
         #region attributes
         private readonly Player player;
         private PlayerType role;
+        private int score = Random.Shared.Next(0, 200);
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
@@ -49,6 +53,7 @@ namespace UI_Layer.ViewModels
         public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
+            
             this.role = role;
         }
 
@@ -81,6 +86,11 @@ namespace UI_Layer.ViewModels
         public PlayerType Role { get => role; set => role = value; }
 
         /// <summary>
+        /// Score actuel du joueur
+        /// </summary>
+        public int Score { get => score; }
+
+        /// <summary>
         /// Est ce que le joueur est prêt à démarrer la partie
         /// </summary>
         public bool IsReady 
@@ -110,6 +120,29 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(isTurnFinished));
             }
         }
+
+        /// <summary>
+        /// Main du joueur.
+        /// </summary>
+        /// <inheritdoc/>
+        public List<CardComponent> Deck
+        {
+            get
+            {
+                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
+                List<CardComponent> cards = new List<CardComponent>();
+
+                int x = 0;
+                foreach (Card card in this.player.Hand.Cards)
+                {
+                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    x = -10;
+                }
+
+                return cards;
+            }
+        }
+
         #endregion
 
     }

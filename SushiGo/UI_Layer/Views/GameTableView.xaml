@@ -10,89 +10,118 @@
         WindowStyle="None"
         Title="SushiGo" 
         WindowState="Maximized">
-
+    <Window.Resources>
+        <usercontrols:LeaderboardRetriever x:Key="LeaderboardRetriever" />
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
         </Grid.Background>
-        <DockPanel>
-            <materialDesign:Card DockPanel.Dock="Top" Height="30" Background="{StaticResource PersianRedBrush}" Grid.ColumnSpan="4" >
-                <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
-                    <Menu.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="50" />
-                                </Grid.ColumnDefinitions>
-                            </Grid>
-                        </ItemsPanelTemplate>
-                    </Menu.ItemsPanel>
+        <!-- Menu -->
+        <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="{StaticResource PersianRedBrush}" Grid.ColumnSpan="4" >
+            <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
 
-                    <MenuItem Command="{Binding NavigationViewModel.BackToMenu}">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon
-                    Width="20"
-                    Height="20"
-                Foreground="White"
-                Kind="Home"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <MenuItem Command="{Binding GameTableViewModel.QuitGame}">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon
+                        Width="18"
+                        Height="18"
+                    Foreground="White"
+                    Kind="Home"/>
+                    </MenuItem.Icon>
+                </MenuItem>
 
-                    <MenuItem Command="{Binding NavigationViewModel.MinimizeApplication}" Grid.Column="2">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon
+                <MenuItem Grid.Column="1" Command="{Binding GameTableViewModel.OpenLeaderboard}">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon
+                             Width="17"
+                             Height="17"
+                         Foreground="{StaticResource SaffronBrush}"
+                         Kind="Trophy"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
+                <MenuItem Command="{Binding NavigationViewModel.MinimizeApplication}" Grid.Column="3">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon
                         Width="25"
                         Height="20"
                         Foreground="Black"
                         Kind="WindowMinimize"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    </MenuItem.Icon>
+                </MenuItem>
 
-                    <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="3">
-                        <MenuItem.Icon >
-                            <materialDesign:PackIcon
+                <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="4">
+                    <MenuItem.Icon >
+                        <materialDesign:PackIcon
                     Foreground="Black"
                     Width="20"
                     Height="20"
                     Kind="Close"/>
-                        </MenuItem.Icon>
+                    </MenuItem.Icon>
 
-                    </MenuItem>
+                </MenuItem>
 
-                </Menu>
-            </materialDesign:Card>
+            </Menu>
+        </materialDesign:Card>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
+        <Grid Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
 
 
 
                 <!-- Liste des cartes -->
-                <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <ItemsControl ItemsSource="{Binding GameTableViewModel.Deck}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <ItemsControl.ItemsPanel>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Orientation="Horizontal">
+                    <ListView ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Control.VerticalAlignment" Value="Bottom" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" />
                             </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                        </ListBox.ItemsPanel>
+                    </ListView>
                 </StackPanel>
 
-                <!-- Colonne 1-->
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.7*"/>
-                    </Grid.RowDefinitions>
+
+
+            <!-- Colonne 1-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
 
                     <!-- Plateau du joueur 2-->
                     <usercontrols:BoardComponent
