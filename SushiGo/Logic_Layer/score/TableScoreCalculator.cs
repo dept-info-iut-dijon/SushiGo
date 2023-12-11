@@ -34,10 +34,10 @@ namespace Logic_Layer.score
         /// <returns></returns>
         public Dictionary<int, int> CalculateScore()
         {
-            foreach(IScoreCalculator scoreCalculator in scoreCalculators)
+            foreach (IScoreCalculator scoreCalculator in scoreCalculators)
             {
                 Dictionary<int, int> calculatedScore = scoreCalculator.CalculateScore(table.Players);
-                foreach(Player player in table.Players)
+                foreach (Player player in table.Players)
                 {
                     scores[player.Id] += calculatedScore[player.Id];
                 }
@@ -70,7 +70,7 @@ namespace Logic_Layer.score
         /// <param name="player">joueur dont on veut le score</param>
         /// <returns>score entier</returns>
         public int GetScoreOfPlayer(Player player)
-        { 
+        {
             return scores[player.Id];
         }
     }

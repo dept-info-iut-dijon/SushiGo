@@ -27,10 +27,23 @@ namespace UI_Layer.ViewModels
         #region attributes
         private readonly Player player;
         private PlayerType role;
+        private int score = 0;
         private bool isReady;
+        private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
         #endregion
 
+        /// <summary>
+        /// Constructeur du playerviewmodel associé au joueur ou a l'ia
+        /// </summary>
+        /// <param name="player">objet player metier</param>
+        /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
+        public PlayerViewModel(Player player, PlayerType role, GameCreationViewModel creationViewModel)
+        {
+            this.player = player;
+            this.role = role;
+            this.gameCreationViewModel = creationViewModel;
+        }
 
         /// <summary>
         /// Constructeur du playerviewmodel associé au joueur ou a l'ia, en version isolée du VM du jeu
@@ -40,7 +53,7 @@ namespace UI_Layer.ViewModels
         public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
-            
+
             this.role = role;
         }
 
@@ -53,8 +66,15 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
-            NotifyPropertyChanged(nameof(player.Score));
-            NotifyPropertyChanged(nameof(this.Score));
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour le score d'après le métier
+        /// </summary>
+        public void LoadScore(int score)
+        {
+            this.score = score;
+            NotifyPropertyChanged(nameof(Score));
         }
 
         #region properties
@@ -62,7 +82,7 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Nom du joueur
         /// </summary>
-        public string Nom { get => player.Pseudo;  }
+        public string Nom { get => player.Pseudo; }
 
         /// <summary>
         /// Id du joueur
@@ -77,21 +97,21 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Score actuel du joueur
         /// </summary>
-        public int Score 
-        { 
-            get => player.Score; 
+        public int Score
+        {
+            get => score;
         }
 
         /// <summary>
         /// Est ce que le joueur est prêt à démarrer la partie
         /// </summary>
-        public bool IsReady 
-        { 
+        public bool IsReady
+        {
             get => isReady;
-            init 
-            { 
-                isReady = value; 
-                NotifyPropertyChanged(nameof(MainWindowViewModel.Instance.GameCreationViewModel.MessageWaitingStart));
+            init
+            {
+                isReady = value;
+                NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
             }
         }
 

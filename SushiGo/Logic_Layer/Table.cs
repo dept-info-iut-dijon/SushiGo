@@ -26,7 +26,20 @@ public class Table : INotifyPropertyChanged
     /// <summary>
     /// Numéro de la manche de la partie
     /// </summary>
-    public int RoundNumber => roundNumber;
+    public int RoundNumber
+    {
+        get
+        {
+            return roundNumber;
+        }
+        private set
+        {
+            roundNumber = value;
+            NotifyPropertyChanged();
+        }
+
+    }
+
     public List<Player> Players => players;
 
 
@@ -43,19 +56,17 @@ public class Table : INotifyPropertyChanged
         this.players = players;
         InitPlayersValue();
         this.scoreCalculator = new TableScoreCalculator(this);
-        
+
     }
 
     /// <summary>
-    /// Permet de mettre à jour le score des joueurs
+    /// Permet de récupérer le score d'un joueur
     /// </summary>
-    private void LoadScores()
+    /// <param name="player">joueur dont on veut le score</param>
+    /// <returns>score entier</returns>
+    public int GetScoreOfPlayer(Player player)
     {
-        Dictionary<int, int> scores = this.scoreCalculator.CalculateScore();
-        foreach(Player p in players)
-        {
-            p.Score = scores[p.Id];
-        }
+        return this.scoreCalculator.GetScoreOfPlayer(player);
     }
 
     /// <summary>
@@ -63,20 +74,20 @@ public class Table : INotifyPropertyChanged
     /// </summary>
     public void NextTurn()
     {
-        
+
         ActualizeHands();
         foreach (Player player in this.players)
         {
             player.PlayerTurn();
         }
         // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
-        if (NoMoreCards()) 
+        if (NoMoreCards())
             NextRound();
 
     }
 
-  
-    
+
+
     #endregion
 
     #region Méthodes privées
@@ -86,19 +97,18 @@ public class Table : INotifyPropertyChanged
         return !players.Any(player => player.HaveCards);
     }
 
-    /// <summary>
-    /// Permet de passer au round d'après 
-    /// </summary>
+    // Passe à la manche suivante
     private void NextRound()
     {
-        LoadScores();
+        this.scoreCalculator.CalculateScore();
         foreach (var player in players)
         {
             EndPlayerRound(player);
         }
-        roundNumber++;
+        RoundNumber = roundNumber + 1;
+
     }
-    
+
     // Doit être appelé sur chaque joueur à la fin de chaque manche
     private void EndPlayerRound(Player player)
     {
@@ -114,7 +124,7 @@ public class Table : INotifyPropertyChanged
             throw new WrongPlayersNumberException("Le nombre de joueur doit être inclus entre 2 et 5");
         }
 
-        
+
         List<Hand> hands = new HandFactory().CreateHands(this.players.Count);
 
 
@@ -132,11 +142,11 @@ public class Table : INotifyPropertyChanged
         {
             case nameof(Player.HavePlayed):
                 // On passe au tour suivant si tout le monde a joué
-                if (players.All(gamePlayer => gamePlayer.HavePlayed)) 
+                if (players.All(gamePlayer => gamePlayer.HavePlayed))
                     NextTurn();
                 break;
         }
-       
+
     }
 
     // Actualise les mains des joueurs en effectuant une rotation
@@ -156,8 +166,8 @@ public class Table : INotifyPropertyChanged
         for (var index = 0; index < players.Count; index++)
         {
             var player = players[index];
-            if (index + 1 < players.Count) 
-                hands[index+1] = player.Hand;
+            if (index + 1 < players.Count)
+                hands[index + 1] = player.Hand;
             else hands[0] = player.Hand;
         }
 
@@ -165,7 +175,7 @@ public class Table : INotifyPropertyChanged
         {
             throw new HandsRotationException("La nouvelle liste de mains est invalide");
         }
-        
+
         return hands;
     }
     #endregion

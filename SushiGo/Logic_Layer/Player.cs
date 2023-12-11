@@ -11,7 +11,6 @@ public class Player : INotifyPropertyChanged
     private Board board;
     private Hand hand;
     private bool havePlayed;
-    private int score;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -23,7 +22,7 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Identifiant du joueur dans la partie
     /// </summary>
-    public int Id 
+    public int Id
     {
         get => id;
         set => id = value;
@@ -51,12 +50,7 @@ public class Player : INotifyPropertyChanged
     /// </summary>
     public Board Board { get => board; }
 
-    /// <summary>
-    /// Représente le score actuel du joueur
-    /// </summary>
-    public int Score { get => score; set => score = value; }
-
-    public Player(int id, Board board, Hand hand,string pseudo)
+    public Player(int id, Board board, Hand hand, string pseudo)
     {
         this.id = id;
         this.board = board;
@@ -82,13 +76,11 @@ public class Player : INotifyPropertyChanged
         {
             hand.PlayCard(card, board);
             havePlayed = true;
-
-            NotifyPropertyChanged(nameof(Player.HavePlayed));
         }
 
-        
+        NotifyPropertyChanged(nameof(Player.HavePlayed));
     }
-    
+
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
     /// </summary>
@@ -99,7 +91,7 @@ public class Player : INotifyPropertyChanged
         havePlayed = false;
         return board.PlayerTurn();
     }
-    
+
     /// <summary>
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>
