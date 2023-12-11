@@ -42,7 +42,7 @@ namespace UI_Layer.Views
                 GameTableViewModel gameTableViewModel = MainWindowViewModel.Instance.GameTableViewModel;
                 if (gameTableViewModel != null)
                 {
-                    gameTableViewModel.ShowLeaderboard = !gameTableViewModel.ShowLeaderboard;
+                    gameTableViewModel.IsLeaderboardShown = !gameTableViewModel.IsLeaderboardShown;
                 }
             }
             

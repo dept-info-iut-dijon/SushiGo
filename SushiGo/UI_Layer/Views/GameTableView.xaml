@@ -34,7 +34,7 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
 
-                <MenuItem Command="{Binding GameTableViewModel.QuitGame}">
+                <MenuItem Command="{Binding GameTableViewModel.PreviewQuitGame}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon
                         Width="18"
@@ -65,7 +65,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="4">
+                <MenuItem Command="{Binding GameTableViewModel.PreviewQuitGame}" Grid.Column="4">
                     <MenuItem.Icon >
                         <materialDesign:PackIcon
                     Foreground="Black"
@@ -193,7 +193,8 @@
             </Grid>
         </Grid>
 
-        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.ShowLeaderboard}" HorizontalAlignment="Center" DialogBackground="{StaticResource SaffronBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+        <!-- Popup des scores-->
+        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.IsLeaderboardShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource SaffronBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
             <materialDesign:DialogHost.DialogContent >
                 <Grid Margin="40,20,40,20" >
                     <Grid.RowDefinitions>
@@ -277,6 +278,42 @@
                         BorderThickness="0"
                         Background="{StaticResource PersianRedBrush}"
                         Content="Retour"/>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    
+        <!-- Popup pour quitter la partie-->
+        <materialDesign:DialogHost IsOpen="{Binding GameTableViewModel.IsPopupValidationQuitShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource SilverBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="40,20,40,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                         FontWeight="bold"
+                         HorizontalAlignment="Center"
+                         FontSize="25"
+                         Text="Etes vous sûr de quitter ?"/>
+
+                    <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal">
+                        <Button
+                            BorderThickness="0"
+                            Command="{Binding GameTableViewModel.PreviewQuitGame}"
+                            Foreground="Black"
+                            Background="{StaticResource WhiteSmokeBrush}"
+                            Content="Non , retour au jeu"
+                            />
+                        <Button
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Command="{Binding GameTableViewModel.QuitGame}"
+                            Background="{StaticResource PersianRedBrush}"
+                            Content="Oui , je quitte la partie"
+                            />
+                    </StackPanel>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
