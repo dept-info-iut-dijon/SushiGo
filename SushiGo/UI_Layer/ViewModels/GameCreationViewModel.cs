@@ -39,12 +39,25 @@ namespace UI_Layer.ViewModels
         #endregion
 
 
+        /// <summary>
+        /// Constructeur du vue modele associé à l'écran de création de partie
+        /// </summary>
+        /// <param name="view">vue liée</param>
+        public GameCreationViewModel(Window view)
+        {
+            this.view = view;     
+        }
 
         #region events
         /// <summary>
-        /// Permet d'indiquer a la vue de fermer la page
+        /// Permet de retourner à l'écran d'accueil
         /// </summary>
-        public event EventHandler CloseRequested;
+        public DelegateCommand BackToHome => new DelegateCommand(() =>
+        {
+            HomeView homeView = new HomeView();
+            homeView.Show();
+            this.view.Close();
+        });
 
         /// <summary>
         /// Permet d'ajouter un joueur dans la partie
@@ -214,14 +227,6 @@ namespace UI_Layer.ViewModels
         #region methods
 
         /// <summary>
-        /// Indique à la vue de close la page
-        /// </summary>
-        protected virtual void OnCloseRequested()
-        {
-            CloseRequested?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
         /// Permet de créer le lobby de la partie
         /// </summary>
         private void CreateLobby()
@@ -255,7 +260,6 @@ namespace UI_Layer.ViewModels
                     // Ajout de l'IA aux joueurs
                     this.Players.Add(playerViewModel);
                 }
-                
                 this.StartButtonShow = true;
             }
 
@@ -289,9 +293,8 @@ namespace UI_Layer.ViewModels
 
 
             GameTableView gameTableView = new GameTableView(t);
-            MainWindowViewModel.Instance.GameTableViewModel.Init(t);
             gameTableView.Show();
-            OnCloseRequested();
+            this.view.Close();
         }
 
         /// <summary>

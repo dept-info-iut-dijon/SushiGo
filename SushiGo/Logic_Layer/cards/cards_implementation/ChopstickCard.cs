@@ -32,7 +32,7 @@ public class ChopstickCard : Card, ISpecialCard
     {
         return false;
     }
-
+    
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {

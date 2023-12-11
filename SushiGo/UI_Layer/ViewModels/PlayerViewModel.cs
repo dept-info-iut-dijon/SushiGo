@@ -28,9 +28,9 @@ namespace UI_Layer.ViewModels
         private readonly Player player;
         private PlayerType role;
         private int score = Random.Shared.Next(0, 200);
-        private bool isReady;
+        private bool isReady = false;
+
         private GameCreationViewModel gameCreationViewModel;
-        private bool isTurnFinished;
         #endregion
 
         /// <summary>
@@ -103,6 +103,7 @@ namespace UI_Layer.ViewModels
             }
         }
 
+
         /// <summary>
         /// Modele du joueur
         /// </summary>
@@ -142,7 +143,6 @@ namespace UI_Layer.ViewModels
                 return cards;
             }
         }
-
         #endregion
 
     }

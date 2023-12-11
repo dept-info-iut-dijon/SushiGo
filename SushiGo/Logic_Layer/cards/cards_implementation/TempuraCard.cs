@@ -7,11 +7,4 @@ public class TempuraCard : Card
 {
     /// <inheritdoc/>
     public override string Name => "Tempura";
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        return obj is TempuraCard card &&
-               Name == card.Name;
-    }
 }

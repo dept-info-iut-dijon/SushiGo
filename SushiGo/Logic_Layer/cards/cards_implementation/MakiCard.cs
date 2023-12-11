@@ -33,13 +33,4 @@ public class MakiCard : Card
     /// Nom de la carte, inclus la quantité de makis présents sur la carte
     /// </summary>
     public override string Name => $"Maki{quantity}";
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        return obj is MakiCard card &&
-               Name == card.Name &&
-               quantity == card.quantity &&
-               Quantity == card.Quantity;
-    }
 }

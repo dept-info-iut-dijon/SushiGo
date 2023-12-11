@@ -95,7 +95,6 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-
                 <!-- Texte affichant le numéro de la manche en cours -->
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
@@ -162,8 +161,9 @@
                         </ListBox.ItemsPanel>
                     </ListView>
                 </StackPanel>
+            </Border>
 
-
+        </Grid>
 
             <!-- Colonne 1-->
             <Grid>
@@ -300,7 +300,6 @@
                         <RowDefinition Height="8*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-
                     <TextBlock
                         FontWeight="bold"
                         HorizontalAlignment="Center"
@@ -380,6 +379,6 @@
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
     </Grid>
-
-
+        
+        
 </Window>
