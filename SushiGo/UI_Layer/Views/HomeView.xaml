@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="SushiGo !" 
         WindowStyle="None"
-        WindowState="Maximized" 
-        Background="Wheat">
+        WindowState="Maximized">
 
 
     <Grid>
@@ -25,11 +24,11 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image  Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="../Assets/Images/sushiTest5.jpg"/>
+        <Image  Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="{StaticResource RestaurantHall}"/>
         <Border Grid.RowSpan="5" Grid.ColumnSpan="3" Opacity="0.5" Background="White">
 
         </Border>
-        <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{StaticResource logo}" Margin="60,50"/>
+        <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{StaticResource Logo}" Margin="60,50"/>
 
         
         <!-- Bouton Jouer -->

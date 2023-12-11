@@ -1,0 +1,25 @@
+﻿name: Tests unitaires des vues-modèles
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore SushiGo/ViewModel_Test/ViewModel_Test.csproj
+      - name: Build
+        run: dotnet build SushiGo/ViewModel_Test/ViewModel_Test.csproj --no-restore
+      - name: Test
+        run: dotnet test SushiGo/ViewModel_Test/ViewModel_Test.csproj --no-build --verbosity normal

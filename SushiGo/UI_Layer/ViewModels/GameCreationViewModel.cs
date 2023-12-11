@@ -1,6 +1,7 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.IA;
+using Logic_Layer.IA.IAImplementation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace UI_Layer.ViewModels
         #endregion
 
         #region attributes
-        private IADifficulty difficulty = IADifficulty.FACILE;
+        private IADifficultyEnum difficulty = IADifficultyEnum.FACILE;
         private ObservableCollection<PlayerViewModel> players = new ObservableCollection<PlayerViewModel>();
         private int playerCount = 3;
         private bool isModeJvJ = false;
@@ -38,25 +39,12 @@ namespace UI_Layer.ViewModels
         #endregion
 
 
-        /// <summary>
-        /// Constructeur du vue modele associé à l'écran de création de partie
-        /// </summary>
-        /// <param name="view">vue liée</param>
-        public GameCreationViewModel(Window view)
-        {
-            this.view = view;     
-        }
 
         #region events
         /// <summary>
-        /// Permet de retourner à l'écran d'accueil
+        /// Permet d'indiquer a la vue de fermer la page
         /// </summary>
-        public DelegateCommand BackToHome => new DelegateCommand(() =>
-        {
-            HomeView homeView = new HomeView();
-            homeView.Show();
-            this.view.Close();
-        });
+        public event EventHandler CloseRequested;
 
         /// <summary>
         /// Permet d'ajouter un joueur dans la partie
@@ -101,7 +89,7 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Difficulté de l'ia sélectionnée
         /// </summary>
-        public IADifficulty Difficulty
+        public IADifficultyEnum Difficulty
         {
             get
             {
@@ -226,11 +214,18 @@ namespace UI_Layer.ViewModels
         #region methods
 
         /// <summary>
+        /// Indique à la vue de close la page
+        /// </summary>
+        protected virtual void OnCloseRequested()
+        {
+            CloseRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
         /// Permet de créer le lobby de la partie
         /// </summary>
         private void CreateLobby()
         {
-            
             // Création du joueur qui créer la partie
             this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Moi"), PlayerType.PLAYER, this) { IsReady = true });
 
@@ -247,17 +242,36 @@ namespace UI_Layer.ViewModels
             // Création des IAs
             else
             {
-                // TODO  : gerer les difficultes
+                IAFactory iAFactory = new IAFactory();
+
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new DrunkenIA(i+1,new Board(),new Hand(i+1,new List<Card>()),$"Robot {i}"), PlayerType.ROBOT, this));
+                    // Création de l'IA
+                    IA ia = iAFactory.CreateIA(this.difficulty, i + 1, new Board(), new Hand(i + 1, new List<Card>()));
+
+                    // Création de la vueModel à partir de l'IA créée
+                    PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT, this);
+
+                    // Ajout de l'IA aux joueurs
+                    this.Players.Add(playerViewModel);
                 }
+                
                 this.StartButtonShow = true;
             }
 
             this.IsLobbyShowed = true;
+        }
 
-           
+        /// <summary>
+        /// Permet de réinitialiser l'ihm à chaque chargement de la page
+        /// </summary>
+        public void ResetChanges()
+        {
+            this.IsLobbyShowed = false;
+            this.StartButtonShow = false;
+            this.PlayerCount = 5;
+            this.IsModeJvJ = false;
+            this.Players.Clear();
         }
 
         /// <summary>
@@ -275,8 +289,9 @@ namespace UI_Layer.ViewModels
 
 
             GameTableView gameTableView = new GameTableView(t);
+            MainWindowViewModel.Instance.GameTableViewModel.Init(t);
             gameTableView.Show();
-            this.view.Close();
+            OnCloseRequested();
         }
 
         /// <summary>

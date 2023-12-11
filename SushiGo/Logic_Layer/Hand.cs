@@ -47,8 +47,9 @@ public class Hand
             RemoveCard(myCard);
         }
         else
-            throw new CardNotInHandException(
-                "La carte ne peut pas être jouée car elle n'est pas dans la main du joueur");
+        {
+            throw new CardNotInHandException("La carte ne peut pas être jouée car elle n'est pas dans la main du joueur");
+        }
     }
 
     // Retourne l'équivalent présent dans la main de la carte, renvoie null si elle n'est pas présente
