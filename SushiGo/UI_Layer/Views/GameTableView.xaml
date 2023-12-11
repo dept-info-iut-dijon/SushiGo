@@ -113,7 +113,7 @@
                         <RowDefinition Height="0.7*"/>
                         <RowDefinition Height="0.6*"/>
                         <RowDefinition Height="1.7*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1.5*"/>
                     </Grid.RowDefinitions>
 
                     <!-- Texte affichant le numéro de la manche en cours -->
