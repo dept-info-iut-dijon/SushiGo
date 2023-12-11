@@ -187,10 +187,7 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x.Score).ToList();  }
-        /// <summary>
-        /// Représente l'objet métier de la table
-        /// </summary>
-        public Logic_Layer.Table Table { get => table;}
+
 
         #endregion Propriété
 
