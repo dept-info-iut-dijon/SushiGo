@@ -33,10 +33,10 @@ public partial class BoardComponent : UserControl
     /// </summary>
     public static readonly DependencyProperty PlayerProperty =
         DependencyProperty.Register("Player", typeof(PlayerViewModel), typeof(BoardComponent),
-            new FrameworkPropertyMetadata(new PlayerViewModel(new Logic_Layer.Player(0,null,null,"Template"),PlayerType.PLAYER),
+            new FrameworkPropertyMetadata(null,
                 FrameworkPropertyMetadataOptions.AffectsRender |
-                FrameworkPropertyMetadataOptions.AffectsParentMeasure,ChangePlayer));
-    
+                FrameworkPropertyMetadataOptions.AffectsParentMeasure, ChangePlayer));
+
     #endregion
 
     #region properties
