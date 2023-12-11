@@ -29,8 +29,24 @@ namespace UI_Layer.Views
             //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableViewModel (propriété Deck)
             Player thisPLayer = t.Players[0];
             player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
+            KeyDown += Show_Leaderboard;
         }
 
+        /// <summary>
+        /// Permet d'afficher le tableau des scores
+        /// </summary>
+        private void Show_Leaderboard(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Tab)
+            {
+                GameTableViewModel gameTableViewModel = MainWindowViewModel.Instance.GameTableViewModel;
+                if (gameTableViewModel != null)
+                {
+                    gameTableViewModel.ShowLeaderboard = !gameTableViewModel.ShowLeaderboard;
+                }
+            }
+            
+        }
 
         private void EndPlayerTurn(object sender, RoutedEventArgs e)
         {

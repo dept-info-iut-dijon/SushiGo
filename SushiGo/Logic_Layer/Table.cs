@@ -1,23 +1,48 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
+using Logic_Layer.score;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Logic_Layer;
 
 /// <summary>
 /// Table de jeu
 /// </summary>
-public class Table
+public class Table : INotifyPropertyChanged
 {
     private readonly List<Player> players;
     private int roundNumber;
-    
+    private TableScoreCalculator scoreCalculator;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
     /// <summary>
     /// Numéro de la manche de la partie
     /// </summary>
-    public int RoundNumber => roundNumber;
+    public int RoundNumber
+    {
+        get
+        {
+            return roundNumber;
+        }
+        private set
+        {
+            roundNumber = value;
+            NotifyPropertyChanged();
+        }
+
+    }
 
     public List<Player> Players => players;
+
+
 
     #region Méthodes publiques
 
@@ -30,41 +55,39 @@ public class Table
     {
         this.players = players;
         InitPlayersValue();
+        this.scoreCalculator = new TableScoreCalculator(this);
+
     }
 
+    /// <summary>
+    /// Permet de récupérer le score d'un joueur
+    /// </summary>
+    /// <param name="player">joueur dont on veut le score</param>
+    /// <returns>score entier</returns>
+    public int GetScoreOfPlayer(Player player)
+    {
+        return this.scoreCalculator.GetScoreOfPlayer(player);
+    }
 
     /// <summary>
     /// Effectue les opérations de changement de tour
     /// </summary>
     public void NextTurn()
     {
+
         ActualizeHands();
-        // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
-        if (NoMoreCards()) NextRound();
-    }
-    
-    /// <summary>
-    /// Fait jouer une carte à un joueur
-    /// </summary>
-    /// <param name="player">Le joueur que l'on veut faire jouer</param>
-    /// <param name="card">La carte à jouer</param>
-    /// <exception cref="PlayerImpossibleToFindException">Lancée quand le joueur demandé n'est pas en jeu</exception>
-    public void PlayCard(Player player, Card card)
-    {
-        Player? myPlayer = players.Find(myPlayer => myPlayer.Equals(player));
-
-        if (myPlayer is null)
+        foreach (Player player in this.players)
         {
-            throw new PlayerImpossibleToFindException("Le joueur n'est pas dans la partie");
+            player.PlayerTurn();
         }
+        // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
+        if (NoMoreCards())
+            NextRound();
 
-        // On joue la carte si le joueur n'est pas null et n'a pas encore joué sur ce tour
-        if (!myPlayer.HavePlayed) myPlayer.PlayCard(card);
-        
-        // On passe au tour suivant si tout le monde a joué
-        if (players.All(gamePlayer => gamePlayer.HavePlayed)) NextTurn();
     }
-    
+
+
+
     #endregion
 
     #region Méthodes privées
@@ -77,18 +100,20 @@ public class Table
     // Passe à la manche suivante
     private void NextRound()
     {
+        this.scoreCalculator.CalculateScore();
         foreach (var player in players)
         {
             EndPlayerRound(player);
         }
-        roundNumber = roundNumber + 1;
+        RoundNumber = roundNumber + 1;
+
     }
-    
+
     // Doit être appelé sur chaque joueur à la fin de chaque manche
     private void EndPlayerRound(Player player)
     {
         var specialCards = player.EndRound();
-        throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
+        //throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
 
     // Initialiser les joueurs
@@ -99,7 +124,7 @@ public class Table
             throw new WrongPlayersNumberException("Le nombre de joueur doit être inclus entre 2 et 5");
         }
 
-        
+
         List<Hand> hands = new HandFactory().CreateHands(this.players.Count);
 
 
@@ -107,7 +132,21 @@ public class Table
         {
             players[i].Id = i;
             players[i].Hand = hands[i];
+            players[i].PropertyChanged += PlayerNotification;
         }
+    }
+
+    private void PlayerNotification(object? sender, PropertyChangedEventArgs e)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(Player.HavePlayed):
+                // On passe au tour suivant si tout le monde a joué
+                if (players.All(gamePlayer => gamePlayer.HavePlayed))
+                    NextTurn();
+                break;
+        }
+
     }
 
     // Actualise les mains des joueurs en effectuant une rotation
@@ -127,8 +166,8 @@ public class Table
         for (var index = 0; index < players.Count; index++)
         {
             var player = players[index];
-            if (index + 1 < players.Count) 
-                hands[index+1] = player.Hand;
+            if (index + 1 < players.Count)
+                hands[index + 1] = player.Hand;
             else hands[0] = player.Hand;
         }
 
@@ -136,7 +175,7 @@ public class Table
         {
             throw new HandsRotationException("La nouvelle liste de mains est invalide");
         }
-        
+
         return hands;
     }
     #endregion
