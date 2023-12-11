@@ -32,17 +32,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public GameTableViewModel()
         {
-            this.ValidateCommand = new DelegateCommand(this.OnValidateCommand);
-
-
-        }
-
-        private void GameTableViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.Equals(nameof(Table.RoundNumber)))
-            {
-                this.LoadAllScores();
-            }
+            this.ValidateCommand = new DelegateCommand(this.PlayCard);
         }
 
         /// <summary>
@@ -54,10 +44,6 @@ namespace UI_Layer.ViewModels
             this.table = table;
             this.cardSelected = null;
             InitPlayers();
-
-            this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
-
-
         }
 
 
@@ -92,7 +78,10 @@ namespace UI_Layer.ViewModels
             ShowLeaderboard = !showLeaderboard;
         });
 
-
+        /// <summary>
+        /// Commande appelée lors du clic sur le bouton Valider.
+        /// </summary>
+        public DelegateCommand ValidateCommand { get; set; }
 
         /// <summary>
         /// Permet de quitter la partie et retourner au menu
@@ -104,14 +93,6 @@ namespace UI_Layer.ViewModels
 
         #endregion Evénement
 
-        #region Commande Déléguée
-
-        /// <summary>
-        /// Commande appelée lors du clic sur le bouton Valider.
-        /// </summary>
-        public DelegateCommand ValidateCommand { get; set; }
-
-        #endregion Commande Déléguée
 
         #region Propriété
 
@@ -154,6 +135,7 @@ namespace UI_Layer.ViewModels
 
                     // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
                     this.cardSelected?.ClickOnCard();
+
 
                     // Notification des changements
                     this.NotifyPropertyChanged(nameof(CardSelected));
@@ -218,34 +200,31 @@ namespace UI_Layer.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <summary>
-        /// Permet de mettre à jour tous les scores d'après le métier
-        /// </summary>
-        public void LoadAllScores()
-        {
-            foreach (PlayerViewModel player in PlayerList)
-            {
-                player.LoadScore(this.table.GetScoreOfPlayer(player.Player));
-            }
-            this.NotifyPropertyChanged(nameof(this.LeaderBoard));
-        }
+
 
         #region Méthode Privée
 
-        private void OnValidateCommand()
+
+        /// <summary>
+        /// Méthode qui utilise la logique du jeu
+        /// </summary>
+        private void PlayCard()
         {
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
+
+                // TODO : Remplacer ce code en dessous qui fait jouer les IAs
                 List<PlayerViewModel> players = PlayerList.FindAll(x => x.Player.HavePlayed == false);
                 foreach (PlayerViewModel player in players)
                 {
                     player.Player.PlayCard(player.Player.Hand.Cards[0]);
                 }
-                LoadAllScores();
+
 
 
                 // Notifications
+                this.NotifyPropertyChanged(nameof(this.LeaderBoard));
                 this.NotifyPropertyChanged(nameof(this.CardSelected));
                 this.NotifyPropertyChanged(nameof(this.Deck));
             }

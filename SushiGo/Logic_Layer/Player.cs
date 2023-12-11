@@ -11,6 +11,7 @@ public class Player : INotifyPropertyChanged
     private Board board;
     private Hand hand;
     private bool havePlayed;
+    private int score;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -49,6 +50,11 @@ public class Player : INotifyPropertyChanged
     /// Board des cartes posées du joueur
     /// </summary>
     public Board Board { get => board; }
+
+    /// <summary>
+    /// Représente le score actuel du joueur
+    /// </summary>
+    public int Score { get => score; set => score = value; }
 
     public Player(int id, Board board, Hand hand,string pseudo)
     {

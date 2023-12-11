@@ -27,7 +27,6 @@ namespace UI_Layer.ViewModels
         #region attributes
         private readonly Player player;
         private PlayerType role;
-        private int score = 0;
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
@@ -66,15 +65,8 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
-        }
-
-        /// <summary>
-        /// Permet de mettre à jour le score d'après le métier
-        /// </summary>
-        public void LoadScore(int score)
-        {
-            this.score = score;
-            NotifyPropertyChanged(nameof(Score));
+            NotifyPropertyChanged(nameof(player.Score));
+            NotifyPropertyChanged(nameof(this.Score));
         }
 
         #region properties
@@ -99,7 +91,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public int Score 
         { 
-            get => score; 
+            get => player.Score; 
         }
 
         /// <summary>

@@ -26,19 +26,7 @@ public class Table : INotifyPropertyChanged
     /// <summary>
     /// Numéro de la manche de la partie
     /// </summary>
-    public int RoundNumber {
-        get
-        {
-            return roundNumber;
-        }
-        private set
-        {
-            roundNumber = value;
-            NotifyPropertyChanged();
-        }
-
-    }
-
+    public int RoundNumber => roundNumber;
     public List<Player> Players => players;
 
 
@@ -59,13 +47,15 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Permet de récupérer le score d'un joueur
+    /// Permet de mettre à jour le score des joueurs
     /// </summary>
-    /// <param name="player">joueur dont on veut le score</param>
-    /// <returns>score entier</returns>
-    public int GetScoreOfPlayer(Player player)
+    private void LoadScores()
     {
-        return this.scoreCalculator.GetScoreOfPlayer(player);
+        Dictionary<int, int> scores = this.scoreCalculator.CalculateScore();
+        foreach(Player p in players)
+        {
+            p.Score = scores[p.Id];
+        }
     }
 
     /// <summary>
@@ -96,16 +86,17 @@ public class Table : INotifyPropertyChanged
         return !players.Any(player => player.HaveCards);
     }
 
-    // Passe à la manche suivante
+    /// <summary>
+    /// Permet de passer au round d'après 
+    /// </summary>
     private void NextRound()
     {
-        this.scoreCalculator.CalculateScore();
+        LoadScores();
         foreach (var player in players)
         {
             EndPlayerRound(player);
         }
-        RoundNumber = roundNumber + 1;
-
+        roundNumber++;
     }
     
     // Doit être appelé sur chaque joueur à la fin de chaque manche
