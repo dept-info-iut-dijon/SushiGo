@@ -22,8 +22,12 @@ namespace Logic_Layer.IA.IAImplementation
         /// </summary>
         public override void Play()
         {
-            PlayCard(Hand.Cards.First());
-            EndRound();
+            if (HavePlayed == false)
+            {
+                PlayCard(Hand.Cards.First());
+                EndRound();
+            }
+            
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Logic_Layer.IA
         /// <param name="id"></param>
         /// <param name="board"></param>
         /// <param name="hand"></param>
-        protected IA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
+        protected IA(int id, Board board, Hand hand, string pseudo) : base(id, board, hand, pseudo)
         {
         }
 
@@ -27,5 +27,18 @@ namespace Logic_Layer.IA
         /// Actions à réaliser au moment du tour de celle-ci
         /// </summary>
         public abstract void Play();
+
+        public override bool HavePlayed
+        {
+            get { return base.HavePlayed; }
+            protected set
+            {
+                base.HavePlayed = value;
+                if (this.HavePlayed == false)
+                {
+                    this.Play();
+                }
+            }
+        }
     }
 }

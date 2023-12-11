@@ -17,7 +17,17 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
     /// </summary>
-    public bool HavePlayed => havePlayed;
+    public virtual bool HavePlayed 
+    { 
+        get 
+        { 
+            return havePlayed; 
+        } 
+        protected set 
+        { 
+            havePlayed = value; 
+        } 
+    }
 
     /// <summary>
     /// Identifiant du joueur dans la partie
