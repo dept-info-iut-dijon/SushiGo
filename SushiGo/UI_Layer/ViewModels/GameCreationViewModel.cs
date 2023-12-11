@@ -227,14 +227,14 @@ namespace UI_Layer.ViewModels
         private void CreateLobby()
         {
             // Création du joueur qui créer la partie
-            this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Moi"), PlayerType.PLAYER, this) { IsReady = true });
+            this.Players.Add(new PlayerViewModel(new Player(1, new Board(), new Hand(1, new List<Card>()), "Moi"), PlayerType.PLAYER) { IsReady = true });
 
             // Création des joueurs en multijoueurs
             if (isModeJvJ)
             {
                 for (int i = 1; i < playerCount; i++)
                 {
-                    this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING, this));
+                    this.Players.Add(new PlayerViewModel(new Player(i + 1, new Board(), new Hand(i + 1, new List<Card>()), $"Waiting for player..."), PlayerType.WAITING));
                 }
                 NotifyPropertyChanged(nameof(MessageWaitingStart));
                 GenerateIDParty();
@@ -250,7 +250,7 @@ namespace UI_Layer.ViewModels
                     IA ia = iAFactory.CreateIA(this.difficulty, i + 1, new Board(), new Hand(i + 1, new List<Card>()));
 
                     // Création de la vueModel à partir de l'IA créée
-                    PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT, this);
+                    PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT);
 
                     // Ajout de l'IA aux joueurs
                     this.Players.Add(playerViewModel);
