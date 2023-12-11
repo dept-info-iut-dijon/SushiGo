@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,6 +22,8 @@ public partial class BoardComponent : UserControl
     {
         InitializeComponent();
     }
+
+
 
     #region dependenciesProperties
 
@@ -60,6 +63,17 @@ public partial class BoardComponent : UserControl
         if (d is BoardComponent BoardComponent)
         {
             BoardComponent.PlayerName.Text = BoardComponent.Player.Nom;
+            SetupCards(BoardComponent.Player);
         }
+    }
+
+    /// <summary>
+    /// Permet de remplir le board avec les différentes cartes
+    /// </summary>
+    private static void SetupCards(PlayerViewModel Player)
+    {
+        List<CardComponent> cartesJoueurs = Player.Deck;
+        // TODO : afficher les cartes
+
     }
 }

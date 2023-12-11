@@ -9,7 +9,7 @@
         >
     <Border 
         Margin="10"
-        BorderBrush="White" 
+        BorderBrush="Transparent" 
         Grid.Row="2" 
         BorderThickness="5"
         CornerRadius="10">
@@ -18,19 +18,21 @@
                Source="../Assets/Images/Board.jpg"
                Stretch="Fill"/>
             <StackPanel>
-                <Border Background="White"  BorderBrush="Black">
-                    <StackPanel Background="White" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Border Background="{StaticResource PersianRedBrush}"  BorderBrush="Black">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <materialDesign:PackIcon
-                    VerticalAlignment="Center"
-                    Width="20"
-                    Height="20"
-                    Kind="Account"/>
-
+                            VerticalAlignment="Center"
+                            Width="20"
+                            Foreground="White"
+                            Height="20"
+                            Kind="Account"/>
                         <TextBlock
-                        Name="PlayerName"
-                        FontFamily="{StaticResource NewSushi}"
-                        Margin="5,0,0,0"
-                        FontSize="20"/>
+                            Name="PlayerName"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            FontFamily="{StaticResource NewSushi}"
+                            Margin="5,0,0,0"
+                            FontSize="18"/>
                     </StackPanel>
                 </Border>
                 <Grid/>
