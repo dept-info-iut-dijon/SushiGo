@@ -34,7 +34,7 @@ namespace Logic_Layer.IA
             protected set
             {
                 base.HavePlayed = value;
-                if (this.HavePlayed == false)
+                if (!this.HavePlayed)
                 {
                     this.Play();
                 }
