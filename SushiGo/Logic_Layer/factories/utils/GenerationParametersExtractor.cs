@@ -25,8 +25,8 @@ public class GenerationParametersExtractor
             { "maki 3", 8 },
             { "sushi saumon", 10 },
             { "sushi calamar", 5 },
-            { "sushi omelette", 10 } //,
-            // { "dessert", 10 },
+            { "sushi omelette", 10 },
+            { "dessert", 10 }//,
             // { "wasabi", 6 },
             // { "baguette", 4 }
         };
