@@ -119,7 +119,8 @@ namespace UI_Layer.ViewModels
         #endregion Commande Déléguée
 
         #region Propriété
-
+        public GameOrderEnum GameOrder => table.GameOrder;
+        
         /// <summary>
         /// Représente le numéro de la manche
         /// </summary>
