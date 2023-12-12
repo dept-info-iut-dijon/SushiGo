@@ -93,7 +93,7 @@
 
             <!-- Liste des cartes -->
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="5" Orientation="Horizontal">
-                <ListView ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="Control.VerticalAlignment" Value="Bottom" />
@@ -244,13 +244,29 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock
-                        FontWeight="bold"
-                        HorizontalAlignment="Center"
-                        FontSize="25"
-                        Text="{Binding GameTableViewModel.MancheNumber}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Center"
+                            Width="20"
+                            Height="20"
+                            Kind="Podium"
+                            Foreground="{StaticResource NightBrush}"/>
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontWeight="bold"
+                            HorizontalAlignment="Center"
+                            FontSize="25"
+                            Text="{Binding GameTableViewModel.MancheNumber}"/>
+                        <materialDesign:PackIcon
+                            VerticalAlignment="Center"
+                            Width="20"
+                            Height="20"
+                            Margin="5,0,0,0"
+                            Kind="Podium"
+                            Foreground="{StaticResource NightBrush}"/>
+                    </StackPanel>
+                    
 
-                    <ListView Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
+                    <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <materialDesign:Chip Margin="0,0,0,-5" Background="White">
