@@ -9,7 +9,7 @@ public class DessertScoreCalculator : IScoreCalculator
     public Dictionary<int, int> CalculateScore(List<Player> players)
     {
         var scores = new Dictionary<int, int>();
-        var dessertCards = new Dictionary<Player, List<Card>>();
+        var dessertCards = new Dictionary<int, List<Card>>();
         
         var playersWithMostDesserts = new List<Player>();
         var playersWithLeastDesserts = new List<Player>();
@@ -19,7 +19,8 @@ public class DessertScoreCalculator : IScoreCalculator
         // Filtrer pour ne retrouver que les cartes desserts
         foreach (var player in players)
         {
-            dessertCards[player] = CardsSorter.TypeSort(typeof(DessertCard), player.Board.Cards);
+            dessertCards[player.Id] = CardsSorter.TypeSort(typeof(DessertCard), player.Board.Cards);
+            scores[player.Id] = 0;
         }
         
         // On donne 6 points au.x joueur.s avec le plus de cartes desserts
@@ -31,7 +32,7 @@ public class DessertScoreCalculator : IScoreCalculator
         return scores;
     }
 
-    private static void RemoveScoreFromPlayersWithLeastDesserts(List<Player> players, Dictionary<Player, List<Card>> dessertCards, int leastDesserts,
+    private static void RemoveScoreFromPlayersWithLeastDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int leastDesserts,
         List<Player> playersWithLeastDesserts, Dictionary<int, int> scores)
     {
         // Définir le/les joueurs avec le moins de cartes desserts
@@ -44,7 +45,7 @@ public class DessertScoreCalculator : IScoreCalculator
         }
     }
 
-    private static void AddScoreToPlayersWithMostDesserts(List<Player> players, Dictionary<Player, List<Card>> dessertCards, int mostDesserts,
+    private static void AddScoreToPlayersWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
         List<Player> playersWithMostDesserts, Dictionary<int, int> scores)
     {
         // Définir le/les joueurs avec le plus de cartes desserts
@@ -58,18 +59,18 @@ public class DessertScoreCalculator : IScoreCalculator
     }
 
     // Définir le/les joueurs avec le plus de cartes desserts
-    private static void GetPlayerWithMostDesserts(List<Player> players, Dictionary<Player, List<Card>> dessertCards, int mostDesserts,
+    private static void GetPlayerWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
         List<Player> playersWithMostDesserts)
     {
         foreach (var player in players)
         {
-            if (dessertCards[player].Count > mostDesserts)
+            if (dessertCards[player.Id].Count > mostDesserts)
             {
-                mostDesserts = dessertCards[player].Count;
+                mostDesserts = dessertCards[player.Id].Count;
                 playersWithMostDesserts.Clear();
                 playersWithMostDesserts.Add(player);
             }
-            else if (dessertCards[player].Count == mostDesserts)
+            else if (dessertCards[player.Id].Count == mostDesserts)
             {
                 playersWithMostDesserts.Add(player);
             }
@@ -77,18 +78,18 @@ public class DessertScoreCalculator : IScoreCalculator
     }
 
     // Définir le/les joueurs avec le moins de cartes desserts
-    private static void GetPlayerWithLeastDesserts(List<Player> players, Dictionary<Player, List<Card>> dessertCards, int leastDesserts,
+    private static void GetPlayerWithLeastDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int leastDesserts,
         List<Player> playersWithLeastDesserts)
     {
         foreach (var player in players)
         {
-            if (dessertCards[player].Count < leastDesserts)
+            if (dessertCards[player.Id].Count < leastDesserts)
             {
-                leastDesserts = dessertCards[player].Count;
+                leastDesserts = dessertCards[player.Id].Count;
                 playersWithLeastDesserts.Clear();
                 playersWithLeastDesserts.Add(player);
             }
-            else if (dessertCards[player].Count == leastDesserts)
+            else if (dessertCards[player.Id].Count == leastDesserts)
             {
                 playersWithLeastDesserts.Add(player);
             }
