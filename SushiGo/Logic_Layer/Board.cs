@@ -1,4 +1,6 @@
 ﻿using Logic_Layer.cards;
+using Logic_Layer.cards.cards_implementation;
+using Logic_Layer.cards.utils;
 
 namespace Logic_Layer;
 
@@ -68,6 +70,19 @@ public class Board
     /// <param name="card">Carte à ajouter</param>
     public void AddCard(Card card)
     {
+        if(card is SushiCard)
+        {
+            List<Card> wasabiCards = CardsSorter.TypeSort(typeof(WasabiCard), cards);
+            bool sushiIsAssociated = false;
+            foreach (WasabiCard c in wasabiCards)
+            {
+                if (c.Sushi is null && !sushiIsAssociated)
+                {
+                    c.AssociateSushi(card as SushiCard);
+                    sushiIsAssociated=true;
+                }
+            }
+        }
         cards.Add(card);
     }
 }
