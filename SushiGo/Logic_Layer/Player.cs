@@ -17,7 +17,17 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
     /// </summary>
-    public bool HavePlayed => havePlayed;
+    public virtual bool HavePlayed 
+    { 
+        get 
+        { 
+            return havePlayed; 
+        } 
+        protected set 
+        { 
+            havePlayed = value; 
+        } 
+    }
 
     /// <summary>
     /// Identifiant du joueur dans la partie
@@ -89,7 +99,7 @@ public class Player : INotifyPropertyChanged
     /// <returns>Les cartes spéciales à prendre en compte</returns>
     public List<ISpecialCard> PlayerTurn()
     {
-        havePlayed = false;
+        HavePlayed = false;
         return board.PlayerTurn();
     }
 
