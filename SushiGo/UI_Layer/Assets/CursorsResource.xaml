@@ -2,6 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Cursor x:Key="MainCursor">Cursors/MainCursor.cur</Cursor>
-    <Cursor x:Key="MainCursorOn">Cursors/MainCursorOn.cur</Cursor>
+    <Cursor x:Key="MainCursorClick">Cursors/MainCursorClick.cur</Cursor>
 
 </ResourceDictionary>
