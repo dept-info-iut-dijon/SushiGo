@@ -127,14 +127,34 @@
 
                 <!-- Plateau du joueur 2-->
                 <usercontrols:BoardComponent
-                    Player="{Binding GameTableViewModel.PlayerList[1]}"
-                    />
+                    Player="{Binding GameTableViewModel.PlayerList[1]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[1]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
 
                 <!-- Plateau du joueur 4-->
                 <usercontrols:BoardComponent
                     Grid.Row="1"
-                    Player="{Binding GameTableViewModel.PlayerList[3]}"
-                    />
+                    Player="{Binding GameTableViewModel.PlayerList[3]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[3]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
 
             </Grid>
 
@@ -182,14 +202,34 @@
 
                 <!-- Plateau du joueur 3-->
                 <usercontrols:BoardComponent
-                         Player="{Binding GameTableViewModel.PlayerList[2]}"
-                         />
+                    Player="{Binding GameTableViewModel.PlayerList[2]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[2]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
 
                 <!-- Plateau du joueur 5-->
                 <usercontrols:BoardComponent
-                        Grid.Row="1"
-                         Player="{Binding GameTableViewModel.PlayerList[4]}"
-                         />
+                    Grid.Row="1"
+                    Player="{Binding GameTableViewModel.PlayerList[4]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[4]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
             </Grid>
         </Grid>
 

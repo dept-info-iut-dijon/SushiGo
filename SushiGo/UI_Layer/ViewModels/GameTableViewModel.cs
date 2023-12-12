@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Runtime.CompilerServices;
 using System;
 using System.Linq;
+using System.Numerics;
 
 namespace UI_Layer.ViewModels
 {
@@ -71,6 +72,7 @@ namespace UI_Layer.ViewModels
             {
                 this.playerList.Add(new PlayerViewModel(player, PlayerType.PLAYER));
             }
+
             NotifyPropertyChanged(nameof(this.PlayerList));
         }
 
@@ -204,7 +206,7 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Liste des joueurs de la partie
         /// </summary>
-        public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x.Score).ToList(); }
+        public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x?.Score).ToList(); }
         /// <summary>
         /// Représente l'objet métier de la table
         /// </summary>
