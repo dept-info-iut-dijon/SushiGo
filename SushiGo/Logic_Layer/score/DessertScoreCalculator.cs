@@ -6,6 +6,7 @@ namespace Logic_Layer.score;
 
 public class DessertScoreCalculator : IScoreCalculator
 {
+    /// <inheritdoc />
     public virtual Dictionary<int, int> CalculateScore(List<Player> players)
     {
         var scores = new Dictionary<int, int>();
