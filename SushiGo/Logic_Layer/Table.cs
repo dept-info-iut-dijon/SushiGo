@@ -30,7 +30,7 @@ public class Table : INotifyPropertyChanged
     /// <summary>
     /// Retourne le de rotation des mains pour la manche actuelle
     /// </summary>
-    public GameOrderEnum GameOrder => RoundNumber % 2 == 0 ? GameOrderEnum.PROGRESSIVE : GameOrderEnum.REGRESSIVE;
+    public GameOrderEnum GameOrder => RoundNumber % 2 == 0 ? GameOrderEnum.REGRESSIVE : GameOrderEnum.PROGRESSIVE;
 
     public List<Player> Players { get; }
 
@@ -50,6 +50,7 @@ public class Table : INotifyPropertyChanged
     /// <param name="players">liste des joueurs</param>
     public Table(List<Player> players)
     {
+        roundNumber = 1;
         this.Players = players;
         InitPlayersValue();
         scoreCalculator = new TableScoreCalculator(this);
@@ -152,7 +153,7 @@ public class Table : INotifyPropertyChanged
 
 
         // Make the hands rotate position positively if the game order is progressive, opposite order if regressive
-        var rotation = GameOrder == GameOrderEnum.PROGRESSIVE ? -1 : 1;
+        var rotation = GameOrder == GameOrderEnum.PROGRESSIVE ? 1 : -1;
         
         for (var i = 0; i < Players.Count; i++)
         {
