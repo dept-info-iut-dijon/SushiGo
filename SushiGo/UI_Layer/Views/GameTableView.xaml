@@ -18,6 +18,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource SushiOnTable}" Stretch="UniformToFill" Opacity="0.7" />
         </Grid.Background>
+
         <!-- Menu -->
         <materialDesign:Card Grid.Row="0" VerticalAlignment="Top" Height="30"  Background="{StaticResource SaffronBrush}" Grid.ColumnSpan="4" >
             <Menu  materialDesign:MenuAssist.TopLevelMenuItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type materialDesign:Card}}, Path=ActualHeight}">
@@ -81,19 +82,17 @@
         </materialDesign:Card>
 
         <Grid Margin="0,30,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="0.3*"/>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="0.3*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-
-
-
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
 
             <!-- Liste des cartes -->
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="5" Orientation="Horizontal">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="5" Orientation="Horizontal">
                 <ListView ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
@@ -118,16 +117,21 @@
 
 
 
-            <!-- Colonne 1-->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="0.7*"/>
-                </Grid.RowDefinitions>
+            <!-- Ligne 1-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
 
                 <!-- Plateau du joueur 2-->
                 <usercontrols:BoardComponent
+                    Grid.Column="1"
                     Player="{Binding GameTableViewModel.PlayerList[1]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
@@ -141,35 +145,8 @@
                     </usercontrols:BoardComponent.Style>
                 </usercontrols:BoardComponent>
 
-                <!-- Plateau du joueur 4-->
-                <usercontrols:BoardComponent
-                    Grid.Row="1"
-                    Player="{Binding GameTableViewModel.PlayerList[3]}">
-                    <usercontrols:BoardComponent.Style>
-                        <Style TargetType="usercontrols:BoardComponent">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[3]}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </usercontrols:BoardComponent.Style>
-                </usercontrols:BoardComponent>
-
-            </Grid>
-
-            <!-- Colonne 2 -->
-            <Grid   Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.7*"/>
-                    <RowDefinition Height="0.6*"/>
-                    <RowDefinition Height="1.7*"/>
-                    <RowDefinition Height="1.5*"/>
-                </Grid.RowDefinitions>
-
                 <!-- Texte affichant le numéro de la manche en cours -->
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
                     <TextBlock 
                     Text="{Binding GameTableViewModel.MancheNumber}"
@@ -178,31 +155,10 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"/>
                 </Grid>
-
-
-                <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-                <Button Grid.Row="1" IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
-                </Button>
-
-                <usercontrols:BoardComponent
-                    Grid.Row="2"
-                    Player="{Binding GameTableViewModel.PlayerList[0]}"
-                    />
-            </Grid>
-
-
-
-            <!-- Colonne 3-->
-            <Grid Grid.Column="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="0.7*"/>
-                </Grid.RowDefinitions>
-
+                
                 <!-- Plateau du joueur 3-->
                 <usercontrols:BoardComponent
+                    Grid.Column="5"
                     Player="{Binding GameTableViewModel.PlayerList[2]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
@@ -216,9 +172,52 @@
                     </usercontrols:BoardComponent.Style>
                 </usercontrols:BoardComponent>
 
+            </Grid>
+
+            
+            <!-- Ligne 2 -->
+            <Grid   Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Plateau du joueur 4-->
+                <usercontrols:BoardComponent
+                    Grid.Column="1"
+                    Player="{Binding GameTableViewModel.PlayerList[3]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[3]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
+
+
+                <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
+                <!--
+                <Button Grid.Row="1" IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
+                </Button>-->
+
+                <usercontrols:BoardComponent
+                    Grid.Column="3"
+                    Player="{Binding GameTableViewModel.PlayerList[0]}"
+                    />
+
                 <!-- Plateau du joueur 5-->
                 <usercontrols:BoardComponent
-                    Grid.Row="1"
+                    Grid.Column="5"
                     Player="{Binding GameTableViewModel.PlayerList[4]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
