@@ -117,7 +117,7 @@
                     </ListView>
 
                     <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-                    <Button Margin="30,0,0,0"  IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Click="EndPlayerTurn" VerticalAlignment="Center">
+                    <Button Margin="30,0,0,0"  Command="{Binding GameTableViewModel.ValidateCommand}" Click="EndPlayerTurn" VerticalAlignment="Center">
                         <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource Button1}">
