@@ -33,17 +33,6 @@ namespace UI_Layer.ViewModels
         private bool isTurnFinished;
         #endregion
 
-        /// <summary>
-        /// Constructeur du playerviewmodel associé au joueur ou a l'ia
-        /// </summary>
-        /// <param name="player">objet player metier</param>
-        /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
-        public PlayerViewModel(Player player, PlayerType role, GameCreationViewModel creationViewModel)
-        {
-            this.player = player;
-            this.role = role;
-            this.gameCreationViewModel = creationViewModel;
-        }
 
         /// <summary>
         /// Constructeur du playerviewmodel associé au joueur ou a l'ia, en version isolée du VM du jeu
