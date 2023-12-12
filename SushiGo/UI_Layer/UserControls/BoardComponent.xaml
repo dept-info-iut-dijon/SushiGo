@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         >
     <Border 
+        Opacity="0.8"
         Margin="10"
         BorderBrush="Transparent" 
         Grid.Row="2" 

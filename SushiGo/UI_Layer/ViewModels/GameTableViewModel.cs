@@ -39,13 +39,6 @@ namespace UI_Layer.ViewModels
 
         }
 
-        private void GameTableViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.Equals(nameof(Table.RoundNumber)))
-            {
-                this.LoadAllScores();
-            }
-        }
 
         /// <summary>
         /// Initialise les valeurs lors de l'ouverture de la fenêtre.
@@ -60,8 +53,6 @@ namespace UI_Layer.ViewModels
             InitPlayers();
 
             this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
-
-
         }
 
 
@@ -127,7 +118,16 @@ namespace UI_Layer.ViewModels
 
         #region Propriété
 
-
+        /// <summary>
+        /// Représente le numéro de la manche
+        /// </summary>
+        public string MancheNumber
+        {
+            get
+            {
+                return $"Manche nº{table.RoundNumber}";
+            }
+        }
         /// <summary>
         /// Permet d'afficher le menu
         /// </summary>
@@ -257,13 +257,23 @@ namespace UI_Layer.ViewModels
 
         #region Méthode Privée
 
+
+        private void GameTableViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(Table.RoundNumber)))
+            {
+                this.LoadAllScores();
+                this.IsLeaderboardShown = true;
+                NotifyPropertyChanged(nameof(MancheNumber));
+            }
+        }
+
         private void OnValidateCommand()
         {
             if (this.CardSelected != null)
             {
                 this.CardSelected.PlayCard();
-               
-                LoadAllScores();
+
 
 
                 // Notifications

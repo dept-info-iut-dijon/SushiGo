@@ -172,7 +172,7 @@
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Border Background="{StaticResource PersianRedBrush}" CornerRadius="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.8"/>
                     <TextBlock 
-                    Text="Manche n°1"
+                    Text="{Binding GameTableViewModel.MancheNumber}"
                     Padding="20,15,20,15"
                     Style="{StaticResource Font1}" 
                     HorizontalAlignment="Center" 
@@ -248,7 +248,7 @@
                         FontWeight="bold"
                         HorizontalAlignment="Center"
                         FontSize="25"
-                        Text="{x:Static res:fr_FR.LEADERBOARD}"/>
+                        Text="{Binding GameTableViewModel.MancheNumber}"/>
 
                     <ListView Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
