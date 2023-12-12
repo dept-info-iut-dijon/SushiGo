@@ -56,7 +56,7 @@ public class Table : INotifyPropertyChanged
         this.players = players;
         InitPlayersValue();
         this.scoreCalculator = new TableScoreCalculator(this);
-
+        this.StartPlayersTurns();
     }
 
     /// <summary>
@@ -76,21 +76,24 @@ public class Table : INotifyPropertyChanged
     {
 
         ActualizeHands();
-        foreach (Player player in this.players)
-        {
-            player.PlayerTurn();
-        }
+        StartPlayersTurns();
         // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
         if (NoMoreCards())
             NextRound();
 
     }
 
-
-
     #endregion
-
+    
     #region Méthodes privées
+    private void StartPlayersTurns()
+    {
+        foreach (Player player in this.players)
+        {
+            player.PlayerTurn();
+        }
+    }
+    
     // Retourne true si toutes les cartes distribuées aux joueurs ont été posées
     private bool NoMoreCards()
     {
