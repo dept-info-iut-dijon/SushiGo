@@ -12,7 +12,7 @@ namespace Logic_Layer.IA.IAImplementation
     /// </summary>
     public class DrunkenIA : IA
     {
-
+        /// <inheritdoc/>
         public DrunkenIA(int id, Board board, Hand hand, string pseudo) : base(id, board, hand, pseudo)
         {
         }
@@ -24,7 +24,10 @@ namespace Logic_Layer.IA.IAImplementation
         {
             if (HavePlayed == false)
             {
-                PlayCard(Hand.Cards.First());
+                if (Hand.Cards.Count > 0)
+                {
+                    PlayCard(Hand.Cards.First());
+                }
                 EndRound();
             }
             

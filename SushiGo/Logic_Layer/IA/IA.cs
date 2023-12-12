@@ -13,12 +13,7 @@ namespace Logic_Layer.IA
     public abstract class IA : Player
     {
 
-        /// <summary>
-        /// Reprend le constructeur du joueur
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="board"></param>
-        /// <param name="hand"></param>
+        /// <inheritdoc/>
         protected IA(int id, Board board, Hand hand, string pseudo) : base(id, board, hand, pseudo)
         {
         }
@@ -28,6 +23,10 @@ namespace Logic_Layer.IA
         /// </summary>
         public abstract void Play();
 
+        /// <summary>
+        /// Propriété qui dit à l'IA de jouer quand elle a pas joué 
+        /// (quand l'attribut passe à false au début d'un tour)
+        /// </summary>
         public override bool HavePlayed
         {
             get { return base.HavePlayed; }

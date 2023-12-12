@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Logic_Layer.IA;
 using Logic_Layer;
+using Logic_Layer.IA.IAImplementation;
 
 namespace LogicTest.IA
 {
     public class IATests
     {
         [Fact]
-        public void HavePlayed_PlayCalled_WhenHavePlayedIsSet()
+        public void PlayerTurn_PlayCalled_WhenHavePlayedIsSet()
         {
-            var iaMock = new Mock<Logic_Layer.IA.IA>(3, new Board(), new Hand(3, new List<Logic_Layer.cards.Card>()), "bloup");
-            Logic_Layer.IA.IA mocked = iaMock.Object;
-            mocked.PlayerTurn();
-            iaMock.Verify(x => x.Play(), Times.Once);
+            FakeIA IA = new FakeIA(3, new Board(), new Hand(3, new List<Logic_Layer.cards.Card>()), "toto");
+            IA.PlayerTurn();
+            Assert.True(IA.TestPlay);
         }
     }
 }
