@@ -11,11 +11,19 @@
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\Cursors\MainCursor.cur" />
+    <None Remove="Assets\Cursors\MainCursorOn.cur" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
     <None Remove="Assets\Images\SushiOnTable.jpg" />
     <None Remove="Assets\test.png" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Resource Include="Assets\Cursors\MainCursorOn.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 

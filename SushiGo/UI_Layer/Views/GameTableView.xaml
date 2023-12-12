@@ -9,7 +9,10 @@
         mc:Ignorable="d" 
         WindowStyle="None"
         Title="SushiGo" 
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Cursor="{StaticResource MainCursor}">
+    
+    
     <Window.Resources>
         <usercontrols:LeaderboardRetriever x:Key="LeaderboardRetriever" />
     </Window.Resources>
