@@ -4,6 +4,9 @@ using Logic_Layer.cards.utils;
 
 namespace Logic_Layer.score;
 
+/// <summary>
+/// Calculateur de score pour les cartes desserts (ne doit être appelé qu'à la fin de la partie)
+/// </summary>
 public class DessertScoreCalculator : IScoreCalculator
 {
     /// <inheritdoc />
