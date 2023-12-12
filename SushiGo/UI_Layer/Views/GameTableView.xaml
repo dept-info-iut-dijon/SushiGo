@@ -9,8 +9,7 @@
         mc:Ignorable="d" 
         WindowStyle="None"
         Title="SushiGo" 
-        WindowState="Maximized"
-        Cursor="{StaticResource MainCursor}">
+        WindowState="Maximized">
     
     
     <Window.Resources>
