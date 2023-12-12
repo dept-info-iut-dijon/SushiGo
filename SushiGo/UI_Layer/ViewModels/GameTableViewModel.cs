@@ -20,7 +20,8 @@ namespace UI_Layer.ViewModels
         #region Attribut
 
         private Logic_Layer.Table table;
-        private bool showLeaderboard = false;
+        private bool isLeaderboardShown = false;
+        private bool isPopupValidationQuitShown = false;
         private List<PlayerViewModel> playerList;
         private CardComponent? cardSelected;
 
@@ -54,6 +55,8 @@ namespace UI_Layer.ViewModels
         {
             this.table = table;
             this.cardSelected = null;
+            this.isLeaderboardShown = false;
+            this.isPopupValidationQuitShown = false;
             InitPlayers();
 
             this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
@@ -91,10 +94,17 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public DelegateCommand OpenLeaderboard => new DelegateCommand(() =>
         {
-            ShowLeaderboard = !showLeaderboard;
+            IsLeaderboardShown = !isLeaderboardShown;
         });
 
-
+        /// <summary>
+        /// Permet d'afficher la popup de validation pour quitter la partie
+        /// </summary>
+        public DelegateCommand PreviewQuitGame => new DelegateCommand(() =>
+        {
+            IsPopupValidationQuitShown = !isPopupValidationQuitShown;
+        });
+        
 
         /// <summary>
         /// Permet de quitter la partie et retourner au menu
@@ -121,13 +131,13 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Permet d'afficher le menu
         /// </summary>
-        public bool ShowLeaderboard
+        public bool IsLeaderboardShown
         {
-            get => showLeaderboard;
+            get => isLeaderboardShown;
             set
             {
-                showLeaderboard = value;
-                NotifyPropertyChanged(nameof(ShowLeaderboard));
+                isLeaderboardShown = value;
+                NotifyPropertyChanged(nameof(IsLeaderboardShown));
             }
         }
 
@@ -211,6 +221,19 @@ namespace UI_Layer.ViewModels
         /// Représente l'objet métier de la table
         /// </summary>
         public Logic_Layer.Table Table { get => table; }
+
+        /// <summary>
+        /// Est ce que la popup pour quitter la partie est affichée
+        /// </summary>
+        public bool IsPopupValidationQuitShown
+        {
+            get => isPopupValidationQuitShown;
+            set
+            {
+                isPopupValidationQuitShown = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #endregion Propriété
 

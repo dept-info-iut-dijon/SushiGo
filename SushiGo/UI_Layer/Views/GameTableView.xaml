@@ -6,6 +6,7 @@
         xmlns:usercontrols="clr-namespace:UI_Layer.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:UI_Layer.Views"
+        xmlns:res="clr-namespace:UI_Layer.Assets"
         mc:Ignorable="d" 
         WindowStyle="None"
         Title="SushiGo" 
@@ -34,7 +35,7 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
 
-                <MenuItem Command="{Binding GameTableViewModel.QuitGame}">
+                <MenuItem Command="{Binding GameTableViewModel.PreviewQuitGame}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon
                         Width="18"
@@ -65,7 +66,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Command="{Binding NavigationViewModel.QuitGame}"  Grid.Column="4">
+                <MenuItem Command="{Binding GameTableViewModel.PreviewQuitGame}" Grid.Column="4">
                     <MenuItem.Icon >
                         <materialDesign:PackIcon
                     Foreground="Black"
@@ -181,7 +182,7 @@
 
                 <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
                 <Button Grid.Row="1" IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Valider" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
+                    <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
                 </Button>
 
                 <usercontrols:BoardComponent
@@ -233,7 +234,8 @@
             </Grid>
         </Grid>
 
-        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.ShowLeaderboard}" HorizontalAlignment="Center" DialogBackground="{StaticResource SaffronBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+        <!-- Popup des scores-->
+        <materialDesign:DialogHost  IsOpen="{Binding GameTableViewModel.IsLeaderboardShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource SaffronBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
             <materialDesign:DialogHost.DialogContent >
                 <Grid Margin="40,20,40,20" >
                     <Grid.RowDefinitions>
@@ -246,7 +248,7 @@
                         FontWeight="bold"
                         HorizontalAlignment="Center"
                         FontSize="25"
-                        Text="Classement"/>
+                        Text="{x:Static res:fr_FR.LEADERBOARD}"/>
 
                     <ListView Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
@@ -316,7 +318,43 @@
                         Margin="10,0,10,0"
                         BorderThickness="0"
                         Background="{StaticResource PersianRedBrush}"
-                        Content="Retour"/>
+                        Content="{x:Static res:fr_FR.CANCEL}"/>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Popup pour quitter la partie-->
+        <materialDesign:DialogHost IsOpen="{Binding GameTableViewModel.IsPopupValidationQuitShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource SilverBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="40,20,40,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                         FontWeight="bold"
+                         HorizontalAlignment="Center"
+                         FontSize="25"
+                         Text="{x:Static res:fr_FR.VERIFICATIONQUIT}"/>
+
+                    <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal">
+                        <Button
+                            BorderThickness="0"
+                            Command="{Binding GameTableViewModel.PreviewQuitGame}"
+                            Foreground="Black"
+                            Background="{StaticResource WhiteSmokeBrush}"
+                            Content="{x:Static res:fr_FR.MESSAGECANCEL}"
+                            />
+                        <Button
+                            BorderThickness="0"
+                            Margin="10,0,0,0"
+                            Command="{Binding GameTableViewModel.QuitGame}"
+                            Background="{StaticResource PersianRedBrush}"
+                            Content="{x:Static res:fr_FR.MESSAGEQUIT}"
+                            />
+                    </StackPanel>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
