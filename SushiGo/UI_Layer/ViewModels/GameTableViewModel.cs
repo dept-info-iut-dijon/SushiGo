@@ -22,6 +22,7 @@ namespace UI_Layer.ViewModels
         private Logic_Layer.Table table;
         private bool isLeaderboardShown = false;
         private bool isPopupValidationQuitShown = false;
+        private bool isButtonValidateShown = false;
         private List<PlayerViewModel> playerList;
         private CardComponent? cardSelected;
 
@@ -50,6 +51,7 @@ namespace UI_Layer.ViewModels
             this.cardSelected = null;
             this.isLeaderboardShown = false;
             this.isPopupValidationQuitShown = false;
+            this.isButtonValidateShown = false;
             InitPlayers();
 
             this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
@@ -141,10 +143,6 @@ namespace UI_Layer.ViewModels
             }
         }
 
-        /// Bouton Valider actif ou non.
-        /// </summary>
-        public bool ButtonValidateEnable => this.CardSelected != null;
-
         /// <summary>
         /// Carte sélectionnée.
         /// </summary>
@@ -168,8 +166,8 @@ namespace UI_Layer.ViewModels
                     this.cardSelected?.ClickOnCard();
 
                     // Notification des changements
+                    IsButtonValidateShown = true;
                     this.NotifyPropertyChanged(nameof(CardSelected));
-                    this.NotifyPropertyChanged(nameof(this.ButtonValidateEnable));
                 }
             }
         }
@@ -235,6 +233,19 @@ namespace UI_Layer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Est ce que le bouton pour valider est affiché
+        /// </summary>
+        public bool IsButtonValidateShown 
+        { 
+            get => isButtonValidateShown;
+            set 
+            { 
+                isButtonValidateShown = value; 
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion Propriété
 
 
@@ -279,6 +290,7 @@ namespace UI_Layer.ViewModels
                 // Notifications
                 this.NotifyPropertyChanged(nameof(this.CardSelected));
                 this.NotifyPropertyChanged(nameof(this.Deck));
+                IsButtonValidateShown = false;
             }
         }
 
