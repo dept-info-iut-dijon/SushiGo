@@ -6,7 +6,7 @@
         xmlns:logiq="clr-namespace:Logic_Layer.IA;assembly=Logic_Layer"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowState="Maximized" WindowStyle="None"
-        Title="GameCreationView" Height="450" Width="800">
+        Title="GameCreationView" Height="450" Width="800" Cursor="{StaticResource MainCursor}">
     
     <Window.Resources>
         <ObjectDataProvider x:Key="DifficultyEnumValues" ObjectType="{x:Type logiq:IADifficultyEnum}"  MethodName="GetValues">

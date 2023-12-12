@@ -11,6 +11,9 @@
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\Cursors\MainCursor_v1.cur" />
+    <None Remove="Assets\Cursors\MainCursor_v3.cur" />
+    <None Remove="Assets\Cursors\MainCursor_v4.cur" />
+    <None Remove="Assets\Cursors\MainCursor_v5.cur" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
@@ -38,6 +41,15 @@
     </EmbeddedResource>
     <Resource Include="Assets\Cursors\MainCursor_v1.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cursors\MainCursor_v3.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cursors\MainCursor_v4.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cursors\MainCursor_v5.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

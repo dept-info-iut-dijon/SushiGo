@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="SushiGo !" 
         WindowStyle="None"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Cursor="{StaticResource MainCursor}">
 
 
     <Grid>
