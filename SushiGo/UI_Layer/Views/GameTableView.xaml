@@ -91,29 +91,51 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <!-- Liste des cartes -->
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="4" Grid.RowSpan="2" Orientation="Horizontal">
-                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Control.VerticalAlignment" Value="Bottom" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                        <ContentPresenter />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListView>
-            </StackPanel>
+            <Grid Grid.Row="4" Grid.RowSpan="2">
+               
+                <!-- Liste des cartes -->
+                <StackPanel Margin="70,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Orientation="Horizontal">
+                    <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Control.VerticalAlignment" Value="Bottom" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter  Margin="0,0,-10,0" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Margin="10,0,10,0"  Orientation="Horizontal" VerticalAlignment="Bottom" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListView>
+
+                    <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
+                    <Button Margin="30,0,0,0"  Command="{Binding GameTableViewModel.ValidateCommand}" Click="EndPlayerTurn" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource Button1}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding GameTableViewModel.IsButtonValidateShown}" Value="false">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding GameTableViewModel.IsButtonValidateShown}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+           
 
 
 
@@ -156,20 +178,17 @@
                     VerticalAlignment="Center"/>
                 </Grid>
 
-                <!-- Griser le bouton lorsque le joueur n'a pas sélectionné de carte-->
-                <Button Grid.Column="3" IsEnabled="{Binding GameTableViewModel.ButtonValidateEnable}"  Command="{Binding GameTableViewModel.ValidateCommand}" Style="{StaticResource Button1}" Click="EndPlayerTurn" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Static res:fr_FR.VALIDATE}" Style="{StaticResource Font1}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,10,20,10" FontSize="30" />
-                </Button>
+                
 
-                <!-- Plateau du joueur 3-->
+                <!-- Plateau du joueur 1-->
                 <usercontrols:BoardComponent
                     Grid.Column="5"
-                    Player="{Binding GameTableViewModel.PlayerList[2]}">
+                    Player="{Binding GameTableViewModel.PlayerList[0]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
                             <Setter Property="Visibility" Value="Visible"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[2]}" Value="{x:Null}">
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[0]}" Value="{x:Null}">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -192,15 +211,15 @@
                     <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Plateau du joueur 4-->
+                <!-- Plateau du joueur 3-->
                 <usercontrols:BoardComponent
                     Grid.Column="1"
-                    Player="{Binding GameTableViewModel.PlayerList[3]}">
+                    Player="{Binding GameTableViewModel.PlayerList[2]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
                             <Setter Property="Visibility" Value="Visible"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[3]}" Value="{x:Null}">
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[2]}" Value="{x:Null}">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -209,22 +228,32 @@
                 </usercontrols:BoardComponent>
 
 
-               
-
-                <usercontrols:BoardComponent
-                    Grid.Column="3"
-                    Player="{Binding GameTableViewModel.PlayerList[0]}"
-                    />
 
                 <!-- Plateau du joueur 5-->
                 <usercontrols:BoardComponent
-                    Grid.Column="5"
+                    Grid.Column="3"
                     Player="{Binding GameTableViewModel.PlayerList[4]}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
                             <Setter Property="Visibility" Value="Visible"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[4]}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </usercontrols:BoardComponent.Style>
+                </usercontrols:BoardComponent>
+
+                <!-- Plateau du joueur 4-->
+                <usercontrols:BoardComponent
+                    Grid.Column="5"
+                    Player="{Binding GameTableViewModel.PlayerList[3]}">
+                    <usercontrols:BoardComponent.Style>
+                        <Style TargetType="usercontrols:BoardComponent">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[3]}" Value="{x:Null}">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>

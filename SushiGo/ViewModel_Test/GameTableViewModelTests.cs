@@ -16,7 +16,7 @@ namespace ViewModel_Test
             var viewModel = new GameTableViewModel();
 
             // Act
-            bool buttonEnable = viewModel.ButtonValidateEnable;
+            bool buttonEnable = viewModel.IsButtonValidateShown;
 
             // Assert
             Assert.False(buttonEnable);
@@ -37,7 +37,7 @@ namespace ViewModel_Test
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
                 gameTableVM.CardSelected = card;
-                bool buttonEnable = gameTableVM.ButtonValidateEnable;
+                bool buttonEnable = gameTableVM.IsButtonValidateShown;
 
                 // Assert
                 Assert.True(buttonEnable);

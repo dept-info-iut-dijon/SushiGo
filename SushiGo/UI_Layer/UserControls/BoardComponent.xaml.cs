@@ -60,7 +60,7 @@ public partial class BoardComponent : UserControl
     /// </summary>
     private static void ChangePlayer(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is BoardComponent BoardComponent)
+        if (d is BoardComponent BoardComponent && BoardComponent.Player != null)
         {
             BoardComponent.PlayerName.Text = BoardComponent.Player.Nom;
             SetupCards(BoardComponent.Player);
