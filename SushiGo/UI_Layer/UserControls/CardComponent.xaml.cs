@@ -28,6 +28,7 @@ public partial class CardComponent : UserControl
         this.card = card;
         this.isSelected = false;
         InitializeComponent();
+        this.CardName = card.Name;
     }
 
     #region dependenciesProperties
@@ -114,9 +115,9 @@ public partial class CardComponent : UserControl
             Thickness thickness = new Thickness();
 
             // On garde les ancienne valeur
-            thickness.Left = this.BaseMargin.Left;
-            thickness.Top = this.BaseMargin.Top;
-            thickness.Right = this.BaseMargin.Right;
+            thickness.Left = this.Margin.Left;
+            thickness.Top = this.Margin.Top;
+            thickness.Right = this.Margin.Right;
 
             // On monte la carte
             thickness.Bottom = 40;

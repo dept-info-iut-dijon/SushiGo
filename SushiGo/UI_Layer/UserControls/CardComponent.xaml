@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UI_Layer.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="450" Width="350">
+        Height="200" Width="140">
     <materialDesign:Card 
         UniformCornerRadius="17"
         materialDesign:ElevationAssist.Elevation="Dp8"

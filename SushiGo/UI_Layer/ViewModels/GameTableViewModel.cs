@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System;
 using System.Linq;
 using System.Numerics;
+using System.Threading;
 
 namespace UI_Layer.ViewModels
 {
@@ -18,7 +19,6 @@ namespace UI_Layer.ViewModels
     public class GameTableViewModel : INotifyPropertyChanged
     {
         #region Attribut
-
         private Logic_Layer.Table table;
         private bool isLeaderboardShown = false;
         private bool isPopupValidationQuitShown = false;
@@ -156,18 +156,20 @@ namespace UI_Layer.ViewModels
             {
                 if (this.cardSelected != value)
                 {
+                    
                     // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
                     this.cardSelected?.ClickOnCard();
 
                     // Mettre à jour la propriété
                     this.cardSelected = value;
-
+                    
                     // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
                     this.cardSelected?.ClickOnCard();
 
                     // Notification des changements
-                    IsButtonValidateShown = true;
                     this.NotifyPropertyChanged(nameof(CardSelected));
+                    IsButtonValidateShown = true;
+
                 }
             }
         }
@@ -186,20 +188,14 @@ namespace UI_Layer.ViewModels
                     Player thisPLayer = table.Players[0];
                     PlayerViewModel player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
 
-                    int x = 0;
                     foreach (Card card in table.Players[0].Hand.Cards)
                     {
-                        // On définie le margin
-                        Thickness margin = new Thickness(x, 0, 0, 0);
-
-                        // On créé la carte et lui applique le margin de départ
-                        CardComponent newCard = new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = margin };
-                        newCard.BaseMargin = margin;
+                        // On créer la carte
+                        CardComponent newCard = new CardComponent(player, card);
 
                         // On ajoute la carte
                         cards.Add(newCard);
 
-                        x = -10;
                     }
                 }
 

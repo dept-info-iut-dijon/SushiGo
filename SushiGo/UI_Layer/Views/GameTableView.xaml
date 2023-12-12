@@ -94,7 +94,7 @@
             <Grid Grid.Row="4" Grid.RowSpan="2">
                
                 <!-- Liste des cartes -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom"  Orientation="Horizontal">
+                <StackPanel Margin="70,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Orientation="Horizontal">
                     <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
@@ -103,7 +103,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <ContentPresenter />
+                                            <ContentPresenter  Margin="0,0,-10,0" />
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -111,7 +111,7 @@
                         </ListView.ItemContainerStyle>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" />
+                                <StackPanel Margin="10,0,10,0"  Orientation="Horizontal" VerticalAlignment="Bottom" />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListView>
@@ -123,7 +123,7 @@
                             <Style TargetType="Button" BasedOn="{StaticResource Button1}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding GameTableViewModel.IsButtonValidateShown}" Value="false">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Setter Property="Visibility" Value="Hidden"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding GameTableViewModel.IsButtonValidateShown}" Value="true">
                                         <Setter Property="Visibility" Value="Visible"/>
