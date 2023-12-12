@@ -21,13 +21,6 @@
 
 
   <ItemGroup>
-    <Resource Include="Assets\Cursors\MainCursorClick.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-
-  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
   </ItemGroup>
 
@@ -45,6 +38,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="Assets\Cursors\MainCursor.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cursors\MainCursorClick.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
