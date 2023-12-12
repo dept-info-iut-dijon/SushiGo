@@ -149,13 +149,18 @@ public class Table : INotifyPropertyChanged
     private List<Hand> RotateHands()
     {
         var hands = Enumerable.Repeat((Hand)null, Players.Count).ToList();
-        for (var index = 0; index < Players.Count; index++)
+
+
+        // Make the hands rotate position positively if the game order is progressive, opposite order if regressive
+        var rotation = GameOrder == GameOrderEnum.PROGRESSIVE ? -1 : 1;
+        
+        for (var i = 0; i < Players.Count; i++)
         {
-            var player = Players[index];
-            if (index + 1 < Players.Count)
-                hands[index + 1] = player.Hand;
-            else hands[0] = player.Hand;
+            var index = (i + rotation) % Players.Count;
+            if (index < 0) index += Players.Count;
+            hands[index] = Players[i].Hand;
         }
+        
 
         if (hands is null || hands.Count != Players.Count || hands.Contains(null))
             throw new HandsRotationException("La nouvelle liste de mains est invalide");
