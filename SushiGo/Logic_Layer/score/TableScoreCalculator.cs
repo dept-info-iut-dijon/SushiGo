@@ -12,10 +12,14 @@ namespace Logic_Layer.score
     public class TableScoreCalculator
     {
         #region attributes
-        private Table table;
-        private List<IScoreCalculator> scoreCalculators;
-        private Dictionary<int, int> scores;
+
+        private readonly Table table;
+        private readonly List<IScoreCalculator> scoreCalculators;
+        private readonly List<IScoreCalculator> endGameScoreCalculators;
+        private readonly Dictionary<int, int> scores;
+
         #endregion
+
         /// <summary>
         /// Constructeur du calculateur de la table 
         /// </summary>
@@ -25,13 +29,17 @@ namespace Logic_Layer.score
             this.table = table;
             this.scoreCalculators = new List<IScoreCalculator>();
             this.ListCalculatorInitializer();
+            this.endGameScoreCalculators = new List<IScoreCalculator> { new DessertScoreCalculator() };
             this.scores = new Dictionary<int, int>();
             this.PlayerInitializer();
         }
+        
+        #region Méthodes publiques
+
         /// <summary>
         /// Calcule le score de toute la table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Dictionnaire des scores triés par ID des joueurs</returns>
         public Dictionary<int, int> CalculateScore()
         {
             foreach (IScoreCalculator scoreCalculator in scoreCalculators)
@@ -42,8 +50,33 @@ namespace Logic_Layer.score
                     scores[player.Id] += calculatedScore[player.Id];
                 }
             }
+
+            // Pas besoin d'aller plus loin si on en est pas à la dernière manche
+            // On aurait pu faire la même chose en mettant le foreach dans une condition mais ça augmenterait le nesting
+            if (table.RoundNumber <3) return scores;
+
+            var endGameScore = EndGameScore();
+            foreach (var player in table.Players)
+            {
+                scores[player.Id] += endGameScore[player.Id];
+            }
+
             return scores;
         }
+        
+        
+        /// <summary>
+        /// Permet de récupérer le score d'un joueur
+        /// </summary>
+        /// <param name="player">joueur dont on veut le score</param>
+        /// <returns>score entier</returns>
+        public int GetScoreOfPlayer(Player player)
+        {
+            return scores[player.Id];
+        }
+        #endregion
+        
+        #region Méthodes privées
 
         private void ListCalculatorInitializer()
         {
@@ -64,14 +97,22 @@ namespace Logic_Layer.score
             }
         }
 
-        /// <summary>
-        /// Permet de récupérer le score d'un joueur
-        /// </summary>
-        /// <param name="player">joueur dont on veut le score</param>
-        /// <returns>score entier</returns>
-        public int GetScoreOfPlayer(Player player)
+        private Dictionary<int, int> EndGameScore()
         {
-            return scores[player.Id];
+            Dictionary<int, int> endGameScore = new Dictionary<int, int>();
+            
+            foreach (IScoreCalculator scoreCalculator in endGameScoreCalculators)
+            {
+                Dictionary<int, int> calculatedScore = scoreCalculator.CalculateScore(table.Players);
+                foreach (Player player in table.Players)
+                {
+                    endGameScore[player.Id] += calculatedScore[player.Id];
+                }
+            }
+            
+            return endGameScore;
         }
+
+        #endregion
     }
 }
