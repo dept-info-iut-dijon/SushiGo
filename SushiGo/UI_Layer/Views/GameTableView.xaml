@@ -92,7 +92,7 @@
             </Grid.RowDefinitions>
 
             <!-- Liste des cartes -->
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="5" Orientation="Horizontal">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="4" Grid.RowSpan="2" Orientation="Horizontal">
                 <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
