@@ -100,6 +100,10 @@ namespace Logic_Layer.score
         private Dictionary<int, int> EndGameScore()
         {
             Dictionary<int, int> endGameScore = new Dictionary<int, int>();
+            foreach (Player player in table.Players)
+            {
+                endGameScore[player.Id] = 0;
+            }
             
             foreach (IScoreCalculator scoreCalculator in endGameScoreCalculators)
             {
