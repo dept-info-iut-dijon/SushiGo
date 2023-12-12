@@ -14,7 +14,6 @@ public class DessertScoreCalculator : IScoreCalculator
         var playersWithMostDesserts = new List<Player>();
         var playersWithLeastDesserts = new List<Player>();
         int mostDesserts = 0;
-        int leastDesserts = 0;
         
         // Filtrer pour ne retrouver que les cartes desserts
         foreach (var player in players)
@@ -24,7 +23,9 @@ public class DessertScoreCalculator : IScoreCalculator
         }
         
         // On donne 6 points au.x joueur.s avec le plus de cartes desserts
-        AddScoreToPlayersWithMostDesserts(players, dessertCards, mostDesserts, playersWithMostDesserts, scores);
+        mostDesserts = AddScoreToPlayersWithMostDesserts(players, dessertCards, mostDesserts, playersWithMostDesserts, scores);
+        
+        int leastDesserts = mostDesserts; // on initialise la variable ici pour pouvoir gérer correctement le cas où les joueurs avec le plus de cartes desserts sont aussi ceux avec le moins de cartes desserts
 
         // On retire 6 points au.x joueur.s avec le moins de cartes desserts
         RemoveScoreFromPlayersWithLeastDesserts(players, dessertCards, leastDesserts, playersWithLeastDesserts, scores);
@@ -45,21 +46,22 @@ public class DessertScoreCalculator : IScoreCalculator
         }
     }
 
-    private static void AddScoreToPlayersWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
+    private static int AddScoreToPlayersWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
         List<Player> playersWithMostDesserts, Dictionary<int, int> scores)
     {
         // Définir le/les joueurs avec le plus de cartes desserts
-        GetPlayerWithMostDesserts(players, dessertCards, mostDesserts, playersWithMostDesserts);
+        mostDesserts = GetPlayerWithMostDesserts(players, dessertCards, mostDesserts, playersWithMostDesserts);
 
         // Leur ajouter 6 points (à partager si égalité)
         foreach (var player in playersWithMostDesserts)
         {
             scores[player.Id] += 6 / playersWithMostDesserts.Count;
         }
+        return mostDesserts;
     }
 
     // Définir le/les joueurs avec le plus de cartes desserts
-    private static void GetPlayerWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
+    private static int GetPlayerWithMostDesserts(List<Player> players, Dictionary<int, List<Card>> dessertCards, int mostDesserts,
         List<Player> playersWithMostDesserts)
     {
         foreach (var player in players)
@@ -75,6 +77,8 @@ public class DessertScoreCalculator : IScoreCalculator
                 playersWithMostDesserts.Add(player);
             }
         }
+
+        return mostDesserts;
     }
 
     // Définir le/les joueurs avec le moins de cartes desserts
