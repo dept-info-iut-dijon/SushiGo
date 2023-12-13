@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
+    <None Remove="Assets\Cartes\sushiCalamar_Wasabi.png" />
+    <None Remove="Assets\Cartes\sushiOmelette_Wasabi.png" />
+    <None Remove="Assets\Cartes\sushiSaumon_Wasabi.png" />
     <None Remove="Assets\Images\Board.jpg" />
     <None Remove="Assets\Images\Board.png" />
     <None Remove="Assets\Images\Logo.png" />
@@ -37,6 +40,15 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\Cartes\sushiCalamar_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiOmelette_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiSaumon_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\Board.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
