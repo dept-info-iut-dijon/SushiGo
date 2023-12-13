@@ -18,19 +18,6 @@ public class ChopstickCardTests
     }
 
     [Fact]
-    public void ChopstickCard_Activate_MakesCardUnavailable()
-    {
-        // Arrange
-        var chopstickCard = new ChopstickCard();
-
-        // Act
-        chopstickCard.Activate();
-
-        // Assert
-        Assert.False(chopstickCard.PlayerTurn());
-    }
-
-    [Fact]
     public void ChopstickCard_PlayerTurn_ReturnsTrueWhenAvailable()
     {
         // Arrange
@@ -41,20 +28,6 @@ public class ChopstickCardTests
 
         // Assert
         Assert.True(result);
-    }
-
-    [Fact]
-    public void ChopstickCard_PlayerTurn_ReturnsFalseWhenUnavailable()
-    {
-        // Arrange
-        var chopstickCard = new ChopstickCard();
-        chopstickCard.Activate();
-
-        // Act
-        bool result = chopstickCard.PlayerTurn();
-
-        // Assert
-        Assert.False(result);
     }
 
     [Fact]

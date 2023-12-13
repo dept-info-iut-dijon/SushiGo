@@ -1,4 +1,5 @@
 ﻿using Logic_Layer.cards;
+using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer;
@@ -49,6 +50,36 @@ public class Hand
         else
         {
             throw new CardNotInHandException("La carte ne peut pas être jouée car elle n'est pas dans la main du joueur");
+        }
+    }
+
+    /// <summary>
+    /// Joue deux cartes à la fois grâce à une carte baguettes
+    /// </summary>
+    /// <param name="firstCard">Première carte à jouer</param>
+    /// <param name="secondCard">Deuxième carte à jouer</param>
+    /// <param name="board">Board où les cartes doivent être placées</param>
+    /// <exception cref="CardNotInHandException">Lancée lorsque le joueur n'a pas </exception>
+    public void PlayCard(Card firstCard, Card secondCard, Board board)
+    {
+        if (!board.CanPlayTwoCards)
+            throw new NoChopstickInBoardException($"Le joueur avec la main {Id} ne peut pas jouer deux cartes sur ce board car il n'a pas de baguettes");
+        
+        Card? myFirstCard = Contains(firstCard);
+        Card? mySecondCard = Contains(secondCard);
+
+        if (myFirstCard is not null && mySecondCard is not null)
+        {
+            board.AddCard(myFirstCard);
+            board.AddCard(mySecondCard);
+            RemoveCard(myFirstCard);
+            RemoveCard(mySecondCard);
+            board.PlayChopstickCard();
+            Cards.Add(new ChopstickCard());
+        }
+        else
+        {
+            throw new CardNotInHandException("Les cartes ne peuvent pas être jouées car au moins une n'est pas dans la main du joueur");
         }
     }
 

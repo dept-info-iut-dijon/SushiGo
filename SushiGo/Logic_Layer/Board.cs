@@ -1,4 +1,6 @@
 ﻿using Logic_Layer.cards;
+using Logic_Layer.cards.cards_implementation;
+using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer;
 
@@ -22,6 +24,11 @@ public class Board
         get => cards;
         private set => cards = value;
     }
+    
+    /// <summary>
+    /// Indique si on peut jouer deux cartes sur ce board
+    /// </summary>
+    public bool CanPlayTwoCards => Cards.Any(c => c is ChopstickCard);
 
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
@@ -69,5 +76,16 @@ public class Board
     public void AddCard(Card card)
     {
         cards.Add(card);
+    }
+
+    /// <summary>
+    /// Retire une carte chopstick de la main, lance une exception s'il n'y en a aucune
+    /// </summary>
+    public void PlayChopstickCard()
+    {
+        if (!CanPlayTwoCards)
+            throw new NoChopstickInBoardException("Le joueur ne peut pas jouer deux cartes car il n'a pas de baguettes");
+        
+        cards.Remove(cards.First(c => c is ChopstickCard));
     }
 }
