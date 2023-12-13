@@ -75,15 +75,20 @@ public class TableTests
     {
         // Arrange
         var handMock = new Mock<Hand>(It.IsAny<int>(), It.IsAny<List<Card>>());
+
         handMock.Setup(hand => hand.Cards).Returns(new List<Card>());
 
+
         var boardMock = new Mock<Board>();
+
         boardMock.Setup(board => board.Cards).Returns(new List<Card>());
 
         boardMock.Setup(board => board.EndRound()).Returns(new List<ISpecialCard>());
 
+
         var playerMock1 = new Mock<Player>(It.IsAny<int>(), It.IsAny<Board>(), It.IsAny<Hand>(), It.IsAny<string>());
         var playerMock2 = new Mock<Player>(It.IsAny<int>(), It.IsAny<Board>(), It.IsAny<Hand>(), It.IsAny<string>());
+
         playerMock1.Setup(bob => bob.Hand).Returns(handMock.Object);
         playerMock2.Setup(bob => bob.Hand).Returns(handMock.Object);
 
@@ -99,13 +104,15 @@ public class TableTests
 
         var table = new Table(new List<Player>() { playerMock1.Object, playerMock2.Object });
 
+
         // Act
         Type type = typeof(Table);
         MethodInfo methodInfo = type.GetMethod("NextRound", BindingFlags.NonPublic | BindingFlags.Instance);
 
         methodInfo.Invoke(table, null);
 
+
         // Assert
-        playerMock1.Verify(bob => bob.Hand, Times.Exactly(2));
+        playerMock1.VerifySet(bob => bob.Hand, Times.Exactly(2));
     }
 }
