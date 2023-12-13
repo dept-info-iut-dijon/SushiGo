@@ -183,7 +183,6 @@ public sealed class Table : INotifyPropertyChanged
     #endregion
 
     #region Notify
-    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

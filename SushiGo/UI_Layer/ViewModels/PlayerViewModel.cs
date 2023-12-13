@@ -56,6 +56,7 @@ namespace UI_Layer.ViewModels
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
             
+            
         }
 
         /// <summary>
@@ -138,6 +139,24 @@ namespace UI_Layer.ViewModels
                 foreach (Card card in this.player.Hand.Cards)
                 {
                     cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    x = -10;
+                }
+
+                return cards;
+            }
+        }
+
+        public List<CardComponent> Board
+        {
+            get
+            {
+                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
+                List<CardComponent> cards = new List<CardComponent>();
+
+                int x = 0;
+                foreach (Card card in this.player.Board.Cards)
+                {
+                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 70, Height = 100, Margin = new Thickness(x, 0, 0, 0) });
                     x = -10;
                 }
 

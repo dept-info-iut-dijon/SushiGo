@@ -38,6 +38,13 @@
                 </Border>
                 <Grid/>
             </StackPanel>
+            <ListView x:Name="Board"  HorizontalAlignment="Center" Height="560" Margin="0,34,0,0" VerticalAlignment="Top" Width="562" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Border>
 </UserControl>
