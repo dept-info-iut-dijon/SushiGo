@@ -11,6 +11,8 @@
         WindowStyle="None"
         Title="SushiGo" 
         WindowState="Maximized">
+    
+    
     <Window.Resources>
         <usercontrols:LeaderboardRetriever x:Key="LeaderboardRetriever" />
     </Window.Resources>
