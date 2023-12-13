@@ -24,6 +24,7 @@ namespace UI_Layer.ViewModels
         private bool isPopupValidationQuitShown = false;
         private bool isButtonValidateShown = false;
         private List<PlayerViewModel> playerList;
+        private Logic_Layer.Table table;
         #endregion Attribut
 
         #region Constructeur
@@ -41,7 +42,7 @@ namespace UI_Layer.ViewModels
         #region Propriétés privées
         private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(table.RoundNumber));
+            NotifyPropertyChanged(nameof(table.RoundNumber));
         }
         #endregion
         
@@ -136,9 +137,8 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x?.Score).ToList(); }
-        /// Représente l'objet métier de la table
-        /// </summary>
-        public Logic_Layer.Table Table { get => table; }
+
+
 
         /// <summary>
         /// Est ce que la popup pour quitter la partie est affichée
@@ -166,24 +166,6 @@ namespace UI_Layer.ViewModels
             }
         }
 
-        public List<CardComponent> PlayerBoard
-        {
-            get
-            {
-                List<CardComponent> cards = new List<CardComponent>();
-                Player thisplayer = table.Players[0];
-                var player = new PlayerViewModel(thisplayer, PlayerType.PLAYER);
-                
-                int x = 0;
-                foreach (Card card in table.Players[0].Board.Cards)
-                {
-                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
-                }
-
-                return cards;
-            }
-        }
 
         public Logic_Layer.Table Table
         {

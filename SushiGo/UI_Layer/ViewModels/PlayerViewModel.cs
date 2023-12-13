@@ -54,6 +54,7 @@ namespace UI_Layer.ViewModels
         public void PlayCard(Card card)
         {
             player.PlayCard(card);
+
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
 
@@ -144,18 +145,20 @@ namespace UI_Layer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Liste des cartes posées sur le plateau
+        /// </summary>
         public List<CardComponent> Board
         {
             get
             {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
 
-                int x = 0;
                 foreach (Card card in this.player.Board.Cards)
                 {
-                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 80, Height = 110, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
+                    CardComponent carte = new CardComponent(card);
+                    carte.IsPut = true;
+                    cards.Add(carte);
                 }
 
                 return cards;

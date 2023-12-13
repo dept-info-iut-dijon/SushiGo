@@ -101,6 +101,28 @@ public partial class CardComponent : UserControl
     /// Représente l'objet métier de la carte
     /// </summary>
     public Card Card { get => card; }
+    /// <summary>
+    /// Est ce que la carte a été posée
+    /// </summary>
+    public bool IsPut 
+    { 
+        get => isPut;
+        set 
+        { 
+            isPut = value;
+            if (this.isPut == true)
+            {
+                this.Width = 80;
+                this.Height = 110;
+
+            }
+            else
+            {
+                this.Width = 140;
+                this.Height = 200;
+            }
+        }
+    }
 
     #endregion
 
@@ -114,14 +136,6 @@ public partial class CardComponent : UserControl
         this.IsSelected = !this.IsSelected;
     }
 
-    /// <summary>
-    /// Joue la carte.
-    /// </summary>
-    public void PlayCard()
-    {
-        this.isPut = true;
-        this.player.PlayCard(this.card);
-    }
 
     #endregion Méthode Publique
 
@@ -148,7 +162,7 @@ public partial class CardComponent : UserControl
     /// </summary>
     private static void HighlightBorders(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is CardComponent CardComponent)
+        if (d is CardComponent CardComponent && CardComponent.IsPut == false)
             if (CardComponent.border != null)
             {
                 if (CardComponent.IsMouseOverCard)

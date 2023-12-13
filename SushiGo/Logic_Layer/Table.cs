@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Logic_Layer.cards;
+﻿using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
 using Logic_Layer.score;
@@ -12,7 +10,7 @@ namespace Logic_Layer;
 /// <summary>
 /// Table de jeu
 /// </summary>
-public sealed class Table : INotifyPropertyChanged
+public class Table : INotifyPropertyChanged
 {
     private readonly List<Player> players;
     private int roundNumber;
@@ -39,6 +37,7 @@ public sealed class Table : INotifyPropertyChanged
             roundNumber = value;
             NotifyPropertyChanged();
         }
+
     }
 
     public List<Player> Players => players;
@@ -85,7 +84,7 @@ public sealed class Table : INotifyPropertyChanged
     }
 
     #endregion
-    
+
     #region Méthodes privées
     private void StartPlayersTurns()
     {
@@ -94,7 +93,7 @@ public sealed class Table : INotifyPropertyChanged
             player.PlayerTurn();
         }
     }
-    
+
     // Retourne true si toutes les cartes distribuées aux joueurs ont été posées
     private bool NoMoreCards()
     {
@@ -109,13 +108,15 @@ public sealed class Table : INotifyPropertyChanged
         {
             EndPlayerRound(player);
         }
-        RoundNumber++;
+        RoundNumber = roundNumber + 1;
+
     }
 
     // Doit être appelé sur chaque joueur à la fin de chaque manche
     private void EndPlayerRound(Player player)
     {
         var specialCards = player.EndRound();
+        //throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
 
     // Initialiser les joueurs
@@ -181,13 +182,4 @@ public sealed class Table : INotifyPropertyChanged
         return hands;
     }
     #endregion
-
-    #region Notify
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
-
 }
