@@ -87,8 +87,7 @@ public class Player : INotifyPropertyChanged
             hand.PlayCard(card, board);
             havePlayed = true;
 
-            NotifyPropertyChanged(nameof(Player.HavePlayed));
-
+            NotifyPropertyChanged(nameof(HavePlayed));
         }
     }
 

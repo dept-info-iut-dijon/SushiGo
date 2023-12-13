@@ -29,7 +29,13 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
 
     private static void GetNotification(object sender, PropertyChangedEventArgs e, BoardComponent boardComponent)
     {
-        SetupCards(boardComponent);
+        switch (e.PropertyName)
+        {
+            case nameof(boardComponent.Player.Player.HavePlayed):
+                SetupCards(boardComponent);
+                break;
+        }
+        
 
     }
 

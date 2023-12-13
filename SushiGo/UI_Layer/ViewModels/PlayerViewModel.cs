@@ -56,7 +56,6 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
 
             NotifyPropertyChanged(nameof(player.Hand));
-            NotifyPropertyChanged(nameof(player.HavePlayed));
 
 
         }
