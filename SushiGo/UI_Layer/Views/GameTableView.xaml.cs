@@ -39,7 +39,11 @@ namespace UI_Layer.Views
         {
             if(e.Key == Key.Tab)
             {
-                MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard = !MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard;
+                GameTableViewModel gameTableViewModel = MainWindowViewModel.Instance.GameTableViewModel;
+                if (gameTableViewModel != null)
+                {
+                    gameTableViewModel.IsLeaderboardShown = !gameTableViewModel.IsLeaderboardShown;
+                }
             }
             
         }

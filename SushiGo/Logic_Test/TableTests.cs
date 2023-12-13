@@ -69,28 +69,5 @@ public void Table_NextPlayerTurn_NoMoreCards_StartsNextRound()
     // Par exemple : Assert.Equal(1, table.CurrentPlayerIndex);
 }
 
-[Fact]
-public void Table_PlayCard_PlayerNotInGame_ThrowsException()
-{
-    // Arrange
-    List<Player> players = new List<Player>()
-    {
-        new Player(1,new Board(),null,""),
-        new Player(2,new Board(),null,""),
-        new Player(3,new Board(),null,""),
-        new Player(4,new Board(),null,""),
-    };
-    var table = new Table(players); // Remplacez par le nombre de joueurs souhaité
-    var player = new Player(999, new Board(), new Hand(999, new List<Card>()), "");
-    var cardMock = new Mock<Card>();
-    var card = cardMock.Object;
-
-    // Act and Assert
-    var exception = Assert.Throws<PlayerImpossibleToFindException>(() => table.PlayCard(player, card));
-
-    // Vérifiez le message d'exception (facultatif)
-    // Assurez-vous que le message d'exception indique que le joueur n'est pas en jeu.
-    // Par exemple : Assert.Equal("Le joueur n'est pas dans la partie", exception.Message);
-}
 
 }

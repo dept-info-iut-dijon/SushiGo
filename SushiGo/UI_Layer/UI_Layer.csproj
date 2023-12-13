@@ -12,6 +12,8 @@
     <None Remove="Assets\bois2.jpg" />
     <None Remove="Assets\Cursors\MainCursor.cur" />
     <None Remove="Assets\Cursors\MainCursorClick.cur" />
+    <None Remove="Assets\Images\Board.jpg" />
+    <None Remove="Assets\Images\Board.png" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
@@ -42,6 +44,8 @@
     </Resource>
     <Resource Include="Assets\Cursors\MainCursorClick.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="Assets\Images\Board.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -96,6 +100,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Assets\fr_FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>fr_FR.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

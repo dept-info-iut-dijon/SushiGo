@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CANCEL" xml:space="preserve">
+    <value>Retour</value>
+  </data>
   <data name="CREATE" xml:space="preserve">
     <value>Créer</value>
   </data>
   <data name="CREDITS" xml:space="preserve">
     <value>Crédits</value>
+  </data>
+  <data name="LEADERBOARD" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="MESSAGECANCEL" xml:space="preserve">
+    <value>Non, retour au jeu</value>
+  </data>
+  <data name="MESSAGEQUIT" xml:space="preserve">
+    <value>Oui, je quitte la partie</value>
   </data>
   <data name="PLAY" xml:space="preserve">
     <value>Jouer</value>
@@ -131,5 +143,11 @@
   </data>
   <data name="TITLE" xml:space="preserve">
     <value>SushiGO</value>
+  </data>
+  <data name="VALIDATE" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="VERIFICATIONQUIT" xml:space="preserve">
+    <value>Etes vous sûr de quitter ?</value>
   </data>
 </root>
