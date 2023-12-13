@@ -27,20 +27,27 @@ namespace Logic_Layer.score
             Dictionary<int, int> ScoreWasabisList = new Dictionary<int, int>();
             foreach (Player player in players)
             {
-                int scorePlayer = 0;
-                ScoreSushiByType sushiScore = new ScoreSushiByType();
                 List<Card> wasabiCards = CardsSorter.TypeSort(typeof(WasabiCard), player.Board.Cards);
-                foreach(WasabiCard wasabiCard in wasabiCards)
-                {
-                    if (wasabiCard.Sushi != null)
-                    {
-                        scorePlayer -= sushiScore.ScoreBySushiTypes[wasabiCard.Sushi.Type];
-                        scorePlayer += 3*sushiScore.ScoreBySushiTypes[wasabiCard.Sushi.Type];
-                    }
-                }
+                int scorePlayer = ScorePlayer(wasabiCards);
                 ScoreWasabisList.Add(player.Id, scorePlayer);
             }
             return ScoreWasabisList;
+        }
+
+
+        private int ScorePlayer(List<Card> wasabiCards)
+        {
+            int scorePlayer = 0;
+            ScoreSushiByType sushiScore = new ScoreSushiByType();
+            foreach (WasabiCard wasabiCard in wasabiCards)
+            {
+                if (wasabiCard.Sushi != null)
+                {
+                    scorePlayer -= sushiScore.ScoreBySushiTypes[wasabiCard.Sushi.Type];
+                    scorePlayer += 3 * sushiScore.ScoreBySushiTypes[wasabiCard.Sushi.Type];
+                }
+            }
+            return scorePlayer;
         }
     }
 }

@@ -37,7 +37,7 @@ public class WasabiCard : Card, ISpecialCard
     /// <summary>
     /// Indique si le wasabi contient un sushi
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Un booleen représentant la présence d'un sushi</returns>
     public bool PlayerTurn()
     {
         return sushi is null;
@@ -46,7 +46,7 @@ public class WasabiCard : Card, ISpecialCard
     /// <summary>
     /// Il n'y a rien de spécial à faire à la fin d'un tour
     /// </summary>
-    /// <returns></returns>
+    /// <returns>False</returns>
     public bool EndRound()
     {
         return false;

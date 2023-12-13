@@ -66,6 +66,7 @@ public class Board
 
     /// <summary>
     /// Ajoute une carte sur le plateau
+    /// Fait une vérification de la carte Wasabi si la carte est un sushi.
     /// </summary>
     /// <param name="card">Carte à ajouter</param>
     public void AddCard(Card card)
@@ -74,14 +75,7 @@ public class Board
         {
             List<Card> wasabiCards = CardsSorter.TypeSort(typeof(WasabiCard), cards);
             bool sushiIsAssociated = false;
-            foreach (WasabiCard c in wasabiCards)
-            {
-                if (c.Sushi is null && !sushiIsAssociated)
-                {
-                    c.AssociateSushi(card as SushiCard);
-                    sushiIsAssociated=true;
-                }
-            }
+            sushiIsAssociated = IsSushiAssociatedWithWasabi(wasabiCards, card);
             if (!sushiIsAssociated)
             {
                 cards.Add(card);
@@ -92,4 +86,18 @@ public class Board
             cards.Add(card);
         }
     }
+    private bool IsSushiAssociatedWithWasabi(List<Card> wasabiCards, Card card)
+    {
+        bool sushiIsAssociated = false;
+        foreach (WasabiCard c in wasabiCards)
+        {
+            if (c.Sushi is null && !sushiIsAssociated)
+            {
+                c.AssociateSushi(card as SushiCard);
+                sushiIsAssociated = true;
+            }
+        }
+        return sushiIsAssociated;
+    }
+
 }
