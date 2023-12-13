@@ -28,7 +28,7 @@ public class Board
     /// <summary>
     /// Indique si on peut jouer deux cartes sur ce board
     /// </summary>
-    public bool CanPlayTwoCards => Cards.Any(c => c is ChopstickCard);
+    public virtual bool CanPlayTwoCards => Cards.Any(c => c is ChopstickCard);
 
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
@@ -73,7 +73,7 @@ public class Board
     /// Ajoute une carte sur le plateau
     /// </summary>
     /// <param name="card">Carte à ajouter</param>
-    public void AddCard(Card card)
+    public virtual void AddCard(Card card)
     {
         cards.Add(card);
     }
@@ -81,7 +81,7 @@ public class Board
     /// <summary>
     /// Retire une carte chopstick de la main, lance une exception s'il n'y en a aucune
     /// </summary>
-    public void PlayChopstickCard()
+    public virtual void PlayChopstickCard()
     {
         if (!CanPlayTwoCards)
             throw new NoChopstickInBoardException("Le joueur ne peut pas jouer deux cartes car il n'a pas de baguettes");
