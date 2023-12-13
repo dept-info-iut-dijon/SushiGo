@@ -8,7 +8,7 @@ public class Player : INotifyPropertyChanged
 {
     private int id;
     private string pseudo;
-    private Board board;
+    private readonly Board board;
     private Hand hand;
     private bool havePlayed;
 

@@ -1,4 +1,6 @@
-﻿using Logic_Layer.cards;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Logic_Layer.cards;
 using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
 using Logic_Layer.score;
@@ -10,7 +12,7 @@ namespace Logic_Layer;
 /// <summary>
 /// Table de jeu
 /// </summary>
-public class Table : INotifyPropertyChanged
+public sealed class Table : INotifyPropertyChanged
 {
     private readonly List<Player> players;
     private int roundNumber;
@@ -37,7 +39,6 @@ public class Table : INotifyPropertyChanged
             roundNumber = value;
             NotifyPropertyChanged();
         }
-
     }
 
     public List<Player> Players => players;
@@ -108,15 +109,13 @@ public class Table : INotifyPropertyChanged
         {
             EndPlayerRound(player);
         }
-        RoundNumber = roundNumber + 1;
-
+        RoundNumber++;
     }
 
     // Doit être appelé sur chaque joueur à la fin de chaque manche
     private void EndPlayerRound(Player player)
     {
         var specialCards = player.EndRound();
-        //throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
 
     // Initialiser les joueurs
@@ -182,4 +181,14 @@ public class Table : INotifyPropertyChanged
         return hands;
     }
     #endregion
+
+    #region Notify
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    #endregion
+
 }

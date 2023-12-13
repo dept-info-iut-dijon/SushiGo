@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
@@ -19,11 +20,12 @@ namespace UI_Layer.ViewModels
     public class GameTableViewModel : INotifyPropertyChanged
     {
         #region Attribut
-        private Logic_Layer.Table table;
         private bool isLeaderboardShown = false;
         private bool isPopupValidationQuitShown = false;
         private bool isButtonValidateShown = false;
         private List<PlayerViewModel> playerList;
+
+        private Logic_Layer.Table? table;
         private CardComponent? cardSelected;
 
         #endregion Attribut
@@ -74,13 +76,19 @@ namespace UI_Layer.ViewModels
 
         #endregion Constructeur
 
+        #region Propriétés privées
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(table.RoundNumber));
+        }
+        #endregion
+        
         #region Evénement
 
         /// <summary>
         /// Evénement lors du changement d'une propriété.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
-
 
         /// <summary>
         /// Permet d'ouvrir l'écran du menu
@@ -107,6 +115,10 @@ namespace UI_Layer.ViewModels
             MainWindowViewModel.Instance.NavigationViewModel.ReturnToMenu();
         });
 
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         #endregion Evénement
 
         #region Commande Déléguée
@@ -240,6 +252,31 @@ namespace UI_Layer.ViewModels
                 isButtonValidateShown = value; 
                 NotifyPropertyChanged();
             }
+        }
+
+        public List<CardComponent> PlayerBoard
+        {
+            get
+            {
+                List<CardComponent> cards = new List<CardComponent>();
+                Player thisplayer = table.Players[0];
+                var player = new PlayerViewModel(thisplayer, PlayerType.PLAYER);
+                
+                int x = 0;
+                foreach (Card card in table.Players[0].Board.Cards)
+                {
+                    cards.Add(new CardComponent(player, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
+                    x = -10;
+                }
+
+                return cards;
+            }
+        }
+
+        public Logic_Layer.Table Table
+        {
+            get => table;
+            set => table.PropertyChanged += Table_PropertyChanged;
         }
 
         #endregion Propriété
