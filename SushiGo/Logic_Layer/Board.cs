@@ -82,7 +82,14 @@ public class Board
                     sushiIsAssociated=true;
                 }
             }
+            if (!sushiIsAssociated)
+            {
+                cards.Add(card);
+            }
         }
-        cards.Add(card);
+        else
+        {
+            cards.Add(card);
+        }
     }
 }
