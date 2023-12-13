@@ -24,7 +24,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
     public BoardComponent()
     {
         InitializeComponent();
-        
+
     }
 
     private static void GetNotification(object sender, PropertyChangedEventArgs e, BoardComponent boardComponent)
@@ -87,7 +87,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
         List<CardComponent> cartesJoueurs = boardComponent.Player.Board;
         // TODO : afficher les cartes
         boardComponent.Board.ItemsSource = cartesJoueurs;
-        
-        
+
+
     }
 }

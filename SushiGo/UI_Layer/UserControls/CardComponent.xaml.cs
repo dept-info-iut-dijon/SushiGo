@@ -17,6 +17,7 @@ public partial class CardComponent : UserControl
     private readonly Card card;
     private Thickness baseMargin;
     private bool isSelected;
+    private bool isPut;
 
     /// <summary>
     /// Instancie un CardComponent
@@ -27,6 +28,7 @@ public partial class CardComponent : UserControl
         this.player = player;
         this.card = card;
         this.isSelected = false;
+        this.isPut = false;
         InitializeComponent();
         this.CardName = card.Name;
     }
@@ -136,6 +138,7 @@ public partial class CardComponent : UserControl
     /// </summary>
     public void PlayCard()
     {
+        this.isPut = true;
         this.player.PlayCard(this.card);
     }
 

@@ -55,8 +55,8 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(player.HavePlayed));
-            
-            
+
+
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace UI_Layer.ViewModels
                 int x = 0;
                 foreach (Card card in this.player.Board.Cards)
                 {
-                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 70, Height = 100, Margin = new Thickness(x, 0, 0, 0) });
+                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 80, Height = 110, Margin = new Thickness(x, 0, 0, 0) });
                     x = -10;
                 }
 

@@ -15,11 +15,18 @@
         BorderThickness="5"
         CornerRadius="10">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
             <Image
+               Grid.Row="1"
                Source="../Assets/Images/Board.jpg"
                Stretch="Fill"/>
-            <StackPanel>
-                <Border Background="{StaticResource PersianRedBrush}"  BorderBrush="Black">
+                
+
+                <Border Grid.Row="0" Background="{StaticResource PersianRedBrush}"  BorderBrush="Black">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <materialDesign:PackIcon
                             VerticalAlignment="Center"
@@ -36,15 +43,15 @@
                             FontSize="18"/>
                     </StackPanel>
                 </Border>
-                <Grid/>
-            </StackPanel>
-            <ListView x:Name="Board"  HorizontalAlignment="Center" Height="560" Margin="0,34,0,0" VerticalAlignment="Top" Width="562" >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+
+            <ItemsControl Grid.Row="1" x:Name="Board" HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+            </ItemsControl>
         </Grid>
     </Border>
 </UserControl>
