@@ -97,7 +97,7 @@
                
                 <!-- Liste des cartes -->
                 <StackPanel Margin="70,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Orientation="Horizontal">
-                    <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.Deck}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.CardSelected}">
+                    <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.PlayerPlaying.Hand}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.PlayerPlaying.CardSelected}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="Control.VerticalAlignment" Value="Bottom" />
@@ -185,12 +185,12 @@
                 <!-- Plateau du joueur 1-->
                 <usercontrols:BoardComponent
                     Grid.Column="5"
-                    Player="{Binding GameTableViewModel.PlayerList[0]}">
+                    Player="{Binding GameTableViewModel.PlayerPlaying}">
                     <usercontrols:BoardComponent.Style>
                         <Style TargetType="usercontrols:BoardComponent">
                             <Setter Property="Visibility" Value="Visible"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerList[0]}" Value="{x:Null}">
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerPlaying}" Value="{x:Null}">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
