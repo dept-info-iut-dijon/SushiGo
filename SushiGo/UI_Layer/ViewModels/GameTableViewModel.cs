@@ -87,6 +87,21 @@ namespace UI_Layer.ViewModels
         public GameOrderEnum GameOrder => table.GameOrder;
         
         /// <summary>
+        /// Liste des joueurs jouant dans l'ordre
+        /// </summary>
+        public List<PlayerViewModel> PlayerOrder
+        {
+            get
+            {
+                List<PlayerViewModel> order = new List<PlayerViewModel>(this.playerList);
+                if (GameOrder == GameOrderEnum.REGRESSIVE)
+                {
+                    order.Reverse();
+                }
+                return order;
+            }
+        }
+        /// <summary>
         /// Représente le joueur qui joue
         /// </summary>
         public PlayerViewModel PlayerPlaying
