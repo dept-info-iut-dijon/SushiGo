@@ -44,6 +44,7 @@
     </Resource>
     <Resource Include="Assets\Cursors\MainCursorClick.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\Board.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
