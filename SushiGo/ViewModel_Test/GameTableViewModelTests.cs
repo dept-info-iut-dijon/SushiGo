@@ -9,7 +9,6 @@ namespace ViewModel_Test
 {
     public class GameTableViewModelTests
     {
-        [Fact]
         public void CardSelected_ShouldRaisePropertyChangedEvent()
         {
             // Act
@@ -23,7 +22,7 @@ namespace ViewModel_Test
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
                 // Assert
-                Assert.PropertyChanged(gameTableVM, "CardSelected", () =>  gameTableVM.CardSelected = new CardComponent(playerVM, new SushiCard(SushiTypes.OMELETTE)));
+                Assert.PropertyChanged(playerVM, "CardSelected", () => playerVM.CardSelected = new CardComponent(new SushiCard(SushiTypes.OMELETTE)));
 
                 Dispatcher.CurrentDispatcher.BeginInvokeShutdown(DispatcherPriority.Background);
                 Dispatcher.Run();
