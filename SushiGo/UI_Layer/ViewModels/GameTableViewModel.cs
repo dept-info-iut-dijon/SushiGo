@@ -84,6 +84,10 @@ namespace UI_Layer.ViewModels
         #endregion Evénement
 
         #region Propriété
+        
+        /// <summary>
+        /// Indique l'ordre dans lequel les mains tournent
+        /// </summary>
         public GameOrderEnum GameOrder => table.GameOrder;
         
         /// <summary>

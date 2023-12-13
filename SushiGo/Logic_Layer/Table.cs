@@ -11,6 +11,9 @@ namespace Logic_Layer;
 /// </summary>
 public class Table : INotifyPropertyChanged
 {
+    private const int MAX_PLAYERS = 5;
+    private const int MIN_PLAYERS = 2;
+    
     private int roundNumber;
     private readonly TableScoreCalculator scoreCalculator;
 
@@ -32,8 +35,14 @@ public class Table : INotifyPropertyChanged
     /// </summary>
     public GameOrderEnum GameOrder => RoundNumber % 2 == 0 ? GameOrderEnum.REGRESSIVE : GameOrderEnum.PROGRESSIVE;
 
+    /// <summary>
+    /// Les joueurs participant à la partie
+    /// </summary>
     public List<Player> Players { get; }
 
+    /// <summary>
+    /// Permet de d'abonner un objet à la notification de changement de propriété
+    /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -112,8 +121,8 @@ public class Table : INotifyPropertyChanged
     // Initialiser les joueurs
     private void InitPlayersValue()
     {
-        if (Players.Count is < 2 or > 5)
-            throw new WrongPlayersNumberException("Le nombre de joueur doit être inclus entre 2 et 5");
+        if (Players.Count is < MIN_PLAYERS or > MAX_PLAYERS)
+            throw new WrongPlayersNumberException($"Le nombre de joueur doit être inclus entre {MIN_PLAYERS} et {MAX_PLAYERS}");
 
 
         var hands = new HandFactory().CreateHands(Players.Count);
@@ -143,7 +152,8 @@ public class Table : INotifyPropertyChanged
     private void ActualizeHands()
     {
         var rotatedHands = RotateHands();
-        for (var index = 0; index < rotatedHands.Count; index++) Players[index].Hand = rotatedHands[index];
+        for (var index = 0; index < rotatedHands.Count; index++) 
+            Players[index].Hand = rotatedHands[index];
     }
 
     // Créée la liste des mains pour la rotation
