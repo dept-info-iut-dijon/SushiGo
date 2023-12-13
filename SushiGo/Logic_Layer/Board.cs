@@ -7,7 +7,7 @@ namespace Logic_Layer;
 /// </summary>
 public class Board
 {
-    private readonly List<Card> cards = new();
+    private List<Card> cards = new();
 
     /// <summary>
     /// Liste des cartes du joueur

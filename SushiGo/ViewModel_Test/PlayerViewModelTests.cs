@@ -34,7 +34,7 @@ public class PlayerViewModelTests
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
         var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
-        var gameVM = new GameTableViewModel(table)
+        var gameVM = new GameTableViewModel()
         {
             Table = table
         };
@@ -58,7 +58,7 @@ public class PlayerViewModelTests
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
         var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
-        var gameVM = new GameTableViewModel(table)
+        var gameVM = new GameTableViewModel()
         {
             Table = table
         };
