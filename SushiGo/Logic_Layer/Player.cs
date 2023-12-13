@@ -46,7 +46,7 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Main de cartes du joueur
     /// </summary>
-    public Hand Hand
+    public virtual Hand Hand
     {
         get => hand;
         set => hand = value;
@@ -58,7 +58,7 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Board des cartes posées du joueur
     /// </summary>
-    public Board Board { get => board; }
+    public virtual Board Board { get => board; }
 
     public Player(int id, Board board, Hand hand, string pseudo)
     {
@@ -88,7 +88,6 @@ public class Player : INotifyPropertyChanged
             havePlayed = true;
 
             NotifyPropertyChanged(nameof(Player.HavePlayed));
-
         }
     }
 
@@ -97,7 +96,7 @@ public class Player : INotifyPropertyChanged
     /// </summary>
     /// <see cref="ISpecialCard"/>
     /// <returns>Les cartes spéciales à prendre en compte</returns>
-    public List<ISpecialCard> PlayerTurn()
+    public virtual List<ISpecialCard> PlayerTurn()
     {
         HavePlayed = false;
         return board.PlayerTurn();
@@ -107,7 +106,7 @@ public class Player : INotifyPropertyChanged
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>
     /// <returns></returns>
-    public List<ISpecialCard> EndRound()
+    public virtual List<ISpecialCard> EndRound()
     {
         return board.EndRound();
     }
