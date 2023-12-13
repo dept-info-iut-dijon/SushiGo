@@ -235,9 +235,17 @@ namespace UI_Layer.ViewModels
             if (this.PlayerPlaying.CardSelected != null)
             {
 
+                // Notifications des ia
+                foreach (PlayerViewModel p in this.playerList)
+                {
+                    p.NotifyBoard();
+                }
+
                 this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
 
-                // Notifications
+
+                // Notifications du joueur
+                this.PlayerPlaying.NotifyBoard();
                 this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
                 this.IsButtonValidateShown = false;
             }

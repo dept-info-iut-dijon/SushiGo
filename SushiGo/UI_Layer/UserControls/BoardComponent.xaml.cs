@@ -31,7 +31,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
     {
         switch (e.PropertyName)
         {
-            case nameof(boardComponent.Player.Player.HavePlayed):
+            case nameof(boardComponent.Player.Board):
                 SetupCards(boardComponent);
                 break;
         }
@@ -81,7 +81,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
         if (d is BoardComponent BoardComponent && BoardComponent.Player != null)
         {
             BoardComponent.PlayerName.Text = BoardComponent.Player.Nom;
-            BoardComponent.Player.Player.PropertyChanged += (sender, args) => GetNotification(sender, args, BoardComponent);
+            BoardComponent.Player.PropertyChanged += (sender, args) => GetNotification(sender, args, BoardComponent);
         }
     }
 

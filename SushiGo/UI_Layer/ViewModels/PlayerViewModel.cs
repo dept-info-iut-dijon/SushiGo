@@ -179,6 +179,15 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(player.Board.Cards));
             }
         }
+
+        /// <summary>
+        /// Permet de notifier le board d'actualiser les cartes
+        /// </summary>
+        public void NotifyBoard()
+        {
+            NotifyPropertyChanged(nameof(Board));
+        }
+
         /// <summary>
         /// Carte sélectionnée.
         /// </summary>
