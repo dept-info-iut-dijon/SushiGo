@@ -154,7 +154,8 @@ public class Table : INotifyPropertyChanged
 
         // Make the hands rotate position positively if the game order is progressive, opposite order if regressive
         var rotation = GameOrder == GameOrderEnum.PROGRESSIVE ? 1 : -1;
-        
+        NotifyPropertyChanged(nameof(GameOrder));
+
         for (var i = 0; i < Players.Count; i++)
         {
             var index = (i + rotation) % Players.Count;

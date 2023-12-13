@@ -227,6 +227,11 @@ namespace UI_Layer.ViewModels
                 this.IsLeaderboardShown = true;
                 NotifyPropertyChanged(nameof(MancheNumber));
             }
+            else if (e.PropertyName.Equals(nameof(table.GameOrder)))
+            {
+                NotifyPropertyChanged(nameof(this.GameOrder));
+                NotifyPropertyChanged(nameof(this.PlayerOrder));
+            }
         }
 
         private void OnValidateCommand()
