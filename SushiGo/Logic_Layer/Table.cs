@@ -217,7 +217,6 @@ public class Table : INotifyPropertyChanged
     /// <summary>
     /// Créée la liste des mains pour la rotation.
     /// </summary>
-    /// <returns>Plusieurs Hand.</returns>
     /// <exception cref="HandsRotationException">Levée si la nouvelle liste de mains est invalide.</exception>
     private List<Hand> RotateHands()
     {
