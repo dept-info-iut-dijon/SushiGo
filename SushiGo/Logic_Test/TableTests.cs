@@ -63,9 +63,5 @@ public class TableTests
         // Act
         player.Hand.Cards.Clear(); // Simulez l'absence de cartes dans la main du joueur
         table.NextTurn();
-
-        // Assurez-vous que NextRound a été appelé (vérifiez l'état interne de votre classe)
-        // et que CurrentPlayer est maintenant le joueur suivant.
-        // Par exemple : Assert.Equal(1, table.CurrentPlayerIndex);
     }
 }
