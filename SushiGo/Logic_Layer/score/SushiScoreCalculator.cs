@@ -37,16 +37,17 @@ namespace Logic_Layer.score
             return score;
         }
 
-        private List<SushiCard> SushiCardsSorterByType(List<SushiCard> sushiCards, cards.SushiTypes sushiType) 
-        { 
-            List<SushiCard> sortedSushiCards = new List<SushiCard>(); 
-            foreach (SushiCard card in sushiCards) { 
-                if (card.Type == sushiType) 
-                { 
-                    sortedSushiCards.Add(card); 
-                } 
-            } 
-            return sortedSushiCards; 
+        private List<SushiCard> SushiCardsSorterByType(List<SushiCard> sushiCards, cards.SushiTypes sushiType)
+        {
+            List<SushiCard> sortedSushiCards = new List<SushiCard>();
+            foreach (SushiCard card in sushiCards)
+            {
+                if (card.Type == sushiType)
+                {
+                    sortedSushiCards.Add(card);
+                }
+            }
+            return sortedSushiCards;
         }
 
         private List<SushiCard> ListCardToListSushiCardConverter(List<Card> cards)

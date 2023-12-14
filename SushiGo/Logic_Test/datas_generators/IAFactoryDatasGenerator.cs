@@ -1,8 +1,8 @@
 ﻿using Logic_Layer;
-using System.Collections;
 using Logic_Layer.cards;
-using Logic_Layer.IA;
 using Logic_Layer.cards.cards_implementation;
+using Logic_Layer.IA;
+using System.Collections;
 
 namespace LogicTest.datas_generators
 {

@@ -1,5 +1,4 @@
-﻿using Logic_Layer.cards;
-using Logic_Layer.factories;
+﻿using Logic_Layer.factories;
 using Logic_Layer.logic_exceptions;
 using Logic_Layer.score;
 using System.ComponentModel;
@@ -98,7 +97,7 @@ public class Table : INotifyPropertyChanged
     }
 
     #endregion
-    
+
     #region Méthodes privées
 
     private void StartPlayersTurns()
@@ -197,7 +196,7 @@ public class Table : INotifyPropertyChanged
                 {
                     this.NextTurn();
                 }
-                    
+
                 break;
         }
     }

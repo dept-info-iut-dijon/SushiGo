@@ -14,21 +14,21 @@ public class DessertScoreCalculator : IScoreCalculator
     {
         var scores = new Dictionary<int, int>();
         var dessertCards = new Dictionary<int, List<Card>>();
-        
+
         var playersWithMostDesserts = new List<Player>();
         var playersWithLeastDesserts = new List<Player>();
         int mostDesserts = 0;
-        
+
         // Filtrer pour ne retrouver que les cartes desserts
         foreach (var player in players)
         {
             dessertCards[player.Id] = CardsSorter.TypeSort(typeof(DessertCard), player.Board.Cards);
             scores[player.Id] = 0;
         }
-        
+
         // On donne 6 points au.x joueur.s avec le plus de cartes desserts
         mostDesserts = AddScoreToPlayersWithMostDesserts(players, dessertCards, mostDesserts, playersWithMostDesserts, scores);
-        
+
         int leastDesserts = mostDesserts; // on initialise la variable ici pour pouvoir gérer correctement le cas où les joueurs avec le plus de cartes desserts sont aussi ceux avec le moins de cartes desserts
 
         // On retire 6 points au.x joueur.s avec le moins de cartes desserts

@@ -13,7 +13,7 @@ public class SushiTypesConverter
         { "calamar", SushiTypes.CALAMARI },
         { "omelette", SushiTypes.OMELETTE }
     };
-    
+
     private static readonly Dictionary<SushiTypes, String> typeToString = new()
     {
         { SushiTypes.SALMON, "Saumon" },
@@ -32,7 +32,7 @@ public class SushiTypesConverter
             return toSushi;
         throw new SushiTypeDoesNotExist($"Le type de sushi {sushi} n'existe pas");
     }
-    
+
     /// <summary>
     /// Convertis un SushiType en string destiné à être lu par un humain
     /// </summary>

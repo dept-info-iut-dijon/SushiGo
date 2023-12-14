@@ -17,7 +17,7 @@ public class PlayerViewModelTests
         playerVM.IsTurnFinished = initValue;
         Assert.PropertyChanged(playerVM, nameof(playerVM.IsTurnFinished), () => playerVM.IsTurnFinished = newValue);
     }
-    
+
     [Theory]
     [ClassData(typeof(PlayerDatasGenerator))]
     public void PlayCard_GetNotification(int playerId, Board board, Hand hand, string pseudo, PlayerType playerType, Card card)

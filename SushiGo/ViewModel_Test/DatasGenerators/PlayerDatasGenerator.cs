@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using Logic_Layer;
-using Logic_Layer.cards;
+﻿using Logic_Layer;
 using Logic_Layer.factories;
-using Logic_Layer.factories.card_factories;
+using System.Collections;
 using UI_Layer.ViewModels;
 
 namespace ViewModel_Test.DatasGenerators;

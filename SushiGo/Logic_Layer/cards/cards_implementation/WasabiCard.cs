@@ -8,7 +8,7 @@ namespace Logic_Layer.cards.cards_implementation;
 public class WasabiCard : Card, ISpecialCard
 {
     private SushiCard? sushi;
-    
+
     public override string Name => "Wasabi";
     public SushiCard? Sushi => sushi;
 

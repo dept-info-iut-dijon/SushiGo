@@ -10,7 +10,7 @@ public interface ISpecialCard
     /// </summary>
     /// <returns>Indique si la carte peut être prise en compte</returns>
     bool PlayerTurn();
-    
+
     /// <summary>
     /// Appelé à la fin de la manche
     /// </summary>

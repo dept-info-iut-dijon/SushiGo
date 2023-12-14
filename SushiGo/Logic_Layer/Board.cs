@@ -31,14 +31,14 @@ public class Board
     public virtual List<ISpecialCard> PlayerTurn()
     {
         List<ISpecialCard> ret = new List<ISpecialCard>();
-        
+
         // On rassemble les cartes spéciales devant être prises en compte
         foreach (Card c in Cards)
         {
             if (c is ISpecialCard card && card.PlayerTurn())
                 ret.Add(card);
         }
-        
+
         return ret;
     }
 
@@ -56,8 +56,8 @@ public class Board
             if (c is ISpecialCard card && card.EndRound())
                 ret.Add(card);
         }
-        
-        Cards = ret.Select(c => (Card) c).ToList();
+
+        Cards = ret.Select(c => (Card)c).ToList();
 
         return ret;
     }

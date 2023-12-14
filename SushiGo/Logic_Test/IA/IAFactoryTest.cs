@@ -1,6 +1,6 @@
 ﻿using Logic_Layer;
-using Logic_Layer.cards;
 using Logic_Layer.IA;
+using Logic_Layer.IA.Factories;
 using Logic_Layer.IA.IAImplementation;
 using LogicTest.datas_generators;
 
@@ -12,7 +12,7 @@ namespace LogicTest.IA
         [ClassData(typeof(IAFactoryDatasGenerator))]
         public void CreateIA_Easy(IADifficultyEnum difficulty, int id, Board board, Hand hand)
         {
-            IAFactory iAFactory = new IAFactory();
+            IIAFactory iAFactory = new IIAFactory();
 
             Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(IADifficultyEnum.FACILE, 3, board, hand);
 

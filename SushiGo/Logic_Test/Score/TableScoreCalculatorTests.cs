@@ -1,8 +1,8 @@
-using System.Reflection;
 using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.score;
 using Moq;
+using System.Reflection;
 
 namespace LogicTest.Score;
 
@@ -21,10 +21,10 @@ public class TableScoreCalculatorTests
         // on récupère l'attribut à mocker
         FieldInfo? dessertCalculatorInfo = typeof(TableScoreCalculator).GetField("endGameScoreCalculators",
             BindingFlags.NonPublic | BindingFlags.Instance);
-        
+
         // on crée  le mock
         Mock<DessertScoreCalculator> mockedDessertCalculator = new Mock<DessertScoreCalculator>();
-        
+
         // on insère le mock dans l'attribut
         dessertCalculatorInfo?.SetValue(calculator, new List<IScoreCalculator>()
         {
@@ -32,11 +32,11 @@ public class TableScoreCalculatorTests
         });
 
         calculator.CalculateScore();
-        
+
         mockedDessertCalculator.Verify(x => x.CalculateScore(playersList), Times.Never());
 
     }
-    
+
     [Fact]
     public void CalculateScore_TakeDessertIntoAccount_WhenItIsLastRound()
     {
@@ -64,7 +64,7 @@ public class TableScoreCalculatorTests
         // on récupère l'attribut à mocker
         FieldInfo? dessertCalculatorInfo = typeof(TableScoreCalculator).GetField("endGameScoreCalculators",
             BindingFlags.NonPublic | BindingFlags.Instance);
-        
+
         // on crée  le mock
         Mock<DessertScoreCalculator> mockedDessertCalculator = new Mock<DessertScoreCalculator>();
         mockedDessertCalculator.Setup(x => x.CalculateScore(It.IsAny<List<Player>>())).Returns(new Dictionary<int, int>()
@@ -72,7 +72,7 @@ public class TableScoreCalculatorTests
             {0, 10},
             {1, 10}
         });
-        
+
         // on insère le mock dans l'attribut
         dessertCalculatorInfo?.SetValue(calculator, new List<IScoreCalculator>()
         {
@@ -80,7 +80,7 @@ public class TableScoreCalculatorTests
         });
 
         calculator.CalculateScore();
-        
+
         mockedDessertCalculator.Verify(x => x.CalculateScore(playersList));
     }
 }

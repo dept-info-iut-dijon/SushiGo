@@ -1,11 +1,4 @@
-﻿using Logic_Layer.cards;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logic_Layer.IA.IAImplementation
+﻿namespace Logic_Layer.IA.IAImplementation
 {
     /// <summary>
     /// IA bourrée : elle pose la premiere carte de sa main
@@ -30,7 +23,7 @@ namespace Logic_Layer.IA.IAImplementation
                 }
                 EndRound();
             }
-            
+
         }
     }
 }

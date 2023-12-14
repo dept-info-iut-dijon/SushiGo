@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logic_Layer.score
+﻿namespace Logic_Layer.score
 {
     /// <summary>
     /// Calcule le score de toute la table
@@ -33,7 +27,7 @@ namespace Logic_Layer.score
             this.scores = new Dictionary<int, int>();
             this.PlayerInitializer();
         }
-        
+
         #region Méthodes publiques
 
         /// <summary>
@@ -53,7 +47,7 @@ namespace Logic_Layer.score
 
             // Pas besoin d'aller plus loin si on en est pas à la dernière manche
             // On aurait pu faire la même chose en mettant le foreach dans une condition mais ça augmenterait le nesting
-            if (table.RoundNumber <3) return scores;
+            if (table.RoundNumber < 3) return scores;
 
             var endGameScore = EndGameScore();
             foreach (var player in table.Players)
@@ -63,8 +57,8 @@ namespace Logic_Layer.score
 
             return scores;
         }
-        
-        
+
+
         /// <summary>
         /// Permet de récupérer le score d'un joueur
         /// </summary>
@@ -75,7 +69,7 @@ namespace Logic_Layer.score
             return scores[player.Id];
         }
         #endregion
-        
+
         #region Méthodes privées
 
         private void ListCalculatorInitializer()
@@ -104,7 +98,7 @@ namespace Logic_Layer.score
             {
                 endGameScore[player.Id] = 0;
             }
-            
+
             foreach (IScoreCalculator scoreCalculator in endGameScoreCalculators)
             {
                 Dictionary<int, int> calculatedScore = scoreCalculator.CalculateScore(table.Players);
@@ -113,7 +107,7 @@ namespace Logic_Layer.score
                     endGameScore[player.Id] += calculatedScore[player.Id];
                 }
             }
-            
+
             return endGameScore;
         }
 

@@ -1,46 +1,48 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.IA;
-using Logic_Layer.IA.IAImplementation;
+using Logic_Layer.IA.Factories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using UI_Layer.Views;
 
 namespace UI_Layer.ViewModels
 {
+    /// <summary>
+    /// Classe intermédiaire entre la vue <see cref="GameCreationView"/> et le métier.
+    /// </summary>
     public class GameCreationViewModel : INotifyPropertyChanged
     {
-
         #region inotify
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
         #region attributes
-        private IADifficultyEnum difficulty = IADifficultyEnum.FACILE;
+
+        private IADifficultyEnum difficulty = IADifficultyEnum.EASY;
         private ObservableCollection<PlayerViewModel> players = new ObservableCollection<PlayerViewModel>();
         private int playerCount = 3;
         private bool isModeJvJ = false;
         private bool isLobbyShowed = false;
         private bool startButtonShow = false;
         private string idParty;
-        private Window view;
 
         #endregion
 
 
 
         #region events
+
         /// <summary>
         /// Permet d'indiquer a la vue de fermer la page
         /// </summary>
@@ -71,14 +73,14 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Permet de créer le lobby de la partie
         /// </summary>
-        public DelegateCommand CreateGame => new DelegateCommand(() => 
+        public DelegateCommand CreateGame => new DelegateCommand(() =>
             this.CreateLobby()
         );
 
         /// <summary>
         /// Permet de lancer  la partie
         /// </summary>
-        public DelegateCommand StartGame => new DelegateCommand(() => 
+        public DelegateCommand StartGame => new DelegateCommand(() =>
             this.Start()
         );
 
@@ -102,9 +104,9 @@ namespace UI_Layer.ViewModels
                     throw new Exception("Mode de jeu non compatible");
                 }
             }
-            set 
-            { 
-                difficulty = value; 
+            set
+            {
+                difficulty = value;
             }
         }
 
@@ -147,8 +149,8 @@ namespace UI_Layer.ViewModels
         public int PlayerCount
         {
             get => playerCount;
-            set 
-            { 
+            set
+            {
                 playerCount = value;
                 NotifyPropertyChanged();
             }
@@ -159,8 +161,8 @@ namespace UI_Layer.ViewModels
         public bool IsModeJvJ
         {
             get => isModeJvJ;
-            set 
-            { 
+            set
+            {
                 isModeJvJ = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(TitleLobby));
@@ -172,8 +174,8 @@ namespace UI_Layer.ViewModels
         public bool StartButtonShow
         {
             get => startButtonShow;
-            set 
-            { 
+            set
+            {
                 startButtonShow = value;
                 NotifyPropertyChanged();
             }
@@ -182,8 +184,8 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Permet d'afficher le lobby et la creation/join de partie
         /// </summary>
-        public bool IsLobbyShowed 
-        { 
+        public bool IsLobbyShowed
+        {
             get => isLobbyShowed;
             set
             {
@@ -199,11 +201,11 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Id de la partie à rejoindre en multijoueur
         /// </summary>
-        public string IdParty 
-        { 
+        public string IdParty
+        {
             get => idParty;
-            set 
-            { 
+            set
+            {
                 idParty = value;
                 NotifyPropertyChanged();
             }
@@ -242,25 +244,13 @@ namespace UI_Layer.ViewModels
             // Création des IAs
             else
             {
-                IAFactory iAFactory = new IAFactory();
-
-                for (int i = 1; i < playerCount; i++)
-                {
-                    // Création de l'IA
-                    IA ia = iAFactory.CreateIA(this.difficulty, i + 1, new Board(), new Hand(i + 1, new List<Card>()));
-
-                    // Création de la vueModel à partir de l'IA créée
-                    PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT);
-
-                    // Ajout de l'IA aux joueurs
-                    this.Players.Add(playerViewModel);
-                }
-                
-                this.StartButtonShow = true;
+                this.CreateIA();
             }
 
             this.IsLobbyShowed = true;
         }
+
+
 
         /// <summary>
         /// Permet de réinitialiser l'ihm à chaque chargement de la page
@@ -308,8 +298,38 @@ namespace UI_Layer.ViewModels
                 uniqueId[i] = characters[random.Next(characters.Length)];
             }
             this.IdParty = new string(uniqueId);
-            
+
         }
+
+        /// <summary>
+        /// Permet de créer les IAs lors de la création d'une partie.
+        /// </summary>
+        private void CreateIA()
+        {
+            IIAFactory iAFactory = new EasyIAFactory();
+
+            switch (this.difficulty)
+            {
+                case IADifficultyEnum.EASY:
+                    iAFactory = new EasyIAFactory();
+                    break;
+            }
+
+            for (int i = 1; i < playerCount; i++)
+            {
+                // Création de l'IA
+                IA ia = iAFactory.CreateIA(i + 1, new Board(), new Hand(i + 1, new List<Card>()));
+
+                // Création de la vueModel à partir de l'IA créée
+                PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT);
+
+                // Ajout de l'IA aux joueurs
+                this.Players.Add(playerViewModel);
+            }
+
+            this.StartButtonShow = true;
+        }
+
         #endregion
     }
 }

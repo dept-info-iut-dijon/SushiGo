@@ -22,7 +22,7 @@ public class TempuraCardTests
     {
         var tempuraCard = new TempuraCard();
         var tempuraCard2 = new TempuraCard();
-        
+
         Assert.True(tempuraCard.Equals(tempuraCard2));
     }
 }

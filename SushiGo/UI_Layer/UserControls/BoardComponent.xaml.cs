@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using Logic_Layer;
-using Logic_Layer.cards;
 using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;

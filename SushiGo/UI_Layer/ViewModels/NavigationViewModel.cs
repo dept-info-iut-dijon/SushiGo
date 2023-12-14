@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace UI_Layer.ViewModels
 {
@@ -25,7 +20,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public DelegateCommand BackToMenu => new DelegateCommand(() =>
         {
-            ReturnToMenu();         
+            ReturnToMenu();
         });
 
         /// <summary>

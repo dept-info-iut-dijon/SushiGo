@@ -17,16 +17,16 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
     /// </summary>
-    public virtual bool HavePlayed 
-    { 
-        get 
-        { 
-            return havePlayed; 
-        } 
-        protected set 
-        { 
-            havePlayed = value; 
-        } 
+    public virtual bool HavePlayed
+    {
+        get
+        {
+            return havePlayed;
+        }
+        protected set
+        {
+            havePlayed = value;
+        }
     }
 
     /// <summary>
