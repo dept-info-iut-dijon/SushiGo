@@ -119,7 +119,7 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Passe à la manche suivante
+    /// Passe à la manche suivante.
     /// </summary>
     private void NextRound()
     {
@@ -160,7 +160,7 @@ public class Table : INotifyPropertyChanged
     /// <summary>
     /// Doit être appelé sur chaque joueur à la fin de chaque manche.
     /// </summary>
-    /// <param name="player"></param>
+    /// <param name="player">Joueur</param>
     private void EndPlayerRound(Player player)
     {
         var specialCards = player.EndRound();
@@ -215,9 +215,9 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Créée la liste des mains pour la rotation
+    /// Créée la liste des mains pour la rotation.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Plusieurs Hand.</returns>
     /// <exception cref="HandsRotationException">Levée si la nouvelle liste de mains est invalide.</exception>
     private List<Hand> RotateHands()
     {

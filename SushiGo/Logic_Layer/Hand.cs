@@ -19,7 +19,7 @@ public class Hand
     /// <summary>
     /// Liste des cartes de la main
     /// </summary>
-    public virtual List<Card> Cards => cards;
+    public List<Card> Cards => cards;
 
     /// <summary>
     /// Créée une main

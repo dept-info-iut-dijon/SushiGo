@@ -17,7 +17,7 @@ public class Board
     /// <summary>
     /// Liste des cartes du joueur
     /// </summary>
-    public virtual List<Card> Cards
+    public List<Card> Cards
     {
         get => cards;
         private set => cards = value;
