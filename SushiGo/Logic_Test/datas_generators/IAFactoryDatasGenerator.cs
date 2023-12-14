@@ -12,7 +12,7 @@ namespace LogicTest.datas_generators
         {
             yield return new object[]
             {
-                IADifficultyEnum.FACILE, 3, new Board(), new Hand(3, new List<Card>())
+                IADifficultyEnum.EASY, 3, new Board(), new Hand(3, new List<Card>())
             };
 
             // Création d'un Board avec une carte de chaque type
@@ -25,7 +25,7 @@ namespace LogicTest.datas_generators
 
             yield return new object[]
             {
-                IADifficultyEnum.FACILE, 3, board, new Hand(3, new List<Card>())
+                IADifficultyEnum.EASY, 3, board, new Hand(3, new List<Card>())
             };
         }
 

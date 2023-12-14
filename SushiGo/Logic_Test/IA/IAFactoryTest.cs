@@ -12,9 +12,9 @@ namespace LogicTest.IA
         [ClassData(typeof(IAFactoryDatasGenerator))]
         public void CreateIA_Easy(IADifficultyEnum difficulty, int id, Board board, Hand hand)
         {
-            IIAFactory iAFactory = new IIAFactory();
+            IIAFactory iAFactory = new EasyIAFactory();
 
-            Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(IADifficultyEnum.FACILE, 3, board, hand);
+            Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(3, board, hand);
 
             // Assert
             Assert.Equal("IAFacile3", easyIA.Pseudo);
