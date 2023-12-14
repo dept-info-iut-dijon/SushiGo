@@ -17,39 +17,61 @@ namespace UI_Layer.ViewModels
     /// </summary>
     public class GameCreationViewModel : INotifyPropertyChanged
     {
-        #region inotify
+        #region Constantes
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private const string CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         #endregion
 
-        #region attributes
+        #region Attributs
 
-        private IADifficultyEnum difficulty = IADifficultyEnum.EASY;
-        private ObservableCollection<PlayerViewModel> players = new ObservableCollection<PlayerViewModel>();
-        private int playerCount = 3;
-        private bool isModeJvJ = false;
-        private bool isLobbyShowed = false;
-        private bool startButtonShow = false;
+        private IADifficultyEnum difficulty;
+        private ObservableCollection<PlayerViewModel> players;
+
+        private int playerCount;
+        private bool isModeJvJ;
+        private bool isLobbyShowed;
+        private bool startButtonShow;
         private string idParty;
 
         #endregion
 
-
-
-        #region events
+        #region Constructeur
 
         /// <summary>
-        /// Permet d'indiquer a la vue de fermer la page
+        /// Initialise les valeurs de la classe <see cref="GameCreationViewModel"/>
+        /// </summary>
+        public GameCreationViewModel()
+        {
+            this.difficulty = IADifficultyEnum.EASY;
+            this.players = new ObservableCollection<PlayerViewModel>();
+            this.playerCount = 3;
+            this.isModeJvJ = false;
+            this.isLobbyShowed = false;
+            this.startButtonShow = false;
+            this.idParty = string.Empty;
+        }
+
+        #endregion
+
+        #region Evenements
+
+        /// <summary>
+        /// Permet d'indiquer a la vue de fermer la page.
         /// </summary>
         public event EventHandler CloseRequested;
 
         /// <summary>
-        /// Permet d'ajouter un joueur dans la partie
+        /// Permet de notifier lorsqu'une propriété a été modifiée.
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        #endregion
+
+        #region Commandes Déléguées
+
+        /// <summary>
+        /// Permet d'ajouter un joueur dans la partie.
         /// </summary>
         public DelegateCommand AddPlayer => new DelegateCommand(() =>
         {
@@ -60,7 +82,7 @@ namespace UI_Layer.ViewModels
         });
 
         /// <summary>
-        /// Permet d'enlever un joueur dans la partie
+        /// Permet d'enlever un joueur dans la partie.
         /// </summary>
         public DelegateCommand RemovePlayer => new DelegateCommand(() =>
         {
@@ -71,14 +93,14 @@ namespace UI_Layer.ViewModels
         });
 
         /// <summary>
-        /// Permet de créer le lobby de la partie
+        /// Permet de créer le lobby de la partie.
         /// </summary>
         public DelegateCommand CreateGame => new DelegateCommand(() =>
             this.CreateLobby()
         );
 
         /// <summary>
-        /// Permet de lancer  la partie
+        /// Permet de lancer  la partie.
         /// </summary>
         public DelegateCommand StartGame => new DelegateCommand(() =>
             this.Start()
@@ -86,10 +108,10 @@ namespace UI_Layer.ViewModels
 
         #endregion
 
-        #region properties
+        #region Propriétés
 
         /// <summary>
-        /// Difficulté de l'ia sélectionnée
+        /// Difficulté de l'ia sélectionnée.
         /// </summary>
         public IADifficultyEnum Difficulty
         {
@@ -111,7 +133,7 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
-        /// Nom de la partie
+        /// Nom de la partie.
         /// </summary>
         public string TitleLobby
         {
@@ -127,7 +149,7 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
-        /// Message qui s'affiche avant de lancer la partie
+        /// Message qui s'affiche avant de lancer la partie.
         /// </summary>
         public string MessageWaitingStart
         {
@@ -144,7 +166,7 @@ namespace UI_Layer.ViewModels
             }
         }
         /// <summary>
-        /// Représente le nombre de joueurs
+        /// Représente le nombre de joueurs.
         /// </summary>
         public int PlayerCount
         {
@@ -156,7 +178,7 @@ namespace UI_Layer.ViewModels
             }
         }
         /// <summary>
-        /// Est ce que le mode de jeu est Joueur vs Joueur / Si non alors c'est Joueur vs Robots
+        /// Est ce que le mode de jeu est Joueur vs Joueur / Si non alors c'est Joueur vs Robots.
         /// </summary>
         public bool IsModeJvJ
         {
@@ -169,7 +191,7 @@ namespace UI_Layer.ViewModels
             }
         }
         /// <summary>
-        /// Permet d'afficher le bouton pour lancer la partie
+        /// Permet d'afficher le bouton pour lancer la partie.
         /// </summary>
         public bool StartButtonShow
         {
@@ -182,7 +204,7 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
-        /// Permet d'afficher le lobby et la creation/join de partie
+        /// Permet d'afficher le lobby et la creation/join de partie.
         /// </summary>
         public bool IsLobbyShowed
         {
@@ -194,12 +216,12 @@ namespace UI_Layer.ViewModels
             }
         }
         /// <summary>
-        /// Liste des joueurs de la partie
+        /// Liste des joueurs de la partie.
         /// </summary>
         public ObservableCollection<PlayerViewModel> Players { get => players; set => players = value; }
 
         /// <summary>
-        /// Id de la partie à rejoindre en multijoueur
+        /// Id de la partie à rejoindre en multijoueur.
         /// </summary>
         public string IdParty
         {
@@ -213,10 +235,10 @@ namespace UI_Layer.ViewModels
 
         #endregion
 
-        #region methods
+        #region Méthodes Protégées
 
         /// <summary>
-        /// Indique à la vue de close la page
+        /// Indique à la vue de close la page.
         /// </summary>
         protected virtual void OnCloseRequested()
         {
@@ -224,7 +246,56 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
-        /// Permet de créer le lobby de la partie
+        /// Notifie le changement d'une propriété.
+        /// </summary>
+        /// <param name="propertyName">Nom de la propriété.</param>
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region Méthodes Publiques
+
+        /// <summary>
+        /// Permet de réinitialiser l'ihm à chaque chargement de la page.
+        /// </summary>
+        public void ResetChanges()
+        {
+            this.IsLobbyShowed = false;
+            this.StartButtonShow = false;
+            this.PlayerCount = 5;
+            this.IsModeJvJ = false;
+            this.Players.Clear();
+        }
+
+        /// <summary>
+        /// Permet de lancer la partie.
+        /// </summary>
+        public void Start()
+        {
+            // Création de la logique
+            List<Player> list = new List<Player>();
+            foreach (var player in this.Players)
+            {
+                list.Add(player.Player);
+            }
+            Table t = new Table(list);
+
+
+            GameTableView gameTableView = new GameTableView(t);
+            MainWindowViewModel.Instance.GameTableViewModel.Init(t);
+            gameTableView.Show();
+            OnCloseRequested();
+        }
+
+        #endregion
+
+        #region Méthodes Privées
+
+        /// <summary>
+        /// Permet de créer le lobby de la partie.
         /// </summary>
         private void CreateLobby()
         {
@@ -250,55 +321,22 @@ namespace UI_Layer.ViewModels
             this.IsLobbyShowed = true;
         }
 
-
-
         /// <summary>
-        /// Permet de réinitialiser l'ihm à chaque chargement de la page
-        /// </summary>
-        public void ResetChanges()
-        {
-            this.IsLobbyShowed = false;
-            this.StartButtonShow = false;
-            this.PlayerCount = 5;
-            this.IsModeJvJ = false;
-            this.Players.Clear();
-        }
-
-        /// <summary>
-        /// Permet de lancer la partie
-        /// </summary>
-        public void Start()
-        {
-            // Création de la logique
-            List<Player> list = new List<Player>();
-            foreach (var player in this.Players)
-            {
-                list.Add(player.Player);
-            }
-            Table t = new Table(list);
-
-
-            GameTableView gameTableView = new GameTableView(t);
-            MainWindowViewModel.Instance.GameTableViewModel.Init(t);
-            gameTableView.Show();
-            OnCloseRequested();
-        }
-
-        /// <summary>
-        /// Permet de générer un identifiant de partie pour s'y connecter
+        /// Permet de générer un identifiant de partie pour s'y connecter.
         /// </summary>
         private void GenerateIDParty()
         {
             Random random = new Random();
             int nbCar = random.Next(6, 9);
-            string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string characters = CHARACTERS;
             char[] uniqueId = new char[nbCar];
+
             for (int i = 0; i < nbCar; i++)
             {
                 uniqueId[i] = characters[random.Next(characters.Length)];
             }
-            this.IdParty = new string(uniqueId);
 
+            this.IdParty = new string(uniqueId);
         }
 
         /// <summary>
