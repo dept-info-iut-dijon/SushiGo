@@ -7,7 +7,7 @@ namespace LogicTest.cards.utils;
 public class SushiTypesConverterTests
 {
     private readonly SushiTypesConverter converter = new SushiTypesConverter();
-    
+
     [Fact]
     public void StringToSushi_ConvertCorrectly()
     {

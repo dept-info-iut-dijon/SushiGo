@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logic_Layer.IA
+﻿namespace Logic_Layer.IA
 {
     /// <summary>
     /// Base de toutes les IA
@@ -13,13 +7,8 @@ namespace Logic_Layer.IA
     public abstract class IA : Player
     {
 
-        /// <summary>
-        /// Reprend le constructeur du joueur
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="board"></param>
-        /// <param name="hand"></param>
-        protected IA(int id, Board board, Hand hand,string pseudo) : base(id, board, hand, pseudo)
+        /// <inheritdoc/>
+        protected IA(int id, Board board, Hand hand, string pseudo) : base(id, board, hand, pseudo)
         {
         }
 
@@ -27,5 +16,22 @@ namespace Logic_Layer.IA
         /// Actions à réaliser au moment du tour de celle-ci
         /// </summary>
         public abstract void Play();
+
+        /// <summary>
+        /// Propriété qui dit à l'IA de jouer quand elle a pas joué 
+        /// (quand l'attribut passe à false au début d'un tour)
+        /// </summary>
+        public override bool HavePlayed
+        {
+            get { return base.HavePlayed; }
+            protected set
+            {
+                base.HavePlayed = value;
+                if (!this.HavePlayed)
+                {
+                    this.Play();
+                }
+            }
+        }
     }
 }

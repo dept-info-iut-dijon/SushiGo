@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using Logic_Layer;
+﻿using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
+using System.Collections;
 
 namespace LogicTest.datas_generators.score;
 

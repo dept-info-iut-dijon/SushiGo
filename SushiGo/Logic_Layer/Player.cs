@@ -1,24 +1,38 @@
 ﻿using Logic_Layer.cards;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Logic_Layer;
 
-public class Player
+public class Player : INotifyPropertyChanged
 {
     private int id;
     private string pseudo;
-    private Board board;
+    private readonly Board board;
     private Hand hand;
     private bool havePlayed;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
     /// </summary>
-    public bool HavePlayed => havePlayed;
+    public virtual bool HavePlayed
+    {
+        get
+        {
+            return havePlayed;
+        }
+        protected set
+        {
+            havePlayed = value;
+        }
+    }
 
     /// <summary>
     /// Identifiant du joueur dans la partie
     /// </summary>
-    public int Id 
+    public int Id
     {
         get => id;
         set => id = value;
@@ -46,7 +60,7 @@ public class Player
     /// </summary>
     public Board Board { get => board; }
 
-    public Player(int id, Board board, Hand hand,string pseudo)
+    public Player(int id, Board board, Hand hand, string pseudo)
     {
         this.id = id;
         this.board = board;
@@ -55,16 +69,28 @@ public class Player
         havePlayed = false;
     }
 
+
+    private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
     /// <summary>
     /// Joue une carte
     /// </summary>
     /// <param name="card">La carte à jouer</param>
     public void PlayCard(Card card)
     {
-        hand.PlayCard(card, board);
-        havePlayed = true;
+        // On joue la carte si le joueur n'est pas null et n'a pas encore joué sur ce tour
+        if (!HavePlayed)
+        {
+            hand.PlayCard(card, board);
+            havePlayed = true;
+
+            NotifyPropertyChanged(nameof(HavePlayed));
+        }
     }
-    
+
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
     /// </summary>
@@ -72,9 +98,10 @@ public class Player
     /// <returns>Les cartes spéciales à prendre en compte</returns>
     public List<ISpecialCard> PlayerTurn()
     {
+        HavePlayed = false;
         return board.PlayerTurn();
     }
-    
+
     /// <summary>
     /// Effectue les actions nécessaires à la fin de la manche
     /// </summary>

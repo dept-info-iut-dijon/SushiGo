@@ -7,13 +7,13 @@ namespace LogicTest.factories.card_factories;
 
 public class MakiFactoryTests
 {
-    private MakiFactory factory = new MakiFactory(); 
-    
+    private MakiFactory factory = new MakiFactory();
+
     [Fact]
     public void CreateCard_ReturnMaki()
     {
         Card maki = factory.CreateCard("maki 2");
-        
+
         Assert.IsType<MakiCard>(maki);
         Assert.Equal(2, ((MakiCard)maki).Quantity);
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UI_Layer.ViewModels
+﻿namespace UI_Layer.ViewModels
 {
     public class MainWindowViewModel
     {
@@ -15,14 +9,14 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public static MainWindowViewModel Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                 {
                     instance = new MainWindowViewModel();
                 }
                 return instance;
-            }   
+            }
         }
 
         #endregion
