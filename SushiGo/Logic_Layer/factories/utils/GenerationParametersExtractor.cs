@@ -26,9 +26,9 @@ public class GenerationParametersExtractor
             { "sushi saumon", 10 },
             { "sushi calamar", 5 },
             { "sushi omelette", 10 },
-            { "dessert", 10 }//,
+            { "dessert", 10 },
             // { "wasabi", 6 },
-            // { "baguette", 4 }
+            { "baguette", 4 }
         };
         //TODO La génération des cartes spéciales est désactivée pour l'instant car leur gestion n'est pas encore totalement implémentée
     }
