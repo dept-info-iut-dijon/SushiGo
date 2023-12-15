@@ -88,6 +88,24 @@ namespace UI_Layer.Assets {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous avez perdu la partie ....
+        /// </summary>
+        public static string GAMELOST {
+            get {
+                return ResourceManager.GetString("GAMELOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous avez gagné la partie !.
+        /// </summary>
+        public static string GAMEWON {
+            get {
+                return ResourceManager.GetString("GAMEWON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Classement.
         /// </summary>
         public static string LEADERBOARD {

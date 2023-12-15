@@ -337,7 +337,7 @@
                     <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                <materialDesign:Chip Width="190" Margin="0,0,0,-5" Background="White">
                                     <materialDesign:Chip.Style>
                                         <Style TargetType="materialDesign:Chip">
                                             <Style.Setters>
@@ -353,6 +353,7 @@
                                                 <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
                                                     <Setter Property="IconBackground" Value="#cd7f32"/>
                                                 </DataTrigger>
+                                                
                                             </Style.Triggers>
                                         </Style>
                                     </materialDesign:Chip.Style>
@@ -457,13 +458,13 @@
                          FontWeight="bold"
                          HorizontalAlignment="Center"
                          FontSize="25"
-                         Text="Vous avez gagné la partie ! "/>
+                         Text="{x:Static res:fr_FR.GAMEWON}"/>
 
                     
                     <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                <materialDesign:Chip Width="190" Margin="0,0,0,-5" Background="White">
                                     <materialDesign:Chip.Style>
                                         <Style TargetType="materialDesign:Chip">
                                             <Style.Setters>
@@ -548,12 +549,12 @@
                          FontWeight="bold"
                          HorizontalAlignment="Center"
                          FontSize="25"
-                         Text="Vous avez perdue la partie ! "/>
+                         Text="{x:Static res:fr_FR.GAMELOST}"/>
 
                     <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                <materialDesign:Chip Width="190" Margin="0,0,0,-5" Background="White">
                                     <materialDesign:Chip.Style>
                                         <Style TargetType="materialDesign:Chip">
                                             <Style.Setters>
