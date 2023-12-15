@@ -13,8 +13,17 @@ namespace UI_Layer.UserControls;
 /// </summary>
 public partial class CardComponent : UserControl
 {
+
+    private const int WIDTHPUT = 80;
+    private const int BASEWIDTH = 140;
+    private const int HEIGHTPUT = 110;
+    private const int BASEHEIGHT= 200;
+
+    #region attributes
     private Card card;
     private bool isSelected;
+    private bool isPut;
+    #endregion
 
     /// <summary>
     /// Instancie un CardComponent
@@ -24,6 +33,7 @@ public partial class CardComponent : UserControl
     {
         this.card = card;
         this.isSelected = false;
+        this.isPut = false;
         InitializeComponent();
         this.CardName = card.Name;
     }
@@ -99,6 +109,28 @@ public partial class CardComponent : UserControl
     /// Représente l'objet métier de la carte
     /// </summary>
     public Card Card { get => card; }
+    /// <summary>
+    /// Est ce que la carte a été posée
+    /// </summary>
+    public bool IsPut 
+    { 
+        get => isPut;
+        set 
+        { 
+            isPut = value;
+            if (this.isPut == true)
+            {
+                this.Width = WIDTHPUT;
+                this.Height = HEIGHTPUT;
+
+            }
+            else
+            {
+                this.Width = BASEWIDTH;
+                this.Height = BASEHEIGHT;
+            }
+        }
+    }
 
     #endregion
 
@@ -138,7 +170,7 @@ public partial class CardComponent : UserControl
     /// </summary>
     private static void HighlightBorders(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is CardComponent CardComponent)
+        if (d is CardComponent CardComponent && CardComponent.IsPut == false)
             if (CardComponent.border != null)
             {
                 if (CardComponent.IsMouseOverCard)

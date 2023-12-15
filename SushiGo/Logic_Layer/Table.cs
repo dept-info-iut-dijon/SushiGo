@@ -98,7 +98,7 @@ public class Table : INotifyPropertyChanged
     }
 
     #endregion
-    
+
     #region Méthodes privées
 
     private void StartPlayersTurns()

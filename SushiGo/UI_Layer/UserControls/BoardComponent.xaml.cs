@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Logic_Layer;
 using Logic_Layer.cards;
+using MaterialDesignThemes.Wpf;
 using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;
 
-
-public partial class BoardComponent : UserControl
+/// <summary>
+/// Logique d'interaction pour BoardComponent.xaml
+/// </summary>
+public partial class BoardComponent : UserControl, INotifyPropertyChanged
 {
 
     /// <summary>
@@ -21,6 +26,19 @@ public partial class BoardComponent : UserControl
     public BoardComponent()
     {
         InitializeComponent();
+
+    }
+
+    private static void GetNotification(object sender, PropertyChangedEventArgs e, BoardComponent boardComponent)
+    {
+        switch (e.PropertyName)
+        {
+            case nameof(boardComponent.Player.Board):
+                SetupCards(boardComponent);
+                break;
+        }
+        
+
     }
 
 
@@ -36,6 +54,8 @@ public partial class BoardComponent : UserControl
             new FrameworkPropertyMetadata(null,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.AffectsParentMeasure, ChangePlayer));
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     #endregion
 
@@ -63,17 +83,18 @@ public partial class BoardComponent : UserControl
         if (d is BoardComponent BoardComponent && BoardComponent.Player != null)
         {
             BoardComponent.PlayerName.Text = BoardComponent.Player.Nom;
-            SetupCards(BoardComponent.Player);
+            BoardComponent.Player.PropertyChanged += (sender, args) => GetNotification(sender, args, BoardComponent);
         }
     }
 
     /// <summary>
     /// Permet de remplir le board avec les différentes cartes
     /// </summary>
-    private static void SetupCards(PlayerViewModel Player)
+    private static void SetupCards(BoardComponent boardComponent)
     {
-        List<CardComponent> cartesJoueurs = Player.Hand;
-        // TODO : afficher les cartes
+        List<CardComponent> cartesJoueurs = boardComponent.Player.Board;
+        boardComponent.Board.ItemsSource = cartesJoueurs;
+
 
     }
 }
