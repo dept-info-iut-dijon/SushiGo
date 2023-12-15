@@ -3,13 +3,89 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI_Layer.Views"
         mc:Ignorable="d"
-        Title="CreditsView" Height="450" Width="800">
+        Title="SushiGo !" 
+        WindowStyle="None"
+        WindowState="Maximized"
+        d:DesignHeight="780"
+        d:DesignWidth="1393">
+
     <Grid>
-        
-        <Canvas Name="canvasCredits" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ClipToBounds="True">
-            <TextBlock x:Name="Credits" Text="Il était une fois" Foreground="Black" FontSize="50" />
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource RestaurantHall}" />
+        </Grid.Background>
+
+        <Canvas Name="CanvasCredits" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border x:Name="Credits" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" BorderThickness="20" CornerRadius="100" Padding="30">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource PersianRed}" Opacity="0.7" />
+                </Border.Background>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Il était une fois," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="dans un restaurant lointain," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="très lointain..." Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="50"/>
+                    
+                    <TextBlock Text="Un lieu où les saveurs exquises" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="et les délices de la mer" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="attiraient des gourmets du monde entier." Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="50"/>
+                    
+                    <TextBlock Text="Cependant, au-delà de la renommée culinaire" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="se cachait une légende mystique," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="le trésor légendaire :" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="40"/>
+                    
+                    <TextBlock Text="Le SushiGo" Style="{StaticResource Font1}" HorizontalAlignment="Center" FontSize="74" FontWeight="Black" />
+                    <TextBlock Text="" FontSize="80"/>
+                    
+                    <TextBlock Text="Le grand sage, Simonet-sama," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="réputé pour sa sagesse et" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="ses talents culinaires inégalés," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Décida qu'il était temps de" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="révéler ce trésor au monde entier." Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="60"/>
+                    
+                    <TextBlock Text="Pour accomplir cette quête périlleuse," Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="il fit appel à ses cinq meilleurs élèves :" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="40"/>
+
+                    <TextBlock Text="Evan, le Maître des Saveurs" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="15"/>
+                    <Image Source="{StaticResource Evan}" Height="220" Width="220" />
+                    <TextBlock Text="" FontSize="50"/>
+
+                    <TextBlock Text="Elia, le Prince des Délices" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="15"/>
+                    <Image Source="{StaticResource Elia}" Height="220" Width="220" />
+                    <TextBlock Text="" FontSize="50"/>
+
+                    <TextBlock Text="Florian, le Chevalier du Sushi Parfait" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="15"/>
+                    <Image Source="{StaticResource Florian}" Height="220" Width="220" />
+                    <TextBlock Text="" FontSize="50"/>
+                    
+                    <TextBlock Text="Jonas, le Gardien des Saveurs Secrètes" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="15"/>
+                    <Image Source="{StaticResource Jonas}" Height="220" Width="220" />
+                    <TextBlock Text="" FontSize="50"/>
+                    
+                    <TextBlock Text="Morgane, la Sorcière des Saveurs Divines" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="15"/>
+                    <Image Source="{StaticResource Morgane}" Height="220" Width="220" />
+                    <TextBlock Text="" FontSize="120"/>
+                    
+                    <TextBlock Text="Ensemble, ces valeureux élèves étaient" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="prêts à entreprendre la quête du SushiGo." Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="Explorant les délices cachés" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="et dévoilant les mystères" Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="culinaires qui les attendaient..." Style="{StaticResource Font1}" HorizontalAlignment="Center" />
+                    <TextBlock Text="" FontSize="50"/>
+
+                </StackPanel>
+            </Border>
+
+            
         </Canvas>
     </Grid>
 </Window>

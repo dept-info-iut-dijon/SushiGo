@@ -24,7 +24,7 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image  Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="{StaticResource RestaurantHall}"/>
+        <Image Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="{StaticResource RestaurantHall}"/>
         <Border Grid.RowSpan="5" Grid.ColumnSpan="3" Opacity="0.5" Background="White">
 
         </Border>

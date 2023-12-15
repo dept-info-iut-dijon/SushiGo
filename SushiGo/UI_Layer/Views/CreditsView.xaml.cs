@@ -10,28 +10,56 @@ namespace UI_Layer.Views
     /// </summary>
     public partial class CreditsView : Window
     {
+        /// <summary>
+        /// Constructeur de la classe <see cref="CreditsView"/>
+        /// </summary>
         public CreditsView()
         {
             this.InitializeComponent();
-            Loaded += MainWindow_Loaded;
+
+            this.Loaded += CreditsView_Loaded;
+            this.PreviewMouseDown += Credits_PreviewMouseDown;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void CreditsView_Loaded(object sender, RoutedEventArgs e)
         {
-            StartCreditsAnimation();
+            this.StartCreditsAnimation();
+            this.CenterCredits();
         }
 
         private void StartCreditsAnimation()
         {
-            DoubleAnimation animation = new DoubleAnimation
+            DoubleAnimation verticalAnimation = new DoubleAnimation
             {
-                From = canvasCredits.ActualWidth,   // Début à la largeur du canvas
-                To = 200,      // Fin à l'opposé (gauche)
-                Duration = TimeSpan.FromSeconds(5),  // Durée de l'animation
-                RepeatBehavior = RepeatBehavior.Forever  // Répéter indéfiniment
+                From = CanvasCredits.ActualHeight,
+                To = -Credits.ActualHeight - 100,
+                Duration = TimeSpan.FromSeconds(80),
+                RepeatBehavior = RepeatBehavior.Forever
             };
 
-            Credits.BeginAnimation(Canvas.LeftProperty, animation);
+            Credits.BeginAnimation(Canvas.TopProperty, verticalAnimation);
+        }
+
+        private void CenterCredits()
+        {
+            double canvasCenterX = CanvasCredits.ActualWidth / 2;
+            double creditsCenterX = Credits.ActualWidth / 2;
+
+            double canvasCenterY = CanvasCredits.ActualHeight / 2;
+            double creditsCenterY = Credits.ActualHeight / 2;
+
+            double leftOffset = canvasCenterX - creditsCenterX;
+            double topOffset = canvasCenterY - creditsCenterY;
+
+            Canvas.SetLeft(Credits, leftOffset);
+            Canvas.SetTop(Credits, topOffset);
+        }
+
+        private void Credits_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            HomeView creditsView = new HomeView();
+            creditsView.Show();
+            this.Close();
         }
     }
 }

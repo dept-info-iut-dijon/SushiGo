@@ -17,6 +17,11 @@
     <None Remove="Assets\Cursors\MainCursorClick.cur" />
     <None Remove="Assets\Images\Board.jpg" />
     <None Remove="Assets\Images\Board.png" />
+    <None Remove="Assets\Images\Creators\Elia.png" />
+    <None Remove="Assets\Images\Creators\Evan.png" />
+    <None Remove="Assets\Images\Creators\Florian.png" />
+    <None Remove="Assets\Images\Creators\Jonas.png" />
+    <None Remove="Assets\Images\Creators\Morgane.png" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
@@ -58,6 +63,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\Board.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Elia.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Evan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Florian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Jonas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Morgane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
