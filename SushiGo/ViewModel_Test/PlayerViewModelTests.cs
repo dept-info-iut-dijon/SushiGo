@@ -1,6 +1,7 @@
 using System.Reflection;
 using Logic_Layer;
 using Logic_Layer.cards;
+using UI_Layer.UserControls;
 using UI_Layer.ViewModels;
 using ViewModel_Test.DatasGenerators;
 
@@ -24,7 +25,7 @@ public class PlayerViewModelTests
     public void PlayCard_GetNotification_Hand(int playerId, Board board, Hand hand, string pseudo, PlayerType playerType, Card card)
     {
         var playerVM = new PlayerViewModel(new Player(playerId, board, hand, pseudo), playerType);
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Hand), () => playerVM.PlayCard(card));
+        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Hand), () => playerVM.PlayCard(new CardComponent(card)));
     }
     
     [Theory]
@@ -34,7 +35,7 @@ public class PlayerViewModelTests
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
 
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Board), () => playerVM.PlayCard(card));
+        Assert.PropertyChanged(playerVM, nameof(playerVM.Board), () => playerVM.PlayCard(new CardComponent(card)));
     }
     
     [Theory]
@@ -42,7 +43,7 @@ public class PlayerViewModelTests
     public void PlayCard_GetNotification_HavePlayed(int playerId, Board board, Hand hand, string pseudo, PlayerType playerType, Card card)
     {
         var playerVM = new PlayerViewModel(new Player(playerId, board, hand, pseudo), playerType);
-        Assert.PropertyChanged(playerVM.Player, nameof(playerVM.Player.HavePlayed), () => playerVM.PlayCard(card));
+        Assert.PropertyChanged(playerVM.Player, nameof(playerVM.Player.HavePlayed), () => playerVM.PlayCard(new CardComponent(card)));
     }
     
     [Theory]
@@ -55,7 +56,7 @@ public class PlayerViewModelTests
         var gameVM = new GameTableViewModel();
         
         player.Hand.Cards.Add(card);
-        playerVM.PlayCard(card);
+        playerVM.PlayCard(new CardComponent(card));
 
         // on fait une réflection de la méthode NextRound pour pouvoir tester la notification
         var method = table.GetType().GetMethod("NextRound", BindingFlags.NonPublic | BindingFlags.Instance);
