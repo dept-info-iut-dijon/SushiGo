@@ -9,12 +9,7 @@ namespace Logic_Layer;
 /// </summary>
 public class Board
 {
-    private List<Card> cards;
-
-    public Board()
-    {
-        cards = new List<Card>();
-    }
+    private List<Card> cards = new();
 
     /// <summary>
     /// Liste des cartes du joueur

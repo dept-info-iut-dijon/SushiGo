@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using UI_Layer.UserControls;
 using Logic_Layer.cards;
@@ -19,11 +20,11 @@ namespace UI_Layer.ViewModels
     public class GameTableViewModel : INotifyPropertyChanged
     {
         #region Attribut
-        private Logic_Layer.Table table;
-        private bool isLeaderboardShown = false;
-        private bool isPopupValidationQuitShown = false;
-        private bool isButtonValidateShown = false;
+        private bool isLeaderboardShown;
+        private bool isPopupValidationQuitShown;
+        private bool isButtonValidateShown;
         private List<PlayerViewModel> playerList;
+        private Logic_Layer.Table table;
         #endregion Attribut
 
         #region Constructeur
@@ -38,6 +39,9 @@ namespace UI_Layer.ViewModels
 
         #endregion Constructeur
 
+
+        
+        
         #region Evénement
 
         /// <summary>
@@ -150,6 +154,8 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x?.Score).ToList(); }
 
+
+
         /// <summary>
         /// Est ce que la popup pour quitter la partie est affichée
         /// </summary>
@@ -175,6 +181,7 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
 
         #endregion Propriété
 
@@ -209,6 +216,11 @@ namespace UI_Layer.ViewModels
 
         #region Méthode Privée
 
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(table.RoundNumber));
+        }
+
         /// <summary>
         /// Permet d'initialiser la liste des joueurs
         /// </summary>
@@ -232,6 +244,20 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(MancheNumber));
                 NotifyPropertyChanged(nameof(this.GameOrder));
                 NotifyPropertyChanged(nameof(this.PlayerOrder));
+
+                // Notifications 
+                NotifyBoardOfEveryone();
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier les boards des joueurs pour qu'ils s'actualisent
+        /// </summary>
+        private void NotifyBoardOfEveryone()
+        {
+            foreach (PlayerViewModel p in this.playerList)
+            {
+                p.NotifyBoard();
             }
         }
 
@@ -239,9 +265,14 @@ namespace UI_Layer.ViewModels
         {
             if (this.PlayerPlaying.CardSelected != null)
             {
-                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
 
                 // Notifications
+                NotifyBoardOfEveryone();
+
+                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
+
+
+                // Notifications du joueur
                 this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
                 this.IsButtonValidateShown = false;
             }

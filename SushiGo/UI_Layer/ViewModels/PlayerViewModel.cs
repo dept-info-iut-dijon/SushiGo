@@ -54,8 +54,10 @@ namespace UI_Layer.ViewModels
         public void PlayCard(Card card)
         {
             player.PlayCard(card);
+
             NotifyPropertyChanged(nameof(player.Hand));
-            NotifyPropertyChanged(nameof(player.HavePlayed));
+            NotifyPropertyChanged(nameof(Board));
+
         }
 
         /// <summary>
@@ -140,6 +142,45 @@ namespace UI_Layer.ViewModels
 
                 return cards;
             }
+        }
+
+        /// <summary>
+        /// Liste des cartes posées sur le plateau
+        /// </summary>
+        public List<CardComponent> Board
+        {
+            get
+            {
+                List<CardComponent> cards = new List<CardComponent>();
+
+                foreach (Card card in this.player.Board.Cards)
+                {
+                    CardComponent carte = new CardComponent(card);
+                    carte.IsPut = true;
+                    cards.Add(carte);
+                }
+
+                return cards;
+            }
+        }
+
+
+
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            // notify if the received notification is for the round number
+            if (e.PropertyName == nameof(Logic_Layer.Table.RoundNumber))
+            {
+                NotifyPropertyChanged(nameof(player.Board.Cards));
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier le board d'actualiser les cartes
+        /// </summary>
+        public void NotifyBoard()
+        {
+            NotifyPropertyChanged(nameof(Board));
         }
 
         /// <summary>
