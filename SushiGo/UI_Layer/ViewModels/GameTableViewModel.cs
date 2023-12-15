@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using UI_Layer.UserControls;
-using Logic_Layer.cards;
-using Logic_Layer;
-using System.Windows.Documents;
-using System.Runtime.CompilerServices;
+﻿using Logic_Layer;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Numerics;
-using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace UI_Layer.ViewModels
 {
@@ -185,7 +178,7 @@ namespace UI_Layer.ViewModels
 
         #endregion Propriété
 
-        
+
 
         /// <summary>
         /// Permet de mettre à jour tous les scores d'après le métier

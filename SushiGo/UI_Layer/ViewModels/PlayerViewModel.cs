@@ -1,15 +1,9 @@
 ﻿using Logic_Layer;
-using Logic_Layer.IA;
+using Logic_Layer.cards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Logic_Layer.cards;
-using System.Windows.Documents;
-using System.Windows;
 using UI_Layer.UserControls;
 
 namespace UI_Layer.ViewModels
@@ -163,7 +157,6 @@ namespace UI_Layer.ViewModels
                 return cards;
             }
         }
-
 
 
         private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)

@@ -13,7 +13,7 @@ public class SushiScoreCalculatorTests
         // Arrange
         var calculator = new SushiScoreCalculator();
         Dictionary<int, int> actualScores = calculator.CalculateScore(players);
-        
+
         // Assert
         Assert.Equal(expectedScores, actualScores);
     }

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Logic_Layer.cards;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Logic_Layer.cards;
-using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;
 
@@ -57,7 +56,7 @@ public partial class CardComponent : UserControl
             new FrameworkPropertyMetadata(string.Empty,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.AffectsParentMeasure, ChangeCardName));
-    
+
     #endregion
 
     #region properties
@@ -94,12 +93,12 @@ public partial class CardComponent : UserControl
             this.isSelected = value;
             if (this.isSelected == true)
             {
-                this.Margin = new Thickness(0,0,0,40);
-                
+                this.Margin = new Thickness(0, 0, 0, 40);
+
             }
             else
             {
-                this.Margin = new Thickness(0,0,0,0);
+                this.Margin = new Thickness(0, 0, 0, 0);
             }
         }
     }

@@ -1,7 +1,7 @@
-using System.Collections;
 using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
+using System.Collections;
 
 namespace LogicTest.datas_generators.score;
 
@@ -74,7 +74,7 @@ public class DessertScoreCalculatorDatasGenerator : IEnumerable<object[]>
                 { 2, -6 }
             }
         };
-        
+
         // cas avec deux joueurs en égalité sur le min de desserts
         yield return new object[]
         {
@@ -105,7 +105,7 @@ public class DessertScoreCalculatorDatasGenerator : IEnumerable<object[]>
                 { 3, 0 }
             }
         };
-        
+
         // cas avec deux joueurs en égalité sur le min et le max de desserts
         yield return new object[]
         {
@@ -141,7 +141,7 @@ public class DessertScoreCalculatorDatasGenerator : IEnumerable<object[]>
                 { 4, 3 }
             }
         };
-        
+
         // cas où les joueurs max et min de desserts sont les mêmes
         yield return new object[]
         {

@@ -11,7 +11,7 @@ public class PlayerTests
     {
         // Arrange
         int expectedId = 1;
-        var player = new Player(expectedId, new Board(), new Hand(expectedId, new List<Card>()),"") ;
+        var player = new Player(expectedId, new Board(), new Hand(expectedId, new List<Card>()), "");
 
         // Act
         int id = player.Id;

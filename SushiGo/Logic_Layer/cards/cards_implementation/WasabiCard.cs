@@ -8,14 +8,17 @@ namespace Logic_Layer.cards.cards_implementation;
 public class WasabiCard : Card, ISpecialCard
 {
     private SushiCard? sushi;
+
     /// <summary>
     /// Nom de la carte (Wasabi)
     /// </summary>
     public override string Name => "Wasabi";
+    
     /// <summary>
     /// La carte sushi de la carte wasabi
     /// </summary>
     public SushiCard? Sushi => sushi;
+    
     /// <summary>
     /// Constructeur de la carte wasabi
     /// </summary>

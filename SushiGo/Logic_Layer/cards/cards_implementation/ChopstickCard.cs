@@ -6,7 +6,7 @@
 public class ChopstickCard : Card, ISpecialCard
 {
     private bool available;
-    
+
     public override string Name => "Baguettes";
 
 

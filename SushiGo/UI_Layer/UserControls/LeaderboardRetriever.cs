@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using UI_Layer.ViewModels;
 
@@ -16,7 +12,7 @@ namespace UI_Layer.UserControls
             String? valeurRetour = null;
             if (value is PlayerViewModel player)
             {
-                int position = MainWindowViewModel.Instance.GameTableViewModel.LeaderBoard.IndexOf(player)+1;
+                int position = MainWindowViewModel.Instance.GameTableViewModel.LeaderBoard.IndexOf(player) + 1;
                 valeurRetour = position.ToString();
             }
             return valeurRetour;

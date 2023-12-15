@@ -12,7 +12,7 @@ public class MakiScoreCalculatorTests
     {
         var calculator = new MakiScoreCalculator();
         Dictionary<int, int> actualScores = calculator.CalculateScore(players);
-        
+
         Assert.Equal(expectedScores, actualScores);
     }
 }

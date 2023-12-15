@@ -31,8 +31,8 @@ public class HandFactoryTests
     public void CreateHands_InvalidPlayersNumber_ThrowsException()
     {
         // Arrange
-        int invalidPlayersNumber = 6; 
-        var factory = new HandFactory(); 
+        int invalidPlayersNumber = 6;
+        var factory = new HandFactory();
 
         // Act and Assert
         var exception = Assert.Throws<WrongPlayersNumberException>(() => factory.CreateHands(invalidPlayersNumber));
@@ -40,7 +40,7 @@ public class HandFactoryTests
         // Vérifiez le message d'exception (facultatif)
         Assert.Equal("Le nombre de joueur devrait être inclus entre 2 et 5", exception.Message);
     }
-    
+
     private int GetExpectedCardsPerPlayer(int playersNumber)
     {
         switch (playersNumber)

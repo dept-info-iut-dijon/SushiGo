@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using Logic_Layer;
-using Logic_Layer.cards;
-using MaterialDesignThemes.Wpf;
 using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;
@@ -37,11 +30,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
                 SetupCards(boardComponent);
                 break;
         }
-        
-
     }
-
-
 
     #region dependenciesProperties
 

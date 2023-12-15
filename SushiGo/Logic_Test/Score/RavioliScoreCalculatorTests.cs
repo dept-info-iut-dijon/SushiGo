@@ -13,7 +13,7 @@ public class RavioliScoreCalculatorTests
         var calculator = new RavioliScoreCalculator();
 
         Dictionary<int, int> actualScore = calculator.CalculateScore(players);
-        
+
         Assert.Equal(expectedScore, actualScore);
     }
 }

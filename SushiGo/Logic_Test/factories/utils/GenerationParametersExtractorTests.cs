@@ -10,7 +10,7 @@ public class GenerationParametersExtractorTests
         Dictionary<string, int> parameters = new GenerationParametersExtractor().GetParameters();
 
         int cardsSum = parameters.Values.Sum();
-        
+
         Assert.True(cardsSum >= 35);
     }
 }

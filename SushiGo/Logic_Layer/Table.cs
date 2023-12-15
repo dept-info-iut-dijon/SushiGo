@@ -40,6 +40,7 @@ public class Table : INotifyPropertyChanged
     /// Retourne le de rotation des mains pour la manche actuelle
     /// </summary>
     public GameOrderEnum GameOrder => RoundNumber % 2 == 0 ? GameOrderEnum.REGRESSIVE : GameOrderEnum.PROGRESSIVE;
+
     /// <summary>
     /// Liste des joueurs.
     /// </summary>
