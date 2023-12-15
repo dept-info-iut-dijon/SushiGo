@@ -126,6 +126,12 @@
   <data name="CREDITS" xml:space="preserve">
     <value>Crédits</value>
   </data>
+  <data name="GAMELOST" xml:space="preserve">
+    <value>Vous avez perdu la partie ...</value>
+  </data>
+  <data name="GAMEWON" xml:space="preserve">
+    <value>Vous avez gagné la partie !</value>
+  </data>
   <data name="LEADERBOARD" xml:space="preserve">
     <value>Classement</value>
   </data>

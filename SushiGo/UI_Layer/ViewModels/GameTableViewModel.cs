@@ -16,6 +16,8 @@ namespace UI_Layer.ViewModels
         private bool isLeaderboardShown;
         private bool isPopupValidationQuitShown;
         private bool isButtonValidateShown;
+        private bool isPopupLooseShown;
+        private bool isPopupWinShown;
         private List<PlayerViewModel> playerList;
         private Logic_Layer.Table table;
         #endregion Attribut
@@ -175,6 +177,32 @@ namespace UI_Layer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Est ce que la popup de defaite est affichée
+        /// </summary>
+        public bool IsPopupLooseShown
+        {
+            get => isPopupLooseShown;
+            set 
+            { 
+                isPopupLooseShown = value; 
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Est ce que la popup de victoire est affichée
+        /// </summary>
+        public bool IsPopupWinShown
+        {
+            get => isPopupWinShown;
+            set
+            {
+                isPopupWinShown = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #endregion Propriété
 
@@ -199,6 +227,8 @@ namespace UI_Layer.ViewModels
         public void Init(Logic_Layer.Table table)
         {
             this.table = table;
+            this.isPopupLooseShown = false;
+            this.isPopupWinShown = false;
             this.isLeaderboardShown = false;
             this.isPopupValidationQuitShown = false;
             this.isButtonValidateShown = false;
@@ -240,6 +270,17 @@ namespace UI_Layer.ViewModels
 
                 // Notifications 
                 NotifyBoardOfEveryone();
+            }
+            if (e.PropertyName.Equals("FIN"))
+            {
+                if (this.LeaderBoard.IndexOf(PlayerPlaying) == 0)
+                {
+                    IsPopupWinShown = true;
+                }
+                else 
+                {
+                    IsPopupLooseShown = true;
+                }
             }
         }
 
