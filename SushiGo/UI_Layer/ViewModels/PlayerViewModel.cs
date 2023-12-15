@@ -27,6 +27,7 @@ namespace UI_Layer.ViewModels
         private bool isTurnFinished;
         private CardComponent? cardSelected;
         private CardComponent? firstCardSelected;
+        private CardComponent? secondCardSelected;
         #endregion
 
 
@@ -46,7 +47,7 @@ namespace UI_Layer.ViewModels
         /// Joue une carte et notifie les observers
         /// </summary>
         /// <param name="card">La carte à jouer, elle doit faire partie de la main du joueur</param>
-        public void PlayCard(CardComponent card,CardComponent card2)
+        public void PlayCard(CardComponent card,CardComponent card2 = null)
         {
 
             if (card2 == null)
@@ -57,8 +58,10 @@ namespace UI_Layer.ViewModels
             {
                 player.PlayCard(card.Card,card2.Card);
             }
-            
 
+            cardSelected = null;
+            firstCardSelected = null;
+            secondCardSelected = null;
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(Board));
 
@@ -209,27 +212,36 @@ namespace UI_Layer.ViewModels
                     this.firstCardSelected?.ClickOnCard();
                     this.firstCardSelected = null;
                 }
+                else if (this.secondCardSelected == value)
+                {
+                    this.secondCardSelected?.ClickOnCard();
+                    this.secondCardSelected = null;
+                }
+
                 else
                 {
-                    if (cardSelected == null)
+                    if (player.Board.CanPlayTwoCards )
                     {
-                        this.cardSelected = value;
-                        this.cardSelected?.ClickOnCard();
-                    }
-                    else
-                    {
-                        if (player.Board.CanPlayTwoCards)
-                        {
+                        this.cardSelected = null;
+
+                        if (this.firstCardSelected == null)
+                        { 
                             this.firstCardSelected = value;
                             this.firstCardSelected?.ClickOnCard();
                         }
-                        else
+                        else if (this.secondCardSelected == null)
                         {
-                            this.cardSelected?.ClickOnCard();
-                            this.cardSelected = value;
-                            this.cardSelected?.ClickOnCard();
+                            this.secondCardSelected = value;
+                            this.secondCardSelected?.ClickOnCard();
                         }
                     }
+                    else
+                    {
+                        this.cardSelected?.ClickOnCard();
+                        this.cardSelected = value;
+                        this.cardSelected?.ClickOnCard();
+                    }
+                    
                 }
                 
                     // Notification des changements
@@ -239,7 +251,15 @@ namespace UI_Layer.ViewModels
                 }
             }
 
-        public CardComponent? FirstCardSelected { get => firstCardSelected; set => firstCardSelected = value; }
+        /// <summary>
+        /// Représente la premiere carte sélectionnée dans le cas d'une carte baguette
+        /// </summary>
+        public CardComponent? FirstCardSelected { get => firstCardSelected; }
+
+        /// <summary>
+        /// Représente la deuxieme carte selectionnée dans le cas d'une carte baguette
+        /// </summary>
+        public CardComponent? SecondCardSelected { get => secondCardSelected; }
     }
 
         #endregion

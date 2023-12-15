@@ -97,7 +97,7 @@
                
                 <!-- Liste des cartes -->
                 <StackPanel Margin="70,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Orientation="Horizontal">
-                    <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.PlayerPlaying.Hand}" SelectionMode="Single" SelectedItem="{Binding GameTableViewModel.PlayerPlaying.CardSelected}">
+                    <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding GameTableViewModel.PlayerPlaying.Hand}" SelectionMode="Extended"  SelectedItem="{Binding GameTableViewModel.PlayerPlaying.CardSelected}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="Control.VerticalAlignment" Value="Bottom" />
