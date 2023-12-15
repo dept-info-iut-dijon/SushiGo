@@ -5,6 +5,8 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>SushiGo_Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
 
@@ -22,6 +24,11 @@
     <None Remove="Assets\Images\RestaurantHall.jpg" />
     <None Remove="Assets\Images\SushiOnTable.jpg" />
     <None Remove="Assets\test.png" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="SushiGo_Logo.ico" />
   </ItemGroup>
 
 
