@@ -1,23 +1,22 @@
 ﻿using Logic_Layer;
-using Logic_Layer.IA;
 using Logic_Layer.IA.Factories;
 using Logic_Layer.IA.IAImplementation;
 using LogicTest.datas_generators;
 
-namespace LogicTest.IA
+namespace LogicTest.IA.Factories
 {
-    public class IAFactoryTest
+    public class EasyIAFactoryTest
     {
         [Theory]
         [ClassData(typeof(IAFactoryDatasGenerator))]
-        public void CreateIA_Easy(IADifficultyEnum difficulty, int id, Board board, Hand hand)
+        public void CreateIA(int id, Board board, Hand hand)
         {
             IIAFactory iAFactory = new EasyIAFactory();
 
-            Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(3, board, hand);
+            Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(id, board, hand);
 
             // Assert
-            Assert.Equal("IAFacile3", easyIA.Pseudo);
+            Assert.Equal($"IAFacile{id}", easyIA.Pseudo);
             Assert.Equal(hand, easyIA.Hand);
             Assert.Equal(typeof(DrunkenIA), easyIA.GetType());
         }

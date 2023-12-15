@@ -1,7 +1,6 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
-using Logic_Layer.IA;
 using System.Collections;
 
 namespace LogicTest.datas_generators
@@ -12,7 +11,7 @@ namespace LogicTest.datas_generators
         {
             yield return new object[]
             {
-                IADifficultyEnum.EASY, 3, new Board(), new Hand(3, new List<Card>())
+                2, new Board(), new Hand(3, new List<Card>())
             };
 
             // Création d'un Board avec une carte de chaque type
@@ -25,7 +24,7 @@ namespace LogicTest.datas_generators
 
             yield return new object[]
             {
-                IADifficultyEnum.EASY, 3, board, new Hand(3, new List<Card>())
+                3, board, new Hand(3, new List<Card>())
             };
         }
 
