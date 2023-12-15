@@ -21,9 +21,7 @@
                 {
                     PlayCard(Hand.Cards.First());
                 }
-                EndRound();
             }
-
         }
     }
 }
