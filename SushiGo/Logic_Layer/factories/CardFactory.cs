@@ -14,7 +14,8 @@ public class CardFactory
         { "sashimi", new SashimiFactory() },
         { "sushi", new SushiFactory() },
         { "tempura", new TempuraFactory() },
-        { "wasabi", new WasabiFactory() }
+        { "wasabi", new WasabiFactory() },
+        { "baguette", new ChopsticFactory() }
     };
 
     /// <summary>

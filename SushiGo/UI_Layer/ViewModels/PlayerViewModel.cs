@@ -26,6 +26,8 @@ namespace UI_Layer.ViewModels
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
         private CardComponent? cardSelected;
+        private CardComponent? firstCardSelected;
+        private CardComponent? secondCardSelected;
         #endregion
 
 
@@ -37,7 +39,7 @@ namespace UI_Layer.ViewModels
         public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
-
+            
             this.role = role;
         }
 
@@ -45,10 +47,25 @@ namespace UI_Layer.ViewModels
         /// Joue une carte et notifie les observers
         /// </summary>
         /// <param name="card">La carte à jouer, elle doit faire partie de la main du joueur</param>
-        public void PlayCard(Card card)
+        public void PlayCard(CardComponent card,CardComponent card2 = null)
         {
-            player.PlayCard(card);
 
+            if (card2 == null)
+            {
+                player.PlayCard(card.Card);
+            }
+            else if (card == null)
+            {
+                player.PlayCard(card2.Card);
+            }
+            else
+            {
+                player.PlayCard(card.Card,card2.Card);
+            }
+
+            cardSelected = null;
+            firstCardSelected = null;
+            secondCardSelected = null;
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(Board));
 
@@ -187,27 +204,69 @@ namespace UI_Layer.ViewModels
             }
             set
             {
-                if (this.cardSelected != value)
+
+                
+                if (this.cardSelected == value)
                 {
-
-                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
                     this.cardSelected?.ClickOnCard();
+                    this.cardSelected = null;
+                }
+                else if (this.firstCardSelected == value)
+                {
+                    this.firstCardSelected?.ClickOnCard();
+                    this.firstCardSelected = null;
+                }
+                else if (this.secondCardSelected == value)
+                {
+                    this.secondCardSelected?.ClickOnCard();
+                    this.secondCardSelected = null;
+                }
 
-                    // Mettre à jour la propriété
-                    this.cardSelected = value;
+                else
+                {
+                    if (player.Board.CanPlayTwoCards )
+                    {
+                        this.cardSelected = null;
 
-                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
-                    this.cardSelected?.ClickOnCard();
-
+                        if (this.firstCardSelected == null)
+                        { 
+                            this.firstCardSelected = value;
+                            this.firstCardSelected?.ClickOnCard();
+                        }
+                        else if (this.secondCardSelected == null)
+                        {
+                            this.secondCardSelected = value;
+                            this.secondCardSelected?.ClickOnCard();
+                        }
+                    }
+                    else
+                    {
+                        this.cardSelected?.ClickOnCard();
+                        this.cardSelected = value;
+                        this.cardSelected?.ClickOnCard();
+                    }
+                    
+                }
+                
                     // Notification des changements
                     this.NotifyPropertyChanged(nameof(CardSelected));
                     MainWindowViewModel.Instance.GameTableViewModel.IsButtonValidateShown = true;
 
                 }
             }
-        }
+
+        /// <summary>
+        /// Représente la premiere carte sélectionnée dans le cas d'une carte baguette
+        /// </summary>
+        public CardComponent? FirstCardSelected { get => firstCardSelected; }
+
+        /// <summary>
+        /// Représente la deuxieme carte selectionnée dans le cas d'une carte baguette
+        /// </summary>
+        public CardComponent? SecondCardSelected { get => secondCardSelected; }
+    }
 
         #endregion
 
-    }
+    
 }

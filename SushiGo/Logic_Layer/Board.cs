@@ -1,6 +1,7 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.cards.utils;
+using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer;
 
@@ -19,6 +20,11 @@ public class Board
         get => cards;
         private set => cards = value;
     }
+    
+    /// <summary>
+    /// Indique si on peut jouer deux cartes sur ce board
+    /// </summary>
+    public virtual bool CanPlayTwoCards => Cards.Any(c => c is ChopstickCard);
 
     /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
@@ -64,7 +70,7 @@ public class Board
     /// Fait une vérification de la carte Wasabi si la carte est un sushi.
     /// </summary>
     /// <param name="card">Carte à ajouter</param>
-    public void AddCard(Card card)
+    public virtual void AddCard(Card card)
     {
         if(card is SushiCard)
         {
@@ -81,6 +87,7 @@ public class Board
             cards.Add(card);
         }
     }
+
     private bool IsSushiAssociatedWithWasabi(List<Card> wasabiCards, Card card)
     {
         bool sushiIsAssociated = false;
@@ -95,4 +102,15 @@ public class Board
         return sushiIsAssociated;
     }
 
+
+    /// <summary>
+    /// Retire une carte chopstick de la main, lance une exception s'il n'y en a aucune
+    /// </summary>
+    public virtual void PlayChopstickCard()
+    {
+        if (!CanPlayTwoCards)
+            throw new NoChopstickInBoardException("Le joueur ne peut pas jouer deux cartes car il n'a pas de baguettes");
+        
+        cards.Remove(cards.First(c => c is ChopstickCard));
+    }
 }

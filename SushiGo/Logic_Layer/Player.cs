@@ -92,6 +92,22 @@ public class Player : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Joue deux cartes à la fois
+    /// </summary>
+    /// <param name="firstCard">Première carte à jouer</param>
+    /// <param name="secondCard">Deuxième carte à jouer</param>
+    public void PlayCard(Card firstCard, Card secondCard)
+    {
+        // On ignore la demande si le joueur a déjà joué ou si le board ne peut pas jouer deux cartes
+        if (HavePlayed || !board.CanPlayTwoCards) return;
+        
+        hand.PlayCard(firstCard, secondCard, board);
+        havePlayed = true;
+
+        NotifyPropertyChanged(nameof(HavePlayed));
+    }
+
+    /// <summary>
     /// Effectue les actions nécessaires au début du tour du joueur possédant la main
     /// </summary>
     /// <see cref="ISpecialCard"/>

@@ -1,5 +1,7 @@
 ﻿using Logic_Layer;
 using Logic_Layer.cards;
+using Logic_Layer.cards.cards_implementation;
+using Logic_Layer.logic_exceptions;
 using Moq;
 
 namespace LogicTest;
@@ -89,6 +91,63 @@ public class BoardTests
             var card = board.Cards[index];
             Assert.Equal(boardCardList[index], card);
         }
+    }
+    
+    [Fact]
+    public void PlayChopstickCard()
+    {
+        var board = new Board();
+        var chopstickCard = new ChopstickCard();
+        board.AddCard(chopstickCard);
+        
+        Assert.Contains(chopstickCard, board.Cards);
+        
+        board.PlayChopstickCard();
+        
+        Assert.DoesNotContain(chopstickCard, board.Cards);
+    }
+
+    [Fact]
+    public void PlayChopstickCard_ThrowsException()
+    {
+        var board = new Board();
+
+        Assert.Throws<NoChopstickInBoardException>(() => board.PlayChopstickCard());
+    }
+    
+    [Fact]
+    public void CanPlayTwoCards_False_WhenNoChopstick()
+    {
+        var board = new Board();
+        var card = new Mock<Card>();
+        card.Setup(c => c.Name).Returns("Card");
+        board.AddCard(card.Object);
+        
+        Assert.False(board.CanPlayTwoCards);
+    }
+
+    [Fact]
+    public void CanPlayTwoCards_True_WhenContainsChopstick()
+    {
+        var board = new Board();
+        var chopstickCard = new ChopstickCard();
+        board.AddCard(chopstickCard);
+        
+        Assert.True(board.CanPlayTwoCards);
+    }
+    
+    [Fact]
+    public void AddCard()
+    {
+        var board = new Board();
+        var card = new Mock<Card>();
+        card.Setup(c => c.Name).Returns("Card");
+        
+        Assert.DoesNotContain(card.Object, board.Cards);
+        
+        board.AddCard(card.Object);
+        
+        Assert.Contains(card.Object, board.Cards);
     }
 }
 

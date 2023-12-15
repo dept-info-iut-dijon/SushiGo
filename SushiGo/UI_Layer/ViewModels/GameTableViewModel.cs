@@ -297,19 +297,23 @@ namespace UI_Layer.ViewModels
 
         private void OnValidateCommand()
         {
+            // Notifications
+            NotifyBoardOfEveryone();
+
             if (this.PlayerPlaying.CardSelected != null)
             {
-
-                // Notifications
-                NotifyBoardOfEveryone();
-
-                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
-
-
-                // Notifications du joueur
-                this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
-                this.IsButtonValidateShown = false;
+                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected);
             }
+            else
+            {
+                this.PlayerPlaying.PlayCard(this.PlayerPlaying.FirstCardSelected, this.PlayerPlaying.SecondCardSelected);
+            }
+                    
+
+            // Notifications du joueur
+            this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
+            this.IsButtonValidateShown = false;
+
         }
 
 
