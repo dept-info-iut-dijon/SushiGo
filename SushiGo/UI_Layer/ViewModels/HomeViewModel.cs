@@ -48,6 +48,9 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public DelegateCommand CreditCommand => new DelegateCommand(() =>
         {
+            CreditsView creditsView = new CreditsView();
+            creditsView.Show();
+            this.view.Close();
         });
 
         /// <summary>

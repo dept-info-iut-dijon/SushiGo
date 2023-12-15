@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="CreditsView" Height="450" Width="800">
     <Grid>
-        <Canvas Name="canvasCredits" VerticalAlignment="Top" ClipToBounds="True">
-            <TextBlock x:Name="txtCredits" Text="Défilement automatique des crédits..." FontSize="18" Foreground="White" Canvas.Left="500"/>
+        
+        <Canvas Name="canvasCredits" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ClipToBounds="True">
+            <TextBlock x:Name="Credits" Text="Il était une fois" Foreground="Black" FontSize="50" />
         </Canvas>
     </Grid>
 </Window>
