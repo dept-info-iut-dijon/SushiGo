@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using UI_Layer.ViewModels;
@@ -29,11 +30,7 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
                 SetupCards(boardComponent);
                 break;
         }
-        
-
     }
-
-
 
     #region dependenciesProperties
 
