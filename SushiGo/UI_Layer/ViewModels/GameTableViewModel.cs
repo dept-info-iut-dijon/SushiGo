@@ -81,7 +81,27 @@ namespace UI_Layer.ViewModels
         #endregion Evénement
 
         #region Propriété
-
+        
+        /// <summary>
+        /// Indique l'ordre dans lequel les mains tournent
+        /// </summary>
+        public GameOrderEnum GameOrder => table.GameOrder;
+        
+        /// <summary>
+        /// Liste des joueurs jouant dans l'ordre
+        /// </summary>
+        public List<PlayerViewModel> PlayerOrder
+        {
+            get
+            {
+                List<PlayerViewModel> order = new List<PlayerViewModel>(this.playerList);
+                if (GameOrder == GameOrderEnum.REGRESSIVE)
+                {
+                    order.Reverse();
+                }
+                return order;
+            }
+        }
         /// <summary>
         /// Représente le joueur qui joue
         /// </summary>
@@ -215,6 +235,8 @@ namespace UI_Layer.ViewModels
                 this.LoadAllScores();
                 this.IsLeaderboardShown = true;
                 NotifyPropertyChanged(nameof(MancheNumber));
+                NotifyPropertyChanged(nameof(this.GameOrder));
+                NotifyPropertyChanged(nameof(this.PlayerOrder));
 
                 // Notifications 
                 NotifyBoardOfEveryone();

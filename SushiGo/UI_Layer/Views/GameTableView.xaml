@@ -180,7 +180,44 @@
                     VerticalAlignment="Center"/>
                 </Grid>
 
-                
+                <!-- Texte affichant le numéro de la manche en cours -->
+                <Grid Grid.ColumnSpan="7" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ItemsControl ItemsSource="{Binding GameTableViewModel.PlayerOrder}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Width="20"
+                                        Height="20"
+                                        Kind="ArrowRightBold"
+                                        Foreground="{StaticResource NightBrush}"/>
+                                    <Grid>
+                                        <Rectangle Width="80" Height="40" Fill="{StaticResource SaffronBrush}" Stroke="Black" StrokeThickness="1" RadiusX="10" RadiusY="10"></Rectangle>
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Nom}" Margin="5" FontWeight="Bold"/>
+                                    </Grid>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding GameTableViewModel.PlayerOrder.Count}" Value="2">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+
+
 
                 <!-- Plateau du joueur 1-->
                 <usercontrols:BoardComponent
