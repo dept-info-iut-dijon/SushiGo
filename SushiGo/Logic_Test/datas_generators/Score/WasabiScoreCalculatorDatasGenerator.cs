@@ -17,6 +17,7 @@ namespace LogicTest.datas_generators.Score
 
         public IEnumerator<object[]> GetEnumerator()
         {
+            //Wasabi avec saumon
             yield return new object[]
             {
             new List<Player>
@@ -37,6 +38,8 @@ namespace LogicTest.datas_generators.Score
                 { 1, 4 }
             }
             };
+
+            //Wasabi avec calamar, 2 wasabi avec calamars
             yield return new object[]
             {
             new List<Player>
@@ -56,6 +59,7 @@ namespace LogicTest.datas_generators.Score
                 { 0, 0 }
             }
             };
+            //Wasabi avec omelette (et 2 wasabi avec omelette)
             yield return new object[]
             {
             new List<Player>
@@ -75,6 +79,9 @@ namespace LogicTest.datas_generators.Score
                 { 1, 2 }
             }
             };
+            //2 wasabi avec sushi
+            //Sushi sans wasabi + wasabi saumon
+            //Aucun wasabi
             yield return new object[]
             {
             new List<Player>
@@ -101,6 +108,7 @@ namespace LogicTest.datas_generators.Score
                 { 2, 0 }
             }
             };
+            //Wasabi vide
             yield return new object[]
             {
             new List<Player>

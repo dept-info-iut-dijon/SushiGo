@@ -1,4 +1,5 @@
-﻿using Logic_Layer.cards;
+﻿using Logic_Layer;
+using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.logic_exceptions;
 
@@ -87,5 +88,25 @@ public class WasabiCardTests
 
         // Assert
         Assert.False(result);
+    }
+
+    
+    [Fact]
+    public void WasabiCard_AssociatedWithNextSushiPutOnTheBoardAndNotOthersSushi()
+    {
+        // Arrange
+        var board = new Board();
+        var wasabiCard = new WasabiCard();
+        var sushiCardOnTheBoard = new SushiCard(SushiTypes.OMELETTE);
+        var sushiCardInTheHand = new SushiCard(SushiTypes.SALMON);
+
+        //Act
+        board.AddCard(sushiCardOnTheBoard);
+        board.AddCard(wasabiCard);
+        //Assert
+        Assert.Null(wasabiCard.Sushi);
+        //Assert
+        board.AddCard(sushiCardInTheHand);
+        Assert.Equal(wasabiCard.Sushi, sushiCardInTheHand);
     }
 }

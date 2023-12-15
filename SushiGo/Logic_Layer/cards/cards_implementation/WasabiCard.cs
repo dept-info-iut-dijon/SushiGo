@@ -34,6 +34,7 @@ public class WasabiCard : Card, ISpecialCard
             this.sushi = sushiToAssociate;
         else throw new ValueAlreadySetException("La carte wasabi est déjà associée à un sushi");
     }
+
     /// <summary>
     /// Indique si le wasabi contient un sushi
     /// </summary>
