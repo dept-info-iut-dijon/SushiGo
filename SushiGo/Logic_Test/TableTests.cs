@@ -2,6 +2,7 @@
 using Logic_Layer.cards;
 using Logic_Layer.logic_exceptions;
 using Moq;
+using System.Reflection;
 using System.Text;
 using Logic_Layer.cards.cards_implementation;
 
@@ -15,10 +16,10 @@ public class TableTests
         // Arrange
         List<Player> players = new List<Player>()
         {
-            new Player(1, new Board(), null, ""),
-            new Player(2, new Board(), null, ""),
-            new Player(3, new Board(), null, ""),
-            new Player(4, new Board(), null, ""),
+            new Player(1,new Board(),null,""),
+            new Player(2,new Board(),null,""),
+            new Player(3,new Board(),null,""),
+            new Player(4,new Board(),null,""),
         };
         var table = new Table(players);
 
@@ -32,12 +33,12 @@ public class TableTests
         // Arrange
         List<Player> players = new List<Player>()
         {
-            new Player(1, new Board(), null, ""),
-            new Player(2, new Board(), null, ""),
-            new Player(3, new Board(), null, ""),
-            new Player(4, new Board(), null, ""),
-            new Player(5, new Board(), null, ""),
-            new Player(6, new Board(), null, ""),
+            new Player(1,new Board(),null,""),
+            new Player(2,new Board(),null,""),
+            new Player(3,new Board(),null,""),
+            new Player(4,new Board(),null,""),
+            new Player(5,new Board(),null,""),
+            new Player(6,new Board(),null,""),
         };
         // Act and Assert
         var exception = Assert.Throws<WrongPlayersNumberException>(() => new Table(players));

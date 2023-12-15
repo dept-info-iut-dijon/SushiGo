@@ -88,7 +88,6 @@ public class Player : INotifyPropertyChanged
             havePlayed = true;
 
             NotifyPropertyChanged(nameof(Player.HavePlayed));
-
         }
     }
 

@@ -86,6 +86,7 @@ namespace Logic_Layer.score
             scoreCalculators.Add(new SashimisScoreCalculator());
             scoreCalculators.Add(new TempuraScoreCalculator());
             scoreCalculators.Add(new RavioliScoreCalculator());
+            scoreCalculators.Add(new WasabiScoreCalculator());
         }
 
         private void PlayerInitializer()

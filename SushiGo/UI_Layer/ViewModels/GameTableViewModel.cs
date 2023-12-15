@@ -242,7 +242,6 @@ namespace UI_Layer.ViewModels
         {
             if (this.PlayerPlaying.CardSelected != null)
             {
-
                 this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
 
                 // Notifications

@@ -11,8 +11,14 @@ namespace Logic_Layer;
 /// </summary>
 public class Table : INotifyPropertyChanged
 {
+    private const int ROUND_MAX = 3;
     private const int MAX_PLAYERS = 5;
     private const int MIN_PLAYERS = 2;
+
+    #region Attributs
+
+    private readonly List<Player> players;
+
     
     private int roundNumber;
     private readonly TableScoreCalculator scoreCalculator;
@@ -26,7 +32,7 @@ public class Table : INotifyPropertyChanged
         private set
         {
             roundNumber = value;
-            NotifyPropertyChanged();
+            this.NotifyPropertyChanged();
         }
     }
 
@@ -34,11 +40,11 @@ public class Table : INotifyPropertyChanged
     /// Retourne le de rotation des mains pour la manche actuelle
     /// </summary>
     public GameOrderEnum GameOrder => RoundNumber % 2 == 0 ? GameOrderEnum.REGRESSIVE : GameOrderEnum.PROGRESSIVE;
-
     /// <summary>
-    /// Les joueurs participant à la partie
+    /// Liste des joueurs.
     /// </summary>
-    public List<Player> Players { get; }
+    public List<Player> Players => players;
+
 
     /// <summary>
     /// Permet de d'abonner un objet à la notification de changement de propriété
@@ -59,12 +65,16 @@ public class Table : INotifyPropertyChanged
     /// <param name="players">liste des joueurs</param>
     public Table(List<Player> players)
     {
-        roundNumber = 1;
-        this.Players = players;
-        InitPlayersValue();
-        scoreCalculator = new TableScoreCalculator(this);
-        StartPlayersTurns();
+        this.players = players;
+        this.InitPlayersValue();
+        this.scoreCalculator = new TableScoreCalculator(this);
+        this.StartPlayersTurns();
+        this.RoundNumber = 1;
     }
+
+    #endregion
+
+    #region Méthodes publiques
 
     /// <summary>
     /// Permet de récupérer le score d'un joueur
@@ -81,11 +91,14 @@ public class Table : INotifyPropertyChanged
     /// </summary>
     public void NextTurn()
     {
-        ActualizeHands();
-        StartPlayersTurns();
+        this.ActualizeHands();
+        this.StartPlayersTurns();
+
         // On passe à la manche suivante si les joueurs n'ont plus de cartes dans leur main
-        if (NoMoreCards())
-            NextRound();
+        if (this.NoMoreCards())
+        {
+            this.NextRound();
+        }
     }
 
     #endregion
@@ -97,43 +110,80 @@ public class Table : INotifyPropertyChanged
         foreach (var player in Players) player.PlayerTurn();
     }
 
-    // Retourne true si toutes les cartes distribuées aux joueurs ont été posées
+    /// <summary>
+    /// Permet de savoir s'il reste des cartes.
+    /// </summary>
+    /// <returns>Retourne true si toutes les cartes distribuées aux joueurs ont été posées. Faux sinon.</returns>
     private bool NoMoreCards()
     {
         return !Players.Any(player => player.HaveCards);
     }
 
-    // Passe à la manche suivante
+    /// <summary>
+    /// Passe à la manche suivante.
+    /// </summary>
     private void NextRound()
     {
-        scoreCalculator.CalculateScore();
-        foreach (var player in Players) EndPlayerRound(player);
-        RoundNumber = roundNumber + 1;
+        this.scoreCalculator.CalculateScore();
+
+        foreach (var player in players)
+        {
+            this.EndPlayerRound(player);
+        }
+
+        // Si toutes les manches n'ont pas été faites
+        if (RoundNumber < ROUND_MAX)
+        {
+            RoundNumber = roundNumber + 1;
+            this.GiveNewHands();
+            this.StartPlayersTurns();
+        }
+        else
+        {
+            // TODO : Fin de partie
+        }
     }
 
-    // Doit être appelé sur chaque joueur à la fin de chaque manche
+    /// <summary>
+    /// Donne une nouvelle main à chaque joueur.
+    /// </summary>
+    private void GiveNewHands()
+    {
+        // Créé autant de mains qu'il y a de joueurs
+        List<Hand> hands = new HandFactory().CreateHands(this.players.Count);
+
+        for (int i = 0; i < this.players.Count; i++)
+        {
+            players[i].Hand = hands[i];
+        }
+    }
+
+    /// <summary>
+    /// Doit être appelé sur chaque joueur à la fin de chaque manche.
+    /// </summary>
+    /// <param name="player">Joueur</param>
     private void EndPlayerRound(Player player)
     {
         var specialCards = player.EndRound();
         //throw new NotImplementedException("Il faut encore implémenter la gestion des cartes spéciales !");
     }
 
-    // Initialiser les joueurs
+    /// <summary>
+    /// Initialiser les joueurs.
+    /// </summary>
+    /// <exception cref="WrongPlayersNumberException">Levée si le nombre de joueur est incorrecte.</exception>
     private void InitPlayersValue()
     {
         if (Players.Count is < MIN_PLAYERS or > MAX_PLAYERS)
             throw new WrongPlayersNumberException($"Le nombre de joueur doit être inclus entre {MIN_PLAYERS} et {MAX_PLAYERS}");
 
-
-        var hands = new HandFactory().CreateHands(Players.Count);
-
-
-        for (var i = 0; i < Players.Count; i++)
+        for (int i = 0; i < this.players.Count; i++)
         {
-            Players[i].Id = i;
-            Players[i].Hand = hands[i];
-            Players[i].PropertyChanged += PlayerNotification;
+            players[i].Id = i;
+            players[i].PropertyChanged += this.PlayerNotification;
         }
+
+        this.GiveNewHands();
     }
 
     private void PlayerNotification(object? sender, PropertyChangedEventArgs e)
@@ -142,21 +192,31 @@ public class Table : INotifyPropertyChanged
         {
             case nameof(Player.HavePlayed):
                 // On passe au tour suivant si tout le monde a joué
-                if (Players.All(gamePlayer => gamePlayer.HavePlayed))
-                    NextTurn();
+                if (players.All(gamePlayer => gamePlayer.HavePlayed))
+                {
+                    this.NextTurn();
+                }
+                    
                 break;
         }
     }
 
-    // Actualise les mains des joueurs en effectuant une rotation
+    /// <summary>
+    /// Actualise les mains des joueurs en effectuant une rotation
+    /// </summary>
     private void ActualizeHands()
     {
-        var rotatedHands = RotateHands();
-        for (var index = 0; index < rotatedHands.Count; index++) 
-            Players[index].Hand = rotatedHands[index];
+        var rotatedHands = this.RotateHands();
+        for (var index = 0; index < rotatedHands.Count; index++)
+        {
+            players[index].Hand = rotatedHands[index];
+        }
     }
 
-    // Créée la liste des mains pour la rotation
+    /// <summary>
+    /// Créée la liste des mains pour la rotation.
+    /// </summary>
+    /// <exception cref="HandsRotationException">Levée si la nouvelle liste de mains est invalide.</exception>
     private List<Hand> RotateHands()
     {
         var hands = Enumerable.Repeat((Hand)null, Players.Count).ToList();
