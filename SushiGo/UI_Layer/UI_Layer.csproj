@@ -5,7 +5,6 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <AssemblyName>SushiGo</AssemblyName>
     <PackageIcon></PackageIcon>
     <ApplicationIcon>SushiGo_Logo.ico</ApplicationIcon>
   </PropertyGroup>
