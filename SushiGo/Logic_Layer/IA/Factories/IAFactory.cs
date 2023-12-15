@@ -17,7 +17,7 @@ namespace Logic_Layer.IA.Factories
         /// <summary>
         /// Construit les IAs du type données en paramètre.
         /// </summary>
-        /// <param name="parameters">Nom des IAs voulues à spérarer par ;</param>
+        /// <param name="parameters">Nom des IAs voulues.</param>
         /// <returns>Liste d'IAs de type demandé en paramètre.</returns>
         public List<IA> CreateIA(string[] parameters)
         {
