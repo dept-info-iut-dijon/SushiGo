@@ -1,12 +1,11 @@
 ﻿using Logic_Layer.cards;
-using Logic_Layer.factories.card_factories;
-using Logic_Layer.factories;
-using Logic_Layer.IA.IAImplementation;
 using Logic_Layer.IA.Factories.IAFactories;
-using System.Xml.Linq;
 
 namespace Logic_Layer.IA.Factories
 {
+    /// <summary>
+    /// Fabrique abstrate ddes IAs.
+    /// </summary>
     public class IAFactory
     {
         private readonly Dictionary<string, ISpecificIAFactory> factories = new Dictionary<string, ISpecificIAFactory>()
