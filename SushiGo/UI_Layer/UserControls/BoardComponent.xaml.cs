@@ -91,7 +91,6 @@ public partial class BoardComponent : UserControl, INotifyPropertyChanged
     private static void SetupCards(BoardComponent boardComponent)
     {
         List<CardComponent> cartesJoueurs = boardComponent.Player.Board;
-        // TODO : afficher les cartes
         boardComponent.Board.ItemsSource = cartesJoueurs;
 
 
