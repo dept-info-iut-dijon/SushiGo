@@ -56,8 +56,7 @@ public class Table : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-
-    #region Méthodes publiques
+    #endregion
 
     /// <summary>
     /// Initialise la table de jeu
@@ -72,7 +71,6 @@ public class Table : INotifyPropertyChanged
         this.RoundNumber = 1;
     }
 
-    #endregion
 
     #region Méthodes publiques
 
@@ -224,7 +222,6 @@ public class Table : INotifyPropertyChanged
 
         // Make the hands rotate position positively if the game order is progressive, opposite order if regressive
         var rotation = GameOrder == GameOrderEnum.PROGRESSIVE ? 1 : -1;
-        NotifyPropertyChanged(nameof(GameOrder));
 
         for (var i = 0; i < Players.Count; i++)
         {
