@@ -54,6 +54,10 @@ namespace UI_Layer.ViewModels
             {
                 player.PlayCard(card.Card);
             }
+            else if (card == null)
+            {
+                player.PlayCard(card2.Card);
+            }
             else
             {
                 player.PlayCard(card.Card,card2.Card);

@@ -263,7 +263,7 @@ namespace UI_Layer.ViewModels
             {
                 this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected);
             }
-            else if (this.PlayerPlaying.FirstCardSelected != null && this.PlayerPlaying.SecondCardSelected != null)
+            else
             {
                 this.PlayerPlaying.PlayCard(this.PlayerPlaying.FirstCardSelected, this.PlayerPlaying.SecondCardSelected);
             }
