@@ -18,11 +18,11 @@ public class Table : INotifyPropertyChanged
     #region Attributs
 
     private readonly List<Player> players;
-
-    
     private int roundNumber;
     private readonly TableScoreCalculator scoreCalculator;
+    #endregion
 
+    #region Propriétés
     /// <summary>
     /// Numéro de la manche de la partie
     /// </summary>
@@ -45,7 +45,9 @@ public class Table : INotifyPropertyChanged
     /// </summary>
     public List<Player> Players => players;
 
+    #endregion
 
+    #region Events
     /// <summary>
     /// Permet de d'abonner un objet à la notification de changement de propriété
     /// </summary>
@@ -194,7 +196,7 @@ public class Table : INotifyPropertyChanged
                 {
                     this.NextTurn();
                 }
-                    
+
                 break;
         }
     }
@@ -229,7 +231,7 @@ public class Table : INotifyPropertyChanged
             if (index < 0) index += Players.Count;
             hands[index] = Players[i].Hand;
         }
-        
+
 
         if (hands is null || hands.Count != Players.Count || hands.Contains(null))
             throw new HandsRotationException("La nouvelle liste de mains est invalide");
