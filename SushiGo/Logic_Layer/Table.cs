@@ -141,7 +141,6 @@ public class Table : INotifyPropertyChanged
         else
         {
             NotifyPropertyChanged("FIN");
-            // TODO : Fin de partie
         }
     }
 
