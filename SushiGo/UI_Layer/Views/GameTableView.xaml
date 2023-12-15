@@ -442,5 +442,189 @@
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
+
+        <!-- Popup partie gagnée -->
+        <materialDesign:DialogHost IsOpen="{Binding GameTableViewModel.IsPopupWinShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource YellowGreenBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="40,20,40,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                         FontWeight="bold"
+                         HorizontalAlignment="Center"
+                         FontSize="25"
+                         Text="Vous avez gagné la partie ! "/>
+
+                    
+                    <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                    <materialDesign:Chip.Style>
+                                        <Style TargetType="materialDesign:Chip">
+                                            <Style.Setters>
+                                                <Setter Property="IconBackground" Value="Transparent" />
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="1">
+                                                    <Setter Property="IconBackground" Value="#ffd700"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                    <Setter Property="IconBackground" Value="#c0c0c0"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                    <Setter Property="IconBackground" Value="#cd7f32"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:Chip.Style>
+                                    <materialDesign:Chip.Icon>
+                                        <materialDesign:PackIcon Width="23" Height="23">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Style.Setters>
+                                                        <Setter Property="Kind" Value="Numeric1" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Style.Setters>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                            <Setter Property="Kind" Value="Numeric2" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                            <Setter Property="Kind" Value="Numeric3" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="4">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric4" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="5">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric5" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+
+                                    </materialDesign:Chip.Icon>
+                                    <materialDesign:Chip.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Nom , StringFormat='{}{0} : '}"/>
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Score , StringFormat='{}{0} points'}"/>
+                                        </StackPanel>
+                                    </materialDesign:Chip.Content>
+                                </materialDesign:Chip>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Button
+                        Grid.Row="2"
+                        BorderThickness="0"
+                        Margin="10,0,0,0"
+                        Command="{Binding GameTableViewModel.QuitGame}"
+                        Background="{StaticResource SaffronBrush}"
+                        Content="{x:Static res:fr_FR.QUIT}"
+                        />
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Popup partie perdue -->
+        <materialDesign:DialogHost IsOpen="{Binding GameTableViewModel.IsPopupLooseShown}" HorizontalAlignment="Center" DialogBackground="{StaticResource PersianRedBrush}" OverlayBackground="Gray"  DialogTheme="Inherit"  VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="40,20,40,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                         FontWeight="bold"
+                         HorizontalAlignment="Center"
+                         FontSize="25"
+                         Text="Vous avez perdue la partie ! "/>
+
+                    <ListView IsHitTestVisible="False" Margin="0,15,0,25" ItemsSource="{Binding GameTableViewModel.LeaderBoard}" HorizontalAlignment="Center" Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Chip Margin="0,0,0,-5" Background="White">
+                                    <materialDesign:Chip.Style>
+                                        <Style TargetType="materialDesign:Chip">
+                                            <Style.Setters>
+                                                <Setter Property="IconBackground" Value="Transparent" />
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="1">
+                                                    <Setter Property="IconBackground" Value="#ffd700"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                    <Setter Property="IconBackground" Value="#c0c0c0"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                    <Setter Property="IconBackground" Value="#cd7f32"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:Chip.Style>
+                                    <materialDesign:Chip.Icon>
+                                        <materialDesign:PackIcon Width="23" Height="23">
+                                            <materialDesign:PackIcon.Style>
+                                                <Style TargetType="materialDesign:PackIcon">
+                                                    <Style.Setters>
+                                                        <Setter Property="Kind" Value="Numeric1" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Style.Setters>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="2">
+                                                            <Setter Property="Kind" Value="Numeric2" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="3">
+                                                            <Setter Property="Kind" Value="Numeric3" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="4">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric4" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ., Converter={StaticResource LeaderboardRetriever}}" Value="5">
+                                                            <Setter Property="Foreground" Value="IndianRed" />
+                                                            <Setter Property="Kind" Value="Numeric5" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:PackIcon.Style>
+                                        </materialDesign:PackIcon>
+
+                                    </materialDesign:Chip.Icon>
+                                    <materialDesign:Chip.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Nom , StringFormat='{}{0} : '}"/>
+                                            <TextBlock Foreground="Black" FontSize="15" Text="{Binding Score , StringFormat='{}{0} points'}"/>
+                                        </StackPanel>
+                                    </materialDesign:Chip.Content>
+                                </materialDesign:Chip>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <Button
+                        Grid.Row="2"
+                        BorderThickness="0"
+                        Margin="10,0,0,0"
+                        Foreground="black"
+                        Command="{Binding GameTableViewModel.QuitGame}"
+                        Background="{StaticResource WhiteSmokeBrush}"
+                        Content="{x:Static res:fr_FR.QUIT}"
+                        />
+
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
     </Grid>
 </Window>
