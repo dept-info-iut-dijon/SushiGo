@@ -262,7 +262,7 @@ namespace UI_Layer.ViewModels
                 // Notifications
                 NotifyBoardOfEveryone();
 
-                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
+                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected, this.PlayerPlaying.FirstCardSelected);
 
 
                 // Notifications du joueur

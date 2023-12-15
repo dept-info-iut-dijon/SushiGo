@@ -26,6 +26,7 @@ namespace UI_Layer.ViewModels
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
         private CardComponent? cardSelected;
+        private CardComponent? firstCardSelected;
         #endregion
 
 
@@ -37,7 +38,7 @@ namespace UI_Layer.ViewModels
         public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
-
+            
             this.role = role;
         }
 
@@ -45,9 +46,18 @@ namespace UI_Layer.ViewModels
         /// Joue une carte et notifie les observers
         /// </summary>
         /// <param name="card">La carte à jouer, elle doit faire partie de la main du joueur</param>
-        public void PlayCard(Card card)
+        public void PlayCard(CardComponent card,CardComponent card2)
         {
-            player.PlayCard(card);
+
+            if (card2 == null)
+            {
+                player.PlayCard(card.Card);
+            }
+            else
+            {
+                player.PlayCard(card.Card,card2.Card);
+            }
+            
 
             NotifyPropertyChanged(nameof(player.Hand));
             NotifyPropertyChanged(nameof(Board));
@@ -187,27 +197,52 @@ namespace UI_Layer.ViewModels
             }
             set
             {
-                if (this.cardSelected != value)
+
+                
+                if (this.cardSelected == value)
                 {
-
-                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
                     this.cardSelected?.ClickOnCard();
-
-                    // Mettre à jour la propriété
-                    this.cardSelected = value;
-
-                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
-                    this.cardSelected?.ClickOnCard();
-
+                    this.cardSelected = null;
+                }
+                else if (this.firstCardSelected == value)
+                {
+                    this.firstCardSelected?.ClickOnCard();
+                    this.firstCardSelected = null;
+                }
+                else
+                {
+                    if (cardSelected == null)
+                    {
+                        this.cardSelected = value;
+                        this.cardSelected?.ClickOnCard();
+                    }
+                    else
+                    {
+                        if (player.Board.CanPlayTwoCards)
+                        {
+                            this.firstCardSelected = value;
+                            this.firstCardSelected?.ClickOnCard();
+                        }
+                        else
+                        {
+                            this.cardSelected?.ClickOnCard();
+                            this.cardSelected = value;
+                            this.cardSelected?.ClickOnCard();
+                        }
+                    }
+                }
+                
                     // Notification des changements
                     this.NotifyPropertyChanged(nameof(CardSelected));
                     MainWindowViewModel.Instance.GameTableViewModel.IsButtonValidateShown = true;
 
                 }
             }
-        }
+
+        public CardComponent? FirstCardSelected { get => firstCardSelected; set => firstCardSelected = value; }
+    }
 
         #endregion
 
-    }
+    
 }

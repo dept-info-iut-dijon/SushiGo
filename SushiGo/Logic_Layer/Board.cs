@@ -87,6 +87,7 @@ public class Board
             cards.Add(card);
         }
     }
+
     private bool IsSushiAssociatedWithWasabi(List<Card> wasabiCards, Card card)
     {
         bool sushiIsAssociated = false;
@@ -101,8 +102,6 @@ public class Board
         return sushiIsAssociated;
     }
 
-        cards.Add(card);
-    }
 
     /// <summary>
     /// Retire une carte chopstick de la main, lance une exception s'il n'y en a aucune
