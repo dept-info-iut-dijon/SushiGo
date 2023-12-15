@@ -14,10 +14,10 @@ namespace UI_Layer.UserControls;
 public partial class CardComponent : UserControl
 {
 
-    private const int widthPut = 80;
-    private const int baseWidth = 140;
-    private const int heightPut = 110;
-    private const int baseHeight= 200;
+    private const int WIDTHPUT = 80;
+    private const int BASEWIDTH = 140;
+    private const int HEIGHTPUT = 110;
+    private const int BASEHEIGHT= 200;
 
     #region attributes
     private Card card;
@@ -120,14 +120,14 @@ public partial class CardComponent : UserControl
             isPut = value;
             if (this.isPut == true)
             {
-                this.Width = widthPut;
-                this.Height = heightPut;
+                this.Width = WIDTHPUT;
+                this.Height = HEIGHTPUT;
 
             }
             else
             {
-                this.Width = baseWidth;
-                this.Height = baseHeight;
+                this.Width = BASEWIDTH;
+                this.Height = BASEHEIGHT;
             }
         }
     }
