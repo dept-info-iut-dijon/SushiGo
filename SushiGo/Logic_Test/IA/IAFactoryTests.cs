@@ -1,13 +1,5 @@
-﻿using Logic_Layer;
-using Logic_Layer.IA;
-using Logic_Layer.IA.Factories;
+﻿using Logic_Layer.IA.Factories;
 using Logic_Layer.IA.IAImplementation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace LogicTest.IA
 {
     public class IAFactoryTests
