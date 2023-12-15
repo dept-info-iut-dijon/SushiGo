@@ -13,7 +13,9 @@ using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;
 
-
+/// <summary>
+/// Logique d'interaction pour BoardComponent.xaml
+/// </summary>
 public partial class BoardComponent : UserControl, INotifyPropertyChanged
 {
 

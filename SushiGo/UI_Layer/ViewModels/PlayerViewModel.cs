@@ -56,7 +56,7 @@ namespace UI_Layer.ViewModels
             player.PlayCard(card);
 
             NotifyPropertyChanged(nameof(player.Hand));
-
+            NotifyPropertyChanged(nameof(Board));
 
         }
 
@@ -164,12 +164,7 @@ namespace UI_Layer.ViewModels
             }
         }
 
-        /// Abonne la vue à la table pour être notifié des changements de round
-        /// </summary>
-        public GameTableViewModel Table
-        {
-            set => value.PropertyChanged += Table_PropertyChanged;
-        }
+
 
         private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

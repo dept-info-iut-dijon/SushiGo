@@ -33,14 +33,8 @@ public class PlayerViewModelTests
     {
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
-        var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
-        var gameVM = new GameTableViewModel()
-        {
-            Table = table
-        };
-        playerVM.Table = gameVM;
 
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Hand), () => playerVM.PlayCard(card));
+        Assert.PropertyChanged(playerVM, nameof(playerVM.Board), () => playerVM.PlayCard(card));
     }
     
     [Theory]
@@ -48,7 +42,7 @@ public class PlayerViewModelTests
     public void PlayCard_GetNotification_HavePlayed(int playerId, Board board, Hand hand, string pseudo, PlayerType playerType, Card card)
     {
         var playerVM = new PlayerViewModel(new Player(playerId, board, hand, pseudo), playerType);
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.HavePlayed), () => playerVM.PlayCard(card));
+        Assert.PropertyChanged(playerVM.Player, nameof(playerVM.Player.HavePlayed), () => playerVM.PlayCard(card));
     }
     
     [Theory]
@@ -58,11 +52,7 @@ public class PlayerViewModelTests
         var player = new Player(playerId, board, hand, pseudo); 
         var playerVM = new PlayerViewModel(player, playerType);
         var table = new Table(new List<Player> {player, new Player(1, board, hand, pseudo)});
-        var gameVM = new GameTableViewModel()
-        {
-            Table = table
-        };
-        playerVM.Table = gameVM;
+        var gameVM = new GameTableViewModel();
         
         player.Hand.Cards.Add(card);
         playerVM.PlayCard(card);
@@ -70,6 +60,6 @@ public class PlayerViewModelTests
         // on fait une réflection de la méthode NextRound pour pouvoir tester la notification
         var method = table.GetType().GetMethod("NextRound", BindingFlags.NonPublic | BindingFlags.Instance);
         
-        Assert.PropertyChanged(playerVM, nameof(playerVM.Player.Board.Cards), () => method.Invoke(table, null));
+        Assert.PropertyChanged(table, nameof(table.RoundNumber), () => method.Invoke(table, null));
     }
 }

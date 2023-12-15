@@ -39,12 +39,8 @@ namespace UI_Layer.ViewModels
 
         #endregion Constructeur
 
-        #region Propriétés privées
-        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(table.RoundNumber));
-        }
-        #endregion
+
+        
         
         #region Evénement
 
@@ -167,12 +163,6 @@ namespace UI_Layer.ViewModels
         }
 
 
-        public Logic_Layer.Table Table
-        {
-            get => table;
-            set => table.PropertyChanged += Table_PropertyChanged;
-        }
-
         #endregion Propriété
 
         
@@ -206,6 +196,11 @@ namespace UI_Layer.ViewModels
 
         #region Méthode Privée
 
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(table.RoundNumber));
+        }
+
         /// <summary>
         /// Permet d'initialiser la liste des joueurs
         /// </summary>
@@ -229,10 +224,18 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(MancheNumber));
 
                 // Notifications 
-                foreach (PlayerViewModel p in this.playerList)
-                {
-                    p.NotifyBoard();
-                }
+                NotifyBoardOfEveryone();
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier les boards des joueurs pour qu'ils s'actualisent
+        /// </summary>
+        private void NotifyBoardOfEveryone()
+        {
+            foreach (PlayerViewModel p in this.playerList)
+            {
+                p.NotifyBoard();
             }
         }
 
@@ -241,17 +244,13 @@ namespace UI_Layer.ViewModels
             if (this.PlayerPlaying.CardSelected != null)
             {
 
-                // Notifications des ia
-                foreach (PlayerViewModel p in this.playerList)
-                {
-                    p.NotifyBoard();
-                }
+                // Notifications
+                NotifyBoardOfEveryone();
 
                 this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
 
 
                 // Notifications du joueur
-                this.PlayerPlaying.NotifyBoard();
                 this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
                 this.IsButtonValidateShown = false;
             }
