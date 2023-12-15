@@ -13,7 +13,7 @@ namespace LogicTest.IA
     public class IAFactoryTests
     {
         [Fact]
-        public void CreateIA_CreateSameIA()
+        public void CreateIA_CreateIA_SameIA()
         {
             // Arrange
             IAFactory iAFactory = new IAFactory();
