@@ -8,7 +8,7 @@ public class Player : INotifyPropertyChanged
 {
     private int id;
     private string pseudo;
-    private Board board;
+    private readonly Board board;
     private Hand hand;
     private bool havePlayed;
 
@@ -17,16 +17,16 @@ public class Player : INotifyPropertyChanged
     /// <summary>
     /// Indique si le joueur a terminé de jouer dans le tour courant
     /// </summary>
-    public virtual bool HavePlayed 
-    { 
-        get 
-        { 
-            return havePlayed; 
-        } 
-        protected set 
-        { 
-            havePlayed = value; 
-        } 
+    public virtual bool HavePlayed
+    {
+        get
+        {
+            return havePlayed;
+        }
+        protected set
+        {
+            havePlayed = value;
+        }
     }
 
     /// <summary>
@@ -87,8 +87,7 @@ public class Player : INotifyPropertyChanged
             hand.PlayCard(card, board);
             havePlayed = true;
 
-            NotifyPropertyChanged(nameof(Player.HavePlayed));
-
+            NotifyPropertyChanged(nameof(HavePlayed));
         }
     }
 

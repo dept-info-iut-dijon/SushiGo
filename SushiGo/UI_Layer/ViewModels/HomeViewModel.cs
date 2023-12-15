@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using UI_Layer;
 using UI_Layer.Views;
 
 namespace UI_Layer.ViewModels
@@ -43,22 +36,25 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Commande permettant d'aller à la vue de création de partie.
         /// </summary>
-        public DelegateCommand PlayCommand => new DelegateCommand(() => {
+        public DelegateCommand PlayCommand => new DelegateCommand(() =>
+        {
             GameCreationView gameCreationView = new GameCreationView();
             gameCreationView.Show();
             this.view.Close();
-            });
+        });
 
         /// <summary>
         /// Commande permettant d'afficher les crédits.
         /// </summary>
-        public DelegateCommand CreditCommand => new DelegateCommand(() => {
+        public DelegateCommand CreditCommand => new DelegateCommand(() =>
+        {
         });
 
         /// <summary>
         /// Commande permettant de quitter l'application.
         /// </summary>
-        public DelegateCommand QuitCommand => new DelegateCommand(() => {
+        public DelegateCommand QuitCommand => new DelegateCommand(() =>
+        {
             this.view.Close();
             Application.Current.Shutdown();
         });

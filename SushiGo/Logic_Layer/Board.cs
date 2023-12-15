@@ -1,5 +1,6 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
+using Logic_Layer.cards.utils;
 using Logic_Layer.logic_exceptions;
 
 namespace Logic_Layer;
@@ -9,12 +10,7 @@ namespace Logic_Layer;
 /// </summary>
 public class Board
 {
-    private List<Card> cards;
-
-    public Board()
-    {
-        cards = new List<Card>();
-    }
+    private List<Card> cards = new();
 
     /// <summary>
     /// Liste des cartes du joueur
@@ -38,14 +34,14 @@ public class Board
     public virtual List<ISpecialCard> PlayerTurn()
     {
         List<ISpecialCard> ret = new List<ISpecialCard>();
-        
+
         // On rassemble les cartes spéciales devant être prises en compte
         foreach (Card c in Cards)
         {
             if (c is ISpecialCard card && card.PlayerTurn())
                 ret.Add(card);
         }
-        
+
         return ret;
     }
 
@@ -63,18 +59,48 @@ public class Board
             if (c is ISpecialCard card && card.EndRound())
                 ret.Add(card);
         }
-        
-        Cards = ret.Select(c => (Card) c).ToList();
+
+        Cards = ret.Select(c => (Card)c).ToList();
 
         return ret;
     }
 
     /// <summary>
     /// Ajoute une carte sur le plateau
+    /// Fait une vérification de la carte Wasabi si la carte est un sushi.
     /// </summary>
     /// <param name="card">Carte à ajouter</param>
     public virtual void AddCard(Card card)
     {
+        if(card is SushiCard)
+        {
+            List<Card> wasabiCards = CardsSorter.TypeSort(typeof(WasabiCard), cards);
+            bool sushiIsAssociated = false;
+            sushiIsAssociated = IsSushiAssociatedWithWasabi(wasabiCards, card);
+            if (!sushiIsAssociated)
+            {
+                cards.Add(card);
+            }
+        }
+        else
+        {
+            cards.Add(card);
+        }
+    }
+    private bool IsSushiAssociatedWithWasabi(List<Card> wasabiCards, Card card)
+    {
+        bool sushiIsAssociated = false;
+        foreach (WasabiCard c in wasabiCards)
+        {
+            if (c.Sushi is null && !sushiIsAssociated)
+            {
+                c.AssociateSushi(card as SushiCard);
+                sushiIsAssociated = true;
+            }
+        }
+        return sushiIsAssociated;
+    }
+
         cards.Add(card);
     }
 

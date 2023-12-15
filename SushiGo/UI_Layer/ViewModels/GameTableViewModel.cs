@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows;
-using UI_Layer.UserControls;
-using Logic_Layer.cards;
-using Logic_Layer;
-using System.Windows.Documents;
-using System.Runtime.CompilerServices;
+﻿using Logic_Layer;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Numerics;
-using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace UI_Layer.ViewModels
 {
@@ -19,13 +13,11 @@ namespace UI_Layer.ViewModels
     public class GameTableViewModel : INotifyPropertyChanged
     {
         #region Attribut
-        private Logic_Layer.Table table;
-        private bool isLeaderboardShown = false;
-        private bool isPopupValidationQuitShown = false;
-        private bool isButtonValidateShown = false;
+        private bool isLeaderboardShown;
+        private bool isPopupValidationQuitShown;
+        private bool isButtonValidateShown;
         private List<PlayerViewModel> playerList;
-        private CardComponent? cardSelected;
-
+        private Logic_Layer.Table table;
         #endregion Attribut
 
         #region Constructeur
@@ -36,50 +28,24 @@ namespace UI_Layer.ViewModels
         public GameTableViewModel()
         {
             this.ValidateCommand = new DelegateCommand(this.OnValidateCommand);
-
-
-        }
-
-
-        /// <summary>
-        /// Initialise les valeurs lors de l'ouverture de la fenêtre.
-        /// </summary>
-        /// <param name="table"></param>
-        public void Init(Logic_Layer.Table table)
-        {
-            this.table = table;
-            this.cardSelected = null;
-            this.isLeaderboardShown = false;
-            this.isPopupValidationQuitShown = false;
-            this.isButtonValidateShown = false;
-            InitPlayers();
-
-            this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
-        }
-
-
-        /// <summary>
-        /// Permet d'initialiser la liste des joueurs
-        /// </summary>
-        private void InitPlayers()
-        {
-            this.playerList = new List<PlayerViewModel>();
-            foreach (Player player in table.Players)
-            {
-                this.playerList.Add(new PlayerViewModel(player, PlayerType.PLAYER));
-            }
-
-            NotifyPropertyChanged(nameof(this.PlayerList));
         }
 
         #endregion Constructeur
 
+
+        
+        
         #region Evénement
 
         /// <summary>
         /// Evénement lors du changement d'une propriété.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
 
         /// <summary>
@@ -97,7 +63,7 @@ namespace UI_Layer.ViewModels
         {
             IsPopupValidationQuitShown = !isPopupValidationQuitShown;
         });
-        
+
 
         /// <summary>
         /// Permet de quitter la partie et retourner au menu
@@ -107,18 +73,45 @@ namespace UI_Layer.ViewModels
             MainWindowViewModel.Instance.NavigationViewModel.ReturnToMenu();
         });
 
-        #endregion Evénement
-
-        #region Commande Déléguée
-
         /// <summary>
         /// Commande appelée lors du clic sur le bouton Valider.
         /// </summary>
         public DelegateCommand ValidateCommand { get; set; }
 
-        #endregion Commande Déléguée
+        #endregion Evénement
 
         #region Propriété
+        
+        /// <summary>
+        /// Indique l'ordre dans lequel les mains tournent
+        /// </summary>
+        public GameOrderEnum GameOrder => table.GameOrder;
+        
+        /// <summary>
+        /// Liste des joueurs jouant dans l'ordre
+        /// </summary>
+        public List<PlayerViewModel> PlayerOrder
+        {
+            get
+            {
+                List<PlayerViewModel> order = new List<PlayerViewModel>(this.playerList);
+                if (GameOrder == GameOrderEnum.REGRESSIVE)
+                {
+                    order.Reverse();
+                }
+                return order;
+            }
+        }
+        /// <summary>
+        /// Représente le joueur qui joue
+        /// </summary>
+        public PlayerViewModel PlayerPlaying
+        {
+            get
+            {
+                return playerList[0];
+            }
+        }
 
         /// <summary>
         /// Représente le numéro de la manche
@@ -130,6 +123,7 @@ namespace UI_Layer.ViewModels
                 return $"Manche nº{table.RoundNumber}";
             }
         }
+
         /// <summary>
         /// Permet d'afficher le menu
         /// </summary>
@@ -144,65 +138,6 @@ namespace UI_Layer.ViewModels
         }
 
         /// <summary>
-        /// Carte sélectionnée.
-        /// </summary>
-        public CardComponent? CardSelected
-        {
-            get
-            {
-                return this.cardSelected;
-            }
-            set
-            {
-                if (this.cardSelected != value)
-                {
-                    
-                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
-                    this.cardSelected?.ClickOnCard();
-
-                    // Mettre à jour la propriété
-                    this.cardSelected = value;
-                    
-                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
-                    this.cardSelected?.ClickOnCard();
-
-                    // Notification des changements
-                    this.NotifyPropertyChanged(nameof(CardSelected));
-                    IsButtonValidateShown = true;
-
-                }
-            }
-        }
-
-        /// <summary>
-        /// Main du joueur.
-        /// </summary>
-        public List<CardComponent> Deck
-        {
-            get
-            {
-                List<CardComponent> cards = new List<CardComponent>();
-
-                if (table != null)
-                {
-                    Player thisPLayer = table.Players[0];
-                    PlayerViewModel player = new PlayerViewModel(thisPLayer, PlayerType.PLAYER);
-
-                    foreach (Card card in table.Players[0].Hand.Cards)
-                    {
-                        // On créer la carte
-                        CardComponent newCard = new CardComponent(player, card);
-
-                        // On ajoute la carte
-                        cards.Add(newCard);
-
-                    }
-                }
-
-                return cards;
-            }
-        }
-        /// <summary>
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> PlayerList { get => playerList; set => playerList = value; }
@@ -211,10 +146,8 @@ namespace UI_Layer.ViewModels
         /// Liste des joueurs de la partie
         /// </summary>
         public List<PlayerViewModel> LeaderBoard { get => playerList.OrderByDescending(x => x?.Score).ToList(); }
-        /// <summary>
-        /// Représente l'objet métier de la table
-        /// </summary>
-        public Logic_Layer.Table Table { get => table; }
+
+
 
         /// <summary>
         /// Est ce que la popup pour quitter la partie est affichée
@@ -232,23 +165,20 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Est ce que le bouton pour valider est affiché
         /// </summary>
-        public bool IsButtonValidateShown 
-        { 
+        public bool IsButtonValidateShown
+        {
             get => isButtonValidateShown;
-            set 
-            { 
-                isButtonValidateShown = value; 
+            set
+            {
+                isButtonValidateShown = value;
                 NotifyPropertyChanged();
             }
         }
 
+
         #endregion Propriété
 
 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         /// <summary>
         /// Permet de mettre à jour tous les scores d'après le métier
@@ -262,31 +192,82 @@ namespace UI_Layer.ViewModels
             this.NotifyPropertyChanged(nameof(this.LeaderBoard));
         }
 
+        /// <summary>
+        /// Initialise les valeurs lors de l'ouverture de la fenêtre.
+        /// </summary>
+        /// <param name="table"></param>
+        public void Init(Logic_Layer.Table table)
+        {
+            this.table = table;
+            this.isLeaderboardShown = false;
+            this.isPopupValidationQuitShown = false;
+            this.isButtonValidateShown = false;
+            InitPlayers();
+
+            this.table.PropertyChanged += GameTableViewModel_PropertyChanged;
+        }
+
         #region Méthode Privée
 
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(table.RoundNumber));
+        }
+
+        /// <summary>
+        /// Permet d'initialiser la liste des joueurs
+        /// </summary>
+        private void InitPlayers()
+        {
+            this.playerList = new List<PlayerViewModel>();
+            foreach (Player player in table.Players)
+            {
+                this.playerList.Add(new PlayerViewModel(player, PlayerType.PLAYER));
+            }
+
+            NotifyPropertyChanged(nameof(this.PlayerList));
+        }
 
         private void GameTableViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.Equals(nameof(Table.RoundNumber)))
+            if (e.PropertyName.Equals(nameof(table.RoundNumber)))
             {
                 this.LoadAllScores();
                 this.IsLeaderboardShown = true;
                 NotifyPropertyChanged(nameof(MancheNumber));
+                NotifyPropertyChanged(nameof(this.GameOrder));
+                NotifyPropertyChanged(nameof(this.PlayerOrder));
+
+                // Notifications 
+                NotifyBoardOfEveryone();
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier les boards des joueurs pour qu'ils s'actualisent
+        /// </summary>
+        private void NotifyBoardOfEveryone()
+        {
+            foreach (PlayerViewModel p in this.playerList)
+            {
+                p.NotifyBoard();
             }
         }
 
         private void OnValidateCommand()
         {
-            if (this.CardSelected != null)
+            if (this.PlayerPlaying.CardSelected != null)
             {
-                this.CardSelected.PlayCard();
-
-
 
                 // Notifications
-                this.NotifyPropertyChanged(nameof(this.CardSelected));
-                this.NotifyPropertyChanged(nameof(this.Deck));
-                IsButtonValidateShown = false;
+                NotifyBoardOfEveryone();
+
+                this.PlayerPlaying.PlayCard(this.PlayerPlaying.CardSelected.Card);
+
+
+                // Notifications du joueur
+                this.NotifyPropertyChanged(nameof(this.PlayerPlaying.Hand));
+                this.IsButtonValidateShown = false;
             }
         }
 

@@ -1,11 +1,6 @@
 ﻿using Logic_Layer.cards;
 using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.cards.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic_Layer.score
 {
@@ -19,8 +14,8 @@ namespace Logic_Layer.score
         private int amountMakisSecond;
         private List<Player> firstPlayerList;
         private List<Player> secondPlayerList;
-       
-        #endregion 
+
+        #endregion
         /// <summary>
         /// Constructeur du calculateur de score des cartes makis
         /// </summary>
@@ -56,12 +51,12 @@ namespace Logic_Layer.score
                 if (secondPlayerList.Count != 0)
                 {
                     int scoreToGiveSecond = 3 / secondPlayerList.Count();
-                    foreach(Player player in secondPlayerList)
+                    foreach (Player player in secondPlayerList)
                     {
-                        score[player.Id] = scoreToGiveSecond; 
+                        score[player.Id] = scoreToGiveSecond;
                     }
                 }
-                
+
             }
 
             return score;
@@ -73,24 +68,24 @@ namespace Logic_Layer.score
         {
             List<Card> makisCards = CardsSorter.TypeSort(typeof(MakiCard), cards);
             int amountMakis = 0;
-            foreach(MakiCard makisCard in makisCards)
+            foreach (MakiCard makisCard in makisCards)
             {
                 amountMakis += makisCard.Quantity;
             }
             return amountMakis;
         }
-        
+
         private void FirstSecondRanking(Player player, int amountMakis)
         {
             if (amountMakis > amountMakisFirst)
             {
                 NewFirstPlayer(player, amountMakis);
             }
-            else if(amountMakis == amountMakisFirst)
+            else if (amountMakis == amountMakisFirst)
             {
                 AddFirstPlayer(player);
             }
-            else if (amountMakis > amountMakisSecond && amountMakis!=0) //Si on a pas de makis on a pas de points
+            else if (amountMakis > amountMakisSecond && amountMakis != 0) //Si on a pas de makis on a pas de points
             {
                 List<Player> secondPlayer = new List<Player>();
                 secondPlayer.Add(player);

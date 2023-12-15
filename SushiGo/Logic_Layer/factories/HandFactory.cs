@@ -13,7 +13,7 @@ public class HandFactory
     private readonly Random rand;
     private List<Card>? deck;
     private readonly CardFactory factory;
-    
+
     // Stocke le nombre de carte par main selon le nombre de joueurs
     private static readonly Dictionary<int, int> playersToCardNumber = new()
     {
@@ -23,7 +23,7 @@ public class HandFactory
         { 5, 7 }
     };
     #endregion
-    
+
     /// <summary>
     /// Constructeur de la factory
     /// </summary>
@@ -42,7 +42,7 @@ public class HandFactory
     {
         if (playersNumber is < 2 or > 5)
             throw new WrongPlayersNumberException("Le nombre de joueur devrait être inclus entre 2 et 5");
-        
+
         // Initialisation des variables
         List<List<Card>> tmpCards = new List<List<Card>>();
         deck = CreateDeck();
@@ -78,10 +78,10 @@ public class HandFactory
     private List<Card> CreateDeck()
     {
         List<Card> ret = new List<Card>();
-        
+
         // Récupération des données de génération
         var generationDatas = new GenerationParametersExtractor().GetParameters();
-        
+
         // On lance chacune des générations et on les ajoute au résultat
         foreach (var param in generationDatas.Keys)
         {
@@ -90,7 +90,7 @@ public class HandFactory
 
         return ret;
     }
- 
+
     // Retourne une carte aléatoire parmi celles présentes dans le deck
     private Card PickRandomCard()
     {

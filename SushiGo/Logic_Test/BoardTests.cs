@@ -85,7 +85,7 @@ public class BoardTests
         foreach (var card in toRemove) boardCardList.Remove(card);
 
         Assert.NotEmpty(board.Cards);
-        
+
         for (var index = 0; index < board.Cards.Count; index++)
         {
             var card = board.Cards[index];

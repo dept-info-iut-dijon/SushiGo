@@ -1,15 +1,9 @@
 ﻿using Logic_Layer;
-using Logic_Layer.IA;
+using Logic_Layer.cards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Logic_Layer.cards;
-using System.Windows.Documents;
-using System.Windows;
 using UI_Layer.UserControls;
 
 namespace UI_Layer.ViewModels
@@ -31,6 +25,7 @@ namespace UI_Layer.ViewModels
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
+        private CardComponent? cardSelected;
         #endregion
 
 
@@ -53,8 +48,10 @@ namespace UI_Layer.ViewModels
         public void PlayCard(Card card)
         {
             player.PlayCard(card);
+
             NotifyPropertyChanged(nameof(player.Hand));
-            NotifyPropertyChanged(nameof(player.HavePlayed));
+            NotifyPropertyChanged(nameof(Board));
+
         }
 
         /// <summary>
@@ -126,21 +123,87 @@ namespace UI_Layer.ViewModels
         /// Main du joueur.
         /// </summary>
         /// <inheritdoc/>
-        public List<CardComponent> Deck
+        public List<CardComponent> Hand
         {
             get
             {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
 
-                int x = 0;
                 foreach (Card card in this.player.Hand.Cards)
                 {
-                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
+                    cards.Add(new CardComponent(card));
                 }
 
                 return cards;
+            }
+        }
+
+        /// <summary>
+        /// Liste des cartes posées sur le plateau
+        /// </summary>
+        public List<CardComponent> Board
+        {
+            get
+            {
+                List<CardComponent> cards = new List<CardComponent>();
+
+                foreach (Card card in this.player.Board.Cards)
+                {
+                    CardComponent carte = new CardComponent(card);
+                    carte.IsPut = true;
+                    cards.Add(carte);
+                }
+
+                return cards;
+            }
+        }
+
+
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            // notify if the received notification is for the round number
+            if (e.PropertyName == nameof(Logic_Layer.Table.RoundNumber))
+            {
+                NotifyPropertyChanged(nameof(player.Board.Cards));
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier le board d'actualiser les cartes
+        /// </summary>
+        public void NotifyBoard()
+        {
+            NotifyPropertyChanged(nameof(Board));
+        }
+
+        /// <summary>
+        /// Carte sélectionnée.
+        /// </summary>
+        public CardComponent? CardSelected
+        {
+            get
+            {
+                return this.cardSelected;
+            }
+            set
+            {
+                if (this.cardSelected != value)
+                {
+
+                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Mettre à jour la propriété
+                    this.cardSelected = value;
+
+                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Notification des changements
+                    this.NotifyPropertyChanged(nameof(CardSelected));
+                    MainWindowViewModel.Instance.GameTableViewModel.IsButtonValidateShown = true;
+
+                }
             }
         }
 

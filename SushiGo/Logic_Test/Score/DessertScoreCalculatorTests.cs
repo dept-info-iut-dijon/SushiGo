@@ -12,7 +12,7 @@ public class DessertScoreCalculatorTests
     {
         var calculator = new DessertScoreCalculator();
         Dictionary<int, int> actualScores = calculator.CalculateScore(players);
-        
+
         Assert.Equal(expectedScores, actualScores);
     }
 }

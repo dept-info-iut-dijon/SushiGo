@@ -1,12 +1,4 @@
-﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Logic_Layer.IA;
-using Logic_Layer;
-using Logic_Layer.IA.IAImplementation;
+﻿using Logic_Layer;
 
 namespace LogicTest.IA
 {
