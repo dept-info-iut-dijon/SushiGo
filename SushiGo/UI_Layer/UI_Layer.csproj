@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AssemblyName>SushiGo</AssemblyName>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>SushiGo_Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
 
@@ -16,6 +18,11 @@
     <None Remove="Assets\Images\RestaurantHall.jpg" />
     <None Remove="Assets\Images\SushiOnTable.jpg" />
     <None Remove="Assets\test.png" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="SushiGo_Logo.ico" />
   </ItemGroup>
 
 
