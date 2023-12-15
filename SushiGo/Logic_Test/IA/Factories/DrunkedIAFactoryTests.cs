@@ -6,7 +6,7 @@ using LogicTest.datas_generators;
 
 namespace LogicTest.IA.Factories
 {
-    public class EasyIAFactoryTests
+    public class DrunkedIAFactoryTests
     {
         [Theory]
         [ClassData(typeof(IAFactoryDatasGenerator))]
