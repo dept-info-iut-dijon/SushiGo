@@ -20,9 +20,9 @@ namespace UI_Layer.ViewModels
     public class GameTableViewModel : INotifyPropertyChanged
     {
         #region Attribut
-        private bool isLeaderboardShown = false;
-        private bool isPopupValidationQuitShown = false;
-        private bool isButtonValidateShown = false;
+        private bool isLeaderboardShown;
+        private bool isPopupValidationQuitShown;
+        private bool isButtonValidateShown;
         private List<PlayerViewModel> playerList;
         private Logic_Layer.Table table;
         #endregion Attribut

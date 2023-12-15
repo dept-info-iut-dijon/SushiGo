@@ -13,9 +13,17 @@ namespace UI_Layer.UserControls;
 /// </summary>
 public partial class CardComponent : UserControl
 {
+
+    private const int widthPut = 80;
+    private const int baseWidth = 140;
+    private const int heightPut = 110;
+    private const int baseHeight= 200;
+
+    #region attributes
     private Card card;
     private bool isSelected;
     private bool isPut;
+    #endregion
 
     /// <summary>
     /// Instancie un CardComponent
@@ -112,14 +120,14 @@ public partial class CardComponent : UserControl
             isPut = value;
             if (this.isPut == true)
             {
-                this.Width = 80;
-                this.Height = 110;
+                this.Width = widthPut;
+                this.Height = heightPut;
 
             }
             else
             {
-                this.Width = 140;
-                this.Height = 200;
+                this.Width = baseWidth;
+                this.Height = baseHeight;
             }
         }
     }
