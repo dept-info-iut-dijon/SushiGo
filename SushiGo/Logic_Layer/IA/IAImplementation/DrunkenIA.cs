@@ -28,7 +28,6 @@ namespace Logic_Layer.IA.IAImplementation
                 {
                     PlayCard(Hand.Cards.First());
                 }
-                //EndRound();
             }
             
         }

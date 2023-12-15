@@ -227,7 +227,8 @@ namespace UI_Layer.ViewModels
                 this.LoadAllScores();
                 this.IsLeaderboardShown = true;
                 NotifyPropertyChanged(nameof(MancheNumber));
-                // Notifications des ia
+
+                // Notifications 
                 foreach (PlayerViewModel p in this.playerList)
                 {
                     p.NotifyBoard();
