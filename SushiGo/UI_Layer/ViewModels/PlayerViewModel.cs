@@ -159,7 +159,6 @@ namespace UI_Layer.ViewModels
         }
 
 
-
         private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             // notify if the received notification is for the round number
