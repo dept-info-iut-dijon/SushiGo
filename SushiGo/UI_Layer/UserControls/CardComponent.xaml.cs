@@ -13,18 +13,15 @@ namespace UI_Layer.UserControls;
 /// </summary>
 public partial class CardComponent : UserControl
 {
-    private readonly PlayerViewModel player;
-    private readonly Card card;
-    private Thickness baseMargin;
+    private Card card;
     private bool isSelected;
 
     /// <summary>
     /// Instancie un CardComponent
     /// </summary>
     /// <param name="player">Le joueur ayant la carte en main</param>
-    public CardComponent(PlayerViewModel player, Card card)
+    public CardComponent(Card card)
     {
-        this.player = player;
         this.card = card;
         this.isSelected = false;
         InitializeComponent();
@@ -85,20 +82,23 @@ public partial class CardComponent : UserControl
         set
         {
             this.isSelected = value;
+            if (this.isSelected == true)
+            {
+                this.Margin = new Thickness(0,0,0,40);
+                
+            }
+            else
+            {
+                this.Margin = new Thickness(0,0,0,0);
+            }
         }
     }
 
-    public Thickness BaseMargin
-    {
-        get
-        {
-            return this.baseMargin;
-        }
-        set
-        {
-            this.baseMargin = value;
-        }
-    }
+
+    /// <summary>
+    /// Représente l'objet métier de la carte
+    /// </summary>
+    public Card Card { get => card; }
 
     #endregion
 
@@ -110,34 +110,8 @@ public partial class CardComponent : UserControl
     public void ClickOnCard()
     {
         this.IsSelected = !this.IsSelected;
-        if (IsSelected)
-        {
-            Thickness thickness = new Thickness();
-
-            // On garde les ancienne valeur
-            thickness.Left = this.Margin.Left;
-            thickness.Top = this.Margin.Top;
-            thickness.Right = this.Margin.Right;
-
-            // On monte la carte
-            thickness.Bottom = 40;
-
-            // On applique la nouvelle valeur
-            this.Margin = thickness;
-        }
-        else
-        {
-            this.Margin = this.baseMargin;
-        }
     }
 
-    /// <summary>
-    /// Joue la carte.
-    /// </summary>
-    public void PlayCard()
-    {
-        this.player.PlayCard(this.card);
-    }
 
     #endregion Méthode Publique
 

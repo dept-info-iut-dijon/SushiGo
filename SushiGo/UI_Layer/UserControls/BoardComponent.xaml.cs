@@ -72,7 +72,7 @@ public partial class BoardComponent : UserControl
     /// </summary>
     private static void SetupCards(PlayerViewModel Player)
     {
-        List<CardComponent> cartesJoueurs = Player.Deck;
+        List<CardComponent> cartesJoueurs = Player.Hand;
         // TODO : afficher les cartes
 
     }

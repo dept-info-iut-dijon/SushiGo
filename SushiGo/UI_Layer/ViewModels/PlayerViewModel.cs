@@ -31,6 +31,7 @@ namespace UI_Layer.ViewModels
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
+        private CardComponent? cardSelected;
         #endregion
 
 
@@ -126,21 +127,49 @@ namespace UI_Layer.ViewModels
         /// Main du joueur.
         /// </summary>
         /// <inheritdoc/>
-        public List<CardComponent> Deck
+        public List<CardComponent> Hand
         {
             get
             {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
 
-                int x = 0;
                 foreach (Card card in this.player.Hand.Cards)
                 {
-                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
+                    cards.Add(new CardComponent(card));
                 }
 
                 return cards;
+            }
+        }
+
+        /// <summary>
+        /// Carte sélectionnée.
+        /// </summary>
+        public CardComponent? CardSelected
+        {
+            get
+            {
+                return this.cardSelected;
+            }
+            set
+            {
+                if (this.cardSelected != value)
+                {
+
+                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Mettre à jour la propriété
+                    this.cardSelected = value;
+
+                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Notification des changements
+                    this.NotifyPropertyChanged(nameof(CardSelected));
+                    MainWindowViewModel.Instance.GameTableViewModel.IsButtonValidateShown = true;
+
+                }
             }
         }
 
