@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface d'une fabrique d'IA.
     /// </summary>
-    public interface IIAFactory
+    public interface ISpecificIAFactory
     {
         /// <summary>
         /// Créé une IA selon les paramètres demandés.

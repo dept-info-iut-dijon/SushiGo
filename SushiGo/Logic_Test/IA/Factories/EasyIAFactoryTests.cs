@@ -1,17 +1,18 @@
 ﻿using Logic_Layer;
 using Logic_Layer.IA.Factories;
+using Logic_Layer.IA.Factories.IAFactories;
 using Logic_Layer.IA.IAImplementation;
 using LogicTest.datas_generators;
 
 namespace LogicTest.IA.Factories
 {
-    public class EasyIAFactoryTest
+    public class EasyIAFactoryTests
     {
         [Theory]
         [ClassData(typeof(IAFactoryDatasGenerator))]
         public void CreateIA(int id, Board board, Hand hand)
         {
-            IIAFactory iAFactory = new EasyIAFactory();
+            ISpecificIAFactory iAFactory = new DrunkedIAFactory();
 
             Logic_Layer.IA.IA easyIA = iAFactory.CreateIA(id, board, hand);
 

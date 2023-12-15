@@ -19,7 +19,7 @@ namespace UI_Layer.ViewModels
     {
         #region Constantes
 
-        private const string CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string ALLOW_CHARACTERS_FOR_GAME_ID = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace UI_Layer.ViewModels
         /// </summary>
         public GameCreationViewModel()
         {
-            this.difficulty = IADifficultyEnum.EASY;
+            this.difficulty = IADifficultyEnum.FACILE;
             this.players = new ObservableCollection<PlayerViewModel>();
             this.playerCount = 3;
             this.isModeJvJ = false;
@@ -177,6 +177,7 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
         /// <summary>
         /// Est ce que le mode de jeu est Joueur vs Joueur / Si non alors c'est Joueur vs Robots.
         /// </summary>
@@ -190,6 +191,7 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged(nameof(TitleLobby));
             }
         }
+
         /// <summary>
         /// Permet d'afficher le bouton pour lancer la partie.
         /// </summary>
@@ -215,6 +217,7 @@ namespace UI_Layer.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
         /// <summary>
         /// Liste des joueurs de la partie.
         /// </summary>
@@ -328,7 +331,7 @@ namespace UI_Layer.ViewModels
         {
             Random random = new Random();
             int nbCar = random.Next(6, 9);
-            string characters = CHARACTERS;
+            string characters = ALLOW_CHARACTERS_FOR_GAME_ID;
             char[] uniqueId = new char[nbCar];
 
             for (int i = 0; i < nbCar; i++)
@@ -344,20 +347,22 @@ namespace UI_Layer.ViewModels
         /// </summary>
         private void CreateIA()
         {
-            IIAFactory iAFactory = new EasyIAFactory();
+            IAFactory iAFactory = new IAFactory();
+            List<IA> ias = new List<IA>();
 
             switch (this.difficulty)
             {
-                case IADifficultyEnum.EASY:
-                    iAFactory = new EasyIAFactory();
+                case IADifficultyEnum.FACILE:
+                    ias = iAFactory.CreateIA(Enumerable.Repeat<string>("DrunkedIA", this.PlayerCount - 1).ToArray());
+                    break;
+
+                default:
+                    ias = iAFactory.CreateIA(Enumerable.Repeat<string>("DrunkedIA", this.PlayerCount - 1).ToArray());
                     break;
             }
 
-            for (int i = 1; i < playerCount; i++)
+            foreach (IA ia in ias)
             {
-                // Création de l'IA
-                IA ia = iAFactory.CreateIA(i + 1, new Board(), new Hand(i + 1, new List<Card>()));
-
                 // Création de la vueModel à partir de l'IA créée
                 PlayerViewModel playerViewModel = new PlayerViewModel(ia, PlayerType.ROBOT);
 
