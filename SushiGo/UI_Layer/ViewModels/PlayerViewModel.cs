@@ -1,15 +1,9 @@
 ﻿using Logic_Layer;
-using Logic_Layer.IA;
+using Logic_Layer.cards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Logic_Layer.cards;
-using System.Windows.Documents;
-using System.Windows;
 using UI_Layer.UserControls;
 
 namespace UI_Layer.ViewModels
@@ -27,23 +21,13 @@ namespace UI_Layer.ViewModels
         #region attributes
         private readonly Player player;
         private PlayerType role;
-        private int score = Random.Shared.Next(0, 200);
+        private int score = 0;
         private bool isReady;
         private GameCreationViewModel gameCreationViewModel;
         private bool isTurnFinished;
+        private CardComponent? cardSelected;
         #endregion
 
-        /// <summary>
-        /// Constructeur du playerviewmodel associé au joueur ou a l'ia
-        /// </summary>
-        /// <param name="player">objet player metier</param>
-        /// <param name="role">type de joueur (ia ou robot ou non-determiné)</param>
-        public PlayerViewModel(Player player, PlayerType role,GameCreationViewModel creationViewModel)
-        {
-            this.player = player;
-            this.role = role;
-            this.gameCreationViewModel = creationViewModel;
-        }
 
         /// <summary>
         /// Constructeur du playerviewmodel associé au joueur ou a l'ia, en version isolée du VM du jeu
@@ -53,7 +37,7 @@ namespace UI_Layer.ViewModels
         public PlayerViewModel(Player player, PlayerType role)
         {
             this.player = player;
-            
+
             this.role = role;
         }
 
@@ -64,8 +48,19 @@ namespace UI_Layer.ViewModels
         public void PlayCard(Card card)
         {
             player.PlayCard(card);
+
             NotifyPropertyChanged(nameof(player.Hand));
-            NotifyPropertyChanged(nameof(player.HavePlayed));
+            NotifyPropertyChanged(nameof(Board));
+
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour le score d'après le métier
+        /// </summary>
+        public void LoadScore(int score)
+        {
+            this.score = score;
+            NotifyPropertyChanged(nameof(Score));
         }
 
         #region properties
@@ -73,7 +68,7 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Nom du joueur
         /// </summary>
-        public string Nom { get => player.Pseudo;  }
+        public string Nom { get => player.Pseudo; }
 
         /// <summary>
         /// Id du joueur
@@ -88,17 +83,20 @@ namespace UI_Layer.ViewModels
         /// <summary>
         /// Score actuel du joueur
         /// </summary>
-        public int Score { get => score; }
+        public int Score
+        {
+            get => score;
+        }
 
         /// <summary>
         /// Est ce que le joueur est prêt à démarrer la partie
         /// </summary>
-        public bool IsReady 
-        { 
+        public bool IsReady
+        {
             get => isReady;
-            init 
-            { 
-                isReady = value; 
+            init
+            {
+                isReady = value;
                 NotifyPropertyChanged(nameof(gameCreationViewModel.MessageWaitingStart));
             }
         }
@@ -125,21 +123,87 @@ namespace UI_Layer.ViewModels
         /// Main du joueur.
         /// </summary>
         /// <inheritdoc/>
-        public List<CardComponent> Deck
+        public List<CardComponent> Hand
         {
             get
             {
-                //TODO : Attention à la dupplication de code entre ce qui est ici et dans le GameTableView (constructeur)
                 List<CardComponent> cards = new List<CardComponent>();
 
-                int x = 0;
                 foreach (Card card in this.player.Hand.Cards)
                 {
-                    cards.Add(new CardComponent(this, card) { CardName = card.Name, Width = 140, Height = 200, Margin = new Thickness(x, 0, 0, 0) });
-                    x = -10;
+                    cards.Add(new CardComponent(card));
                 }
 
                 return cards;
+            }
+        }
+
+        /// <summary>
+        /// Liste des cartes posées sur le plateau
+        /// </summary>
+        public List<CardComponent> Board
+        {
+            get
+            {
+                List<CardComponent> cards = new List<CardComponent>();
+
+                foreach (Card card in this.player.Board.Cards)
+                {
+                    CardComponent carte = new CardComponent(card);
+                    carte.IsPut = true;
+                    cards.Add(carte);
+                }
+
+                return cards;
+            }
+        }
+
+
+        private void Table_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            // notify if the received notification is for the round number
+            if (e.PropertyName == nameof(Logic_Layer.Table.RoundNumber))
+            {
+                NotifyPropertyChanged(nameof(player.Board.Cards));
+            }
+        }
+
+        /// <summary>
+        /// Permet de notifier le board d'actualiser les cartes
+        /// </summary>
+        public void NotifyBoard()
+        {
+            NotifyPropertyChanged(nameof(Board));
+        }
+
+        /// <summary>
+        /// Carte sélectionnée.
+        /// </summary>
+        public CardComponent? CardSelected
+        {
+            get
+            {
+                return this.cardSelected;
+            }
+            set
+            {
+                if (this.cardSelected != value)
+                {
+
+                    // Déclencher l'événement ClickOnCard sur l'ancienne valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Mettre à jour la propriété
+                    this.cardSelected = value;
+
+                    // Déclencher l'événement ClickOnCard sur la nouvelle valeur (si elle existe)
+                    this.cardSelected?.ClickOnCard();
+
+                    // Notification des changements
+                    this.NotifyPropertyChanged(nameof(CardSelected));
+                    MainWindowViewModel.Instance.GameTableViewModel.IsButtonValidateShown = true;
+
+                }
             }
         }
 

@@ -6,5 +6,14 @@
     <BitmapImage x:Key="CardsBackground" UriSource="Images/CardsBackground.png" />
     <BitmapImage x:Key="RestaurantHall" UriSource="Images/RestaurantHall.jpg" />
     <BitmapImage x:Key="SushiOnTable" UriSource="Images/SushiOnTable.jpg" />
+
+
+    <BitmapImage x:Key="Elia" UriSource="Images/Creators/Elia.png" />
+    <BitmapImage x:Key="Evan" UriSource="Images/Creators/Evan.png" />
+    <BitmapImage x:Key="Florian" UriSource="Images/Creators/Florian.png" />
+    <BitmapImage x:Key="Jonas" UriSource="Images/Creators/Jonas.png" />
+    <BitmapImage x:Key="Morgane" UriSource="Images/Creators/Morgane.png" />
+    
+    
     
 </ResourceDictionary>

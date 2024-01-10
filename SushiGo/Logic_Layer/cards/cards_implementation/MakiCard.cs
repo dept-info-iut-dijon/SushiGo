@@ -14,7 +14,7 @@ public class MakiCard : Card
     }
 
     private readonly int quantity;
-    
+
     /// <summary>
     /// Quantité de makis présents sur la carte
     /// </summary>

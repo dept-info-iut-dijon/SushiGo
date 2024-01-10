@@ -24,7 +24,7 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image  Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="{StaticResource RestaurantHall}"/>
+        <Image Stretch="Fill" Grid.ColumnSpan="3" Grid.RowSpan="5" Source="{StaticResource RestaurantHall}"/>
         <Border Grid.RowSpan="5" Grid.ColumnSpan="3" Opacity="0.5" Background="White">
 
         </Border>
@@ -37,7 +37,7 @@
         </Button>
 
         <!-- Bouton Credits -->
-        <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150,35,150,35" Style="{StaticResource Button1}">
+        <Button Grid.Column="1" Grid.Row="2" Command="{Binding CreditCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="150,35,150,35" Style="{StaticResource Button1}">
             <TextBlock Text="{x:Static res:fr_FR.CREDITS}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Font1}" />
         </Button>
 

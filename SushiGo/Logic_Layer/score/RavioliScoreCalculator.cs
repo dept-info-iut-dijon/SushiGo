@@ -2,12 +2,6 @@
 using Logic_Layer.cards.cards_implementation;
 using Logic_Layer.cards.utils;
 using Logic_Layer.logic_exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic_Layer.score
 {
@@ -45,13 +39,13 @@ namespace Logic_Layer.score
             int score = 0;
             switch (cards.Count())
             {
-                case 0:score = 0; break;
-                case 1:score = 1; break;
-                case 2:score = 3; break;
-                case 3:score = 6; break;
-                case 4:score = 10; break;
-                case >=5:score = 15; break;
-                default:throw new NegativeScore("Le score est négatif");
+                case 0: score = 0; break;
+                case 1: score = 1; break;
+                case 2: score = 3; break;
+                case 3: score = 6; break;
+                case 4: score = 10; break;
+                case >= 5: score = 15; break;
+                default: throw new NegativeScore("Le score est négatif");
             }
             return score;
         }

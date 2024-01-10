@@ -61,6 +61,15 @@ namespace UI_Layer.Assets {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Retour.
+        /// </summary>
+        public static string CANCEL {
+            get {
+                return ResourceManager.GetString("CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Créer.
         /// </summary>
         public static string CREATE {
@@ -75,6 +84,51 @@ namespace UI_Layer.Assets {
         public static string CREDITS {
             get {
                 return ResourceManager.GetString("CREDITS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous avez perdu la partie ....
+        /// </summary>
+        public static string GAMELOST {
+            get {
+                return ResourceManager.GetString("GAMELOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous avez gagné la partie !.
+        /// </summary>
+        public static string GAMEWON {
+            get {
+                return ResourceManager.GetString("GAMEWON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Classement.
+        /// </summary>
+        public static string LEADERBOARD {
+            get {
+                return ResourceManager.GetString("LEADERBOARD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Non, retour au jeu.
+        /// </summary>
+        public static string MESSAGECANCEL {
+            get {
+                return ResourceManager.GetString("MESSAGECANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Oui, je quitte la partie.
+        /// </summary>
+        public static string MESSAGEQUIT {
+            get {
+                return ResourceManager.GetString("MESSAGEQUIT", resourceCulture);
             }
         }
         
@@ -102,6 +156,24 @@ namespace UI_Layer.Assets {
         public static string TITLE {
             get {
                 return ResourceManager.GetString("TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Valider.
+        /// </summary>
+        public static string VALIDATE {
+            get {
+                return ResourceManager.GetString("VALIDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Etes vous sûr de quitter ?.
+        /// </summary>
+        public static string VERIFICATIONQUIT {
+            get {
+                return ResourceManager.GetString("VERIFICATIONQUIT", resourceCulture);
             }
         }
     }

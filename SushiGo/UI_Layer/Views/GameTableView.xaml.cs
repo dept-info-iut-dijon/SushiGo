@@ -1,14 +1,6 @@
 ﻿using Logic_Layer;
-using Logic_Layer.cards;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using UI_Layer.UserControls;
 using UI_Layer.ViewModels;
 
 namespace UI_Layer.Views
@@ -19,7 +11,7 @@ namespace UI_Layer.Views
     public partial class GameTableView : Window
     {
         private PlayerViewModel player;
-        
+
         public GameTableView(Logic_Layer.Table t)
         {
             InitializeComponent();
@@ -37,11 +29,15 @@ namespace UI_Layer.Views
         /// </summary>
         private void Show_Leaderboard(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Tab)
+            if (e.Key == Key.Tab)
             {
-                MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard = !MainWindowViewModel.Instance.GameTableViewModel.ShowLeaderboard;
+                GameTableViewModel gameTableViewModel = MainWindowViewModel.Instance.GameTableViewModel;
+                if (gameTableViewModel != null)
+                {
+                    gameTableViewModel.IsLeaderboardShown = !gameTableViewModel.IsLeaderboardShown;
+                }
             }
-            
+
         }
 
         private void EndPlayerTurn(object sender, RoutedEventArgs e)

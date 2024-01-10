@@ -5,13 +5,25 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>SushiGo_Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
 
   <ItemGroup>
     <None Remove="Assets\bois2.jpg" />
+    <None Remove="Assets\Cartes\sushiCalamar_Wasabi.png" />
+    <None Remove="Assets\Cartes\sushiOmelette_Wasabi.png" />
+    <None Remove="Assets\Cartes\sushiSaumon_Wasabi.png" />
     <None Remove="Assets\Cursors\MainCursor.cur" />
     <None Remove="Assets\Cursors\MainCursorClick.cur" />
+    <None Remove="Assets\Images\Board.jpg" />
+    <None Remove="Assets\Images\Board.png" />
+    <None Remove="Assets\Images\Creators\Elia.png" />
+    <None Remove="Assets\Images\Creators\Evan.png" />
+    <None Remove="Assets\Images\Creators\Florian.png" />
+    <None Remove="Assets\Images\Creators\Jonas.png" />
+    <None Remove="Assets\Images\Creators\Morgane.png" />
     <None Remove="Assets\Images\Logo.png" />
     <None Remove="Assets\Images\pin.png" />
     <None Remove="Assets\Images\RestaurantHall.jpg" />
@@ -21,9 +33,7 @@
 
 
   <ItemGroup>
-    <Resource Include="Assets\Cursors\MainCursorClick.cur">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Content Include="SushiGo_Logo.ico" />
   </ItemGroup>
 
 
@@ -44,8 +54,38 @@
       <LastGenOutput>fr_FR.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="Assets\Cartes\sushiCalamar_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiOmelette_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cartes\sushiSaumon_Wasabi.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Cursors\MainCursor.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Cursors\MainCursorClick.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Board.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Elia.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Evan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Florian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Jonas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\Creators\Morgane.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\SushiOnTable.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -100,6 +140,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Assets\fr_FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>fr_FR.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

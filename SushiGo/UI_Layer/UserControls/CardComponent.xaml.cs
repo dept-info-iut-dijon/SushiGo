@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Logic_Layer.cards;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Logic_Layer.cards;
-using UI_Layer.ViewModels;
 
 namespace UI_Layer.UserControls;
 
@@ -13,21 +12,29 @@ namespace UI_Layer.UserControls;
 /// </summary>
 public partial class CardComponent : UserControl
 {
-    private readonly PlayerViewModel player;
-    private readonly Card card;
-    private Thickness baseMargin;
+
+    private const int WIDTHPUT = 80;
+    private const int BASEWIDTH = 140;
+    private const int HEIGHTPUT = 110;
+    private const int BASEHEIGHT= 200;
+
+    #region attributes
+    private Card card;
     private bool isSelected;
+    private bool isPut;
+    #endregion
 
     /// <summary>
     /// Instancie un CardComponent
     /// </summary>
     /// <param name="player">Le joueur ayant la carte en main</param>
-    public CardComponent(PlayerViewModel player, Card card)
+    public CardComponent(Card card)
     {
-        this.player = player;
         this.card = card;
         this.isSelected = false;
+        this.isPut = false;
         InitializeComponent();
+        this.CardName = card.Name;
     }
 
     #region dependenciesProperties
@@ -49,7 +56,7 @@ public partial class CardComponent : UserControl
             new FrameworkPropertyMetadata(string.Empty,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.AffectsParentMeasure, ChangeCardName));
-    
+
     #endregion
 
     #region properties
@@ -84,18 +91,43 @@ public partial class CardComponent : UserControl
         set
         {
             this.isSelected = value;
+            if (this.isSelected == true)
+            {
+                this.Margin = new Thickness(0, 0, 0, 40);
+
+            }
+            else
+            {
+                this.Margin = new Thickness(0, 0, 0, 0);
+            }
         }
     }
 
-    public Thickness BaseMargin
-    {
-        get
-        {
-            return this.baseMargin;
-        }
-        set
-        {
-            this.baseMargin = value;
+
+    /// <summary>
+    /// Représente l'objet métier de la carte
+    /// </summary>
+    public Card Card { get => card; }
+    /// <summary>
+    /// Est ce que la carte a été posée
+    /// </summary>
+    public bool IsPut 
+    { 
+        get => isPut;
+        set 
+        { 
+            isPut = value;
+            if (this.isPut == true)
+            {
+                this.Width = WIDTHPUT;
+                this.Height = HEIGHTPUT;
+
+            }
+            else
+            {
+                this.Width = BASEWIDTH;
+                this.Height = BASEHEIGHT;
+            }
         }
     }
 
@@ -109,34 +141,8 @@ public partial class CardComponent : UserControl
     public void ClickOnCard()
     {
         this.IsSelected = !this.IsSelected;
-        if (IsSelected)
-        {
-            Thickness thickness = new Thickness();
-
-            // On garde les ancienne valeur
-            thickness.Left = this.BaseMargin.Left;
-            thickness.Top = this.BaseMargin.Top;
-            thickness.Right = this.BaseMargin.Right;
-
-            // On monte la carte
-            thickness.Bottom = 40;
-
-            // On applique la nouvelle valeur
-            this.Margin = thickness;
-        }
-        else
-        {
-            this.Margin = this.baseMargin;
-        }
     }
 
-    /// <summary>
-    /// Joue la carte.
-    /// </summary>
-    public void PlayCard()
-    {
-        this.player.PlayCard(this.card);
-    }
 
     #endregion Méthode Publique
 
@@ -163,7 +169,7 @@ public partial class CardComponent : UserControl
     /// </summary>
     private static void HighlightBorders(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is CardComponent CardComponent)
+        if (d is CardComponent CardComponent && CardComponent.IsPut == false)
             if (CardComponent.border != null)
             {
                 if (CardComponent.IsMouseOverCard)

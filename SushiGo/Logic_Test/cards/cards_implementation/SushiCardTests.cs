@@ -5,7 +5,7 @@ namespace LogicTest.cards.cards_implementation;
 public class SushiCardTests
 {
     private CardFactory CardFactory => new CardFactory();
-    
+
     [Theory]
     [InlineData("sushi saumon")]
     [InlineData("sushi calamar")]
@@ -15,10 +15,10 @@ public class SushiCardTests
         var sushiCards = CardFactory.CreateCard(generationParameter, 2);
         Assert.True(sushiCards.First().Equals(sushiCards.Last()));
     }
-    
+
     [Theory]
     [InlineData("sushi saumon", "sushi calamar")]
-    [InlineData("sushi calamar" , "sushi omelette")]
+    [InlineData("sushi calamar", "sushi omelette")]
     [InlineData("sushi omelette", "sushi saumon")]
     public void Equals_ComparisonByValueFalse(string generationParameter, string generationParameterDifferentCard)
     {

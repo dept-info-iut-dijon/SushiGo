@@ -1,5 +1,4 @@
 ﻿using Logic_Layer.cards;
-using LogicTest.datas_generators;
 using Logic_Layer.cards.utils;
 using LogicTest.datas_generators.cards.utils;
 

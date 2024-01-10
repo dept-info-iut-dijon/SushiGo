@@ -10,7 +10,7 @@ public class Hand
 {
     private int id;
     private readonly List<Card> cards;
-    
+
     /// <summary>
     /// Identifiant de la main
     /// </summary>
@@ -57,7 +57,7 @@ public class Hand
     {
         return cards.Find(myCard => myCard.Equals(card));
     }
-    
+
     /// <summary>
     /// Retire une carte de la main
     /// </summary>

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Couche_IHM
+namespace SushiGo
 {
     public partial class App : Application
     {
